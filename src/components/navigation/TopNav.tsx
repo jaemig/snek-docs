@@ -1,5 +1,15 @@
-import { Box, Center, Container, Flex, Img, Spacer, Text, Link } from "@chakra-ui/react";
+import { Box, Center, Container, Flex, Img, Spacer, Text, Link, LinkProps, HStack, Input, InputGroup, InputRightElement, Kbd } from "@chakra-ui/react";
 import React, { FC } from "react";
+
+const navLinkProps = {
+    color: 'gray.800',
+    opacity: 0.8,
+    _hover: {
+        textDecoration: 'none',
+        opacity: 1
+    },
+    fontSize: 'sm',
+}
 
 /**
  * Top navigation bar.
@@ -27,13 +37,47 @@ const TopNav: FC = () => {
                     </Box>
                     <Spacer />
                     <Center>
-                        <Link mr={4} href="#">About</Link>
-                        <Link mr={4} href="#" isExternal>Contact</Link>
-                        <Img
-                            h="28px"
-                            src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-                            alt='GitHub Logo'
-                        />
+                        <HStack spacing={4}>
+                            <Link href="#" {...navLinkProps}>About</Link>
+                            <Link href="#" isExternal {...navLinkProps}>Contact</Link>
+                            <InputGroup size="sm">
+                                <Input
+                                    htmlSize={20}
+                                    placeholder="Search documentation"
+                                    borderRadius="md"
+                                    backgroundColor="blackAlpha.50"
+                                    pr="45px"
+                                    _focus={{
+                                        backgroundColor: 'white',
+                                    }}
+                                />
+                                <InputRightElement
+                                    children={
+                                        <Kbd
+                                            borderBottomWidth={1}
+                                            background='transparent'
+                                            borderRadius={4}
+                                            py={0.5}
+                                        >⌘ K</Kbd>
+                                    }
+                                    pr="10px" 
+                                    color="rgb(107, 114, 128)"
+                                />
+                            </InputGroup>
+                            <Link 
+                                display="inline-block"
+                                href="https://github.com/Jan-Emig/snek-docs"
+                                // This doesnt work for some reason (min-width solves it temporarily)
+                                boxSize="28px"
+                                minW='28px'
+                            >
+                                <Img
+                                    boxSize="28px"
+                                    src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                                    alt='GitHub Logo'
+                                />
+                            </Link>
+                        </HStack>
                     </Center>
                 </Flex>
             </Container>    
