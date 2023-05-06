@@ -8,6 +8,7 @@ type MenuItem = {
     href: string;
     isExternal?: boolean;
     children?: MenuItem[];
+    isActive?: boolean;
 }
 
 type MenuSection = {
@@ -26,6 +27,7 @@ const menuStructure: MenuSection[] = [
             {
                 name: 'Guide',
                 href: '/docs/guide',
+                isActive: true,
                 children: [
                     {
                         name: 'Organize Files',
@@ -86,14 +88,29 @@ const menuStructure: MenuSection[] = [
     },
 ];
 
-const menuItemProps = {
+const baseMenuItemProps = {
+    transition: 'opacity 0.2s ease-in-out, background-color 0.2s ease-in-out',
+};
+
+const inactiveMenuItemProps = {
+    ...baseMenuItemProps,
     opacity: 0.8,
     _hover: {
         opacity: 1,
         bgColor: 'gray.100',
     },
-    transition: 'opacity 0.2s ease-in-out, background-color 0.2s ease-in-out'
 }
+
+const activeMenuItemProps = {
+    ...baseMenuItemProps,
+    opacity: 1,
+    bgColor: 'blue.100',
+    color: 'blue.500',
+    fontWeight: 'bold',
+    _hover: {
+        bgColor: 'blue.100',
+    },
+};
 
 const generateMenuItem = (item: MenuItem, idx: number) => {
     const children = item.children?.map((child, idx) => generateMenuItem(child, idx));
@@ -114,7 +131,7 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
                         <AccordionButton
                             borderRadius='md'
                             py={1.5}
-                            {...menuItemProps}
+                            {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
                         >
                             <Box 
                                 as='span'
@@ -127,9 +144,10 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
                             <Center
                                 as='span'
                                 _hover={{
-                                    backgroundColor: 'gray.200',
+                                    backgroundColor: item.isActive ? 'blue.200' : 'gray.200',
                                     borderRadius: 'sm'
-                                }} 
+                                }}
+                                transition='background-color 0.2s ease-in-out'
                             >
                                 <AccordionIcon
                                 opacity='inherit'
@@ -150,7 +168,7 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
             py={1.5}
             px={4}
             mt={1}
-            {...menuItemProps}
+            {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
             cursor='pointer'
             borderRadius='md'
         >
