@@ -1,4 +1,5 @@
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Flex, ListItem, UnorderedList } from "@chakra-ui/react";
+import { ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, ListItem, UnorderedList, } from "@chakra-ui/react";
 import { it } from "node:test";
 import React, { FC } from "react";
 
@@ -85,50 +86,74 @@ const menuStructure: MenuSection[] = [
     },
 ];
 
-const indentAmnt = 4;
 const menuItemProps = {
-    p: 1,
-    mt: 1,
     opacity: 0.8,
     _hover: {
         opacity: 1,
+        bgColor: 'gray.100',
     },
 }
-const generateMenuItem = (item: MenuItem) => {
-    let indentIdx = 0;
 
-    const children = item.children?.map((child) => generateMenuItem(child));
+const generateMenuItem = (item: MenuItem, idx: number) => {
+    const children = item.children?.map((child, idx) => generateMenuItem(child, idx));
 
-    let WrapperElmnt;
-    if (item.children) {
+    if (item.children && item.children.length > 0) {
         return (
-            <AccordionItem borderWidth={0}>
-                <AccordionButton>
-                    <Box 
-                        as='span'
-                        flex='1'
-                        textAlign='left'
-                        fontSize='sm'
-                    >
-                        {item.name}
-                    </Box>
-                    <AccordionIcon />
-                </AccordionButton>
-                <AccordionPanel>
-                    {children}
-                </AccordionPanel>
+            <AccordionItem 
+                borderWidth={0}
+                key={idx}
+                css={{
+                    '& .chakra-collapse .chakra-accordion__panel':  {
+                        'padding-top': 0,
+                    }
+                }}
+            >
+                {({ isExpanded }) => (
+                    <>
+                        <AccordionButton
+                            borderRadius='md'
+                            py={1.5}
+                            {...menuItemProps}
+                        >
+                            <Box 
+                                as='span'
+                                flex='1'
+                                textAlign='left'
+                                fontSize='sm'
+                            >
+                                {item.name}
+                            </Box>
+                            <Center
+                                as='span'
+                                _hover={{
+                                    backgroundColor: 'gray.200',
+                                    borderRadius: 'sm'
+                                }} 
+                            >
+                                <AccordionIcon
+                                opacity='inherit'
+                                    transform={`rotate(${isExpanded ? 0 : -90}deg)`}
+                                />
+                            </Center>
+                        </AccordionButton>
+                        <AccordionPanel>
+                            {children}
+                        </AccordionPanel>
+                    </>
+                )}
             </AccordionItem>
         )
     }
     //TODO: Hover effect gets triggered when hovering over children
     return (
         <Box
-            p={1}
+            py={1.5}
+            px={4}
             mt={1}
-            opacity={0.8}
-            _hover={{
-                opacity: 1,
-            }}
+            {...menuItemProps}
+            cursor='pointer'
+            borderRadius='md'
+            transition='opacity 0.2s ease-in-out, background-color 0.2s ease-in-out'
         >
             {item.name}
             {children}
@@ -146,27 +171,34 @@ const LeftNav: FC = () => {
             position='sticky'
             fontSize='sm'
         >
-            <Accordion allowMultiple borderWidth={0}>
+            <Accordion
+                allowMultiple
+                css={{
+                    // Remove border from last accordion item
+                    '& .chakra-accordion__item:last-child': {
+                        borderBottomWidth: 0,
+                    },
+                }}
+            >
             {
                 menuStructure.map((section, i) => (
-                    <Box
-                    color='gray.800'
-                    >
+                    <>
                         {
                             section.name && (
                                 <Box
-                                mt={i === 0 ? 0 : 7}
-                                fontSize='sm'
-                                fontWeight='bold'
+                                    mt={i === 0 ? 0 : 9}
+                                    fontSize='sm'
+                                    fontWeight='bold'
+                                    ml={4}
                                 >
                                     {section.name}
                                 </Box>
                             )
                         }
-                        <Box>
-                            { section.items.map((item) => generateMenuItem(item))}
+                        <Box key={i}>
+                            { section.items.map((item, idx) => generateMenuItem(item, idx))}
                         </Box>
-                    </Box>
+                    </>
                 ))
             }
             </Accordion>
