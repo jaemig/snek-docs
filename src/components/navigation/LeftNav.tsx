@@ -219,7 +219,6 @@ const LeftNav: FC = () => {
     return (
         <Box
             as='nav'
-            position='sticky'
             fontSize='sm'
         >
             <Accordion

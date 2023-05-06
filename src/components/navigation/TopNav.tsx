@@ -1,4 +1,4 @@
-import { Box, Center, Container, Flex, Img, Spacer, Text, Link, LinkProps, HStack, Input, InputGroup, InputRightElement, Kbd } from "@chakra-ui/react";
+import { Center, Flex, Img, Spacer, Link, HStack, Input, InputGroup, InputRightElement, Kbd } from "@chakra-ui/react";
 import React, { FC } from "react";
 
 const navLinkProps = {
@@ -23,6 +23,9 @@ const TopNav: FC = () => {
             h="64px"
             borderBottom="1px solid"
             borderBottomColor="rgb(229, 231, 235)"
+            backgroundColor='rgba(255, 255, 255, 0.8)'
+            backdropFilter={'blur(5px)'}
+            zIndex={999}
         >
             <Flex w='7xl'>
                 <Link
