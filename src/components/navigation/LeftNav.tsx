@@ -1,4 +1,4 @@
-import { ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { ArrowForwardIcon, ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, ListItem, UnorderedList, Link } from "@chakra-ui/react";
 import { it } from "node:test";
 import React, { FC } from "react";
@@ -116,9 +116,11 @@ const activeMenuItemProps = {
 };
 
 const generateMenuItem = (item: MenuItem, idx: number) => {
-    const children = item.children?.map((child, i) => generateMenuItem(child, i));
+    
+    const externalLinkIcon = <ArrowForwardIcon transform={`rotate(-45deg)`} ml={2} />;
 
     if (item.children && item.children.length > 0) {
+        const children = item.children.map((child, i) => generateMenuItem(child, i));
         return (
             <AccordionItem 
                 borderWidth={0}
@@ -155,6 +157,7 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
                                 fontSize='sm'
                             >
                                 {item.name}
+                                {item.isExternal && externalLinkIcon}
                             </Box>
                             <Center
                                 as='span'
@@ -207,7 +210,7 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
             {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
         >
             {item.name}
-            {children}
+            {item.isExternal && externalLinkIcon}
         </Link>
     )
 }
