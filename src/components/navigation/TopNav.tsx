@@ -76,6 +76,10 @@ const TopNav: FC = () => {
                             // This doesnt work for some reason (min-width solves it temporarily)
                             boxSize="28px"
                             minW='28px'
+                            _hover={{
+                                transform: 'scale(1.2)'
+                            }}
+                            transition='transform 0.2s ease-in-out'
                         >
                             <Img
                                 boxSize="28px"
