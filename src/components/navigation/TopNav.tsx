@@ -25,13 +25,19 @@ const TopNav: FC = () => {
             borderBottomColor="rgb(229, 231, 235)"
         >
             <Flex w='7xl'>
-                <Box>
+                <Link
+                    href='#'
+                    _hover={{
+                        transform: 'scale(1.1)'
+                    }}
+                    transition='transform 0.2s ease-in-out'
+                >
                     <Img
                         h="32px"
                         src="https://avatars.githubusercontent.com/u/55870326?s=200&v=4"
                         alt="Snek Logo"
                     />
-                </Box>
+                </Link>
                 <Spacer />
                 <Center>
                     <HStack spacing={4}>

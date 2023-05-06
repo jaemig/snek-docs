@@ -113,7 +113,7 @@ const activeMenuItemProps = {
 };
 
 const generateMenuItem = (item: MenuItem, idx: number) => {
-    const children = item.children?.map((child, idx) => generateMenuItem(child, idx));
+    const children = item.children?.map((child, i) => generateMenuItem(child, i));
 
     if (item.children && item.children.length > 0) {
         return (
@@ -123,7 +123,10 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
                 css={{
                     '& .chakra-collapse .chakra-accordion__panel':  {
                         'paddingTop': 0,
-                    }
+                    },
+                    '&:last-child .chakra-collapse .chakra-accordion__panel':  {
+                        'paddingBottom': 0,
+                    },
                 }}
             >
                 {({ isExpanded }) => (
@@ -155,8 +158,25 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
                                 />
                             </Center>
                         </AccordionButton>
-                        <AccordionPanel>
-                            {children}
+                        <AccordionPanel
+                                position='relative'
+                        >
+                            <Box
+                                _before={{
+                                    content: '""',
+                                    display: 'block',
+                                    position: 'absolute',
+                                    top: 0,
+                                    borderRadius: 'full',
+                                    left: '10px',
+                                    width: '1px',
+                                    height: '100%',
+                                    backgroundColor: 'gray.200',
+                                    my: 2,  
+                                }}
+                            >
+                                {children}
+                            </Box>
                         </AccordionPanel>
                     </>
                 )}
@@ -168,9 +188,9 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
             py={1.5}
             px={4}
             mt={1}
-            {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
             cursor='pointer'
             borderRadius='md'
+            {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
         >
             {item.name}
             {children}
