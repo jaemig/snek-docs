@@ -166,13 +166,12 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
                                     content: '""',
                                     display: 'block',
                                     position: 'absolute',
-                                    top: 0,
+                                    top: 2,
                                     borderRadius: 'full',
                                     left: '10px',
                                     width: '1px',
                                     height: '100%',
                                     backgroundColor: 'gray.200',
-                                    my: 2,  
                                 }}
                             >
                                 {children}
