@@ -1,4 +1,4 @@
-import { Box, Flex, ListItem, UnorderedList } from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Flex, ListItem, UnorderedList } from "@chakra-ui/react";
 import { it } from "node:test";
 import React, { FC } from "react";
 
@@ -85,13 +85,44 @@ const menuStructure: MenuSection[] = [
     },
 ];
 
+const indentAmnt = 4;
+const menuItemProps = {
+    p: 1,
+    mt: 1,
+    opacity: 0.8,
+    _hover: {
+        opacity: 1,
+    },
+}
 const generateMenuItem = (item: MenuItem) => {
+    let indentIdx = 0;
 
     const children = item.children?.map((child) => generateMenuItem(child));
 
+    let WrapperElmnt;
+    if (item.children) {
+        return (
+            <AccordionItem borderWidth={0}>
+                <AccordionButton>
+                    <Box 
+                        as='span'
+                        flex='1'
+                        textAlign='left'
+                        fontSize='sm'
+                    >
+                        {item.name}
+                    </Box>
+                    <AccordionIcon />
+                </AccordionButton>
+                <AccordionPanel>
+                    {children}
+                </AccordionPanel>
+            </AccordionItem>
+        )
+    }
     //TODO: Hover effect gets triggered when hovering over children
     return (
-        <ListItem
+        <Box
             p={1}
             mt={1}
             opacity={0.8}
@@ -100,12 +131,8 @@ const generateMenuItem = (item: MenuItem) => {
             }}
         >
             {item.name}
-            {children && (
-                <UnorderedList styleType='none'>
-                    {children}
-                </UnorderedList>
-            )}
-        </ListItem>
+            {children}
+        </Box>
     )
 }
 
@@ -117,29 +144,32 @@ const LeftNav: FC = () => {
         <Box
             as='nav'
             position='sticky'
+            fontSize='sm'
         >
+            <Accordion allowMultiple borderWidth={0}>
             {
                 menuStructure.map((section, i) => (
                     <Box
-                        color='gray.800'
+                    color='gray.800'
                     >
                         {
                             section.name && (
                                 <Box
-                                    mt={i === 0 ? 0 : 7}
-                                    fontSize='sm'
-                                    fontWeight='bold'
+                                mt={i === 0 ? 0 : 7}
+                                fontSize='sm'
+                                fontWeight='bold'
                                 >
                                     {section.name}
                                 </Box>
                             )
                         }
-                        <UnorderedList styleType='none'>
+                        <Box>
                             { section.items.map((item) => generateMenuItem(item))}
-                        </UnorderedList>
+                        </Box>
                     </Box>
                 ))
             }
+            </Accordion>
         </Box>
     )
 }
