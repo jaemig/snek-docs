@@ -16,6 +16,7 @@ type MenuSection = {
     items: MenuItem[];
 }
 
+// Example menu structure - this would be fetched from a CMS
 const menuStructure: MenuSection[] = [
     {
         items: [
@@ -123,12 +124,15 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
                 borderWidth={0}
                 key={idx}
                 css={{
+                    // Remove top padding from accordion item
                     '& .chakra-collapse .chakra-accordion__panel':  {
                         'paddingTop': 0,
                     },
+                    // Remove padding from last accordion item
                     '&:last-child .chakra-collapse .chakra-accordion__panel':  {
                         'paddingBottom': 0,
                     },
+                    // Remove text decoration (underline) from accordion button
                     '& .chakra-link.chakra-accordion__button': {
                         'textDecoration': 'none',
                     }
@@ -161,7 +165,7 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
                                 transition='background-color 0.2s ease-in-out'
                             >
                                 <AccordionIcon
-                                opacity='inherit'
+                                    opacity='inherit'
                                     transform={`rotate(${isExpanded ? 0 : -90}deg)`}
                                 />
                             </Center>
