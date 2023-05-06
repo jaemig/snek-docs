@@ -1,5 +1,5 @@
 import { ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons";
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, ListItem, UnorderedList, } from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, ListItem, UnorderedList, Link } from "@chakra-ui/react";
 import { it } from "node:test";
 import React, { FC } from "react";
 
@@ -21,33 +21,33 @@ const menuStructure: MenuSection[] = [
         items: [
             {
                 name: 'Introduction',
-                href: '/docs/introduction',
+                href: '#',
                 children: [],
             },
             {
                 name: 'Guide',
-                href: '/docs/guide',
+                href: '#',
                 isActive: true,
                 children: [
                     {
                         name: 'Organize Files',
-                        href: '/docs/guide/organize-files',
+                        href: '#',
                     },
                     {
                         name: 'Markdown',
-                        href: '/docs/guide/markdown',
+                        href: '#',
                     },
                     {
                         name: 'Advanced',
-                        href: '/docs/guide/advanced',
+                        href: '#',
                         children: [
                             {
                                 name: 'Rendering Tables',
-                                href: '/docs/guide/advanced/rendering-tables',                           
+                                href: '#',                           
                             },
                             {
                                 name: 'Remote Content',
-                                href: '/docs/guide/advanced/remote-content',
+                                href: '#',
                             }
                         ]
                     }
@@ -60,15 +60,15 @@ const menuStructure: MenuSection[] = [
         items: [
             {
                 name: 'Docs Theme',
-                href: '/docs/themes/docs-theme',
+                href: '#',
             },
             {
                 name: 'Blog Theme',
-                href: '/docs/themes/blog-theme',
+                href: '#',
             },
             {
                 name: 'Custom Theme',
-                href: '/docs/themes/custom-theme',
+                href: '#',
             }
         ],
     },
@@ -77,18 +77,20 @@ const menuStructure: MenuSection[] = [
         items: [
             {
                 'name': 'About Snek',
-                'href': '/docs/about-snek',
+                href: '/docs/about-snek',
             },
             {
-                'name': 'Snek CLI',
-                'href': 'https://snek.at',
-                'isExternal': true,
+                name: 'Snek CLI',
+                href: 'https://snek.at',
+                isExternal: true,
             },
         ],      
     },
 ];
 
 const baseMenuItemProps = {
+    _hover: {
+    },
     transition: 'opacity 0.2s ease-in-out, background-color 0.2s ease-in-out',
 };
 
@@ -127,11 +129,17 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
                     '&:last-child .chakra-collapse .chakra-accordion__panel':  {
                         'paddingBottom': 0,
                     },
+                    '& .chakra-link.chakra-accordion__button': {
+                        'textDecoration': 'none',
+                    }
                 }}
             >
                 {({ isExpanded }) => (
                     <>
                         <AccordionButton
+                            as={Link}
+                            href={item.href}
+                            isExternal={item.isExternal}
                             borderRadius='md'
                             py={1.5}
                             {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
@@ -183,7 +191,10 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
         )
     }
     return (
-        <Box
+        <Link
+            href={item.href}
+            isExternal={item.isExternal}
+            display='block'
             py={1.5}
             px={4}
             mt={1}
@@ -193,7 +204,7 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
         >
             {item.name}
             {children}
-        </Box>
+        </Link>
     )
 }
 
