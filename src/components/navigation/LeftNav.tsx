@@ -92,6 +92,7 @@ const menuItemProps = {
         opacity: 1,
         bgColor: 'gray.100',
     },
+    transition: 'opacity 0.2s ease-in-out, background-color 0.2s ease-in-out'
 }
 
 const generateMenuItem = (item: MenuItem, idx: number) => {
@@ -104,7 +105,7 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
                 key={idx}
                 css={{
                     '& .chakra-collapse .chakra-accordion__panel':  {
-                        'padding-top': 0,
+                        'paddingTop': 0,
                     }
                 }}
             >
@@ -144,7 +145,6 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
             </AccordionItem>
         )
     }
-    //TODO: Hover effect gets triggered when hovering over children
     return (
         <Box
             py={1.5}
@@ -153,7 +153,6 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
             {...menuItemProps}
             cursor='pointer'
             borderRadius='md'
-            transition='opacity 0.2s ease-in-out, background-color 0.2s ease-in-out'
         >
             {item.name}
             {children}
@@ -186,6 +185,7 @@ const LeftNav: FC = () => {
                         {
                             section.name && (
                                 <Box
+                                    key={-i}
                                     mt={i === 0 ? 0 : 9}
                                     fontSize='sm'
                                     fontWeight='bold'
