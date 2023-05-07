@@ -10,16 +10,16 @@ const IndexPage: React.FC<PageProps> = () => {
     <ChakraProvider>
       <Flex
         direction='column'
-        h='200vh'
+        h='100vh'
       >
         <TopNav />
         <Grid
           flex={1}
-          mt={5}
+          my={5}
           w='7xl'
           mx='auto'
-          templateRows={{ base: 'auto 1fr', md: 'auto 1fr' }}
-          templateColumns={{ base: '1fr', md: 'minmax(auto, 250px) 4fr minmax(auto, 250px)' }}
+          templateRows='1fr'
+          templateColumns='minmax(auto, 250px) 4fr minmax(auto, 250px)'
           gap={10}
         >
           <LeftNav />

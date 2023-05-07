@@ -1,5 +1,5 @@
 import { ArrowForwardIcon, ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons";
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, ListItem, UnorderedList, Link } from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, ListItem, UnorderedList, Link, Spacer } from "@chakra-ui/react";
 import { it } from "node:test";
 import React, { FC } from "react";
 
@@ -220,9 +220,11 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
  */
 const LeftNav: FC = () => {
     return (
-        <Box
+        <Flex
             as='nav'
             fontSize='sm'
+            flexDirection='column'
+            h='100%'
         >
             <Accordion
                 allowMultiple
@@ -256,7 +258,11 @@ const LeftNav: FC = () => {
                 ))
             }
             </Accordion>
-        </Box>
+            <Spacer />
+            <Flex>
+                hi!
+            </Flex>
+        </Flex>
     )
 }
 
