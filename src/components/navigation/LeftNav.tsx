@@ -1,7 +1,8 @@
-import { ArrowForwardIcon, ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons";
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, ListItem, UnorderedList, Link, Spacer } from "@chakra-ui/react";
+import { ArrowForwardIcon, ChevronDownIcon, ChevronRightIcon, Icon, SunIcon } from "@chakra-ui/icons";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, ListItem, UnorderedList, Link, Spacer, Button, IconButton } from "@chakra-ui/react";
 import { it } from "node:test";
 import React, { FC } from "react";
+import HideSidebarIcon from "../icons/HideSidebar";
 
 type MenuItem = {
     name: string;
@@ -259,9 +260,31 @@ const LeftNav: FC = () => {
             }
             </Accordion>
             <Spacer />
-            <Flex>
-                hi!
-            </Flex>
+            <LeftBottomMenu />
+        </Flex>
+    )
+}
+
+/**
+ * Left bottom menu (part of the left navigation bar).
+ */
+const LeftBottomMenu: FC = () => {
+
+    return (
+        <Flex
+            borderTop='1px solid'
+            borderTopColor='gray.200'
+            py={5}
+            gap={3}
+        >
+            <Button
+                size='sm'
+                variant='ghost'
+                flex={1}
+                justifyContent='start'
+                fontWeight='normal'
+            ><SunIcon mr={2} />Light</Button>
+            <IconButton icon={<HideSidebarIcon />} aria-label='Close sidebar' size='sm' variant='ghost' />
         </Flex>
     )
 }

@@ -15,7 +15,7 @@ const IndexPage: React.FC<PageProps> = () => {
         <TopNav />
         <Grid
           flex={1}
-          my={5}
+          mt={5}
           w='7xl'
           mx='auto'
           templateRows='1fr'
