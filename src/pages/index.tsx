@@ -4,6 +4,7 @@ import { Box, ChakraProvider, Flex, Grid } from "@chakra-ui/react"
 import TopNav from "../components/navigation/TopNav"
 import LeftNav from "../components/navigation/LeftNav"
 import RightNav from "../components/navigation/RightNav"
+import MainWrapper from "../components/main/MainWrapper"
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
@@ -29,9 +30,7 @@ const IndexPage: React.FC<PageProps> = () => {
             gap={10}
           >
             <LeftNav />
-            <Box>
-
-            </Box>
+            <MainWrapper />
             <RightNav />
           </Grid>
         </Flex>
