@@ -1,7 +1,7 @@
 import { ArrowForwardIcon, ChevronDownIcon, ChevronRightIcon, Icon, SunIcon } from "@chakra-ui/icons";
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, ListItem, UnorderedList, Link, Spacer, Button, IconButton } from "@chakra-ui/react";
 import { it } from "node:test";
-import React, { FC } from "react";
+import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import HideSidebarIcon from "../icons/HideSidebar";
 
 type MenuItem = {
@@ -123,7 +123,7 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
     if (item.children && item.children.length > 0) {
         const children = item.children.map((child, i) => generateMenuItem(child, i));
         return (
-            <AccordionItem 
+            <AccordionItem
                 borderWidth={0}
                 key={idx}
                 css={{
@@ -221,47 +221,59 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
  * Left navigation bar.
  */
 const LeftNav: FC = () => {
+
+    const [isExpanded, setIsExpanded] = useState(true);
+
     return (
         <Flex
             as='nav'
             fontSize='sm'
             flexDirection='column'
             h='100%'
+            w={isExpanded ? 'auto' : '5rem'}
         >
-            <Accordion
-                allowMultiple
-                css={{
-                    // Remove border from last accordion item
-                    '& .chakra-accordion__item:last-child': {
-                        borderBottomWidth: 0,
-                    },
-                }}
+            <Box
+                w={isExpanded ? 'auto' : 0}
             >
-            {
-                menuStructure.map((section, i) => (
-                    <>
-                        {
-                            section.name && (
-                                <Box
-                                    key={-i}
-                                    mt={i === 0 ? 0 : 9}
-                                    fontSize='sm'
-                                    fontWeight='bold'
-                                    ml={4}
-                                >
-                                    {section.name}
-                                </Box>
-                            )
-                        }
-                        <Box key={i}>
-                            { section.items.map((item, idx) => generateMenuItem(item, idx))}
-                        </Box>
-                    </>
-                ))
-            }
-            </Accordion>
+                <Accordion
+                    visibility={isExpanded ? 'visible' : 'hidden'}
+                    opacity={isExpanded ? 1 : 0}
+                    w={isExpanded ? '100%' : 'max-content'}
+                    allowMultiple
+                    css={{
+                        // Remove border from last accordion item
+                        '& .chakra-accordion__item:last-child': {
+                            borderBottomWidth: 0,
+                        },
+                    }}
+                    transition='opacity 0.2s ease-in-out, width 0.2s ease-in-out'
+                >
+                {
+                    menuStructure.map((section, i) => (
+                        <>
+                            {
+                                section.name && (
+                                    <Box
+                                        key={-i}
+                                        mt={i === 0 ? 0 : 9}
+                                        fontSize='sm'
+                                        fontWeight='bold'
+                                        ml={4}
+                                    >
+                                        {section.name}
+                                    </Box>
+                                )
+                            }
+                            <Box key={i}>
+                                { section.items.map((item, idx) => generateMenuItem(item, idx))}
+                            </Box>
+                        </>
+                    ))
+                }
+                </Accordion>
+            </Box>
             <Spacer />
-            <LeftBottomMenu />
+            <LeftBottomMenu isExpanded={isExpanded} setisExpanded={setIsExpanded} />
         </Flex>
     )
 }
@@ -269,23 +281,40 @@ const LeftNav: FC = () => {
 /**
  * Left bottom menu (part of the left navigation bar).
  */
-const LeftBottomMenu: FC = () => {
+interface LeftBottomMenuProps {
+    isExpanded: boolean;
+    setisExpanded: Dispatch<SetStateAction<boolean>>;
+}
+const LeftBottomMenu: FC<LeftBottomMenuProps> = ({ isExpanded, setisExpanded }) => {
 
     return (
         <Flex
-            borderTop='1px solid'
+            borderTop={isExpanded ? '1px solid' : undefined }
             borderTopColor='gray.200'
             py={5}
             gap={3}
+            flexDir={isExpanded ? 'row' : 'column'}
+            alignItems={isExpanded ? 'flex-start' : 'center'}
         >
             <Button
                 size='sm'
                 variant='ghost'
-                flex={1}
+                flex={isExpanded ? 1 : 'auto'}
                 justifyContent='start'
                 fontWeight='normal'
-            ><SunIcon mr={2} />Light</Button>
-            <IconButton icon={<HideSidebarIcon />} aria-label='Close sidebar' size='sm' variant='ghost' />
+            ><SunIcon mr={isExpanded ? 2 : 0} />{ isExpanded && 'Light' }</Button>
+            <IconButton
+                icon={
+                    <HideSidebarIcon
+                        transform={!isExpanded ? 'rotate(180deg)' : undefined} 
+                        transition='transform 0.2s ease-in-out'
+                    />
+                }
+                aria-label={`${isExpanded ? 'Close' : 'Open'}`}
+                size='sm'
+                variant='ghost'
+                onClick={() => setisExpanded(!isExpanded)}
+            />
         </Flex>
     )
 }
