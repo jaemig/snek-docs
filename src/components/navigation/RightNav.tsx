@@ -63,19 +63,31 @@ const generateMenuItem = (item: NavMenuItem, intendation: number = 0) => {
             <Link 
                 href={item.href}
                 paddingLeft={intendation * 4}
-                opacity={item.isActive ? 1 : 0.8}
+                opacity={item.isActive ? 1 : 0.7}
                 color={item.isActive ? 'blue.500' : 'gray.800'}
                 fontWeight={item.isActive ? 'semibold' : 'normal'}
                 _hover={{
                     textDecoration: 'none',
                     opacity: 1
                 }}
-                transition='opacity 0.2s ease-in-out'
+                transition='opacity 0.1s ease-in-out'
             >{item.name}</Link>
             {children}
         </Box>
     )
 };
+
+const linkProps = {
+    w: '100%',
+    display: 'block',
+    color: 'gray.800',
+    opacity: 0.7,
+    _hover: {
+        textDecoration: 'none',
+        opacity: 1,
+    },
+    transition: 'opacity 0.1s ease-in-out',
+}
 
 /**
  * Right navigation bar.
@@ -105,27 +117,12 @@ const RightNav: FC = () => {
                 <VStack rowGap={1} textAlign='left'>
                     <Link
                         href='#'
-                        w='100%'
-                        display='block'
-                        color='gray.800'
-                        opacity={0.8}
-                        _hover={{
-                            textDecoration: 'none',
-                            opacity: 1
-                        }}
+                        {...linkProps}
                     >Question? Give us feedback <ArrowForwardIcon /></Link>
                     <Link
                         href='#'
-                        w='100%'
-                        display='block'
-                        color='gray.800'
-                        opacity={0.8}
-                        _hover={{
-                            textDecoration: 'none',
-                            opacity: 1
-                        }}
-                        transition='opacity 0.2s ease-in-out'
-                    >Question? Give us feedback <ArrowForwardIcon /></Link>
+                        {...linkProps}
+                    >Edit this page on GitHub <ArrowForwardIcon /></Link>
                 </VStack>
             </Box>
         </Box>
