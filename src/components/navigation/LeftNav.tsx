@@ -130,6 +130,7 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
                     // Remove top padding from accordion item
                     '& .chakra-collapse .chakra-accordion__panel':  {
                         'paddingTop': 0,
+                        'paddingRight': 0,
                     },
                     // Remove padding from last accordion item
                     '&:last-child .chakra-collapse .chakra-accordion__panel':  {
