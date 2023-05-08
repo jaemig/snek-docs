@@ -8,31 +8,45 @@ import RightNav from "../components/navigation/RightNav"
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <ChakraProvider>
-      <Flex
-        direction='column'
+      <Box
+        w='100vw'
         h='100vh'
+        minW='100vw'
+        minH='100vh'
       >
-        <TopNav />
-        <Grid
-          flex={1}
-          mt={5}
-          w='7xl'
-          mx='auto'
-          templateRows='1fr'
-          templateColumns='minmax(auto, 250px) 4fr minmax(auto, 250px)'
-          gap={10}
+        <Flex
+          direction='column'
+          h='100vh'
         >
-          <LeftNav />
-          <Box>
+          <TopNav />
+          <Grid
+            flex={1}
+            mt={5}
+            w='7xl'
+            mx='auto'
+            templateRows='1fr'
+            templateColumns='minmax(auto, 250px) 4fr minmax(auto, 250px)'
+            gap={10}
+          >
+            <LeftNav />
+            <Box>
 
-          </Box>
-          <RightNav />
-        </Grid>
-      </Flex>
+            </Box>
+            <RightNav />
+          </Grid>
+        </Flex>
+      </Box>
     </ChakraProvider>
   )
 }
 
 export default IndexPage
 
-export const Head: HeadFC = () => <title>Snek Docs</title>
+export const Head: HeadFC = () => (
+  <>
+    <html lang="de"></html>
+    <title>Snek Docs</title>
+    <meta name="description" content="Snek Docs" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </>
+)

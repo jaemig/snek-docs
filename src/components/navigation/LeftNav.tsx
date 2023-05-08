@@ -1,24 +1,11 @@
-import { ArrowForwardIcon, ChevronDownIcon, ChevronRightIcon, Icon, SunIcon } from "@chakra-ui/icons";
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, ListItem, UnorderedList, Link, Spacer, Button, IconButton } from "@chakra-ui/react";
-import { it } from "node:test";
+import { ArrowForwardIcon, SunIcon } from "@chakra-ui/icons";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, Link, Spacer, Button, IconButton } from "@chakra-ui/react";
 import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import HideSidebarIcon from "../icons/HideSidebar";
-
-type MenuItem = {
-    name: string;
-    href: string;
-    isExternal?: boolean;
-    children?: MenuItem[];
-    isActive?: boolean;
-}
-
-type MenuSection = {
-    name?: string;
-    items: MenuItem[];
-}
+import { NavMenuSection, NavMenuItem } from "./navigation.types";
 
 // Example menu structure - this would be fetched from a CMS
-const menuStructure: MenuSection[] = [
+const menuStructure: NavMenuSection[] = [
     {
         items: [
             {
@@ -116,7 +103,7 @@ const activeMenuItemProps = {
     },
 };
 
-const generateMenuItem = (item: MenuItem, idx: number) => {
+const generateMenuItem = (item: NavMenuItem, idx: number) => {
     
     const externalLinkIcon = <ArrowForwardIcon transform={`rotate(-45deg)`} ml={2} />;
 
@@ -221,7 +208,6 @@ const generateMenuItem = (item: MenuItem, idx: number) => {
  * Left navigation bar.
  */
 const LeftNav: FC = () => {
-
     const [isExpanded, setIsExpanded] = useState(true);
 
     return (
