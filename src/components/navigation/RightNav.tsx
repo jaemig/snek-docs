@@ -6,7 +6,7 @@ import { Box } from "@chakra-ui/react";
  */
 const RightNav: FC = () => {
     return (
-        <Box bgColor='blue.200' />
+        <Box />
     )
 }
 
