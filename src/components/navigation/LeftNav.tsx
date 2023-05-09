@@ -1,5 +1,5 @@
 import { ArrowForwardIcon, SunIcon } from "@chakra-ui/icons";
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, Link, Spacer, Button, IconButton, useColorMode } from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, Link, Spacer, Button, IconButton, useColorMode, ColorModeContextType, ColorMode, CenterProps, AccordionButtonProps, LinkProps } from "@chakra-ui/react";
 import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import HideSidebarIcon from "../icons/HideSidebar";
 import { NavMenuSection, NavMenuItem } from "./navigation.types";
@@ -84,10 +84,6 @@ const baseMenuItemProps = {
 const inactiveMenuItemProps = {
     ...baseMenuItemProps,
     opacity: 0.8,
-    _hover: {
-        opacity: 1,
-        bgColor: 'gray.100',
-    },
 }
 
 const activeMenuItemProps = {
@@ -96,17 +92,30 @@ const activeMenuItemProps = {
     bgColor: 'blue.100',
     color: 'blue.500',
     fontWeight: 'bold',
-    _hover: {
-        bgColor: 'blue.100',
-    },
 };
 
-const generateMenuItem = (item: NavMenuItem, idx: number) => {
+const generateMenuItem = (item: NavMenuItem, idx: number, isLightColorMode: boolean) => {
     
     const externalLinkIcon = <ArrowForwardIcon transform={`rotate(-45deg)`} ml={2} />;
 
+    const props:CenterProps & AccordionButtonProps & LinkProps = {};
+
+        if (item.isActive) {
+            props.backgroundColor = ( isLightColorMode ? 'blue.100' : 'blue.900' );
+            props._hover = {
+                backgroundColor: ( isLightColorMode ? 'blue.100' : 'blue.700' ),
+            }
+        } else {
+            props._hover = {
+                backgroundColor: ( isLightColorMode ? 'gray.100' : 'gray.700' ),
+            }
+        }
+        props._hover.opacity = 1;
+        props._hover.textDecoration = 'none';
+
     if (item.children && item.children.length > 0) {
-        const children = item.children.map((child, i) => generateMenuItem(child, i));
+        const children = item.children.map((child, i) => generateMenuItem(child, i, isLightColorMode));
+
         return (
             <AccordionItem
                 borderWidth={0}
@@ -136,6 +145,7 @@ const generateMenuItem = (item: NavMenuItem, idx: number) => {
                             borderRadius='md'
                             py={1.5}
                             {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
+                            {...props}
                         >
                             <Box 
                                 as='span'
@@ -148,11 +158,13 @@ const generateMenuItem = (item: NavMenuItem, idx: number) => {
                             </Box>
                             <Center
                                 as='span'
-                                _hover={{
-                                    backgroundColor: item.isActive ? 'blue.200' : 'gray.200',
-                                    borderRadius: 'sm'
-                                }}
+                                borderRadius='sm'
                                 transition='background-color 0.2s ease-in-out'
+                                {...props}
+                                bgColor='transparent'
+                                _hover={{
+                                    bgColor: ( isLightColorMode ? 'gray.100' : 'blue.800' ),
+                                }}
                             >
                                 <AccordionIcon
                                     opacity='inherit'
@@ -173,7 +185,7 @@ const generateMenuItem = (item: NavMenuItem, idx: number) => {
                                     left: '10px',
                                     width: '1px',
                                     height: '100%',
-                                    backgroundColor: 'gray.200',
+                                    backgroundColor: ( isLightColorMode ? 'gray.200' : 'gray.700' ),
                                 }}
                             >
                                 {children}
@@ -195,6 +207,7 @@ const generateMenuItem = (item: NavMenuItem, idx: number) => {
             cursor='pointer'
             borderRadius='md'
             {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
+            {...props}
         >
             {item.name}
             {item.isExternal && externalLinkIcon}
@@ -211,7 +224,10 @@ interface LeftNavProps {
 
 const LeftNav: FC<LeftNavProps> = ({ isMobile }) => {
     const [isExpanded, setIsExpanded] = useState(true);
+    const { colorMode } = useColorMode();
 
+
+    const isLightColorMode = colorMode === 'light';
     return (
         <Flex
             as='nav'
@@ -253,7 +269,7 @@ const LeftNav: FC<LeftNavProps> = ({ isMobile }) => {
                                 )
                             }
                             <Box key={i}>
-                                { section.items.map((item, idx) => generateMenuItem(item, idx))}
+                                { section.items.map((item, idx) => generateMenuItem(item, idx, isLightColorMode))}
                             </Box>
                         </>
                     ))
