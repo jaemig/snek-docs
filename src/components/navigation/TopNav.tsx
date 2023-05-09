@@ -1,5 +1,7 @@
-import { Center, Flex, Img, Spacer, Link, HStack, Input, InputGroup, InputRightElement, Kbd } from '@chakra-ui/react';
+import { Center, Flex, Img, Spacer, Link, HStack, Input, InputGroup, InputRightElement, Kbd, useColorModeValue } from '@chakra-ui/react';
+import { StaticImage } from 'gatsby-plugin-image';
 import React, { FC } from 'react';
+import GitHub from '../icons/GitHub';
 
 const navLinkProps = {
     color: 'gray.800',
@@ -19,6 +21,10 @@ const mobileProps = {
  * Top navigation bar.
  */
 const TopNav: FC = () => {
+    const bgColor = useColorModeValue('rgba(255, 255, 255, 0.8)', 'gray.800');
+    const borderColor = useColorModeValue('rgb(229, 231, 235)', 'gray.700');
+    const gitHubFill = useColorModeValue('black', 'white');
+
     return (
         <Center
             as='nav'
@@ -27,8 +33,8 @@ const TopNav: FC = () => {
             h='64px'
             px={{ base: 5, xl: 0 }}
             borderBottom='1px solid'
-            borderBottomColor='rgb(229, 231, 235)'
-            backgroundColor='rgba(255, 255, 255, 0.8)'
+            borderBottomColor={borderColor}
+            backgroundColor={bgColor}
             backdropFilter={'blur(5px)'}
             zIndex={999}
         >
@@ -98,11 +104,7 @@ const TopNav: FC = () => {
                             }}
                             transition='transform 0.2s ease-in-out'
                         >
-                            <Img
-                                boxSize='32px'
-                                src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
-                                alt='GitHub Logo'
-                            />
+                            <GitHub boxSize='32px' fill={gitHubFill} />
                         </Link>
                     </HStack>
                 </Center>

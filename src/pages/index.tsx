@@ -5,11 +5,12 @@ import TopNav from "../components/navigation/TopNav"
 import LeftNav from "../components/navigation/LeftNav"
 import RightNav from "../components/navigation/RightNav"
 import MainWrapper from "../components/main/MainWrapper"
+import theme from "../components/core/theme/theme"
 
 //TODO: Outsource the link style to the chakra theme
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <Box
         w='100vw'
         h='100vh'

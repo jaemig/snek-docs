@@ -1,5 +1,5 @@
 import { ArrowForwardIcon, SunIcon } from "@chakra-ui/icons";
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, Link, Spacer, Button, IconButton } from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, Link, Spacer, Button, IconButton, useColorMode } from "@chakra-ui/react";
 import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import HideSidebarIcon from "../icons/HideSidebar";
 import { NavMenuSection, NavMenuItem } from "./navigation.types";
@@ -274,6 +274,7 @@ interface LeftBottomMenuProps {
     setisExpanded: Dispatch<SetStateAction<boolean>>;
 }
 const LeftBottomMenu: FC<LeftBottomMenuProps> = ({ isExpanded, setisExpanded }) => {
+    const { colorMode, toggleColorMode } = useColorMode();
 
     return (
         <Flex
@@ -290,7 +291,13 @@ const LeftBottomMenu: FC<LeftBottomMenuProps> = ({ isExpanded, setisExpanded }) 
                 flex={isExpanded ? 1 : 'auto'}
                 justifyContent='start'
                 fontWeight='normal'
-            ><SunIcon mr={isExpanded ? 2 : 0} />{ isExpanded && 'Light' }</Button>
+                onClick={toggleColorMode}
+            >
+                <SunIcon mr={isExpanded ? 2 : 0} />
+                { 
+                    isExpanded && (colorMode === 'light' ? 'Light' : 'Dark') 
+                }
+            </Button>
             <IconButton
                 icon={
                     <HideSidebarIcon
