@@ -6,6 +6,7 @@ import LeftNav from "../components/navigation/LeftNav"
 import RightNav from "../components/navigation/RightNav"
 import MainWrapper from "../components/main/MainWrapper"
 
+//TODO: Outsource the link style to the chakra theme
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <ChakraProvider>
@@ -23,13 +24,17 @@ const IndexPage: React.FC<PageProps> = () => {
           <Grid
             flex={1}
             mt={5}
-            w='7xl'
+            w='100vw'
+            maxW='7xl'
             mx='auto'
             templateRows='1fr'
-            templateColumns='minmax(auto, 250px) 4fr minmax(auto, 250px)'
+            templateColumns={{ base: '1fr', md: '0.5fr 1fr', lg: 'minmax(auto, 250px) minmax(auto, 4fr) minmax(auto, 250px)' }}
             gap={10}
+            px={{ base: 5, xl: 0 }}
           >
-            <LeftNav />
+            <Box display={{ base: 'none', md: 'block' }}>
+              <LeftNav />
+            </Box>
             <MainWrapper />
             <RightNav />
           </Grid>

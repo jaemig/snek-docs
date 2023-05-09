@@ -78,8 +78,6 @@ const menuStructure: NavMenuSection[] = [
 ];
 
 const baseMenuItemProps = {
-    _hover: {
-    },
     transition: 'opacity 0.2s ease-in-out, background-color 0.2s ease-in-out',
 };
 
@@ -207,7 +205,11 @@ const generateMenuItem = (item: NavMenuItem, idx: number) => {
 /**
  * Left navigation bar.
  */
-const LeftNav: FC = () => {
+interface LeftNavProps {
+    isMobile?: boolean;
+}
+
+const LeftNav: FC<LeftNavProps> = ({ isMobile }) => {
     const [isExpanded, setIsExpanded] = useState(true);
 
     return (

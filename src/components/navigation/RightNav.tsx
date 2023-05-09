@@ -96,6 +96,7 @@ const RightNav: FC = () => {
     return (
         <Box 
             as='aside'
+            display={{ base: 'none', xl: 'block' }}
         >
             <Flex
                 as='nav'

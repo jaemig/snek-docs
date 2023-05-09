@@ -1,5 +1,5 @@
-import { Center, Flex, Img, Spacer, Link, HStack, Input, InputGroup, InputRightElement, Kbd } from "@chakra-ui/react";
-import React, { FC } from "react";
+import { Center, Flex, Img, Spacer, Link, HStack, Input, InputGroup, InputRightElement, Kbd } from '@chakra-ui/react';
+import React, { FC } from 'react';
 
 const navLinkProps = {
     color: 'gray.800',
@@ -11,18 +11,23 @@ const navLinkProps = {
     fontSize: 'sm',
 }
 
+const mobileProps = {
+    display: { base: 'none', lg: 'initial' },
+}
+
 /**
  * Top navigation bar.
  */
 const TopNav: FC = () => {
     return (
         <Center
-            as="nav"
-            position="sticky"
+            as='nav'
+            position='sticky'
             top={0}
-            h="64px"
-            borderBottom="1px solid"
-            borderBottomColor="rgb(229, 231, 235)"
+            h='64px'
+            px={{ base: 5, xl: 0 }}
+            borderBottom='1px solid'
+            borderBottomColor='rgb(229, 231, 235)'
             backgroundColor='rgba(255, 255, 255, 0.8)'
             backdropFilter={'blur(5px)'}
             zIndex={999}
@@ -36,23 +41,35 @@ const TopNav: FC = () => {
                     transition='transform 0.2s ease-in-out'
                 >
                     <Img
-                        h="32px"
-                        src="https://avatars.githubusercontent.com/u/55870326?s=200&v=4"
-                        alt="Snek Logo"
+                        h='32px'
+                        src='https://avatars.githubusercontent.com/u/55870326?s=200&v=4'
+                        alt='Snek Logo'
                     />
                 </Link>
                 <Spacer />
                 <Center>
                     <HStack spacing={4}>
-                        <Link href="#" {...navLinkProps}>About</Link>
-                        <Link href="#" isExternal {...navLinkProps}>Contact</Link>
-                        <InputGroup size="sm">
+                        <Link
+                            href='#'
+                            {...navLinkProps}
+                            {...mobileProps}
+                        >About</Link>
+                        <Link
+                            href='#'
+                            isExternal
+                            {...navLinkProps}
+                            {...mobileProps}
+                        >Contact</Link>
+                        <InputGroup
+                            size='sm'
+                            {...mobileProps}
+                        >
                             <Input
                                 htmlSize={20}
-                                placeholder="Search documentation"
-                                borderRadius="md"
-                                backgroundColor="blackAlpha.50"
-                                pr="45px"
+                                placeholder='Search documentation'
+                                borderRadius='md'
+                                backgroundColor='blackAlpha.50'
+                                pr='45px'
                                 _focus={{
                                     backgroundColor: 'white',
                                 }}
@@ -66,24 +83,24 @@ const TopNav: FC = () => {
                                         py={0.5}
                                     >⌘ K</Kbd>
                                 }
-                                pr="10px" 
-                                color="rgb(107, 114, 128)"
+                                pr='10px' 
+                                color='rgb(107, 114, 128)'
                             />
                         </InputGroup>
                         <Link 
-                            display="inline-block"
-                            href="https://github.com/Jan-Emig/snek-docs"
+                            display='inline-block'
+                            href='https://github.com/Jan-Emig/snek-docs'
                             // This doesnt work for some reason (min-width solves it temporarily)
-                            boxSize="28px"
-                            minW='28px'
+                            boxSize='32px'
+                            minW='32px'
                             _hover={{
                                 transform: 'scale(1.2)'
                             }}
                             transition='transform 0.2s ease-in-out'
                         >
                             <Img
-                                boxSize="28px"
-                                src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                                boxSize='32px'
+                                src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
                                 alt='GitHub Logo'
                             />
                         </Link>
