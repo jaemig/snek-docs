@@ -1,4 +1,4 @@
-import { Center, Flex, Img, Spacer, Link, HStack, Input, InputGroup, InputRightElement, Kbd, useColorModeValue } from '@chakra-ui/react';
+import { Center, Flex, Img, Spacer, Link, HStack, Input, InputGroup, InputRightElement, Kbd, useColorModeValue, VStack, Box } from '@chakra-ui/react';
 import { StaticImage } from 'gatsby-plugin-image';
 import React, { FC } from 'react';
 import GitHub from '../../components/icons/GitHub';
@@ -101,6 +101,26 @@ const TopNav: FC = () => {
                         >
                             <GitHub boxSize='32px' fill='topNav.GitHubFill' />
                         </Link>
+                        <VStack spacing={1.5}>
+                            <Box
+                                w='24px'
+                                h='2px'
+                                backgroundColor='white'
+                                borderRadius='full'
+                            />
+                            <Box
+                                w='24px'
+                                h='2px'
+                                backgroundColor='white'
+                                borderRadius='full'
+                            />
+                            <Box
+                                w='24px'
+                                h='2px'
+                                backgroundColor='white'
+                                borderRadius='full'
+                            />
+                        </VStack>
                     </HStack>
                 </Center>
             </Flex>
