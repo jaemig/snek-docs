@@ -1,7 +1,7 @@
-import { ArrowForwardIcon, SunIcon } from "@chakra-ui/icons";
+import { ArrowForwardIcon, Icon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, Link, Spacer, Button, IconButton, useColorMode, ColorModeContextType, ColorMode, CenterProps, AccordionButtonProps, LinkProps } from "@chakra-ui/react";
 import React, { Dispatch, FC, SetStateAction, useState } from "react";
-import HideSidebarIcon from "../icons/HideSidebar";
+import HideSidebarIcon from "../../components/icons/HideSidebar";
 import { NavMenuSection, NavMenuItem } from "./navigation.types";
 
 // Example menu structure - this would be fetched from a CMS
@@ -94,46 +94,44 @@ const activeMenuItemProps = {
     fontWeight: 'bold',
 };
 
-const generateMenuItem = (item: NavMenuItem, idx: number, isLightColorMode: boolean) => {
+const generateMenuItem = (item: NavMenuItem, idx: number) => {
     
     const externalLinkIcon = <ArrowForwardIcon transform={`rotate(-45deg)`} ml={2} />;
 
     const props:CenterProps & AccordionButtonProps & LinkProps = {};
 
         if (item.isActive) {
-            props.backgroundColor = ( isLightColorMode ? 'blue.100' : 'blue.900' );
-            props._hover = {
-                backgroundColor: ( isLightColorMode ? 'blue.100' : 'blue.700' ),
-            }
+            props.backgroundColor = 'leftNav.accordion.activeItem.bgColor';
+            props._hover = {}
         } else {
             props._hover = {
-                backgroundColor: ( isLightColorMode ? 'gray.100' : 'gray.700' ),
+                backgroundColor: 'leftNav.accordion.inactiveItem.hoverBgColor',
             }
         }
         props._hover.opacity = 1;
         props._hover.textDecoration = 'none';
 
     if (item.children && item.children.length > 0) {
-        const children = item.children.map((child, i) => generateMenuItem(child, i, isLightColorMode));
+        const children = item.children.map((child, i) => generateMenuItem(child, i));
 
+        const semanticPath = `leftNav.accordion.${item.isActive ? '' : 'in'}activeItem.`;
         return (
             <AccordionItem
-                borderWidth={0}
                 key={idx}
                 css={{
                     // Remove top padding from accordion item
-                    '& .chakra-collapse .chakra-accordion__panel':  {
-                        'paddingTop': 0,
-                        'paddingRight': 0,
-                    },
+                    // '& .chakra-collapse .chakra-accordion__panel':  {
+                    //     'paddingTop': 0,
+                    //     'paddingRight': 0,
+                    // },
                     // Remove padding from last accordion item
                     '&:last-child .chakra-collapse .chakra-accordion__panel':  {
                         'paddingBottom': 0,
                     },
                     // Remove text decoration (underline) from accordion button
-                    '& .chakra-link.chakra-accordion__button': {
-                        'textDecoration': 'none',
-                    }
+                    // '& .chakra-link.chakra-accordion__button': {
+                    //     'textDecoration': 'none',
+                    // }
                 }}
             >
                 {({ isExpanded }) => (
@@ -146,12 +144,11 @@ const generateMenuItem = (item: NavMenuItem, idx: number, isLightColorMode: bool
                             py={1.5}
                             {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
                             {...props}
+                            backgroundColor={item.isActive ? (semanticPath + 'bgColor') : undefined}
                         >
                             <Box 
                                 as='span'
                                 flex='1'
-                                textAlign='left'
-                                fontSize='sm'
                             >
                                 {item.name}
                                 {item.isExternal && externalLinkIcon}
@@ -161,9 +158,9 @@ const generateMenuItem = (item: NavMenuItem, idx: number, isLightColorMode: bool
                                 borderRadius='sm'
                                 transition='background-color 0.2s ease-in-out'
                                 {...props}
-                                bgColor='transparent'
+                                backgroundColor='transparent'
                                 _hover={{
-                                    bgColor: ( isLightColorMode ? 'gray.100' : 'blue.800' ),
+                                    bgColor: semanticPath + 'button.icon.hoverContainerBgColor',
                                 }}
                             >
                                 <AccordionIcon
@@ -185,7 +182,7 @@ const generateMenuItem = (item: NavMenuItem, idx: number, isLightColorMode: bool
                                     left: '10px',
                                     width: '1px',
                                     height: '100%',
-                                    backgroundColor: ( isLightColorMode ? 'gray.200' : 'gray.700' ),
+                                    backgroundColor: 'leftNav.accordion.panel.borderLeftColor',
                                 }}
                             >
                                 {children}
@@ -250,6 +247,7 @@ const LeftNav: FC<LeftNavProps> = ({ isMobile }) => {
                             borderBottomWidth: 0,
                         },
                     }}
+                    variant='leftNav'
                     transition='opacity 0.2s ease-in-out, width 0.2s ease-in-out'
                 >
                 {
@@ -269,7 +267,7 @@ const LeftNav: FC<LeftNavProps> = ({ isMobile }) => {
                                 )
                             }
                             <Box key={i}>
-                                { section.items.map((item, idx) => generateMenuItem(item, idx, isLightColorMode))}
+                                { section.items.map((item, idx) => generateMenuItem(item, idx))}
                             </Box>
                         </>
                     ))
@@ -292,6 +290,7 @@ interface LeftBottomMenuProps {
 const LeftBottomMenu: FC<LeftBottomMenuProps> = ({ isExpanded, setisExpanded }) => {
     const { colorMode, toggleColorMode } = useColorMode();
 
+    const isLightColorMode = colorMode === 'light';
     return (
         <Flex
             borderTop={isExpanded ? '1px solid' : undefined }
@@ -309,9 +308,9 @@ const LeftBottomMenu: FC<LeftBottomMenuProps> = ({ isExpanded, setisExpanded }) 
                 fontWeight='normal'
                 onClick={toggleColorMode}
             >
-                <SunIcon mr={isExpanded ? 2 : 0} />
+                <Icon as={isLightColorMode ? SunIcon : MoonIcon} mr={isExpanded ? 2 : 0} />
                 { 
-                    isExpanded && (colorMode === 'light' ? 'Light' : 'Dark') 
+                    isExpanded && (isLightColorMode ? 'Light' : 'Dark') 
                 }
             </Button>
             <IconButton

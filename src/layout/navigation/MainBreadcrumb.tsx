@@ -1,5 +1,5 @@
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbLinkProps } from "@chakra-ui/react";
+import { Breadcrumb, BreadcrumbLinkProps, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 import React, { FC } from "react";
 
 // Example breadcrumb parts - this would be fetched from a CMS or other data source
@@ -20,15 +20,11 @@ const breadCrumbParts = [
 ];
 
 /**
- * Main wrapper component.
+ *  Main breadcrumb component.
  */
-const MainWrapper: FC = () => {
+const MainBreadcrumb: FC = () => {
     return (
-        <Box
-            as='main'
-            px={{ base: 5, md: 0 }}
-        >
-            <Breadcrumb 
+        <Breadcrumb 
                 separator={<ChevronRightIcon />}
                 fontSize='sm'
             >
@@ -37,15 +33,15 @@ const MainWrapper: FC = () => {
 
                     if (item.isActive) {
                         props.opacity = 1;
-                        props.color = 'gray.600';
+                        props.color = 'breadcrumb.active.color';
                         props.fontWeight = 'semibold';
                     } else {
-                        props.opacity = 0.7;
-                        props.color = 'gray.500';
+                        // props.opacity = 0.7;
+                        props.color = 'breadcrumb.inactive.color';
                         props._hover = {
                             opacity: 1,
                             textDecoration: 'none',
-                            color: 'gray.900'
+                            color: 'breadcrumb.inactive.hover.color'
                         };
                     }
 
@@ -67,8 +63,7 @@ const MainWrapper: FC = () => {
                     )
                 })}
             </Breadcrumb>
-        </Box>
     )
-}
+};
 
-export default MainWrapper;
+export default MainBreadcrumb;

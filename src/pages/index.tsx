@@ -1,11 +1,11 @@
 import React from "react"
 import type { HeadFC, PageProps } from "gatsby"
 import { Box, ChakraProvider, Flex, Grid } from "@chakra-ui/react"
-import TopNav from "../components/navigation/TopNav"
-import LeftNav from "../components/navigation/LeftNav"
-import RightNav from "../components/navigation/RightNav"
-import MainWrapper from "../components/main/MainWrapper"
-import theme from "../components/core/theme/theme"
+import TopNav from "../layout/navigation/TopNav"
+import LeftNav from "../layout/navigation/LeftNav"
+import RightNav from "../layout/navigation/RightNav"
+import MainWrapper from "../layout/main/MainWrapper"
+import theme from "../theme/theme"
 
 //TODO: Outsource the link style to the chakra theme
 const IndexPage: React.FC<PageProps> = () => {

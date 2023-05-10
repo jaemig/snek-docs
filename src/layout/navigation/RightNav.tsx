@@ -54,6 +54,7 @@ const generateMenuItem = (item: NavMenuItem, intendation: number = 0) => {
         });
     }
 
+    const semanticVariantPathPart = item.isActive ? 'active' : 'inactive';
     return (
         <Box
             display='block'
@@ -64,7 +65,7 @@ const generateMenuItem = (item: NavMenuItem, intendation: number = 0) => {
                 href={item.href}
                 paddingLeft={intendation * 4}
                 opacity={item.isActive ? 1 : 0.7}
-                color={item.isActive ? 'blue.500' : 'gray.800'}
+                color={`rightNav.link.${semanticVariantPathPart}.color`}
                 fontWeight={item.isActive ? 'semibold' : 'normal'}
                 _hover={{
                     textDecoration: 'none',
@@ -80,7 +81,6 @@ const generateMenuItem = (item: NavMenuItem, intendation: number = 0) => {
 const linkProps = {
     w: '100%',
     display: 'block',
-    color: 'gray.800',
     opacity: 0.7,
     _hover: {
         textDecoration: 'none',
