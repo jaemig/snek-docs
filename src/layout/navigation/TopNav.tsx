@@ -109,7 +109,10 @@ const TopNav: FC = () => {
                         >
                             <GitHub boxSize='32px' fill='topNav.GitHubFill' />
                         </Link>
-                        <VStack spacing={1.5}>
+                        <VStack 
+                            spacing={1.5}
+                            display={{ base: 'initial', md: 'none' }}
+                        >
                             <Box
                                 w='24px'
                                 h='2px'
