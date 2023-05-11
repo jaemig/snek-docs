@@ -6,46 +6,34 @@ import LeftNav from "../layout/navigation/LeftNav"
 import RightNav from "../layout/navigation/RightNav"
 import MainWrapper from "../layout/main/MainWrapper"
 import theme from "../theme/theme"
+import AppLayout from "../layout/AppLayout"
 
 //TODO: Outsource the link style to the chakra theme
-const IndexPage: React.FC<PageProps> = () => {
+const DocsPage: React.FC<PageProps> = () => {
   return (
-    <ChakraProvider theme={theme}>
-      <Box
-        w='100vw'
-        h='100vh'
-        minW='100vw'
-        minH='100vh'
-      >
-        <Flex
-          direction='column'
-          h='100vh'
+    <AppLayout>
+        <Grid
+          flex={1}
+          mt={5}
+          maxW='7xl'
+          h='100%'
+          mx='auto'
+          templateRows='1fr'
+          templateColumns={{ base: '1fr', md: '0.5fr 1fr', lg: 'minmax(auto, 250px) minmax(auto, 4fr) minmax(auto, 250px)' }}
+          gap={10}
+          px={{ base: 5, xl: 0 }}
         >
-          <TopNav />
-          <Grid
-            flex={1}
-            mt={5}
-            w='100vw'
-            maxW='7xl'
-            mx='auto'
-            templateRows='1fr'
-            templateColumns={{ base: '1fr', md: '0.5fr 1fr', lg: 'minmax(auto, 250px) minmax(auto, 4fr) minmax(auto, 250px)' }}
-            gap={10}
-            px={{ base: 5, xl: 0 }}
-          >
-            <Box display={{ base: 'none', md: 'block' }}>
-              <LeftNav />
-            </Box>
-            <MainWrapper />
-            <RightNav />
-          </Grid>
-        </Flex>
-      </Box>
-    </ChakraProvider>
+          <Box display={{ base: 'none', md: 'block' }}>
+            <LeftNav />
+          </Box>
+          <MainWrapper />
+          <RightNav />
+        </Grid>
+    </AppLayout>
   )
 }
 
-export default IndexPage
+export default DocsPage
 
 export const Head: HeadFC = () => (
   <>

@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import React, { FC } from "react";
-import MainBreadcrumb from "../navigation/MainBreadCrumb";
+import MainBreadcrumb from "../navigation/MainBreadcrumb";
 
 /**
  * Main wrapper component.
