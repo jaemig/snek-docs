@@ -1,5 +1,5 @@
 import { ArrowForwardIcon, Icon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, Link, Spacer, Button, IconButton, useColorMode, ColorModeContextType, ColorMode, CenterProps, AccordionButtonProps, LinkProps } from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, Link, Spacer, Button, IconButton, useColorMode, CenterProps, AccordionButtonProps, LinkProps } from "@chakra-ui/react";
 import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import HideSidebarIcon from "../../components/icons/HideSidebar";
 import { NavMenuSection, NavMenuItem } from "./navigation.types";
@@ -89,8 +89,8 @@ const inactiveMenuItemProps = {
 const activeMenuItemProps = {
     ...baseMenuItemProps,
     opacity: 1,
-    bgColor: 'blue.100',
-    color: 'blue.500',
+    bgColor: 'theme.100',
+    color: 'leftNav.accordion.activeItem.button.text.color',
     fontWeight: 'bold',
 };
 
@@ -119,19 +119,10 @@ const generateMenuItem = (item: NavMenuItem, idx: number) => {
             <AccordionItem
                 key={idx}
                 css={{
-                    // Remove top padding from accordion item
-                    // '& .chakra-collapse .chakra-accordion__panel':  {
-                    //     'paddingTop': 0,
-                    //     'paddingRight': 0,
-                    // },
                     // Remove padding from last accordion item
                     '&:last-child .chakra-collapse .chakra-accordion__panel':  {
                         'paddingBottom': 0,
                     },
-                    // Remove text decoration (underline) from accordion button
-                    // '& .chakra-link.chakra-accordion__button': {
-                    //     'textDecoration': 'none',
-                    // }
                 }}
             >
                 {({ isExpanded }) => (
@@ -221,10 +212,7 @@ interface LeftNavProps {
 
 const LeftNav: FC<LeftNavProps> = ({ isMobile }) => {
     const [isExpanded, setIsExpanded] = useState(true);
-    const { colorMode } = useColorMode();
 
-
-    const isLightColorMode = colorMode === 'light';
     return (
         <Flex
             as='nav'
@@ -232,6 +220,7 @@ const LeftNav: FC<LeftNavProps> = ({ isMobile }) => {
             flexDirection='column'
             h='100%'
             w={isExpanded ? 'auto' : '5rem'}
+            color='text'
         >
             <Box
                 w={isExpanded ? 'auto' : 0}

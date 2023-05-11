@@ -1,5 +1,5 @@
-import { extendTheme, type ThemeConfig } from "@chakra-ui/react";
-import { accordionTheme } from "./components/accordion";
+import { extendTheme, StyleFunctionProps, type ThemeConfig } from "@chakra-ui/react";
+import { mode } from "@chakra-ui/theme-tools";
 
 
 const theme: ThemeConfig = extendTheme({
@@ -9,7 +9,7 @@ const theme: ThemeConfig = extendTheme({
         colors: {
             text: {
                 default: 'gray.800',
-                _dark: 'gray.100',
+                _dark: 'gray.400',
             },
             topNav: {
                 bgColor: {
@@ -29,6 +29,11 @@ const theme: ThemeConfig = extendTheme({
                         bgColor: {
                             default: 'white',
                             _dark: 'gray.900',
+                        },
+                        //? This doesnt work with focusBorderColor for some reason
+                        borderColor: {
+                            default: 'red.500',
+                            _dark: 'red.500',
                         }
                     }
                 }
@@ -37,18 +42,24 @@ const theme: ThemeConfig = extendTheme({
                 accordion: {
                     activeItem: {
                         bgColor: {
-                            default: 'blue.100',
-                            _dark: 'blue.900',
+                            default: 'theme.100',
+                            _dark: 'theme.900',
                         },
                         hoverBgColor: {
-                            default: 'blue.100',
-                            _dark: 'blue.700',
+                            default: 'theme.100',
+                            _dark: 'theme.700',
                         },
                         button: {
                             icon: {
                                 hoverContainerBgColor: {
-                                    default: 'gray.100',
-                                    _dark: 'blue.800',
+                                    default: 'theme.200',
+                                    _dark: 'theme.800',
+                                }
+                            },
+                            text: {
+                                color: {
+                                    default: 'theme.800',
+                                    _dark: 'theme.200',
                                 }
                             }
                         }
@@ -61,7 +72,7 @@ const theme: ThemeConfig = extendTheme({
                         button: {
                             icon: {
                                 hoverContainerBgColor: {
-                                    default: 'gray.100',
+                                    default: 'gray.200',
                                     _dark: 'gray.600',
                                 }
                             }
@@ -79,14 +90,14 @@ const theme: ThemeConfig = extendTheme({
                 active: {
                     color: {
                         default: 'gray.600',
-                        _dark: 'gray.500',
+                        _dark: 'gray.400',
                     }
                 },
                 inactive: {
                     hover: {
                         color: {
                             default: 'gray.900',
-                            _dark: 'gray.100',
+                            _dark: 'gray.500',
                         }
                     }
                 },
@@ -98,8 +109,8 @@ const theme: ThemeConfig = extendTheme({
                 link: {
                     active: {
                         color: {
-                            default: 'blue.500',
-                            _dark: 'blue.300',
+                            default: 'theme.800',
+                            _dark: 'theme.300',
                         },
                     },
                     inactive: {
@@ -110,6 +121,31 @@ const theme: ThemeConfig = extendTheme({
                     },
                 },
             },
+        },
+    },
+    styles: {
+        global: (props: StyleFunctionProps) => ({
+            text: {
+                color: mode('gray.800', 'red.100')(props),
+            },
+            body: {
+                color: mode('gray.800', 'red.100')(props),
+                bg: mode('gray.100', 'gray.900')(props),
+            },
+        }),
+    },
+    colors: {
+        theme: {
+            brand: '#00A9CE',
+            100: '#e5faff',
+            200: '#b3f1ff',
+            300: '#80e8ff',
+            400: '#4ddfff',
+            500: '#1ad6ff',
+            600: '#00bce6',
+            700: '#0092b3',
+            800: '#006980',
+            900: '#003f4d',
         },
     },
     components: {

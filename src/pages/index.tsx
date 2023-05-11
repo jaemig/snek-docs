@@ -1,7 +1,5 @@
 import React from "react"
 import type { HeadFC, PageProps } from "gatsby"
-import { ChakraProvider, Flex, Grid } from "@chakra-ui/react"
-import theme from "../theme/theme"
 import AppLayout from "../layout/AppLayout"
 
 //TODO: Outsource the link style to the chakra theme
@@ -22,6 +20,5 @@ export const Head: HeadFC = () => (
     <title>Snek Docs</title>
     <meta name="description" content="Snek Docs" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="docs:url" content="https://snek.at/docs" />
   </>
 )

@@ -7,6 +7,7 @@ const breadCrumbParts = [
     {
         name: 'Documentation',
         href: '#',
+        isDisabled: true,
     }, 
     {
         name: 'Guide',
@@ -49,7 +50,7 @@ const MainBreadcrumb: FC = () => {
                     return (
                         <BreadcrumbItem 
                             key={i}
-                            isCurrentPage={item.isActive}
+                            isCurrentPage={item.isActive || item.isDisabled}
                         >
                             <BreadcrumbLink 
                                 href={item.href}

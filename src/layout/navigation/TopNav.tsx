@@ -2,6 +2,7 @@ import { Center, Flex, Img, Spacer, Link, HStack, Input, InputGroup, InputRightE
 import { StaticImage } from 'gatsby-plugin-image';
 import React, { FC } from 'react';
 import GitHub from '../../components/icons/GitHub';
+import SnekIcon from '../../assets/icons/brand.svg';
 
 const navLinkProps = {
     opacity: 0.8,
@@ -16,9 +17,10 @@ const mobileProps = {
     display: { base: 'none', lg: 'initial' },
 }
 
+
 /**
  * Top navigation bar.
- */
+*/
 const TopNav: FC = () => {
     return (
         <Center
@@ -43,13 +45,18 @@ const TopNav: FC = () => {
                 >
                     <Img
                         h='32px'
-                        src='https://avatars.githubusercontent.com/u/55870326?s=200&v=4'
+                        src={SnekIcon}
                         alt='Snek Logo'
                     />
                 </Link>
                 <Spacer />
                 <Center>
                     <HStack spacing={4}>
+                        <Link
+                            href='#'
+                            {...navLinkProps}
+                            {...mobileProps}
+                        >Documentation</Link>
                         <Link
                             href='#'
                             {...navLinkProps}
@@ -74,6 +81,7 @@ const TopNav: FC = () => {
                                 _focus={{
                                     backgroundColor: 'topNav.input.focus.bgColor',
                                 }}
+                                focusBorderColor='theme.500'
                             />
                             <InputRightElement
                                 children={

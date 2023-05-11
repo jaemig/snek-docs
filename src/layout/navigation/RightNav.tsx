@@ -59,7 +59,7 @@ const generateMenuItem = (item: NavMenuItem, intendation: number = 0) => {
         <Box
             display='block'
             key={item.name}
-            py={1}    
+            py={1}
         >
             <Link 
                 href={item.href}
@@ -97,6 +97,7 @@ const RightNav: FC = () => {
         <Box 
             as='aside'
             display={{ base: 'none', xl: 'block' }}
+            color='text'
         >
             <Flex
                 as='nav'
