@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import TopNav from "./navigation/TopNav";
 import { Box, ChakraProvider, Flex } from "@chakra-ui/react";
 import theme from "../theme/theme";
+import Footer from "./Footer";
 
 interface AppLayoutProps {
     children?: React.ReactNode;
@@ -29,6 +30,7 @@ const AppLayout: FC<AppLayoutProps> = ({ children }) => {
                 { children }
             </Box>
             </Flex>
+            <Footer />
         </ChakraProvider>
     );
 }

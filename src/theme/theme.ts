@@ -121,15 +121,25 @@ const theme: ThemeConfig = extendTheme({
                     },
                 },
             },
+            footer: {
+                bgColor: {
+                    default: 'gray.100',
+                    _dark: '#1B222E',
+                },
+                textColor: {
+                    default: 'gray.800',
+                    _dark: 'gray.400',
+                }
+            }
         },
     },
     styles: {
         global: (props: StyleFunctionProps) => ({
             text: {
-                color: mode('gray.800', 'red.100')(props),
+                color: mode('gray.800', 'gray.100')(props),
             },
             body: {
-                color: mode('gray.800', 'red.100')(props),
+                color: mode('gray.800', 'gray.500')(props),
                 bg: mode('gray.100', 'gray.900')(props),
             },
         }),
