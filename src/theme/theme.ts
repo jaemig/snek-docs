@@ -86,24 +86,32 @@ const theme: ThemeConfig = extendTheme({
                     }
                 },
             },
-            breadcrumb: {
-                active: {
-                    color: {
-                        default: 'gray.600',
-                        _dark: 'gray.400',
-                    }
-                },
-                inactive: {
-                    hover: {
-                        color: {
-                            default: 'gray.900',
-                            _dark: 'gray.500',
-                        }
-                    }
-                },
-            },
             main: {
+                breadcrumb: {
+                    active: {
+                        color: {
+                            default: 'gray.600',
+                            _dark: 'gray.400',
+                        }
+                    },
+                    inactive: {
+                        color: {
+                            default: 'gray.400',
+                            _dark: 'gray.600',
+                        },
+                        hover: {
+                            color: {
+                                default: 'gray.900',
+                                _dark: 'gray.400',
+                            }
+                        }
+                    },
+                },
                 bottomNav: {
+                    borderColor: {
+                        default: 'gray.100',
+                        _dark: 'gray.700',
+                    },
                     linkHoverColor: {
                         default: 'theme.800',
                         _dark: 'theme.300',

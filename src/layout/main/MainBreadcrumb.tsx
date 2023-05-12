@@ -34,16 +34,18 @@ const MainBreadcrumb: FC = () => {
 
                     if (item.isActive) {
                         props.opacity = 1;
-                        props.color = 'breadcrumb.active.color';
+                        props.color = 'main.breadcrumb.active.color';
                         props.fontWeight = 'semibold';
                     } else {
                         // props.opacity = 0.7;
-                        props.color = 'breadcrumb.inactive.color';
-                        props._hover = {
-                            opacity: 1,
-                            textDecoration: 'none',
-                            color: 'breadcrumb.inactive.hover.color'
-                        };
+                        props.color = 'main.breadcrumb.inactive.color';
+                        if (!item.isDisabled) {
+                            props._hover = {
+                                opacity: 1,
+                                textDecoration: 'none',
+                                color: 'main.breadcrumb.inactive.hover.color'
+                            };
+                        }
                     }
 
 
