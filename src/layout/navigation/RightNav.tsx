@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { Box, Flex, Link, VStack } from "@chakra-ui/react";
 import { NavMenuItem } from "./navigation.types";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
+import MemoizedLinks from "../../components/MemoizedLink";
 
 // Example menu structure - this would be fetched from a CMS or other data source
 const menuStructure: NavMenuItem[] = [
@@ -90,27 +91,6 @@ const links = [
     },
 ];
 
-// Memoize the links so they don't re-render on every page change
-const MemoizedLinks = React.memo(() => {
-    return (
-        <>
-        {
-            links.map((link) => {
-                return (
-                    <Link
-                        key={link.name}
-                        href={link.href}
-                        variant='right-bottom-nav'
-                        w='100%'
-                        display='block'
-                    >{link.name} <ArrowForwardIcon /></Link>
-                )
-            })
-        }
-        </>
-    )
-}, () => false);
-
 /**
  * Right navigation bar.
  */
@@ -136,7 +116,11 @@ const RightNav: FC = () => {
                 fontSize='xs'
             >
                 <VStack rowGap={1} textAlign='left'>
-                    <MemoizedLinks />
+                    <MemoizedLinks links={links} props={{
+                        variant: 'right-bottom-nav',
+                        w: '100%',
+                        display: 'block'
+                    }} />
                 </VStack>
             </Box>
         </Box>

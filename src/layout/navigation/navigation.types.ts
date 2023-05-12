@@ -14,4 +14,5 @@ export type NavMenuSection = {
 export type LinkData = {
     name: string;
     href: string;
+    isActive?: boolean;
 }

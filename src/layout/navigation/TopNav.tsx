@@ -2,6 +2,24 @@ import { Center, Flex, Img, Spacer, Link, HStack, Input, InputGroup, InputRightE
 import React, { FC } from 'react';
 import GitHub from '../../components/icons/GitHub';
 import SnekIcon from '../../assets/icons/brand.svg';
+import MemoizedLinks from '../../components/MemoizedLink';
+import { LinkData } from './navigation.types';
+
+const links: LinkData[] = [
+    {
+        name: 'Documentation',
+        href: '#',
+        isActive: true,
+    },
+    {
+        name: 'About',
+        href: '#'
+    },
+    {
+        name: 'Contact',
+        href: '#'
+    }
+]
 
 const navLinkProps = {
     opacity: 0.8,
@@ -51,22 +69,14 @@ const TopNav: FC = () => {
                 <Spacer />
                 <Center>
                     <HStack spacing={4}>
-                        <Link
-                            href='#'
-                            {...navLinkProps}
-                            {...mobileProps}
-                        >Documentation</Link>
-                        <Link
-                            href='#'
-                            {...navLinkProps}
-                            {...mobileProps}
-                        >About</Link>
-                        <Link
-                            href='#'
-                            isExternal
-                            {...navLinkProps}
-                            {...mobileProps}
-                        >Contact</Link>
+                        <MemoizedLinks 
+                            links={links}
+                            props={navLinkProps} 
+                            activeProps={{
+                                opacity: 1,
+                                fontWeight: 'semibold'
+                            }}
+                        />
                         <InputGroup
                             size='sm'
                             {...mobileProps}
