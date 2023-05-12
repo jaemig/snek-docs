@@ -14,7 +14,7 @@ const theme: ThemeConfig = extendTheme({
             topNav: {
                 bgColor: {
                     default: 'rgba(255, 255, 255, 0.8)',
-                    _dark: 'gray.800',
+                    _dark: 'rgba(26, 32, 44, 0.8)',
                 },
                 borderColor: {
                     default: 'rgb(229, 231, 235)',
