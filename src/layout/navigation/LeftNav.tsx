@@ -98,18 +98,10 @@ const generateMenuItem = (item: NavMenuItem, idx: number) => {
     
     const externalLinkIcon = <ArrowForwardIcon transform={`rotate(-45deg)`} ml={2} />;
 
-    const props:CenterProps & AccordionButtonProps & LinkProps = {};
-
-        if (item.isActive) {
-            props.backgroundColor = 'leftNav.accordion.activeItem.bgColor';
-            props._hover = {}
-        } else {
-            props._hover = {
-                backgroundColor: 'leftNav.accordion.inactiveItem.hoverBgColor',
-            }
-        }
-        props._hover.opacity = 1;
-        props._hover.textDecoration = 'none';
+    const props:CenterProps & AccordionButtonProps & LinkProps = { _hover: { opacity: 1}};
+    
+    if (item.isActive) props.backgroundColor = 'leftNav.accordion.activeItem.bgColor';
+    else if (props._hover) props._hover.backgroundColor = 'leftNav.accordion.inactiveItem.hoverBgColor';
 
     if (item.children && item.children.length > 0) {
         const children = item.children.map((child, i) => generateMenuItem(child, i));
@@ -128,13 +120,13 @@ const generateMenuItem = (item: NavMenuItem, idx: number) => {
                 {({ isExpanded }) => (
                     <>
                         <AccordionButton
+                            {...props}
                             as={Link}
                             href={item.href}
                             isExternal={item.isExternal}
                             borderRadius='md'
                             py={1.5}
                             {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
-                            {...props}
                             backgroundColor={item.isActive ? (semanticPath + 'bgColor') : undefined}
                         >
                             <Box 
@@ -145,10 +137,10 @@ const generateMenuItem = (item: NavMenuItem, idx: number) => {
                                 {item.isExternal && externalLinkIcon}
                             </Box>
                             <Center
+                                {...props}
                                 as='span'
                                 borderRadius='sm'
                                 transition='background-color 0.2s ease-in-out'
-                                {...props}
                                 backgroundColor='transparent'
                                 _hover={{
                                     bgColor: semanticPath + 'button.icon.hoverContainerBgColor',
@@ -186,6 +178,8 @@ const generateMenuItem = (item: NavMenuItem, idx: number) => {
     }
     return (
         <Link
+            {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
+            {...props}
             href={item.href}
             isExternal={item.isExternal}
             display='block'
@@ -194,8 +188,6 @@ const generateMenuItem = (item: NavMenuItem, idx: number) => {
             mt={1}
             cursor='pointer'
             borderRadius='md'
-            {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
-            {...props}
         >
             {item.name}
             {item.isExternal && externalLinkIcon}

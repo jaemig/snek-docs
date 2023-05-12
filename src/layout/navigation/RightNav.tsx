@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Box, Flex, Link, VStack } from "@chakra-ui/react";
 import { NavMenuItem } from "./navigation.types";
-import { ArrowForwardIcon, ArrowLeftIcon } from "@chakra-ui/icons";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 
 // Example menu structure - this would be fetched from a CMS or other data source
 const menuStructure: NavMenuItem[] = [
@@ -78,16 +78,38 @@ const generateMenuItem = (item: NavMenuItem, intendation: number = 0) => {
     )
 };
 
-const linkProps = {
-    w: '100%',
-    display: 'block',
-    opacity: 0.7,
-    _hover: {
-        textDecoration: 'none',
-        opacity: 1,
+// Example links - these would be fetched from a CMS or other data source
+const links = [
+    {
+        name: 'Question? Give us feedback',
+        href: '#'
     },
-    transition: 'opacity 0.1s ease-in-out',
-}
+    {
+        name: 'Edit this page on GitHub',
+        href: '#'
+    },
+];
+
+// Memoize the links so they don't re-render on every page change
+const MemoizedLinks = React.memo(() => {
+    return (
+        <>
+        {
+            links.map((link) => {
+                return (
+                    <Link
+                        key={link.name}
+                        href={link.href}
+                        variant='right-bottom-nav'
+                        w='100%'
+                        display='block'
+                    >{link.name} <ArrowForwardIcon /></Link>
+                )
+            })
+        }
+        </>
+    )
+}, () => false);
 
 /**
  * Right navigation bar.
@@ -113,18 +135,8 @@ const RightNav: FC = () => {
                 borderTopColor='gray.200'
                 fontSize='xs'
             >
-                {
-                    //TODO: Outsource shared props to a variable
-                }
                 <VStack rowGap={1} textAlign='left'>
-                    <Link
-                        href='#'
-                        {...linkProps}
-                    >Question? Give us feedback <ArrowForwardIcon /></Link>
-                    <Link
-                        href='#'
-                        {...linkProps}
-                    >Edit this page on GitHub <ArrowForwardIcon /></Link>
+                    <MemoizedLinks />
                 </VStack>
             </Box>
         </Box>
