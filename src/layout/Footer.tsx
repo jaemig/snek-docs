@@ -1,6 +1,7 @@
-import { Box, Center, HStack, Image, Text } from "@chakra-ui/react";
+import { Box, Center, HStack, Image, Text, useColorMode } from "@chakra-ui/react";
 import React, { FC } from "react";
-import JaenLogo from "../assets/icons/jaen.svg";
+import JaenLogoLight from "../assets/icons/jaen_light.svg";
+import JaenLogoDark from "../assets/icons/jaen_dark.svg";
 
 const year = new Date().getFullYear();
 
@@ -8,6 +9,8 @@ const year = new Date().getFullYear();
  * Footer component.
  */
 const Footer: FC = () => {
+
+    const { colorMode } = useColorMode();
 
     return (
         <Center
@@ -25,7 +28,7 @@ const Footer: FC = () => {
                     <Text>Powered by</Text>
                     <Image
                         h='30px'
-                        src={JaenLogo}
+                        src={colorMode === 'light' ? JaenLogoLight : JaenLogoDark}
                         alt='Jaen Logo'
                     />
                 </HStack>
