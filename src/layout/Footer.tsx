@@ -1,4 +1,4 @@
-import { Box, Center, HStack, Image, Text, useColorMode } from "@chakra-ui/react";
+import { Box, Center, HStack, Image, Link, Text, useColorMode } from "@chakra-ui/react";
 import React, { FC } from "react";
 import JaenLogoLight from "../assets/icons/jaen_light.svg";
 import JaenLogoDark from "../assets/icons/jaen_dark.svg";
@@ -26,11 +26,17 @@ const Footer: FC = () => {
             >
                 <HStack>
                     <Text>Powered by</Text>
-                    <Image
-                        h='30px'
-                        src={colorMode === 'light' ? JaenLogoLight : JaenLogoDark}
-                        alt='Jaen Logo'
-                    />
+                    <Link>
+                        <Image
+                            h='30px'
+                            src={colorMode === 'light' ? JaenLogoLight : JaenLogoDark}
+                            alt='Jaen Logo'
+                            _hover={{
+                                transform: 'scale(1.1)'
+                            }}
+                            transition='transform 0.2s ease-in-out'
+                        />
+                    </Link>
                 </HStack>
                 <Text 
                     mt={5}
