@@ -32,7 +32,7 @@ const config: GatsbyConfig = {
       resolve: 'gatsby-plugin-react-svg',
       options: {
         rule: {
-          include: '/src/assets/iconss',
+          include: '/src/assets/icons',
         }
       }
     }

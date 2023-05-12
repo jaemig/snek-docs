@@ -1,5 +1,4 @@
-import { Center, Flex, Img, Spacer, Link, HStack, Input, InputGroup, InputRightElement, Kbd, useColorModeValue, VStack, Box } from '@chakra-ui/react';
-import { StaticImage } from 'gatsby-plugin-image';
+import { Center, Flex, Img, Spacer, Link, HStack, Input, InputGroup, InputRightElement, Kbd, useColorModeValue, VStack, Box, Image } from '@chakra-ui/react';
 import React, { FC } from 'react';
 import GitHub from '../../components/icons/GitHub';
 import SnekIcon from '../../assets/icons/brand.svg';
@@ -43,7 +42,7 @@ const TopNav: FC = () => {
                     }}
                     transition='transform 0.2s ease-in-out'
                 >
-                    <Img
+                    <Image
                         h='32px'
                         src={SnekIcon}
                         alt='Snek Logo'
