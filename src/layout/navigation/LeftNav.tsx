@@ -120,13 +120,13 @@ const generateMenuItem = (item: NavMenuItem, idx: number) => {
                 {({ isExpanded }) => (
                     <>
                         <AccordionButton
+                            {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
                             {...props}
                             as={Link}
                             href={item.href}
                             isExternal={item.isExternal}
                             borderRadius='md'
                             py={1.5}
-                            {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
                             backgroundColor={item.isActive ? (semanticPath + 'bgColor') : undefined}
                         >
                             <Box 

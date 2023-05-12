@@ -140,7 +140,7 @@ const theme: ThemeConfig = extendTheme({
             },
             body: {
                 color: mode('gray.800', 'gray.500')(props),
-                bg: mode('gray.100', 'gray.900')(props),
+                // bg: mode('gray.100', 'gray.900')(props),
             },
         }),
     },
