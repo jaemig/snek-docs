@@ -10,3 +10,8 @@ export type NavMenuSection = {
     name?: string;
     items: NavMenuItem[];
 }
+
+export type LinkData = {
+    name: string;
+    href: string;
+}

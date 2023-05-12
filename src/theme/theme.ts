@@ -103,7 +103,12 @@ const theme: ThemeConfig = extendTheme({
                 },
             },
             main: {
-
+                bottomNav: {
+                    linkHoverColor: {
+                        default: 'theme.800',
+                        _dark: 'theme.300',
+                    }
+                }
             },
             rightNav: {
                 link: {

@@ -1,18 +1,26 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Flex, VStack } from "@chakra-ui/react";
 import React, { FC } from "react";
 import MainBreadcrumb from "./MainBreadcrumb";
+import MainContent from "./MainContent";
+import MainBottomNav from "../navigation/MainBottomNav";
 
 /**
  * Main wrapper component.
  */
 const MainWrapper: FC = () => {
     return (
-        <Box
+        <Flex
             as='main'
             px={{ base: 5, md: 0 }}
+            direction='column'
         >
             <MainBreadcrumb />
-        </Box>
+            <MainContent />
+            <MainBottomNav
+                previousPage={{ href: '#', name: 'Flamingo Facts'}}
+                nextPage={{ href: '#', name: 'Wacky Wings'}} 
+            />
+        </Flex>
     )
 }
 
