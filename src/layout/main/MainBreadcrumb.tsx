@@ -1,5 +1,5 @@
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import { Breadcrumb, BreadcrumbLinkProps, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
+import { Breadcrumb, BreadcrumbLinkProps, BreadcrumbItem, BreadcrumbLink, Text } from "@chakra-ui/react";
 import React, { FC } from "react";
 
 // Example breadcrumb parts - this would be fetched from a CMS or other data source
@@ -28,6 +28,8 @@ const MainBreadcrumb: FC = () => {
         <Breadcrumb 
                 separator={<ChevronRightIcon />}
                 fontSize='sm'
+                w='100%'
+                overflowX='auto'
             >
                 {breadCrumbParts.map((item, i) => {
                     const props: BreadcrumbLinkProps = {};
@@ -49,10 +51,14 @@ const MainBreadcrumb: FC = () => {
                     }
 
 
+                    //TODO: Improve responsiveness of breadcrumb
                     return (
                         <BreadcrumbItem 
                             key={i}
                             isCurrentPage={item.isActive || item.isDisabled}
+                            overflow='hidden'
+                            whiteSpace='nowrap'
+                            textOverflow='ellipsis'
                         >
                             <BreadcrumbLink 
                                 href={item.href}
@@ -60,7 +66,7 @@ const MainBreadcrumb: FC = () => {
                                 isCurrentPage
                                 {...props}
                             >
-                                {item.name}
+                                <Text isTruncated>{item.name}</Text>
                             </BreadcrumbLink>
                         </BreadcrumbItem>
                     )

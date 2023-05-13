@@ -1,4 +1,4 @@
-import { Center, Flex, Img, Spacer, Link, HStack, Input, InputGroup, InputRightElement, Kbd, useColorModeValue, VStack, Box, Image } from '@chakra-ui/react';
+import { Center, Flex, Spacer, Link, HStack, Input, InputGroup, InputRightElement, Kbd, VStack, Box, Image } from '@chakra-ui/react';
 import React, { FC } from 'react';
 import GitHub from '../../components/icons/GitHub';
 import SnekIcon from '../../assets/icons/brand.svg';
@@ -21,17 +21,18 @@ const links: LinkData[] = [
     }
 ]
 
+const mobileProps = {
+    display: { base: 'none', md: 'initial' },
+}
+
 const navLinkProps = {
+    ...mobileProps,
     opacity: 0.8,
     _hover: {
         textDecoration: 'none',
         opacity: 1
     },
     fontSize: 'sm',
-}
-
-const mobileProps = {
-    display: { base: 'none', lg: 'initial' },
 }
 
 

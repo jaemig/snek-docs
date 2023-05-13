@@ -9,6 +9,8 @@ interface MainBottomNavProps {
 }
 
 const props = {
+    display: 'flex',
+    alignItems: 'center',
     opacity: 0.7,
     _hover: {
         color: 'main.bottomNav.linkHoverColor',
@@ -35,7 +37,7 @@ const MainBottomNav: FC<MainBottomNavProps> = ({ previousPage, nextPage }) => {
                         href={previousPage.href}
                         {...props}
                     >
-                        <ChevronLeftIcon />
+                        <ChevronLeftIcon mr={2} />
                         <Text
                             as='span'
                             verticalAlign='middle'
@@ -43,18 +45,19 @@ const MainBottomNav: FC<MainBottomNavProps> = ({ previousPage, nextPage }) => {
                     </Link>
                 )
             }
-            <Spacer />
+            <Spacer minW={10} />
             {
                 nextPage && (
                     <Link 
                         href={nextPage.href}
                         {...props}
+                        textAlign='right'
                     >
                         <Text
                         as='span'
                         verticalAlign='middle'
                         >{ nextPage.name }</Text>
-                        <ChevronRightIcon />
+                        <ChevronRightIcon ml={2} />
                     </Link>
                 )
             }
