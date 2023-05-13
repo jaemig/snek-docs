@@ -1,5 +1,5 @@
-import { ArrowForwardIcon, Icon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, Link, Spacer, Button, IconButton, useColorMode, CenterProps, AccordionButtonProps, LinkProps } from "@chakra-ui/react";
+import { ArrowForwardIcon, CheckIcon, Icon, MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Center, Flex, Link, Spacer, Button, IconButton, useColorMode, CenterProps, AccordionButtonProps, LinkProps, Menu, MenuButton, MenuList, MenuItem, ColorMode } from "@chakra-ui/react";
 import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import HideSidebarIcon from "../../components/icons/HideSidebar";
 import { NavMenuSection, NavMenuItem } from "./navigation.types";
@@ -262,6 +262,44 @@ const LeftNav: FC<LeftNavProps> = ({ isMobile }) => {
 }
 
 /**
+ * Memoized color mode menu items.
+ */
+const colorModes = ['Light', 'Dark', 'System'];
+//TODO: Fix system color mode toggle (doesnt work - doesnt stay in sync with system)
+const MemoizedColorModeMenuItems = React.memo<{currentColorMode: ColorMode, toggleColorMode: () => void }>(({ currentColorMode, toggleColorMode }) => {
+    return (
+        <>
+            {
+                colorModes.map((mode, i) => {
+                    const isCurrentColorMode = currentColorMode === mode.toLocaleLowerCase();
+                    return (
+                        <MenuItem
+                            key={i}
+                            position='relative'
+                            disabled={isCurrentColorMode}
+                            onClick={!isCurrentColorMode && mode !== 'System' ? toggleColorMode : undefined}
+                        >
+                            { mode }
+                            { 
+                                isCurrentColorMode && (
+                                    <CheckIcon
+                                        position='absolute'
+                                        right={3}
+                                        top='50%'
+                                        transform='translateY(-50%)'
+                                        boxSize='10px'
+                                    /> 
+                                )
+                            }
+                        </MenuItem>
+                    )
+                })
+            }
+        </>
+    )
+}, (prevProps, nextProps) => prevProps.currentColorMode === nextProps.currentColorMode);
+
+/**
  * Left bottom menu (part of the left navigation bar).
  */
 interface LeftBottomMenuProps {
@@ -279,21 +317,32 @@ const LeftBottomMenu: FC<LeftBottomMenuProps> = ({ isExpanded, setisExpanded }) 
             py={5}
             gap={3}
             flexDir={isExpanded ? 'row' : 'column'}
-            alignItems={isExpanded ? 'flex-start' : 'center'}
+            alignItems='center'
         >
-            <Button
-                size='sm'
-                variant='ghost'
-                flex={isExpanded ? 1 : 'auto'}
-                justifyContent='start'
-                fontWeight='normal'
-                onClick={toggleColorMode}
+            <Menu 
+                placement='top'
+                variant='brand-hover'
+                isLazy
             >
-                <Icon as={isLightColorMode ? SunIcon : MoonIcon} mr={isExpanded ? 2 : 0} />
+                <MenuButton
+                    as={Button}
+                    size='sm'
+                    variant='ghost'
+                    flex={isExpanded ? 1 : 'auto'}
+                    textAlign='left'
+                >
+                    <Icon as={isLightColorMode ? SunIcon : MoonIcon} mr={isExpanded ? 2 : 0} />
                 { 
                     isExpanded && (isLightColorMode ? 'Light' : 'Dark') 
                 }
-            </Button>
+                </MenuButton>
+                <MenuList>
+                    <MemoizedColorModeMenuItems
+                        currentColorMode={colorMode}
+                        toggleColorMode={toggleColorMode}
+                    />
+                </MenuList>
+            </Menu>
             <IconButton
                 icon={
                     <HideSidebarIcon

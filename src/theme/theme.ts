@@ -3,8 +3,8 @@ import { mode } from "@chakra-ui/theme-tools";
 
 
 const theme: ThemeConfig = extendTheme({
-    initialColorMode: 'light',
-    useSystemColorMode: false, //TODO: Implement system color mode
+    initialColorMode: 'system',
+    useSystemColorMode: true, //? This doesnt sync with the system color mode
     semanticTokens: {
         colors: {
             text: {
@@ -85,6 +85,22 @@ const theme: ThemeConfig = extendTheme({
                         }
                     }
                 },
+                bottomNav: {
+                    menu: {
+                        item: {
+                            active: {
+                                bgColor: {
+                                    default: 'theme.100',
+                                    _dark: 'theme.900',
+                                },
+                                textColor: {
+                                    default: 'theme.800',
+                                    _dark: 'theme.200',
+                                }
+                            }
+                        }
+                    }
+                }
             },
             main: {
                 breadcrumb: {
@@ -217,6 +233,23 @@ const theme: ThemeConfig = extendTheme({
                     },
                     transition: 'opacity 0.1s ease-in-out',
                 }
+            }
+        },
+        Menu: {
+            variants: {
+                'brand-hover': {
+                    item: {
+                        _hover: {
+                            bgColor: 'leftNav.bottomNav.menu.item.active.bgColor',
+                            color: 'leftNav.bottomNav.menu.item.active.textColor',
+                        },
+                        _focus:  {
+                            bgColor: 'leftNav.bottomNav.menu.item.active.bgColor',
+                            color: 'leftNav.bottomNav.menu.item.active.textColor',
+                        },
+                        transition: 'background-color 0.1s ease-in-out, color 0.1s ease-in-out',
+                    }
+                },
             }
         }
     }
