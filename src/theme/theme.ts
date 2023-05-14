@@ -135,6 +135,12 @@ const theme: ThemeConfig = extendTheme({
                 }
             },
             rightNav: {
+                titleTop: {
+                    color: {
+                        default: 'gray.800',
+                        _dark: 'gray.200',
+                    }
+                },
                 link: {
                     active: {
                         color: {

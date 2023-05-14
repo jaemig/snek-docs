@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Box, Flex, Link, VStack } from "@chakra-ui/react";
+import { Box, Flex, Link, Text, VStack } from "@chakra-ui/react";
 import { NavMenuItem } from "./navigation.types";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import MemoizedLinks from "../../components/MemoizedLink";
@@ -100,11 +100,16 @@ const RightNav: FC = () => {
             as='aside'
             display={{ base: 'none', xl: 'block' }}
             color='text'
+            fontSize='sm'
         >
+            <Text 
+                color='rightNav.titleTop.color'
+                fontWeight='semibold'
+            >On This Page</Text>
             <Flex
                 as='nav'
                 direction='column'
-                fontSize='sm'
+                mt={5}
             >
                 {menuStructure.map((item) => generateMenuItem(item))}
             </Flex>
