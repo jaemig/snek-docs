@@ -1,5 +1,5 @@
 import { Center, Flex, Spacer, Link, HStack, Input, InputGroup, InputRightElement, Kbd, VStack, Box, Image, useDisclosure, Button } from '@chakra-ui/react';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import GitHub from '../../components/icons/GitHub';
 import SnekIcon from '../../assets/icons/brand.svg';
 import MemoizedLinks from '../../components/MemoizedLink';
@@ -46,6 +46,11 @@ const TopNav: FC = () => {
     const [hamburgerClass, setHamburgerClass] = useState('');
     // Mobile menu drawer
     const { isOpen, onOpen, onClose } = useDisclosure();
+
+    //TODO: Remove this when the mobile menu is implemented
+    useEffect(() => {
+        openDrawer();
+    }, []);
 
     const openDrawer = () => {
         setHamburgerClass('open');
