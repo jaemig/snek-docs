@@ -36,6 +36,14 @@ const theme: ThemeConfig = extendTheme({
                             _dark: 'red.500',
                         }
                     }
+                },
+                mobile: {
+                    hamburger: {
+                        bgColor: {
+                            default: 'gray.800',
+                            _dark: 'gray.200',
+                        },
+                    }
                 }
             },
             leftNav: {
@@ -256,9 +264,9 @@ const theme: ThemeConfig = extendTheme({
                         transition: 'background-color 0.1s ease-in-out, color 0.1s ease-in-out',
                     }
                 },
-            }
-        }
-    }
+            },
+        },
+    },
 })
 
 export default theme;
