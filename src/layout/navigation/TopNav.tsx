@@ -49,7 +49,7 @@ const TopNav: FC = () => {
 
     //TODO: Remove this when the mobile menu is implemented
     useEffect(() => {
-        openDrawer();
+        // openDrawer();
     }, []);
 
     const openDrawer = () => {
