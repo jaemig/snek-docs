@@ -29,7 +29,7 @@ const NavbarControls: FC<NavbarControlsProps> = ({ isMobile = false, isExpanded,
         <Flex
             w='100%'
             borderTop={isExpanded ? '1px solid' : undefined }
-            borderTopColor='gray.200'
+            borderTopColor='separator.borderColor'
             py={5}
             gap={3}
             flexDir={isExpanded ? 'row' : 'column'}
@@ -39,15 +39,16 @@ const NavbarControls: FC<NavbarControlsProps> = ({ isMobile = false, isExpanded,
             <Menu 
                 placement='top'
                 variant='brand-hover'
-                isLazy
                 matchWidth={isMobile}
+                isLazy
             >
                 <MenuButton
                     as={Button}
                     size='sm'
                     flexGrow={1}
-                    variant='ghost'
+                    variant='ghost-hover'
                     textAlign='left'
+                    color='text'
                 >
                     <Icon as={isLightColorMode ? SunIcon : MoonIcon} mr={isExpanded ? 2 : 0} />
                 { 

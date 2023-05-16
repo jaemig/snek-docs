@@ -7,6 +7,18 @@ const theme: ThemeConfig = extendTheme({
     useSystemColorMode: true, //? This doesnt sync with the system color mode
     semanticTokens: {
         colors: {
+            components: {
+                button: {
+                    ghost: {
+                        hover: {
+                            bgColor: {
+                                default: 'gray.100',
+                                _dark: 'whiteAlpha.200',
+                            },
+                        },
+                    },
+                },
+            },
             body: {
                 default: 'white',
                 _dark: 'gray.800',
@@ -20,6 +32,12 @@ const theme: ThemeConfig = extendTheme({
             text: {
                 default: 'gray.800',
                 _dark: 'gray.400',
+            },
+            separator: {
+                borderColor: {
+                    default: 'gray.100',
+                    _dark: 'gray.700',
+                },  
             },
             topNav: {
                 bgColor: {
@@ -130,7 +148,7 @@ const theme: ThemeConfig = extendTheme({
                 breadcrumb: {
                     active: {
                         color: {
-                            default: 'gray.600',
+                            default: 'gray.800',
                             _dark: 'gray.400',
                         }
                     },
@@ -148,10 +166,6 @@ const theme: ThemeConfig = extendTheme({
                     },
                 },
                 bottomNav: {
-                    borderColor: {
-                        default: 'gray.100',
-                        _dark: 'gray.700',
-                    },
                     linkHoverColor: {
                         default: 'theme.800',
                         _dark: 'theme.300',
@@ -175,7 +189,7 @@ const theme: ThemeConfig = extendTheme({
                     inactive: {
                         color: {
                             default: 'gray.800',
-                            _dark: 'gray.100',
+                            _dark: 'gray.400',
                         },
                     },
                 },
@@ -269,6 +283,22 @@ const theme: ThemeConfig = extendTheme({
                 }
             }
         },
+        Button: {
+            variants: {
+                'ghost-hover': {
+                    bgColor: 'transparent',
+                    opacity: 0.7,
+                    _hover: {
+                        bgColor: 'components.button.ghost.hover.bgColor',
+                        opacity: 1,
+                    },
+                    _focus:  {
+                        bgColor: 'components.button.ghost.hover.bgColor',
+                        opacity: 1,
+                    },
+                },
+            },
+        },
         Menu: {
             variants: {
                 'brand-hover': {
@@ -282,7 +312,7 @@ const theme: ThemeConfig = extendTheme({
                             color: 'leftNav.bottomNav.menu.item.active.textColor',
                         },
                         transition: 'background-color 0.1s ease-in-out, color 0.1s ease-in-out',
-                    }
+                    },
                 },
             },
         },

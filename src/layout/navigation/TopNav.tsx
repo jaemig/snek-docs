@@ -5,6 +5,7 @@ import SnekIcon from '../../assets/icons/brand.svg';
 import MemoizedLinks from '../../components/MemoizedLink';
 import { LinkData } from './navigation.types';
 import MobileNavDrawer from './MobileNavDrawer';
+import PlatformSearch from '../../components/search/PlatformSearch';
 
 const links: LinkData[] = [
     {
@@ -22,12 +23,8 @@ const links: LinkData[] = [
     }
 ]
 
-const mobileProps = {
-    display: { base: 'none', md: 'initial' },
-}
-
 const navLinkProps = {
-    ...mobileProps,
+    display: { base: 'none', md: 'initial' },
     opacity: 0.8,
     _hover: {
         textDecoration: 'none',
@@ -98,34 +95,7 @@ const TopNav: FC = () => {
                                     fontWeight: 'semibold'
                                 }}
                             />
-                            <InputGroup
-                                size='sm'
-                                {...mobileProps}
-                            >
-                                <Input
-                                    htmlSize={20}
-                                    placeholder='Search documentation'
-                                    borderRadius='md'
-                                    backgroundColor='blackAlpha.50'
-                                    pr='45px'
-                                    _focus={{
-                                        backgroundColor: 'topNav.input.focus.bgColor',
-                                    }}
-                                    focusBorderColor='theme.500'
-                                />
-                                <InputRightElement
-                                    children={
-                                        <Kbd
-                                            borderBottomWidth={1}
-                                            background='transparent'
-                                            borderRadius={4}
-                                            py={0.5}
-                                        >⌘ K</Kbd>
-                                    }
-                                    pr='10px' 
-                                    color='rgb(107, 114, 128)'
-                                />
-                            </InputGroup>
+                            <PlatformSearch />
                             <Link 
                                 display='inline-block'
                                 href='https://github.com/Jan-Emig/snek-docs'

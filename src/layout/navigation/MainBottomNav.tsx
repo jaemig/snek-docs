@@ -27,7 +27,7 @@ const MainBottomNav: FC<MainBottomNavProps> = ({ previousPage, nextPage }) => {
     return (
         <Flex
             borderTop='1px solid'
-            borderColor='main.bottomNav.borderColor'
+            borderColor='separator.borderColor'
             mt={10}
             pt={5}
         >
