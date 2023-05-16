@@ -1,5 +1,5 @@
 import { Accordion, AccordionButton, AccordionButtonProps, AccordionIcon, AccordionItem, AccordionPanel, Center, CenterProps, Link, LinkProps, Box } from "@chakra-ui/react";
-import React, { FC } from "react";
+import React, { FC, Fragment, useEffect } from "react";
 import { NavMenuItem, NavMenuSection } from "../navigation.types";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 
@@ -111,15 +111,15 @@ const activeMenuItemProps = {
     fontWeight: 'bold',
 };
 
+let menuIdx = 0; // Used to generate unique keys for menu items
 /**
  * Generates a menu item for the main navigation menu.
  * @param item  The menu item to generate
- * @param idx  The index of the menu item
  * @param isMobile  Whether or not the menu is being generated for mobile. If true, sections will be included.
  * @param closeMobileDrawer  A function to close the mobile drawer. Only required if isMobile is true.
  * @returns 
  */
-const generateMenuItem = (item: NavMenuItem, idx: number, isMobile: boolean, closeMobileDrawer?: () => void) => {
+const generateMenuItem = (item: NavMenuItem, isMobile: boolean, closeMobileDrawer?: () => void) => {
     
     if (!isMobile && item.isSection) return;
 
@@ -133,13 +133,13 @@ const generateMenuItem = (item: NavMenuItem, idx: number, isMobile: boolean, clo
     // Check if the item has children and is not a section (except on mobile)
     const hasChildren = item.children && item.children.length > 0 && (isMobile || item.children.some(child => !child.isSection));
 
+    const currentIdx = menuIdx++; // Pre-save the current index so it doesn't change when rendering the children
     if (hasChildren) {
-        const children = item.children?.map((child, i) => generateMenuItem(child, i, isMobile, closeMobileDrawer));
-
+        const children = item.children?.map(child => generateMenuItem(child, isMobile, closeMobileDrawer));
         const semanticPath = `leftNav.accordion.${item.isActive ? '' : 'in'}activeItem.`;
         return (
             <AccordionItem
-                key={idx}
+                key={currentIdx}
                 css={{
                     // Remove padding from last accordion item
                     '&:last-child .chakra-collapse .chakra-accordion__panel':  {
@@ -212,6 +212,7 @@ const generateMenuItem = (item: NavMenuItem, idx: number, isMobile: boolean, clo
         <Link
             {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
             {...styleProps}
+            key={currentIdx}
             href={item.href}
             isExternal={item.isExternal}
             display='block'
@@ -224,6 +225,7 @@ const generateMenuItem = (item: NavMenuItem, idx: number, isMobile: boolean, clo
         >
             { item.isSection && (
                 <Box
+                    key={-5}
                     as='span'
                     mr={2}
                     fontSize='sm'
@@ -246,6 +248,10 @@ interface PageDirectoryProps {
  */
 const PageDirectory: FC<PageDirectoryProps> = ({ isExpanded = true, isMobile = false, closeMobileDrawer }) => {
 
+    useEffect(() => {
+        menuIdx = 0; // Reset the menu index every time the menu is rendered
+    });
+
     return (
         <Accordion
             visibility={isExpanded ? 'visible' : 'hidden'}
@@ -263,11 +269,11 @@ const PageDirectory: FC<PageDirectoryProps> = ({ isExpanded = true, isMobile = f
         >
         {
             menuStructure.map((section, i) => (
-                <>
+                <Fragment key={i}>
                     {
                         section.name && (
                             <Box
-                                key={-i}
+                                key={0}
                                 mt={i === 0 ? 0 : 9}
                                 fontSize='sm'
                                 fontWeight='bold'
@@ -277,10 +283,10 @@ const PageDirectory: FC<PageDirectoryProps> = ({ isExpanded = true, isMobile = f
                             </Box>
                         )
                     }
-                    <Box key={i}>
-                        { section.items.map((item, idx) => generateMenuItem(item, idx, isMobile, closeMobileDrawer)) }
+                    <Box key={1}>
+                        { section.items.map(item => generateMenuItem(item, isMobile, closeMobileDrawer)) }
                     </Box>
-                </>
+                </Fragment>
             ))
         }
         </Accordion>
