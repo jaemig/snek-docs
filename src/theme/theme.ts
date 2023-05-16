@@ -207,6 +207,9 @@ const theme: ThemeConfig = extendTheme({
         Accordion: {
             variants: {
                 leftNav: {
+                    root: {
+                        fontSize: 'sm',
+                    },
                     container: {
                         borderWidth: 0,
                     },
@@ -218,6 +221,7 @@ const theme: ThemeConfig = extendTheme({
                     panel: {
                         paddingTop: 0,
                         paddingRight: 0,
+                        fontSize: 'sm',
                     }
                 }
             }
