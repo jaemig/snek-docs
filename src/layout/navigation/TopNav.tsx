@@ -112,10 +112,10 @@ const TopNav: FC = () => {
                                 <Button 
                                     variant='ghost'
                                     size='sm'
+                                    display={{ base: 'initial', md: 'none' }}
                                 >
                                     <VStack 
                                         spacing={1.5}
-                                        display={{ base: 'initial', md: 'none' }}
                                         onClick={toggleMobileMenu}
                                         className={hamburgerClass}
                                         __css={{
