@@ -2,8 +2,9 @@ export type NavMenuItem = {
     name: string;
     href: string;
     isExternal?: boolean;
-    children?: NavMenuItem[];
     isActive?: boolean;
+    children?: NavMenuItem[];
+    isSection?: boolean;
 }
 
 export type NavMenuSection = {

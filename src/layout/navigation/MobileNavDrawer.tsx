@@ -25,7 +25,10 @@ const MobileNavDrawer: FC<MobileNavDrawerProps> = ({ isOpen, onOpen, onClose }) 
             <DrawerContent zIndex={1000}>
                 <DrawerBody pt={20}>
                     <SearchInput />
-                    <PageDirectory />
+                    <PageDirectory 
+                        isMobile={true}
+                        closeMobileDrawer={onClose}
+                    />
                 </DrawerBody>
             </DrawerContent>
         </Drawer>

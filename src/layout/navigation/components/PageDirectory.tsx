@@ -31,11 +31,29 @@ const menuStructure: NavMenuSection[] = [
                         children: [
                             {
                                 name: 'Rendering Tables',
-                                href: '#',                           
+                                href: '#',    
+                                children: [
+                                    {
+                                        name: 'Features',
+                                        href: '#',
+                                        isSection: true,
+                                    },
+                                    {
+                                        name: 'Syntax Support',
+                                        href: '#',
+                                        isSection: true,
+                                    },
+                                    {
+                                        name: 'Configuration',
+                                        href: '#',
+                                        isSection: true,
+                                    },
+                                ]
                             },
                             {
                                 name: 'Remote Content',
                                 href: '#',
+
                             }
                         ]
                     }
@@ -93,18 +111,29 @@ const activeMenuItemProps = {
     fontWeight: 'bold',
 };
 
-// Generates a menu item recursively
-const generateMenuItem = (item: NavMenuItem, idx: number) => {
+/**
+ * Generates a menu item for the main navigation menu.
+ * @param item  The menu item to generate
+ * @param idx  The index of the menu item
+ * @param isMobile  Whether or not the menu is being generated for mobile. If true, sections will be included.
+ * @returns 
+ */
+const generateMenuItem = (item: NavMenuItem, idx: number, isMobile: boolean, closeMobileDrawer?: () => void) => {
     
+    if (!isMobile && item.isSection) return;
+
     const externalLinkIcon = <ArrowForwardIcon transform={`rotate(-45deg)`} ml={2} />;
 
-    const props:CenterProps & AccordionButtonProps & LinkProps = { _hover: { opacity: 1}};
+    const styleProps:CenterProps & AccordionButtonProps & LinkProps = { _hover: { opacity: 1}};
     
-    if (item.isActive) props.backgroundColor = 'leftNav.accordion.activeItem.bgColor';
-    else if (props._hover) props._hover.backgroundColor = 'leftNav.accordion.inactiveItem.hoverBgColor';
+    if (item.isActive) styleProps.backgroundColor = 'leftNav.accordion.activeItem.bgColor';
+    else if (styleProps._hover) styleProps._hover.backgroundColor = 'leftNav.accordion.inactiveItem.hoverBgColor';
 
-    if (item.children && item.children.length > 0) {
-        const children = item.children.map((child, i) => generateMenuItem(child, i));
+    // Check if the item has children and is not a section (except on mobile)
+    const hasChildren = item.children && item.children.length > 0 && (isMobile || item.children.some(child => !child.isSection));
+
+    if (hasChildren) {
+        const children = item.children?.map((child, i) => generateMenuItem(child, i, isMobile, closeMobileDrawer));
 
         const semanticPath = `leftNav.accordion.${item.isActive ? '' : 'in'}activeItem.`;
         return (
@@ -116,12 +145,14 @@ const generateMenuItem = (item: NavMenuItem, idx: number) => {
                         'paddingBottom': 0,
                     },
                 }}
+                // This is a hack to remove the bottom border from the last accordion item
+                borderBottomWidth='0 !important'
             >
                 {({ isExpanded }) => (
                     <>
                         <AccordionButton
                             {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
-                            {...props}
+                            {...styleProps}
                             as={Link}
                             href={item.href}
                             isExternal={item.isExternal}
@@ -137,7 +168,7 @@ const generateMenuItem = (item: NavMenuItem, idx: number) => {
                                 {item.isExternal && externalLinkIcon}
                             </Box>
                             <Center
-                                {...props}
+                                {...styleProps}
                                 as='span'
                                 borderRadius='sm'
                                 transition='background-color 0.2s ease-in-out'
@@ -179,7 +210,7 @@ const generateMenuItem = (item: NavMenuItem, idx: number) => {
     return (
         <Link
             {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
-            {...props}
+            {...styleProps}
             href={item.href}
             isExternal={item.isExternal}
             display='block'
@@ -188,7 +219,16 @@ const generateMenuItem = (item: NavMenuItem, idx: number) => {
             mt={1}
             cursor='pointer'
             borderRadius='md'
+            onClick={closeMobileDrawer}
         >
+            { item.isSection && (
+                <Box
+                    as='span'
+                    mr={2}
+                    fontSize='sm'
+                    color='gray.400'
+                >#</Box>
+            ) }
             {item.name}
             {item.isExternal && externalLinkIcon}
         </Link>
@@ -197,11 +237,14 @@ const generateMenuItem = (item: NavMenuItem, idx: number) => {
 
 interface PageDirectoryProps {
     isExpanded?: boolean;
+    isMobile?: boolean;
+    closeMobileDrawer?: () => void;
 }
 /**
  * The page directory component that shows the documentation structure.
  */
-const PageDirectory: FC<PageDirectoryProps> = ({ isExpanded = true }) => {
+const PageDirectory: FC<PageDirectoryProps> = ({ isExpanded = true, isMobile = false, closeMobileDrawer }) => {
+
     return (
         <Accordion
             visibility={isExpanded ? 'visible' : 'hidden'}
@@ -234,7 +277,7 @@ const PageDirectory: FC<PageDirectoryProps> = ({ isExpanded = true }) => {
                         )
                     }
                     <Box key={i}>
-                        { section.items.map((item, idx) => generateMenuItem(item, idx))}
+                        { section.items.map((item, idx) => generateMenuItem(item, idx, isMobile, closeMobileDrawer)) }
                     </Box>
                 </>
             ))

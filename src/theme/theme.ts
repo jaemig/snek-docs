@@ -43,7 +43,13 @@ const theme: ThemeConfig = extendTheme({
                             default: 'gray.800',
                             _dark: 'gray.200',
                         },
-                    }
+                    },
+                    menu: {
+                        sectionIconColor: {
+                            default: 'gray.400',
+                            _dark: 'gray.600',
+                        },
+                    },
                 }
             },
             leftNav: {

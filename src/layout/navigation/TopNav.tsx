@@ -58,6 +58,7 @@ const TopNav: FC = () => {
     }
 
     const closeDrawer = () => {
+        console.log('!!!');
         setHamburgerClass('');
         onClose();
     }
