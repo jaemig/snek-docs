@@ -7,6 +7,16 @@ const theme: ThemeConfig = extendTheme({
     useSystemColorMode: true, //? This doesnt sync with the system color mode
     semanticTokens: {
         colors: {
+            body: {
+                default: 'white',
+                _dark: 'gray.800',
+            },
+            drawer: {
+                bgColor: {
+                    default: 'white',
+                    _dark: 'gray.700',
+                },
+            },
             text: {
                 default: 'gray.800',
                 _dark: 'gray.400',

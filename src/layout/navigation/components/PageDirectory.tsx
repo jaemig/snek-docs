@@ -116,6 +116,7 @@ const activeMenuItemProps = {
  * @param item  The menu item to generate
  * @param idx  The index of the menu item
  * @param isMobile  Whether or not the menu is being generated for mobile. If true, sections will be included.
+ * @param closeMobileDrawer  A function to close the mobile drawer. Only required if isMobile is true.
  * @returns 
  */
 const generateMenuItem = (item: NavMenuItem, idx: number, isMobile: boolean, closeMobileDrawer?: () => void) => {

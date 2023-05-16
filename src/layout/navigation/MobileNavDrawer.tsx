@@ -1,7 +1,8 @@
-import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Input, InputGroup, InputRightElement, Kbd, useDisclosure } from "@chakra-ui/react";
+import { Drawer, DrawerBody, DrawerContent, DrawerOverlay } from "@chakra-ui/react";
 import React, { FC } from "react";
 import SearchInput from "./components/SearchInput";
 import PageDirectory from "./components/PageDirectory";
+import NavbarControls from "./components/NavbarControls";
 
 interface MobileNavDrawerProps {
     isOpen: boolean;
@@ -29,6 +30,7 @@ const MobileNavDrawer: FC<MobileNavDrawerProps> = ({ isOpen, onOpen, onClose }) 
                         isMobile={true}
                         closeMobileDrawer={onClose}
                     />
+                    <NavbarControls isMobile />
                 </DrawerBody>
             </DrawerContent>
         </Drawer>

@@ -41,16 +41,8 @@ const navLinkProps = {
  * Top navigation bar.
 */
 const TopNav: FC = () => {
-
-    
     const [hamburgerClass, setHamburgerClass] = useState('');
-    // Mobile menu drawer
-    const { isOpen, onOpen, onClose } = useDisclosure();
-
-    //TODO: Remove this when the mobile menu is implemented
-    useEffect(() => {
-        // openDrawer();
-    }, []);
+    const { isOpen, onOpen, onClose } = useDisclosure(); // Mobile menu drawer
 
     const openDrawer = () => {
         setHamburgerClass('open');
@@ -58,7 +50,6 @@ const TopNav: FC = () => {
     }
 
     const closeDrawer = () => {
-        console.log('!!!');
         setHamburgerClass('');
         onClose();
     }
@@ -200,7 +191,11 @@ const TopNav: FC = () => {
                     </Center>
                 </Flex>
             </Center>
-            <MobileNavDrawer isOpen={isOpen} onOpen={onOpen} onClose={closeDrawer} />
+            <MobileNavDrawer 
+                isOpen={isOpen} 
+                onOpen={onOpen}
+                onClose={closeDrawer} 
+            />
         </>
     )
 }
