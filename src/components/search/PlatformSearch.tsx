@@ -1,39 +1,20 @@
-import { InputGroup, Input, InputRightElement, Kbd } from "@chakra-ui/react";
-import React, { FC } from "react";
+import { InputGroup, Input, InputRightElement, Kbd, Box } from "@chakra-ui/react";
+import React, { FC, useState } from "react";
+import SearchMenu from "./SearchMenu";
+import SearchInput from "../../layout/navigation/components/SearchInput";
 
 
 const PlatformSearch: FC = () => {
+
+    const [isOpen, setIsOpen] = useState(true);
+
     return (
-        <>
-        <InputGroup
-            size='sm'
-            display={{ base: 'none', md: 'initial' }}
+        <Box
+            position='relative'
         >
-            <Input
-                htmlSize={20}
-                placeholder='Search documentation'
-                borderRadius='md'
-                backgroundColor='blackAlpha.50'
-                pr='45px'
-                _focus={{
-                    backgroundColor: 'topNav.input.focus.bgColor',
-                }}
-                focusBorderColor='theme.500'
-            />
-            <InputRightElement
-                children={
-                    <Kbd
-                        borderBottomWidth={1}
-                        background='transparent'
-                        borderRadius={4}
-                        py={0.5}
-                    >⌘ K</Kbd>
-                }
-                pr='10px' 
-                color='rgb(107, 114, 128)'
-            />
-        </InputGroup>
-        </>
+            <SearchInput />
+            <SearchMenu isOpen={isOpen} setIsOpen={setIsOpen} query={'layout'} />
+        </Box>
     )
 }
 

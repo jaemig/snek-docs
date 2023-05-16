@@ -314,6 +314,13 @@ const theme: ThemeConfig = extendTheme({
                         transition: 'background-color 0.1s ease-in-out, color 0.1s ease-in-out',
                     },
                 },
+                'search-result': {
+                  groupTitle: {
+                    color: 'gray.500',
+                    textTransform: 'uppercase',
+                    fontSize: 'xs',
+                  },
+                },
             },
         },
     },

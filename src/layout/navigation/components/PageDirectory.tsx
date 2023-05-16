@@ -126,7 +126,6 @@ const generateMenuItem = (item: NavMenuItem, isMobile: boolean, closeMobileDrawe
     const externalLinkIcon = <ArrowForwardIcon transform={`rotate(-45deg)`} ml={2} />;
 
     const styleProps:CenterProps & AccordionButtonProps & LinkProps = { _hover: { opacity: 1}};
-    
     if (item.isActive) styleProps.backgroundColor = 'leftNav.accordion.activeItem.bgColor';
     else if (styleProps._hover) styleProps._hover.backgroundColor = 'leftNav.accordion.inactiveItem.hoverBgColor';
 
