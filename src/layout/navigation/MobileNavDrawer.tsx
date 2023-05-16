@@ -27,7 +27,7 @@ const MobileNavDrawer: FC<MobileNavDrawerProps> = ({ isOpen, onOpen, onClose }) 
                 <DrawerBody pt={20}>
                     <SearchInput />
                     <PageDirectory 
-                        isMobile={true}
+                        isMobile
                         closeMobileDrawer={onClose}
                     />
                     <NavbarControls isMobile />
