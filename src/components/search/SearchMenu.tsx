@@ -1,11 +1,14 @@
 import {
   Box,
+  Center,
   Heading,
   Menu,
   MenuDivider,
   MenuGroup,
   MenuItem,
   MenuList,
+  MenuListProps,
+  MenuProps,
   Text,
 } from "@chakra-ui/react";
 import React, { FC, Fragment, useEffect, useRef } from "react";
@@ -105,10 +108,11 @@ const generateSearchResultItem = (item: SearchResult, query: string) => {
           <Heading
             size="sm"
             transition="color 0.2s ease-in-out"
+            color="shared.text.bright"
           >
             {highLightQuery(item.title, query)}
         </Heading>
-          <Text color="gray.500">
+          <Text color="text.default">
             { highLightQuery(item.description, query) }
           </Text>
         </Box>
@@ -131,7 +135,7 @@ const generateSearchresultSection = (
   return (
     <MenuGroup key={idx}>
         <Heading 
-            size="xs"
+            fontSize='12px'
             mb={2}
             mt={idx === 0 ? 2 : 5}
             textTransform='uppercase'
@@ -143,10 +147,15 @@ const generateSearchresultSection = (
   );
 };
 
+interface SearchMenuProps {
+  menuProps?:Partial<MenuProps>;
+  menuListProps?: Partial<MenuListProps>;
+}
+
 /**
  * Search menu component - shows a navigatable list of search results
  */
-const SearchMenu: FC = () => {
+const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
   const r = useRef(null);
 
   const [searchQuery, setSearchQuery] = React.useState('');
@@ -156,17 +165,37 @@ const SearchMenu: FC = () => {
     menuIdx = 0;
   })
 
+  let searchResults;
+  
+  if (searchQuery.length > 0) {
+      searchResults = exampleSearchResult.map((section, idx) => generateSearchresultSection(section, idx, searchQuery));
+      if (!searchResults.length) {
+        searchResults = (
+            <Center
+              my={5}
+              color="components.menu.noResults.color"
+            >No results found.</Center>
+        )
+      }
+}
+
   return (
-    <Menu variant="search-result" initialFocusRef={r} isLazy>
+    <Menu 
+      variant="search-result"
+      initialFocusRef={r} 
+      isLazy
+      {...menuProps}
+    >
       <SearchInput ref={r} setSearchQuery={setSearchQuery} />
 
       <MenuList
-        w="500px"
+        // w="500px"
         fontSize="sm"
+        //TODO: Fix the backdrop blur not working
+        backdropBlur={8}
+        {...menuListProps}
       >
-        {searchQuery.length > 0 && exampleSearchResult.map((section, idx) =>
-          generateSearchresultSection(section, idx, searchQuery)
-        )}
+        {searchResults}
       </MenuList>
     </Menu>
   );

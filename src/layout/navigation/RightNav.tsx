@@ -99,7 +99,7 @@ const RightNav: FC = () => {
         <Box 
             as='aside'
             display={{ base: 'none', xl: 'block' }}
-            color='text'
+            color='shared.text.default'
             fontSize='sm'
         >
             <Text 

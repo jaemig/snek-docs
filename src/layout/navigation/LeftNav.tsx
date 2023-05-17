@@ -22,7 +22,7 @@ const LeftNav: FC<LeftNavProps> = ({ isMobile }) => {
             flexDirection='column'
             h='100%'
             w={isExpanded ? 'auto' : '5rem'}
-            color='text'
+            color='shared.text.default'
         >
             <Box w={isExpanded ? 'auto' : 0} >
                 <PageDirectory isExpanded={isExpanded} />
