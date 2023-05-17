@@ -5,7 +5,7 @@ import SnekIcon from '../../assets/icons/brand.svg';
 import MemoizedLinks from '../../components/MemoizedLink';
 import { LinkData } from './navigation.types';
 import MobileNavDrawer from './MobileNavDrawer';
-import PlatformSearch from '../../components/search/PlatformSearch';
+import SearchMenu from '../../components/search/SearchMenu';
 
 const links: LinkData[] = [
     {
@@ -95,7 +95,7 @@ const TopNav: FC = () => {
                                     fontWeight: 'semibold'
                                 }}
                             />
-                            <PlatformSearch />
+                            <SearchMenu />
                             <Link 
                                 display='inline-block'
                                 href='https://github.com/Jan-Emig/snek-docs'
