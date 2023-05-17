@@ -20,7 +20,7 @@ const NavbarControls: FC<NavbarControlsProps> = ({ isMobile = false, isExpanded,
         isExpanded = true;
         conditional_props.position = 'absolute';
         conditional_props.bottom = 0;
-        conditional_props.bgColor = 'components.drawer.bgColor';
+        conditional_props.bgColor = 'shared.body';
         conditional_props.w = 'calc(100% - 3rem)';
     }
 
@@ -48,7 +48,7 @@ const NavbarControls: FC<NavbarControlsProps> = ({ isMobile = false, isExpanded,
                     flexGrow={1}
                     variant='ghost-hover'
                     textAlign='left'
-                    color='text'
+                    color='shared.text.default'
                 >
                     <Icon as={isLightColorMode ? SunIcon : MoonIcon} mr={isExpanded ? 2 : 0} />
                 { 

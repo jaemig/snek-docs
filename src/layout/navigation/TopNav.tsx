@@ -66,8 +66,8 @@ const TopNav: FC = () => {
                 px={{ base: 5, xl: 0 }}
                 borderBottom='1px solid'
                 borderBottomColor='topNav.borderColor'
-                backgroundColor='topNav.bgColor'
-                backdropFilter='blur(5px)'
+                backgroundColor='shared.translucent.bgColor'
+                backdropFilter='blur(10px)'
                 zIndex={99999999999}
             >
                 <Flex w='7xl'>
@@ -95,7 +95,9 @@ const TopNav: FC = () => {
                                     fontWeight: 'semibold'
                                 }}
                             />
-                            <SearchMenu />
+                            <Box display={{ base: 'none', md: 'initial' }}>
+                                <SearchMenu menuListProps={{ width: '500px' }} />
+                            </Box>
                             <Link 
                                 display='inline-block'
                                 href='https://github.com/Jan-Emig/snek-docs'

@@ -5,6 +5,9 @@ import { mode } from "@chakra-ui/theme-tools";
 const theme: ThemeConfig = extendTheme({
     initialColorMode: 'system',
     useSystemColorMode: true, //? This doesnt sync with the system color mode
+    /**
+     * SEMANTIC TOKENS
+     */
     semanticTokens: {
         colors: {
             components: {
@@ -42,16 +45,36 @@ const theme: ThemeConfig = extendTheme({
                             default: 'gray.500',
                             _dark: 'gray.400',
                         }
-                    }
+                    },
+                    noResults: {
+                        color: {
+                            default: 'gray.500',
+                            _dark: 'gray.400',
+                        },
+                    },
                 },
             },
-            body: {
-                default: 'white',
-                _dark: 'gray.800',
-            },
-            text: {
-                default: 'gray.800',
-                _dark: 'gray.400',
+            shared: {
+                translucent: {
+                    bgColor: {
+                        default: 'rgba(255, 255, 255, 0.8)',
+                        _dark: 'rgba(26, 32, 44, 0.8)',
+                    },
+                },
+                text: {
+                    default: {
+                        default: 'gray.800',
+                        _dark: 'gray.400',
+                    },
+                    bright: {
+                        default: 'white',
+                        _dark: 'gray.300',
+                    },
+                },
+                body: {
+                    default: 'white',
+                    _dark: 'gray.800',
+                }
             },
             separator: {
                 borderColor: {
@@ -60,10 +83,6 @@ const theme: ThemeConfig = extendTheme({
                 },
             },
             topNav: {
-                bgColor: {
-                    default: 'rgba(255, 255, 255, 0.8)',
-                    _dark: 'rgba(26, 32, 44, 0.8)',
-                },
                 borderColor: {
                     default: 'rgb(229, 231, 235)',
                     _dark: 'gray.700',
@@ -226,17 +245,9 @@ const theme: ThemeConfig = extendTheme({
             },
         },
     },
-    styles: {
-        global: (props: StyleFunctionProps) => ({
-            text: {
-                color: mode('gray.800', 'gray.100')(props),
-            },
-            body: {
-                color: mode('gray.800', 'gray.500')(props),
-                // bg: mode('gray.100', 'gray.900')(props),
-            },
-        }),
-    },
+    /**
+     * CUSTOM COLORS
+     */
     colors: {
         theme: {
             brand: '#00A9CE',
@@ -251,6 +262,9 @@ const theme: ThemeConfig = extendTheme({
             900: '#003f4d',
         },
     },
+    /**
+     * COMPONENT CUSTOMIZATIONS
+     */
     components: {
         // TODO: Figure out how to get this to work
         // Accordion: accordionTheme,
@@ -343,6 +357,9 @@ const theme: ThemeConfig = extendTheme({
                     list: {
                         paddingLeft: 5,
                         paddingRight: 5,
+                        // bgColor: 'shared.translucent.bgColor',
+                        bgColor: 'shared.body',
+                        backdropFilter: 'blur(10px)',
                     },
                     item: {
                         paddingLeft: 3,
@@ -352,6 +369,7 @@ const theme: ThemeConfig = extendTheme({
                             bgColor: 'components.menu.item.focus.bgColor',
                             boxShadow: '0 0 0 2px #00bce6',
                         },
+                        bgColor: 'transparent',
                         borderRadius: 'md',
                     }
                 },
