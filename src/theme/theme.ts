@@ -18,16 +18,36 @@ const theme: ThemeConfig = extendTheme({
                         },
                     },
                 },
+                drawer: {
+                    bgColor: {
+                        default: 'white',
+                        _dark: 'gray.700',
+                    },
+                },
+                menu: {
+                    item: {
+                        focus: {
+                            bgColor: {
+                                default: 'theme.100',
+                                _dark: 'theme.900',
+                            },
+                            headingColor: {
+                                default: 'theme.600',
+                                _dark: 'theme.600',
+                            }
+                        },
+                    },
+                    groupTitle: {
+                        color: {
+                            default: 'gray.500',
+                            _dark: 'gray.400',
+                        }
+                    }
+                },
             },
             body: {
                 default: 'white',
                 _dark: 'gray.800',
-            },
-            drawer: {
-                bgColor: {
-                    default: 'white',
-                    _dark: 'gray.700',
-                },
             },
             text: {
                 default: 'gray.800',
@@ -37,7 +57,7 @@ const theme: ThemeConfig = extendTheme({
                 borderColor: {
                     default: 'gray.100',
                     _dark: 'gray.700',
-                },  
+                },
             },
             topNav: {
                 bgColor: {
@@ -203,7 +223,7 @@ const theme: ThemeConfig = extendTheme({
                     default: 'gray.800',
                     _dark: 'gray.400',
                 }
-            }
+            },
         },
     },
     styles: {
@@ -292,7 +312,7 @@ const theme: ThemeConfig = extendTheme({
                         bgColor: 'components.button.ghost.hover.bgColor',
                         opacity: 1,
                     },
-                    _focus:  {
+                    _focus: {
                         bgColor: 'components.button.ghost.hover.bgColor',
                         opacity: 1,
                     },
@@ -307,7 +327,7 @@ const theme: ThemeConfig = extendTheme({
                             bgColor: 'leftNav.bottomNav.menu.item.active.bgColor',
                             color: 'leftNav.bottomNav.menu.item.active.textColor',
                         },
-                        _focus:  {
+                        _focus: {
                             bgColor: 'leftNav.bottomNav.menu.item.active.bgColor',
                             color: 'leftNav.bottomNav.menu.item.active.textColor',
                         },
@@ -315,11 +335,25 @@ const theme: ThemeConfig = extendTheme({
                     },
                 },
                 'search-result': {
-                  groupTitle: {
-                    color: 'gray.500',
-                    textTransform: 'uppercase',
-                    fontSize: 'xs',
-                  },
+                    groupTitle: {
+                        color: 'gray.500',
+                        textTransform: 'uppercase',
+                        fontSize: 'xs',
+                    },
+                    list: {
+                        paddingLeft: 5,
+                        paddingRight: 5,
+                    },
+                    item: {
+                        paddingLeft: 3,
+                        paddingRight: 3,
+                        mb: 2,
+                        _focus: {
+                            bgColor: 'components.menu.item.focus.bgColor',
+                            boxShadow: '0 0 0 2px #00bce6',
+                        },
+                        borderRadius: 'md',
+                    }
                 },
             },
         },

@@ -1,6 +1,6 @@
 import { Drawer, DrawerBody, DrawerContent, DrawerOverlay } from "@chakra-ui/react";
 import React, { FC } from "react";
-import SearchInput from "./components/SearchInput";
+import SearchInput from "../../components/search/SearchInput";
 import PageDirectory from "./components/PageDirectory";
 import NavbarControls from "./components/NavbarControls";
 

@@ -18,9 +18,9 @@ const NavbarControls: FC<NavbarControlsProps> = ({ isMobile = false, isExpanded,
     const conditional_props: FlexProps = {};
     if (isMobile) {
         isExpanded = true;
-        conditional_props.position = 'absolute'
+        conditional_props.position = 'absolute';
         conditional_props.bottom = 0;
-        conditional_props.bgColor = 'drawer.bgColor';
+        conditional_props.bgColor = 'components.drawer.bgColor';
         conditional_props.w = 'calc(100% - 3rem)';
     }
 
