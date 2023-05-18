@@ -3,6 +3,7 @@ import { mode } from "@chakra-ui/theme-tools";
 import themeComponents from "./components";
 import themeColors from "./colors";
 import themeSemanticTokens from "./semanticTokens";
+import themeFonts from "./fonts";
 
 
 const theme: ThemeConfig = extendTheme({
@@ -16,6 +17,10 @@ const theme: ThemeConfig = extendTheme({
      * CUSTOM COLORS
      */
     colors: themeColors,
+    /**
+     * CUSTOM FONTS
+     */
+    fonts: themeFonts,
     /**
      * COMPONENT CUSTOMIZATIONS
      */
