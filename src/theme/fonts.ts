@@ -1,4 +1,3 @@
-import "@fontsource/jetbrains-mono";
 import "@fontsource/cascadia-code";
 
 const themeFonts = {
