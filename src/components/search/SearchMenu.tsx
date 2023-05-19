@@ -124,6 +124,7 @@ const SearchResultSection: FC<{ section: TSearchResultSection, idx: number, quer
   return (
     <MenuGroup key={idx}>
         <Heading 
+            key={-1}
             fontSize='12px'
             mb={2}
             mt={idx === 0 ? 2 : 5}
@@ -131,7 +132,7 @@ const SearchResultSection: FC<{ section: TSearchResultSection, idx: number, quer
             color='components.menu.groupTitle.color'
         >{section.title}</Heading>
       <MenuDivider />
-      { section.results.map((result) => <SearchResultItem item={result} query={query} />) }
+      { section.results.map((result, i) => <SearchResultItem item={result} query={query} key={i} />) }
     </MenuGroup>
   );
 }
@@ -157,7 +158,7 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
   let searchResults;
   
   if (searchQuery.length > 0) {
-      searchResults = exampleSearchResult.map((section, idx) => <SearchResultSection section={section} idx={idx} query={searchQuery} />);
+      searchResults = exampleSearchResult.map((section, idx) => <SearchResultSection section={section} idx={idx} query={searchQuery} key={idx} />);
       if (!searchResults.length) {
         searchResults = (
             <Center
