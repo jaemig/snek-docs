@@ -1,5 +1,5 @@
 import { Box, BoxProps, List, ListItem } from "@chakra-ui/react";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { FileSystemItem } from "./filesystem.types";
 import FeatherFolder from "../../icons/FeatherFolder";
 import FeatherFile from "../../icons/FeatherFile";
@@ -32,6 +32,7 @@ const FilesystemItem: FC<{ item: FileSystemItem, intendation: number }> = ({ ite
             <Box
                 {...props}
                 onClick={toggleShowChildren}
+                key={0}
             >
                 <IconComp
                     boxSize='10px'
@@ -42,7 +43,7 @@ const FilesystemItem: FC<{ item: FileSystemItem, intendation: number }> = ({ ite
                 {item.name}
             </Box>
             {
-                item.type === 'folder' && showChildren && item.children?.map(child => <FilesystemItem item={child} intendation={intendation + 1} />)
+                item.type === 'folder' && showChildren && item.children?.map((child, i) => <FilesystemItem item={child} intendation={intendation + 1} key={i} />)
             }
         </Box>
     )
@@ -55,6 +56,7 @@ interface FileSystemProps {
  * Filesystem component for displaying filesystem structures.
  */
 const Filesystem: FC<FileSystemProps> = ({ structure }) => {
+
     return (
         <Box
             w='fit-content'
@@ -72,7 +74,7 @@ const Filesystem: FC<FileSystemProps> = ({ structure }) => {
             transition='box-shadow 0.2s ease-in-out'
         >
             {
-                structure.map(item => <FilesystemItem item={item} intendation={0} />)
+                structure.map((item, i) => <FilesystemItem item={item} intendation={0} key={i} />)
             }
         </Box>
     )
