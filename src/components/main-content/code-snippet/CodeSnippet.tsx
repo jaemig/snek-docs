@@ -54,6 +54,7 @@ const CodeSnippet: FC<CodeSnippetProps> = ({ code, headerText, startingLineNumbe
                     minH: '100px',
                 },
                 '& code': {
+                  bgColor: 'transparent !important',
                   w: 'max-content',
                   display: 'block',
                 },
