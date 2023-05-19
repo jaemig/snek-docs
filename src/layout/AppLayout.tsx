@@ -16,10 +16,10 @@ const AppLayout: FC<AppLayoutProps> = ({ children }) => {
     return (
         <ChakraProvider theme={theme}>
             <Flex
-                w='100vw'
+                w='100%'
                 minW='max(210px, 100vw)'
-                h='100vh'
-                minH='100vh'
+                h='100%'
+                minH='100%'
                 direction='column'
                 pb={5}
             >

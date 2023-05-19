@@ -19,9 +19,9 @@ const DocsPage: React.FC<PageProps> = () => {
           h='100%'
           mx='auto'
           templateRows='1fr'
-          templateColumns={{ base: '1fr', md: '0.5fr 1fr', lg: 'minmax(auto, 250px) minmax(auto, 4fr) minmax(auto, 250px)' }}
+          templateColumns={{ base: '1fr', md: '0.8fr 2fr', xl: 'minmax(auto, 250px) minmax(auto, 4fr) minmax(auto, 250px)' }}
           gap={10}
-          px={{ base: 5, xl: 0 }}
+          px={{ base: 7, xl: 0 }}
         >
           <Box display={{ base: 'none', md: 'block' }}>
             <LeftNav />

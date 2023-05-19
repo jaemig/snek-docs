@@ -2,7 +2,7 @@ import { Box, Heading, Text } from "@chakra-ui/react";
 import React, { FC } from "react";
 import CodeSnippet from "../../components/main-content/code-snippet/CodeSnippet";
 import Filesystem from "../../components/main-content/filesystem/Filesystem";
-import { FileSystemItem } from "../../components/main-content/filesystem/filesystem.types";
+import { TFilesystemItem } from "../../components/main-content/filesystem/filesystem.types";
 
 const exampleCode = `
 import React from 'react';
@@ -28,7 +28,7 @@ const GroceryItem: React.FC<GroceryItemProps> = ({ item }) => {
 export default GroceryItem;
 `
 
-const exampleFsStructure: FileSystemItem[] = [
+const exampleFsStructure: TFilesystemItem[] = [
   {
     name: 'pages',
     type: 'folder',
@@ -36,6 +36,7 @@ const exampleFsStructure: FileSystemItem[] = [
       {
         name: 'fruits',
         type: 'folder',
+        defaultOpen: false,
         children: [
           {
             name: '_meta.json',
@@ -80,7 +81,7 @@ const MainContent: FC = () => {
             <Text mb={5}>
             Rubber ducks are not just a fun bath-time companion, they have also been used by researchers to study ocean currents, providing valuable insights into global weather patterns and marine ecology.
             </Text>
-            <CodeSnippet code={exampleCode} fileName="app.tsx" />
+            <CodeSnippet code={exampleCode} headerText="app.tsx" />
             <Filesystem structure={exampleFsStructure} />
         </Box>
     )

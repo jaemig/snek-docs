@@ -7,7 +7,7 @@ import { oneDark, oneLight } from "react-syntax-highlighter/dist/esm/styles/pris
 
 interface CodeSnippetProps {
     code: string;
-    fileName?: string;
+    headerText?: string;
     startingLineNumber?: number;
 }
 
@@ -16,7 +16,7 @@ let timeout: NodeJS.Timeout;
 /**
  * Code snippet component for displaying code examples.
  */
-const CodeSnippet: FC<CodeSnippetProps> = ({ code, fileName, startingLineNumber = 1, }) => {
+const CodeSnippet: FC<CodeSnippetProps> = ({ code, headerText, startingLineNumber = 1, }) => {
   const [buttonIcon, setButtonIcon] = React.useState<'copy' | 'check'>('copy');
   const theme = useColorModeValue(oneLight, oneDark);
 
@@ -30,17 +30,25 @@ const CodeSnippet: FC<CodeSnippetProps> = ({ code, fileName, startingLineNumber 
   }
 
     return (
+      <Box
+        w={{ base: 'calc(100vw - 3.5rem)', md: 'auto' }}
+        // overflowX='auto'
+        border='1px solid'
+        borderColor='components.codeSnippet.borderColor'
+        borderRadius='xl'
+      >
         <Box
             fontSize='sm'
             borderRadius='md'
             // border='1px solid #2D3748'
+            overflowX='auto'
             __css={{
                 '& pre': {
-                    borderRadius: 'xl',
-                    borderTopRadius: fileName ? 'none' : 'xl',
-                    border: '1px solid',
-                    borderTop: fileName ? 'none' : '1px solid',
-                    borderColor: 'components.codeSnippet.borderColor',
+                    // borderRadius: 'xl',
+                    // borderTopRadius: headerText ? 'none' : 'xl',
+                    // border: '1px solid',
+                    // borderTop: headerText ? 'none' : '1px solid',
+                    // borderColor: 'components.codeSnippet.borderColor',
                     backgroundColor: 'components.codeSnippet.body.bgColor !important',
                     fontFamily: 'ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace',
                     fontWeight: 500,
@@ -48,8 +56,12 @@ const CodeSnippet: FC<CodeSnippetProps> = ({ code, fileName, startingLineNumber 
                     padding: 3,
                     pt: 0,
                     pb: 5,
-                    mt: '0 !important',
+                    my: '0 !important',
                     minH: '100px',
+                },
+                '& code': {
+                  w: 'max-content',
+                  display: 'block',
                 },
                 '&:hover .code-snippet-copy-button': {
                     visibility: 'visible',
@@ -62,17 +74,12 @@ const CodeSnippet: FC<CodeSnippetProps> = ({ code, fileName, startingLineNumber 
             transition='box-shadow 0.2s cubic-bezier(0.000, 0.735, 0.580, 1.000)'
         >
           {
-            fileName && (
+            headerText && (
               <Text
                 bgColor='components.codeSnippet.header.bgColor'
-                borderTopLeftRadius='xl'
-                borderTopRightRadius='xl'
-                border='1px solid'
-                borderBottom='none'
-                borderColor='components.codeSnippet.borderColor'
                 fontSize='xs'
                 p={3}
-              >{ fileName }</Text>
+              >{ headerText }</Text>
             )
           }
             <Box
@@ -87,7 +94,6 @@ const CodeSnippet: FC<CodeSnippetProps> = ({ code, fileName, startingLineNumber 
               >
                 { code }
               </SyntaxHighlighter>
-              {/* <Highlight className="react-highlight">{ code }</Highlight> */}
               <IconButton
                 position='absolute'
                 top={5}
@@ -102,6 +108,7 @@ const CodeSnippet: FC<CodeSnippetProps> = ({ code, fileName, startingLineNumber 
               />
             </Box>
         </Box>
+      </Box>
     )
 }
 

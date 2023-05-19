@@ -11,7 +11,7 @@ const MainWrapper: FC = () => {
     return (
         <Flex
             as='main'
-            px={{ base: 5, md: 0 }}
+            px={{ base: 0, md: 0 }}
             direction='column'
         >
             <MainBreadcrumb />
