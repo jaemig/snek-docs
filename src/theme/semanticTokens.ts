@@ -60,7 +60,19 @@ const themeSemanticTokens = {
                     default: 'gray.200',
                     _dark: 'rgba(45, 55, 72, 0.75)',
                 }                 
-            }
+            },
+            filesystem: {
+                icon: {
+                    color: {
+                        default: 'gray.600',
+                        _dark: 'gray.400',
+                    },
+                },
+                borderColor: {
+                    default: 'gray.200',
+                    _dark: 'gray.700',
+                },
+            },
         },
         shared: {
             translucent: {

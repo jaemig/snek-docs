@@ -1,6 +1,8 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
 import React, { FC } from "react";
 import CodeSnippet from "../../components/main-content/code-snippet/CodeSnippet";
+import Filesystem from "../../components/main-content/filesystem/Filesystem";
+import { FileSystemItem } from "../../components/main-content/filesystem/filesystem.types";
 
 const exampleCode = `
 import React from 'react';
@@ -26,6 +28,45 @@ const GroceryItem: React.FC<GroceryItemProps> = ({ item }) => {
 export default GroceryItem;
 `
 
+const exampleFsStructure: FileSystemItem[] = [
+  {
+    name: 'pages',
+    type: 'folder',
+    children: [
+      {
+        name: 'fruits',
+        type: 'folder',
+        children: [
+          {
+            name: '_meta.json',
+            type: 'file',
+          },
+          {
+            name: 'apple.mdx',
+            type: 'file',
+          },
+          {
+            name: 'banana.mdx',
+            type: 'file',
+          },
+        ],
+      },
+      {
+        name: 'about.mdx',
+        type: 'file',
+      },
+      {
+        name: 'contact.mdx',
+        type: 'file',
+      },
+      {
+        name: 'index.mdx',
+        type: 'file',
+      },
+    ],
+  },
+];
+
 /**
  * Main content component.
  * This is where the core content of the page goes.
@@ -40,6 +81,7 @@ const MainContent: FC = () => {
             Rubber ducks are not just a fun bath-time companion, they have also been used by researchers to study ocean currents, providing valuable insights into global weather patterns and marine ecology.
             </Text>
             <CodeSnippet code={exampleCode} fileName="app.tsx" />
+            <Filesystem structure={exampleFsStructure} />
         </Box>
     )
 }
