@@ -1,9 +1,9 @@
-export type SearchResultSection = {
+export type TSearchResultSection = {
     title: string;
-    results: SearchResult[];
+    results: TSearchResult[];
 }
 
-export type SearchResult = {
+export type TSearchResult = {
     title: string;
     description: string;
     href: string;

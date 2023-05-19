@@ -12,10 +12,10 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React, { FC, Fragment, useEffect, useRef } from "react";
-import { SearchResult, SearchResultSection } from "./search.types";
+import { TSearchResult, TSearchResultSection } from "./search.types";
 import SearchInput from "./SearchInput";
 
-const exampleSearchResult: SearchResultSection[] = [
+const exampleSearchResult: TSearchResultSection[] = [
   {
     title: "Page Configuration",
     results: [
@@ -90,7 +90,7 @@ const highLightQuery = (text: string, query: string) => {
  * @param query  The search query
  * @returns The search result item component with highlighted query
  */
-const generateSearchResultItem = (item: SearchResult, query: string) => {
+const SearchResultItem: FC<{ item: TSearchResult, query: string }> = ({ item, query }) => {
   return (
     <MenuItem
         key={menuIdx++}
@@ -127,11 +127,7 @@ const generateSearchResultItem = (item: SearchResult, query: string) => {
  * @param query  The search query
  * @returns  The search result section component
  */
-const generateSearchresultSection = (
-  section: SearchResultSection,
-  idx: number,
-  query: string
-) => {
+const SearchResultSection: FC<{ section: TSearchResultSection, idx: number, query: string }> = ({ section, idx, query }) => {
   return (
     <MenuGroup key={idx}>
         <Heading 
@@ -142,10 +138,10 @@ const generateSearchresultSection = (
             color='components.menu.groupTitle.color'
         >{section.title}</Heading>
       <MenuDivider />
-      {section.results.map((result) => generateSearchResultItem(result, query))}
+      { section.results.map((result) => <SearchResultItem item={result} query={query} />) }
     </MenuGroup>
   );
-};
+}
 
 interface SearchMenuProps {
   menuProps?:Partial<MenuProps>;
@@ -168,7 +164,7 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
   let searchResults;
   
   if (searchQuery.length > 0) {
-      searchResults = exampleSearchResult.map((section, idx) => generateSearchresultSection(section, idx, searchQuery));
+      searchResults = exampleSearchResult.map((section, idx) => <SearchResultSection section={section} idx={idx} query={searchQuery} />);
       if (!searchResults.length) {
         searchResults = (
             <Center
