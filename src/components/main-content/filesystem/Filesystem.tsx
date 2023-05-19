@@ -1,11 +1,9 @@
 import { Box, BoxProps } from "@chakra-ui/react";
 import React, { FC, useState } from "react";
 import { TFilesystemItem } from "./filesystem.types";
-import FeatherFolder from "../../icons/FeatherFolder";
-import FeatherFile from "../../icons/FeatherFile";
 import FaRegFolderOpen from "../../icons/FaRegFolderOpen";
-import FaRegFolder from "../../icons/faRegFolder";
-import FaRegFile from "../../icons/FaRegFile";
+import FaRegFolder from "../../icons/FaRegFolder";
+import FaRegFileAlt from "../../icons/FaRegFileAlt";
 
 const FilesystemItem: FC<{ item: TFilesystemItem, intendation: number }> = ({ item, intendation }) => {
 
@@ -25,7 +23,7 @@ const FilesystemItem: FC<{ item: TFilesystemItem, intendation: number }> = ({ it
         IconComp = showChildren ? FaRegFolderOpen : FaRegFolder;
     } else {
         props.cursor = 'default';
-        IconComp = FaRegFile;
+        IconComp = FaRegFileAlt;
     }
 
     const toggleShowChildren = () => {
