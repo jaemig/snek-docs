@@ -11,7 +11,7 @@ import {
   MenuProps,
   Text,
 } from "@chakra-ui/react";
-import React, { FC, Fragment, useEffect, useRef } from "react";
+import React, { FC, Fragment, ReactElement, useEffect, useRef } from "react";
 import { TSearchResult, TSearchResultSection } from "./search.types";
 import SearchInput from "./SearchInput";
 
@@ -85,10 +85,7 @@ const highLightQuery = (text: string, query: string) => {
 }
 
 /**
- * Generate a search result item
- * @param item  The search result item
- * @param query  The search query
- * @returns The search result item component with highlighted query
+ * The search menu item component for displaying a specific search result item.
  */
 const SearchResultItem: FC<{ item: TSearchResult, query: string }> = ({ item, query }) => {
   return (
@@ -121,11 +118,7 @@ const SearchResultItem: FC<{ item: TSearchResult, query: string }> = ({ item, qu
 };
 
 /**
- * Generate a search result section
- * @param section  The search result section
- * @param idx  The index of the section
- * @param query  The search query
- * @returns  The search result section component
+ * The search menu section component for displaying a search result section containing multiple search result items.
  */
 const SearchResultSection: FC<{ section: TSearchResultSection, idx: number, query: string }> = ({ section, idx, query }) => {
   return (
@@ -184,16 +177,19 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
     >
       <SearchInput ref={r} setSearchQuery={setSearchQuery} />
 
-      <MenuList
-        // w="500px"
-        fontSize="sm"
-        //TODO: Fix the backdrop blur not working
-        backdropBlur={8}
-        {...menuListProps}
-      >
-        {searchResults}
-      </MenuList>
-    </Menu>
+    {
+      searchResults && (
+        <MenuList
+          fontSize="sm"
+          //TODO: Fix the backdrop blur not working
+          backdropBlur={8}
+          {...menuListProps}
+        >
+          {searchResults}
+        </MenuList>
+      )
+    }
+  </Menu>
   );
 };
 
