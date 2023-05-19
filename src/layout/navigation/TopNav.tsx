@@ -10,7 +10,7 @@ import SearchMenu from '../../components/search/SearchMenu';
 const links: LinkData[] = [
     {
         name: 'Documentation',
-        href: '#',
+        href: '/docs',
         isActive: true,
     },
     {
