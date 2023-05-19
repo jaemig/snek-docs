@@ -31,6 +31,7 @@ const NavbarControls: FC<NavbarControlsProps> = ({ isMobile = false, isExpanded,
             borderTop={isExpanded ? '1px solid' : undefined }
             borderTopColor='separator.borderColor'
             pt={5}
+            pb={isMobile ? 5 : 0}
             gap={3}
             flexDir={isExpanded ? 'row' : 'column'}
             alignItems='center'
