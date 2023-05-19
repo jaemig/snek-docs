@@ -18,17 +18,17 @@ const AppLayout: FC<AppLayoutProps> = ({ children }) => {
             <Flex
                 w='100%'
                 minW='max(210px, 100vw)'
-                h='100%'
-                minH='100%'
+                h='max(100%, 100vh)'
+                minH='100vh'
                 direction='column'
                 pb={5}
             >
-            <TopNav />
-            <Box
-                flex={1}
-            >
-                { children }
-            </Box>
+                <TopNav />
+                <Box
+                    flex={1}
+                >
+                    { children }
+                </Box>
             </Flex>
             <Footer />
         </ChakraProvider>

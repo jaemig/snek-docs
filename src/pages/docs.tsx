@@ -23,11 +23,13 @@ const DocsPage: React.FC<PageProps> = () => {
           gap={10}
           px={{ base: 7, xl: 0 }}
         >
-          <Box display={{ base: 'none', md: 'block' }}>
+          <Box display={{ base: 'none', md: 'block' }} position='sticky' top='110px'>
             <LeftNav />
           </Box>
           <MainWrapper />
-          <RightNav />
+          <Box position='sticky' top='80px'>
+            <RightNav />
+          </Box>
         </Grid>
     </AppLayout>
   )

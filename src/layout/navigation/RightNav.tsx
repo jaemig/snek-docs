@@ -96,7 +96,9 @@ const links = [
  */
 const RightNav: FC = () => {
     return (
-        <Box 
+        <Box
+            position='sticky'
+            top='80px'
             as='aside'
             display={{ base: 'none', xl: 'block' }}
             color='shared.text.default'

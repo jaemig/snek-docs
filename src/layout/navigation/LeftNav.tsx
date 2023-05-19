@@ -1,7 +1,5 @@
-import { CheckIcon, Icon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { Box, Flex, Spacer, Button, IconButton, useColorMode, Menu, MenuButton, MenuList, MenuItem, ColorMode } from "@chakra-ui/react";
-import React, { Dispatch, FC, SetStateAction, useState } from "react";
-import HideSidebarIcon from "../../components/icons/HideSidebar";
+import { Box, Flex, Spacer } from "@chakra-ui/react";
+import React, { FC, useState } from "react";
 import PageDirectory from "./components/PageDirectory";
 import NavbarControls from "./components/NavbarControls";
 
@@ -17,10 +15,12 @@ const LeftNav: FC<LeftNavProps> = ({ isMobile }) => {
 
     return (
         <Flex
+            position='sticky'
+            top='80px'
             as='nav'
             fontSize='sm'
             flexDirection='column'
-            h='100%'
+            h='calc(100vh - 100px)'
             w={isExpanded ? 'auto' : '5rem'}
             color='shared.text.default'
         >
