@@ -1,24 +1,29 @@
-import { Box, BoxProps, List, ListItem } from "@chakra-ui/react";
-import React, { FC, useEffect, useState } from "react";
-import { FileSystemItem } from "./filesystem.types";
+import { Box, BoxProps } from "@chakra-ui/react";
+import React, { FC, useState } from "react";
+import { TFilesystemItem } from "./filesystem.types";
 import FeatherFolder from "../../icons/FeatherFolder";
 import FeatherFile from "../../icons/FeatherFile";
 
-const FilesystemItem: FC<{ item: FileSystemItem, intendation: number }> = ({ item, intendation }) => {
+const FilesystemItem: FC<{ item: TFilesystemItem, intendation: number }> = ({ item, intendation }) => {
 
-    const [showChildren, setShowChildren] = useState(true);
+    const isFolder = item.type === 'folder';
 
+    const [showChildren, setShowChildren] = useState(isFolder && (item.defaultOpen ?? true));
+
+    let IconComp;
     let props: BoxProps = { };
-    if (item.type === 'folder') {
+    if (isFolder) {
         props = {
             ...props,
             cursor: 'pointer',
             _hover: { ...props._hover, opacity: 0.7 },
             transition: 'opacity 0.2s ease-in-out',
-        }
-    } else props.cursor = 'default';
-
-    const IconComp = item.type === 'folder' ? FeatherFolder : FeatherFile;
+        };
+        IconComp = FeatherFolder;
+    } else {
+        props.cursor = 'default';
+        IconComp = FeatherFile;
+    }
 
     const toggleShowChildren = () => {
         setShowChildren(!showChildren);
@@ -50,7 +55,7 @@ const FilesystemItem: FC<{ item: FileSystemItem, intendation: number }> = ({ ite
 }
 
 interface FileSystemProps {
-    structure: FileSystemItem[];
+    structure: TFilesystemItem[];
 }
 /**
  * Filesystem component for displaying filesystem structures.

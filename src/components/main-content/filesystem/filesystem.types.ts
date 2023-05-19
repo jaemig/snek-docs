@@ -1,17 +1,18 @@
 export type FilesystemItemType = 'file' | 'folder';
 
-export type FileSystemItem = FileSystemFolder | FileSystemFile;
+export type TFilesystemItem = TFilesystemFolder | TFilesystemFile;
 
-export type FileSystemItemBase = {
+export type TFilesystemItemBase = {
     name: string;
     type: FilesystemItemType;
 }
 
-export type FileSystemFolder = FileSystemItemBase & {
+export type TFilesystemFolder = TFilesystemItemBase & {
     type: 'folder';
-    children?: Array<FileSystemItem>;
+    defaultOpen?: boolean;
+    children?: Array<TFilesystemItem>;
 }
 
-export type FileSystemFile = FileSystemItemBase & {
+export type TFilesystemFile = TFilesystemItemBase & {
     type: 'file';
 }
