@@ -1,6 +1,6 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
 import React, { FC } from "react";
-import CodeSnippet from "../../components/main-content/CodeSnippet";
+import CodeSnippet from "../../components/main-content/code-snippet/CodeSnippet";
 
 const exampleCode = `
 import React from 'react';
