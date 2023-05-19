@@ -32,7 +32,7 @@ const CodeSnippet: FC<CodeSnippetProps> = ({ code, headerText, startingLineNumbe
     return (
       <Box
         w={{ base: 'calc(100vw - 3.5rem)', md: 'auto' }}
-        // overflowX='auto'
+        overflow='hidden'
         border='1px solid'
         borderColor='components.codeSnippet.borderColor'
         borderRadius='xl'
@@ -40,15 +40,9 @@ const CodeSnippet: FC<CodeSnippetProps> = ({ code, headerText, startingLineNumbe
         <Box
             fontSize='sm'
             borderRadius='md'
-            // border='1px solid #2D3748'
             overflowX='auto'
             __css={{
                 '& pre': {
-                    // borderRadius: 'xl',
-                    // borderTopRadius: headerText ? 'none' : 'xl',
-                    // border: '1px solid',
-                    // borderTop: headerText ? 'none' : '1px solid',
-                    // borderColor: 'components.codeSnippet.borderColor',
                     backgroundColor: 'components.codeSnippet.body.bgColor !important',
                     fontFamily: 'ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace',
                     fontWeight: 500,
