@@ -3,6 +3,9 @@ import React, { FC, useState } from "react";
 import { TFilesystemItem } from "./filesystem.types";
 import FeatherFolder from "../../icons/FeatherFolder";
 import FeatherFile from "../../icons/FeatherFile";
+import FaRegFolderOpen from "../../icons/FaRegFolderOpen";
+import FaRegFolder from "../../icons/faRegFolder";
+import FaRegFile from "../../icons/FaRegFile";
 
 const FilesystemItem: FC<{ item: TFilesystemItem, intendation: number }> = ({ item, intendation }) => {
 
@@ -19,10 +22,10 @@ const FilesystemItem: FC<{ item: TFilesystemItem, intendation: number }> = ({ it
             _hover: { ...props._hover, opacity: 0.7 },
             transition: 'opacity 0.2s ease-in-out',
         };
-        IconComp = FeatherFolder;
+        IconComp = showChildren ? FaRegFolderOpen : FaRegFolder;
     } else {
         props.cursor = 'default';
-        IconComp = FeatherFile;
+        IconComp = FaRegFile;
     }
 
     const toggleShowChildren = () => {
@@ -38,11 +41,13 @@ const FilesystemItem: FC<{ item: TFilesystemItem, intendation: number }> = ({ it
                 {...props}
                 onClick={toggleShowChildren}
                 key={0}
+                mb={1}
+                color={item.isSelected ? 'components.filesystem.selected.color' : 'components.filesystem.color'}
             >
                 <IconComp
-                    boxSize='10px'
+                    boxSize='14px'
                     mr={2}
-                    fill='none'
+                    fill='components.filesystem.icon.color'
                     color='components.filesystem.icon.color'
                 />
                 {item.name}

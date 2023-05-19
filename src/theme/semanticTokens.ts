@@ -62,9 +62,15 @@ const themeSemanticTokens = {
                 }                 
             },
             filesystem: {
+                selected: {
+                    color: {
+                        default: 'theme.800',
+                        _dark: 'theme.300',
+                    }
+                },
                 icon: {
                     color: {
-                        default: 'gray.600',
+                        default: 'gray.700',
                         _dark: 'gray.400',
                     },
                 },

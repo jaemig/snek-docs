@@ -5,6 +5,7 @@ export type TFilesystemItem = TFilesystemFolder | TFilesystemFile;
 export type TFilesystemItemBase = {
     name: string;
     type: FilesystemItemType;
+    isSelected?: boolean;
 }
 
 export type TFilesystemFolder = TFilesystemItemBase & {

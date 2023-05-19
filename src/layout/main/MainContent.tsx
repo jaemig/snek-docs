@@ -55,6 +55,7 @@ const exampleFsStructure: TFilesystemItem[] = [
       {
         name: 'about.mdx',
         type: 'file',
+        isSelected: true,
       },
       {
         name: 'contact.mdx',
