@@ -87,7 +87,7 @@ const themeSemanticTokens = {
                     _dark: 'gray.400',
                 },
                 bright: {
-                    default: 'white',
+                    default: 'gray.600',
                     _dark: 'gray.300',
                 },
             },
