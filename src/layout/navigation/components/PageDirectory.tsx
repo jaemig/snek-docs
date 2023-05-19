@@ -265,6 +265,7 @@ const PageDirectory: FC<PageDirectoryProps> = ({ isExpanded = true, isMobile = f
             }}
             variant='leftNav'
             transition='opacity 0.2s ease-in-out, width 0.2s ease-in-out'
+            mb={isMobile ? 12 : undefined}
         >
         {
             menuStructure.map((section, i) => (
