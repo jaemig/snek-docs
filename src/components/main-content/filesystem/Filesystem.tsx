@@ -69,8 +69,8 @@ const Filesystem: FC<FileSystemProps> = ({ structure }) => {
         <Box
             w='fit-content'
             mt={5}
-            p={3}
-            pb={2}
+            px={5}
+            py={3}
             border="1px solid"
             borderColor='components.filesystem.borderColor'
             borderRadius="md"
