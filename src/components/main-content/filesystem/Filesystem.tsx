@@ -66,6 +66,10 @@ const Filesystem: FC<FileSystemProps> = ({ structure }) => {
             borderRadius="md"
             color='shared.text.default'
             fontSize='sm'
+            _hover={{
+                boxShadow: 'base',
+            }}
+            transition='box-shadow 0.2s ease-in-out'
         >
             {
                 structure.map(item => <FilesystemItem item={item} intendation={0} />)
