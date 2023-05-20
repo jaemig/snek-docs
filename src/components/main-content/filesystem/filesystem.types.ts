@@ -6,6 +6,7 @@ export type TFilesystemItemBase = {
     name: string;
     type: FilesystemItemType;
     isSelected?: boolean;
+    tooltip?: string;
 }
 
 export type TFilesystemFolder = TFilesystemItemBase & {

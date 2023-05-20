@@ -78,6 +78,16 @@ const themeSemanticTokens = {
                     default: 'gray.200',
                     _dark: 'gray.700',
                 },
+                tooltip: {
+                    bgColor: {
+                        default: 'theme.700',
+                        _dark: 'theme.800',
+                    },
+                    color: {
+                        default: 'white',
+                        _dark: 'gray.200',
+                    },
+                }
             },
         },
         shared: {
