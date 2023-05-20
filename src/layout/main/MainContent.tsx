@@ -50,6 +50,12 @@ const exampleFsStructure: TFilesystemItem[] = [
           {
             name: 'banana.mdx',
             type: 'file',
+            tooltip: {
+              text: 'This contains some weird bananas 🍌',
+              placement: 'left',
+              bgColor: 'yellow.500',
+              hasArrow: true,
+            }
           },
         ],
       },

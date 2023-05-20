@@ -1,4 +1,4 @@
-import { Box, BoxProps, Tooltip } from "@chakra-ui/react";
+import { Box, BoxProps, Tooltip, TooltipProps } from "@chakra-ui/react";
 import React, { FC, useState } from "react";
 import { TFilesystemItem } from "./filesystem.types";
 import FaRegFolderOpen from "../../icons/FaRegFolderOpen";
@@ -18,6 +18,21 @@ const FilesystemItem: FC<FilesystemItemProps> = ({ item, intendation }) => {
     const [showChildren, setShowChildren] = useState(isFolder && (item.defaultOpen ?? true));
     const toggleShowChildren = () => setShowChildren(!showChildren);
     
+    const tooltipText = typeof item.tooltip === 'string' ? item.tooltip : item.tooltip?.text;
+    let tooltipProps: TooltipProps = {
+        label: tooltipText,
+        bgColor: 'components.filesystem.tooltip.bgColor',
+        color: 'components.filesystem.tooltip.color',
+        borderRadius: 'md',
+        placement: 'right',
+        children: undefined,
+    };
+    if (typeof item.tooltip === 'object') {
+        tooltipProps = {
+            ...tooltipProps,
+            ...item.tooltip,
+        }
+    }
 
     let IconComp;
     let props: BoxProps = { };
@@ -30,7 +45,7 @@ const FilesystemItem: FC<FilesystemItemProps> = ({ item, intendation }) => {
         };
         IconComp = showChildren ? FaRegFolderOpen : FaRegFolder;
     } else {
-        props.cursor = 'default';
+        props.cursor = tooltipText ? 'pointer' : 'default';
         IconComp = FaRegFileAlt;
     }
 
@@ -59,14 +74,12 @@ const FilesystemItem: FC<FilesystemItemProps> = ({ item, intendation }) => {
                 color={item.isSelected ? 'components.filesystem.selected.color' : 'components.filesystem.color'}
             >
                 {
-                    item.tooltip && item.tooltip.length
+                    tooltipText && tooltipText.length
                     ? (
                         <Tooltip 
-                            label={item.tooltip}
-                            bg='components.filesystem.tooltip.bgColor'
-                            color='components.filesystem.tooltip.color'
+                            {...tooltipProps}
+                            label={tooltipText}
                             borderRadius='md'
-                            placement='right'
                             openDelay={500}
                         >
                             {itemContent}
