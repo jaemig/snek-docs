@@ -1,4 +1,4 @@
-import type { GatsbyConfig } from "gatsby"
+import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -11,7 +11,13 @@ const config: GatsbyConfig = {
   graphqlTypegen: true,
   plugins: [
     {
-      resolve: '@chakra-ui/gatsby-plugin',
+      resolve: "gatsby-plugin-jaen",
+      options: {
+        snekResourceId: "1234",
+      },
+    },
+    {
+      resolve: "@chakra-ui/gatsby-plugin",
       options: {
         resetCSS: true,
         isUsingColorMode: true,
@@ -19,24 +25,24 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: 'images',
+        name: "images",
         path: `${__dirname}/src/assets/images`,
       },
     },
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-image',
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-image",
     {
-      resolve: 'gatsby-plugin-react-svg',
+      resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {
-          include: '/src/assets/icons',
-        }
-      }
-    }
+          include: "/src/assets/icons",
+        },
+      },
+    },
   ],
-}
+};
 
-export default config
+export default config;
