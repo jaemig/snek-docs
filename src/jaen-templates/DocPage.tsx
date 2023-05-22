@@ -1,38 +1,19 @@
 import React from "react";
 import { HeadFC, graphql } from "gatsby";
-import { Box, ChakraProvider, Flex, Grid } from "@chakra-ui/react";
+import { Box, ChakraProvider, Flex, Grid, chakra } from "@chakra-ui/react";
 import TopNav from "../layout/navigation/TopNav";
 import LeftNav from "../layout/navigation/LeftNav";
 import RightNav from "../layout/navigation/RightNav";
 import MainWrapper from "../layout/main/MainWrapper";
 import theme from "../theme/theme";
 import AppLayout from "../layout/AppLayout";
-import {
-  connectPage,
-  usePageManager,
-  PageManagerProvider,
-} from "@snek-at/jaen";
-
-const PageTree = () => {
-  const manager = usePageManager();
-
-  return (
-    <span>
-      {JSON.stringify(
-        manager.pageTree.find((page) => page.id === "JaenPage /docs/")
-      )}
-    </span>
-  );
-};
+import { connectTemplate, Field } from "@snek-at/jaen";
 
 //TODO: Outsource the link style to the chakra theme
-const DocsPage = connectPage(
+const DocsPage = connectTemplate(
   () => {
     return (
       <AppLayout>
-        <PageManagerProvider>
-          <PageTree />
-        </PageManagerProvider>
         <Grid
           flex={1}
           mt={5}
@@ -55,7 +36,27 @@ const DocsPage = connectPage(
           >
             <LeftNav />
           </Box>
-          <MainWrapper />
+          <Box w="800px">
+            <Field.Mdx
+              name="documentation"
+              components={{
+                p: (props) => <chakra.p fontSize="sm" color="red" {...props} />,
+                h1: (props) => (
+                  <chakra.h1
+                    fontSize="2xl"
+                    borderBottom="1px solid blue"
+                    {...props}
+                  />
+                ),
+                h2: (props) => (
+                  <chakra.h2 fontSize="xl" color="aqua" {...props} />
+                ),
+                h3: (props) => <chakra.h3 fontSize="lg" {...props} />,
+                h4: (props) => <chakra.h4 fontSize="md" {...props} />,
+              }}
+              defaultValue={undefined}
+            />
+          </Box>
           <Box position="sticky" top="80px">
             <RightNav />
           </Box>
@@ -65,9 +66,11 @@ const DocsPage = connectPage(
   },
   {
     label: "Docs",
-    children: ["DocPage"],
+    children: [],
   }
 );
+
+export default DocsPage;
 
 export const query = graphql`
   query ($jaenPageId: String!) {
@@ -82,7 +85,5 @@ export const query = graphql`
     }
   }
 `;
-
-export default DocsPage;
 
 export { Head } from "@snek-at/jaen";
