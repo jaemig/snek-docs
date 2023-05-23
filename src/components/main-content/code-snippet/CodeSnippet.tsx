@@ -36,6 +36,10 @@ const CodeSnippet: FC<CodeSnippetProps> = ({ code, headerText, startingLineNumbe
         border='1px solid'
         borderColor='components.codeSnippet.borderColor'
         borderRadius='xl'
+        _hover={{
+          boxShadow: 'md',
+        }}
+        transition='box-shadow 0.2s cubic-bezier(0.000, 0.735, 0.580, 1.000)'
       >
         <Box
             fontSize='sm'
