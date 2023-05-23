@@ -1,18 +1,19 @@
 import { Box, BoxProps, Tooltip, TooltipProps } from "@chakra-ui/react";
 import React, { FC, useState } from "react";
 import { TFilesystemItem } from "./filesystem.types";
-import FaRegFolderOpen from "../../icons/FaRegFolderOpen";
-import FaRegFolder from "../../icons/FaRegFolder";
-import FaRegFileAlt from "../../icons/FaRegFileAlt";
+import BsFileEarmark from "../../icons/bootstrap/BsFileEarmark";
+import BsFolder2Open from "../../icons/bootstrap/BsFolder2Open";
+import BsFolder from "../../icons/bootstrap/BsFolder";
 
 interface FilesystemItemProps {
     item: TFilesystemItem;
     intendation: number;
+    isChild?: boolean;
 }
 /**
  * A single item in the filesystem
  */
-const FilesystemItem: FC<FilesystemItemProps> = ({ item, intendation }) => {
+const FilesystemItem: FC<FilesystemItemProps> = ({ item, intendation, isChild }) => {
     const isFolder = item.type === 'folder';
 
     const [showChildren, setShowChildren] = useState(isFolder && (item.defaultOpen ?? true));
@@ -43,10 +44,27 @@ const FilesystemItem: FC<FilesystemItemProps> = ({ item, intendation }) => {
             _hover: { ...props._hover, opacity: 0.7 },
             transition: 'opacity 0.2s ease-in-out',
         };
-        IconComp = showChildren ? FaRegFolderOpen : FaRegFolder;
+        IconComp = showChildren ? BsFolder2Open : BsFolder;
     } else {
         props.cursor = tooltipText ? 'pointer' : 'default';
-        IconComp = FaRegFileAlt;
+        IconComp = BsFileEarmark;
+    }
+
+    if (isChild) {
+        props = {
+            ...props,
+            position: 'relative',
+            _before: {
+                content: '""',
+                position: 'absolute',
+                top: '50%',
+                left: intendation * -3,
+                transform: 'translateY(-50%)',
+                height: '1px',
+                width: 2,
+                bg: 'components.filesystem.',
+            }
+        };
     }
 
     const itemContent = (
@@ -89,7 +107,16 @@ const FilesystemItem: FC<FilesystemItemProps> = ({ item, intendation }) => {
                 }
             </Box>
             {
-                item.type === 'folder' && showChildren && item.children?.map((child, i) => <FilesystemItem item={child} intendation={intendation + 1} key={i} />)
+                item.type === 'folder' && showChildren && (
+                    <Box
+                        borderLeft='1px solid'
+                        borderColor='leftNav.accordion.panel.borderLeftColor'
+                    >
+                        {
+                            item.children?.map((child, i) => <FilesystemItem item={child} intendation={intendation + 1} key={i} isChild />)
+                        }
+                    </Box>
+                )
             }
         </Box>
     )
