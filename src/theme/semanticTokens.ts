@@ -27,14 +27,14 @@ const themeSemanticTokens = {
                         headingColor: {
                             default: 'theme.600',
                             _dark: 'theme.600',
-                        }
+                        },
                     },
                 },
                 groupTitle: {
                     color: {
                         default: 'gray.500',
                         _dark: 'gray.400',
-                    }
+                    },
                 },
                 noResults: {
                     color: {
@@ -64,14 +64,36 @@ const themeSemanticTokens = {
             filesystem: {
                 selected: {
                     color: {
-                        default: 'theme.800',
-                        _dark: 'theme.300',
-                    }
+                        default: {
+                            default: 'theme.800',
+                            _dark: 'theme.300',
+                        },
+                        lowContrast: {
+                            default: 'theme.600',
+                            _dark: 'theme.400',
+                        },
+                    },
+                },
+                color: {
+                    default: {
+                        default: 'gray.800',
+                        _dark: 'gray.300',
+                    },
+                    lowContrast: {
+                        default: 'gray.400',
+                        _dark: 'gray.600',
+                    },
                 },
                 icon: {
                     color: {
-                        default: 'gray.700',
-                        _dark: 'gray.400',
+                        default: {
+                            default: 'gray.700',
+                            _dark: 'gray.400',
+                        },
+                        lowContrast: {
+                            default: 'gray.500',
+                            _dark: 'gray.500',
+                        },
                     },
                 },
                 borderColor: {
@@ -252,7 +274,7 @@ const themeSemanticTokens = {
                 color: {
                     default: 'gray.800',
                     _dark: 'gray.200',
-                }
+                },
             },
             link: {
                 active: {

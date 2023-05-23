@@ -15,6 +15,7 @@ export type TFilesystemItemBase = {
         placement?: PlacementWithLogical;
         hasArrow?: boolean;
     };
+    lowContrast?: boolean;
 }
 
 export type TFilesystemFolder = TFilesystemItemBase & {

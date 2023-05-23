@@ -19,6 +19,7 @@ const FilesystemItem: FC<FilesystemItemProps> = ({ item, intendation, isChild })
     const [showChildren, setShowChildren] = useState(isFolder && (item.defaultOpen ?? true));
     const toggleShowChildren = () => setShowChildren(!showChildren);
     
+    // Tooltip sttings
     const tooltipText = typeof item.tooltip === 'string' ? item.tooltip : item.tooltip?.text;
     let tooltipProps: TooltipProps = {
         label: tooltipText,
@@ -35,19 +36,47 @@ const FilesystemItem: FC<FilesystemItemProps> = ({ item, intendation, isChild })
         }
     }
 
+    // Icon settings
     let IconComp;
-    let props: BoxProps = { };
+    let props: BoxProps = { transition: 'opacity 0.2s ease-in-out' };
     if (isFolder) {
         props = {
             ...props,
             cursor: 'pointer',
             _hover: { ...props._hover, opacity: 0.7 },
-            transition: 'opacity 0.2s ease-in-out',
         };
         IconComp = showChildren ? BsFolder2Open : BsFolder;
     } else {
         props.cursor = tooltipText ? 'pointer' : 'default';
         IconComp = BsFileEarmark;
+    }
+
+    // Colorization settings
+    if (item.isSelected) {
+        const color = `components.filesystem.selected.color.${item.lowContrast ? 'lowContrast' : 'default'}`;
+        props = {
+            ...props,
+            color,
+            fill: color,
+        };
+    } else {
+        const color = `components.filesystem.color.${item.lowContrast ? 'lowContrast.initial' : 'default'}`;
+        props = {
+            ...props,
+            color,
+            fill: color,
+        };
+    }
+
+    if (item.lowContrast) {
+        props = {
+            ...props,
+            opacity: 0.5,
+            _hover: { 
+                ...props._hover,
+                opacity: 1,
+            },
+        };
     }
 
     if (isChild) {
@@ -89,7 +118,7 @@ const FilesystemItem: FC<FilesystemItemProps> = ({ item, intendation, isChild })
                 onClick={toggleShowChildren}
                 key={0}
                 mb={1}
-                color={item.isSelected ? 'components.filesystem.selected.color' : 'components.filesystem.color'}
+                // color={item.isSelected ? 'components.filesystem.selected.color' : 'components.filesystem.color'}
             >
                 {
                     tooltipText && tooltipText.length

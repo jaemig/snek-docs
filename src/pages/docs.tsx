@@ -14,6 +14,7 @@ import {
   generatePageOriginPath,
 } from "@snek-at/jaen";
 
+//TODO: Use this to build the page tree
 const PageTree = () => {
   const manager = usePageManager();
 
@@ -35,14 +36,13 @@ const PageTree = () => {
   );
 };
 
-//TODO: Outsource the link style to the chakra theme
 const DocsPage = connectPage(
   () => {
     return (
       <AppLayout>
-        <PageManagerProvider>
+        {/* <PageManagerProvider>
           <PageTree />
-        </PageManagerProvider>
+        </PageManagerProvider> */}
         <Grid
           flex={1}
           mt={5}

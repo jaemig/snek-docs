@@ -45,7 +45,7 @@ const exampleFsStructure: TFilesystemItem[] = [
           {
             name: 'apple.mdx',
             type: 'file',
-            tooltip: 'This contains some yummy apples 🍎'
+            tooltip: 'This contains some yummy apples 🍎',
           },
           {
             name: 'banana.mdx',
@@ -72,6 +72,11 @@ const exampleFsStructure: TFilesystemItem[] = [
         name: 'index.mdx',
         type: 'file',
       },
+      {
+        name: '.internal',
+        type: 'file',
+        lowContrast: true,
+      }
     ],
   },
 ];
