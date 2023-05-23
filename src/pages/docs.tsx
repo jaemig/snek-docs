@@ -11,6 +11,7 @@ import {
   connectPage,
   usePageManager,
   PageManagerProvider,
+  generatePageOriginPath,
 } from "@snek-at/jaen";
 
 const PageTree = () => {
@@ -18,9 +19,18 @@ const PageTree = () => {
 
   return (
     <span>
-      {JSON.stringify(
+      {/* {JSON.stringify(
         manager.pageTree.find((page) => page.id === "JaenPage /docs/")
-      )}
+      )} */}
+
+      {manager.pageTree.map((page) => {
+        return (
+          <div key={page.id}>
+            {page.id} {page.slug} (
+            {generatePageOriginPath(manager.pageTree, page)})
+          </div>
+        );
+      })}
     </span>
   );
 };
