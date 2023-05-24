@@ -1,6 +1,12 @@
 const themeSemanticTokens = {
     colors: {
         components: {
+            separator: {
+                borderColor: {
+                    default: 'gray.100',
+                    _dark: 'gray.700',
+                },
+            },
             button: {
                 ghost: {
                     hover: {
@@ -147,12 +153,6 @@ const themeSemanticTokens = {
                 default: 'white',
                 _dark: 'gray.800',
             }
-        },
-        separator: {
-            borderColor: {
-                default: 'gray.100',
-                _dark: 'gray.700',
-            },
         },
         topNav: {
             borderColor: {
