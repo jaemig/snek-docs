@@ -3,7 +3,7 @@ import React, { FC, useState } from "react";
 import CodeSnippet from "../../components/main-content/code-snippet/CodeSnippet";
 import Filesystem from "../../components/main-content/filesystem/Filesystem";
 import { TFilesystemItem } from "../../components/main-content/filesystem/filesystem.types";
-import Heading from "../../components/main-content/Heading";
+import Heading from "../../components/main-content/heading/Heading";
 import { MainContentItem, MainContentType } from "./mainContent.types";
 
 const exampleCode = `

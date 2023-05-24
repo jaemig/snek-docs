@@ -1,4 +1,4 @@
-import { IHeadingProps } from "../../components/main-content/Heading";
+import { IHeadingProps } from "../../components/main-content/heading/Heading";
 import { ICodeSnippetProps } from "../../components/main-content/code-snippet/CodeSnippet";
 import { IFileSystemProps } from "../../components/main-content/filesystem/Filesystem";
 

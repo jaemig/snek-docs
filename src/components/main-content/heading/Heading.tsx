@@ -1,6 +1,6 @@
 import { Heading as ChakraHeading, HeadingProps as ChakraHeadingProps, Link, ResponsiveValue, ThemeTypings } from "@chakra-ui/react";
 import React, { Dispatch, FC, ReactNode, SetStateAction } from "react";
-import FaHashtag from "../icons/fontawesome/FaHashtag";
+import FaHashtag from "../../icons/fontawesome/FaHashtag";
 
 // Font sizes for the different heading variants
 const variantFontSizes = {
