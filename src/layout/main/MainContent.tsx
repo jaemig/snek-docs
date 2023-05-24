@@ -1,10 +1,12 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import React, { FC, useState } from "react";
 import CodeSnippet from "../../components/main-content/code-snippet/CodeSnippet";
 import Filesystem from "../../components/main-content/filesystem/Filesystem";
 import { TFilesystemItem } from "../../components/main-content/filesystem/filesystem.types";
 import Heading from "../../components/main-content/heading/Heading";
 import { MainContentItem, MainContentType } from "./mainContent.types";
+import { mainComponentBaseStyle } from "./mainContent.vars";
+import Text from "../../components/main-content/text/text";
 
 const exampleCode = `
 import React from 'react';
@@ -83,13 +85,16 @@ const exampleFsStructure: TFilesystemItem[] = [
   },
 ];
 
-//* This is only an early example and doesnt represent the final structure
-//* in the future, the content coming from the CMS will be in a different format that will be converted to this format
+//* This is only an early example and doesnt represent the final structure - in the future, the content coming from the CMS will be in a different format that will be converted to this something like this
 const exampleContent: MainContentItem[] =[
   {
     type: MainContentType.Heading,
     children: 'The Secret Life of Rubber Ducks',
     variant: 'h1',
+  },
+  {
+    type: MainContentType.Text,
+    children: 'Rubber ducks are not just a fun bath-time companion, they have also been used by researchers to study ocean currents, providing valuable insights into global weather patterns and marine ecology.',
   },
   {
     type: MainContentType.CodeSnippet,
@@ -115,16 +120,18 @@ const exampleContent: MainContentItem[] =[
   }
 ]
 
+
 /**
  * Main content component.
  * This is where the core content of the page goes.
  */
 const MainContent: FC = () => {
 
-  const [activeHeading, setActiveHeading] = useState<number | null>(1);
+  //TODO: This gets reset after clicking on one of the associated links
+  const [activeHeading, setActiveHeading] = useState<number>();
 
-  const handleHeadingClick = (heading: number) => {
-    setActiveHeading(heading);
+  const handleHeadingClick = (index: number) => {
+    setActiveHeading(index);
   }
 
   return (
@@ -141,7 +148,8 @@ const MainContent: FC = () => {
                   id={item.id}
                   activeLink={index === activeHeading}
                   setActiveLink={() => handleHeadingClick(index)}
-                  noSpacing={index === 0}                  
+                  noSpacing={index === 0}
+                  {...mainComponentBaseStyle}
                 >
                   {item.children}
                 </Heading>
@@ -150,25 +158,26 @@ const MainContent: FC = () => {
                   key={index}
                   code={item.code}
                   headerText={item.headerText}
+                  {...mainComponentBaseStyle}
                 />
               case MainContentType.Filesystem:
                 return <Filesystem
                   key={index}
                   structure={item.structure}
+                  {...mainComponentBaseStyle}
                 />
+              case MainContentType.Text:
+                return <Text
+                  key={index}
+                  {...mainComponentBaseStyle}
+                >
+                  {item.children}
+                </Text>
               default:
                 return null;
             }
           })
         }
-          {/* <Heading variant='h1' noSpacing>The Secret Life of Rubber Ducks</Heading>
-          <Text mb={5}>
-          Rubber ducks are not just a fun bath-time companion, they have also been used by researchers to study ocean currents, providing valuable insights into global weather patterns and marine ecology.
-          </Text>
-          <CodeSnippet code={exampleCode} headerText="app.tsx" />
-          <Heading variant='h2' id='filesystem'>Filesystem</Heading>
-          <Heading variant='h3' id='filesystem' activeLink={true} setActiveLink={() => handleHeadingClick(1)}>Example</Heading>
-          <Filesystem structure={exampleFsStructure} /> */}
       </Box>
   )
 }

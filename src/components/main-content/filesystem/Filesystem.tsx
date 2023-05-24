@@ -4,6 +4,8 @@ import { TFilesystemItem } from "./filesystem.types";
 import BsFileEarmark from "../../icons/bootstrap/BsFileEarmark";
 import BsFolder2Open from "../../icons/bootstrap/BsFolder2Open";
 import BsFolder from "../../icons/bootstrap/BsFolder";
+import { IMainContentComponentBaseProps } from "../../../layout/main/mainContent.types";
+import { mainComponentBaseStyle } from "../../../layout/main/mainContent.vars";
 
 interface IFilesystemItemProps {
     item: TFilesystemItem;
@@ -151,18 +153,18 @@ const FilesystemItem: FC<IFilesystemItemProps> = ({ item, intendation, isChild }
     )
 }
 
-export interface IFileSystemProps {
+export interface IFileSystemProps extends IMainContentComponentBaseProps {
     structure: TFilesystemItem[];
 }
 /**
  * Filesystem component for displaying filesystem structures.
  */
-const Filesystem: FC<IFileSystemProps> = ({ structure }) => {
+const Filesystem: FC<IFileSystemProps> = ({ baseProps, structure }) => {
 
     return (
         <Box
+            {...baseProps}
             w='fit-content'
-            mt={5}
             px={5}
             py={3}
             border="1px solid"

@@ -1,6 +1,8 @@
-import { Heading as ChakraHeading, HeadingProps as ChakraHeadingProps, Link, ResponsiveValue, ThemeTypings } from "@chakra-ui/react";
+import { Heading as ChakraHeading, HeadingProps as ChakraHeadingProps, ResponsiveValue, ThemeTypings } from "@chakra-ui/react";
 import React, { Dispatch, FC, ReactNode, SetStateAction } from "react";
 import FaHashtag from "../../icons/fontawesome/FaHashtag";
+import { IMainContentComponentBaseProps } from "../../../layout/main/mainContent.types";
+import Link from "../../Link";
 
 // Font sizes for the different heading variants
 const variantFontSizes = {
@@ -21,7 +23,7 @@ const variantLinkFontSizes = {
     h6: '12',
 }
 
-export interface IHeadingProps {
+export interface IHeadingProps extends IMainContentComponentBaseProps {
     variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
     id?: string;
     noAnchor?: boolean;
@@ -35,13 +37,13 @@ export interface IHeadingProps {
 /**
  * Component for displaying different heading variants and sizes.
  */
-const Heading: FC<IHeadingProps> = ({ variant = 'h2', id, noAnchor, customSpacing, noSpacing, activeLink, setActiveLink, children }) => {
+const Heading: FC<IHeadingProps> = ({ baseProps, variant = 'h2', id, noAnchor, customSpacing, noSpacing, activeLink, setActiveLink, children }) => {
     let props: ChakraHeadingProps = { };
     if (variant === 'h2' ) {
         props = {
             ...props,
             borderBottom: '1px solid',
-            borderColor: 'gray.200',
+            borderColor: 'components.separator.borderColor',
             pb: 2,
         }
     }
@@ -56,11 +58,12 @@ const Heading: FC<IHeadingProps> = ({ variant = 'h2', id, noAnchor, customSpacin
 
     return (
         <ChakraHeading
+            {...baseProps}
             {...props}
             as={variant}
             id={id}
             fontSize={variantFontSizes[variant]}
-            mt={!noSpacing ? (customSpacing ?? 8) : 0}
+            mt={!noSpacing ? (customSpacing ?? baseProps?.marginTop) : 0}
             _hover={{
                 '& a': {
                     opacity: 1,
@@ -71,14 +74,15 @@ const Heading: FC<IHeadingProps> = ({ variant = 'h2', id, noAnchor, customSpacin
             {
                 !noAnchor && id && (
                     <Link
-                        lineHeight={(Number(variantLinkFontSizes[variant]) + 5) + 'px'}
                         href={`#${id}`}
                         aria-label={`Link to ${children}`}
+                        position='relative'
                         ml={1}
                         opacity={activeLink ? 1 : 0}
-                        fontSize={variantLinkFontSizes[variant]}
-                        verticalAlign='top'
                         color='components.heading.link.color.default'
+                        fontSize={variantLinkFontSizes[variant]}
+                        lineHeight={(Number(variantLinkFontSizes[variant]) + 5) + 'px'}
+                        verticalAlign='top'
                         onClick={handleClick}
                     >
                         <FaHashtag />

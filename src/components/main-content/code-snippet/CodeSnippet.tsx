@@ -4,8 +4,10 @@ import "highlight.js/styles/atom-one-dark.css";
 import { CheckIcon, CopyIcon } from "@chakra-ui/icons";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { oneDark, oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { IMainContentComponentBaseProps } from "../../../layout/main/mainContent.types";
+import { mainComponentBaseStyle } from "../../../layout/main/mainContent.vars";
 
-export interface ICodeSnippetProps {
+export interface ICodeSnippetProps extends IMainContentComponentBaseProps {
     code: string;
     headerText?: string;
     startingLineNumber?: number;
@@ -16,7 +18,7 @@ let timeout: NodeJS.Timeout;
 /**
  * Code snippet component for displaying code examples.
  */
-const CodeSnippet: FC<ICodeSnippetProps> = ({ code, headerText, startingLineNumber = 1, }) => {
+const CodeSnippet: FC<ICodeSnippetProps> = ({ baseProps, code, headerText, startingLineNumber = 1, }) => {
   const [buttonIcon, setButtonIcon] = React.useState<'copy' | 'check'>('copy');
   const theme = useColorModeValue(oneLight, oneDark);
 
@@ -31,6 +33,7 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({ code, headerText, startingLineNumb
 
     return (
       <Box
+        {...baseProps}
         w={{ base: 'calc(100vw - 3.5rem)', md: 'auto' }}
         overflow='hidden'
         border='1px solid'
