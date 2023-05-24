@@ -29,7 +29,7 @@ const NavbarControls: FC<NavbarControlsProps> = ({ isMobile = false, isExpanded,
         <Flex
             w='100%'
             borderTop={isExpanded ? '1px solid' : undefined }
-            borderTopColor='separator.borderColor'
+            borderTopColor='components.separator.borderColor'
             pt={5}
             pb={isMobile ? 5 : 0}
             gap={3}

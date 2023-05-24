@@ -119,7 +119,7 @@ const RightNav: FC = () => {
                 mt={7}
                 pt={7}
                 borderTop='1px solid'
-                borderTopColor='separator.borderColor'
+                borderTopColor='components.separator.borderColor'
                 fontSize='xs'
             >
                 <VStack rowGap={1} textAlign='left'>

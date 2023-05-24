@@ -27,7 +27,7 @@ const MainBottomNav: FC<MainBottomNavProps> = ({ previousPage, nextPage }) => {
     return (
         <Flex
             borderTop='1px solid'
-            borderColor='separator.borderColor'
+            borderColor='components.separator.borderColor'
             mt={10}
             pt={5}
             pb='8px' // This is to make the nav controls align with the bottom of this nav
