@@ -6,7 +6,8 @@ import { TFilesystemItem } from "../../components/main-content/filesystem/filesy
 import Heading from "../../components/main-content/heading/Heading";
 import { MainContentItem, MainContentType } from "./mainContent.types";
 import { mainComponentBaseStyle } from "./mainContent.vars";
-import Text from "../../components/main-content/text/text";
+import Text from "../../components/main-content/text/Text";
+import List from "../../components/main-content/list/List";
 
 const exampleCode = `
 import React from 'react';
@@ -117,7 +118,30 @@ const exampleContent: MainContentItem[] =[
   {
     type: MainContentType.Filesystem,
     structure: exampleFsStructure,
-  }
+  },
+  {
+    type: MainContentType.List,
+    variant: 'unordered',
+    items: [
+      {
+        text: 'Item 1',
+        children: [
+          {
+            text: 'Item 1.1',
+          },
+          {
+            text: 'Item 1.2',
+          },
+        ],
+      },
+      {
+        text: 'Item 2',
+      },
+      {
+        text: 'Item 3',
+      },
+    ],
+  },
 ]
 
 
@@ -173,6 +197,13 @@ const MainContent: FC = () => {
                 >
                   {item.children}
                 </Text>
+              case MainContentType.List:
+                return <List
+                  key={index}
+                  variant={item.variant}
+                  items={item.items}
+                  {...mainComponentBaseStyle}
+                />
               default:
                 return null;
             }
