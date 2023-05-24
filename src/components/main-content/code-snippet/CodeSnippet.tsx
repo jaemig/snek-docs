@@ -5,7 +5,7 @@ import { CheckIcon, CopyIcon } from "@chakra-ui/icons";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { oneDark, oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-interface CodeSnippetProps {
+export interface ICodeSnippetProps {
     code: string;
     headerText?: string;
     startingLineNumber?: number;
@@ -16,7 +16,7 @@ let timeout: NodeJS.Timeout;
 /**
  * Code snippet component for displaying code examples.
  */
-const CodeSnippet: FC<CodeSnippetProps> = ({ code, headerText, startingLineNumber = 1, }) => {
+const CodeSnippet: FC<ICodeSnippetProps> = ({ code, headerText, startingLineNumber = 1, }) => {
   const [buttonIcon, setButtonIcon] = React.useState<'copy' | 'check'>('copy');
   const theme = useColorModeValue(oneLight, oneDark);
 

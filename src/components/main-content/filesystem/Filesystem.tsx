@@ -5,7 +5,7 @@ import BsFileEarmark from "../../icons/bootstrap/BsFileEarmark";
 import BsFolder2Open from "../../icons/bootstrap/BsFolder2Open";
 import BsFolder from "../../icons/bootstrap/BsFolder";
 
-interface FilesystemItemProps {
+interface IFilesystemItemProps {
     item: TFilesystemItem;
     intendation: number;
     isChild?: boolean;
@@ -13,7 +13,7 @@ interface FilesystemItemProps {
 /**
  * A single item in the filesystem
  */
-const FilesystemItem: FC<FilesystemItemProps> = ({ item, intendation, isChild }) => {
+const FilesystemItem: FC<IFilesystemItemProps> = ({ item, intendation, isChild }) => {
     const isFolder = item.type === 'folder';
 
     const [showChildren, setShowChildren] = useState(isFolder && (item.defaultOpen ?? true));
@@ -151,13 +151,13 @@ const FilesystemItem: FC<FilesystemItemProps> = ({ item, intendation, isChild })
     )
 }
 
-interface FileSystemProps {
+export interface IFileSystemProps {
     structure: TFilesystemItem[];
 }
 /**
  * Filesystem component for displaying filesystem structures.
  */
-const Filesystem: FC<FileSystemProps> = ({ structure }) => {
+const Filesystem: FC<IFileSystemProps> = ({ structure }) => {
 
     return (
         <Box
