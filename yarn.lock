@@ -5601,9 +5601,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@snek-at/jaen@npm:^0.0.50":
-  version: 0.0.50
-  resolution: "@snek-at/jaen@npm:0.0.50"
+"@snek-at/jaen@npm:^0.0.57":
+  version: 0.0.57
+  resolution: "@snek-at/jaen@npm:0.0.57"
   dependencies:
     "@chakra-ui/icons": ^2.0.18
     "@chakra-ui/pro-theme": ^0.0.64
@@ -5638,6 +5638,7 @@ __metadata:
     react-helmet-async: ^1.3.0
     react-hook-form: ^7.39.5
     react-icons: ^4.6.0
+    react-photo-view: ^1.2.3
     react-redux: ^8.0.4
     react-router-dom: ^6.4.2
     react-syntax-highlighter: ^15.5.0
@@ -5667,7 +5668,7 @@ __metadata:
     react-dom: ^18.2.0
   bin:
     jaen: dist/index.cli.mjs
-  checksum: 5d2b690932f0e32a9802532b1f35661672bdf612eee4eb8dfef7e46b534ab3614431f33b2cd90948d491ef5165e4e1fefa4731c8ce3ac314adf40204ba9bdca7
+  checksum: e8c304f729bed75cdff83d0e72437b62ba75491593c1aa15f7a547dceb558d1712b0aa490a716138c27472ba60b6095392bb8c77d34b1f02813799cee982460c
   languageName: node
   linkType: hard
 
@@ -17753,6 +17754,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-photo-view@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "react-photo-view@npm:1.2.3"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 0ff8b4b9ff35acd2e756e11e221af2f9e30eb9f9bbec3ddab7f76fd1fd334a8e0222f24343f412e055daa7fa94de1e3f1f0dc1f81c9e6f249c0eece425af0717
+  languageName: node
+  linkType: hard
+
 "react-reconciler@npm:~0.29.0":
   version: 0.29.0
   resolution: "react-reconciler@npm:0.29.0"
@@ -19022,7 +19033,7 @@ __metadata:
     "@chakra-ui/theme-tools": ^2.0.16
     "@emotion/react": ^11.10.8
     "@emotion/styled": ^11.10.8
-    "@snek-at/jaen": ^0.0.50
+    "@snek-at/jaen": ^0.0.57
     "@types/node": ^18.16.2
     "@types/react": ^18.2.0
     "@types/react-dom": ^18.2.1
