@@ -8,8 +8,11 @@ import MainWrapper from "../layout/main/MainWrapper";
 import theme from "../theme/theme";
 import AppLayout from "../layout/AppLayout";
 import { connectTemplate, Field } from "@snek-at/jaen";
+import Heading from "../components/main-content/heading/Heading";
+import CodeSnippet from "../components/main-content/code-snippet/CodeSnippet";
+import Text from "../components/main-content/text/Text";
+import Filesystem from "../components/main-content/filesystem/Filesystem";
 
-//TODO: Outsource the link style to the chakra theme
 const DocsPage = connectTemplate(
   () => {
     return (
@@ -40,21 +43,16 @@ const DocsPage = connectTemplate(
             <Field.Mdx
               name="documentation"
               components={{
-                p: (props) => <chakra.p fontSize="sm" color="red" {...props} />,
-                h1: (props) => (
-                  <chakra.h1
-                    fontSize="2xl"
-                    borderBottom="1px solid blue"
-                    {...props}
-                  />
-                ),
-                h2: (props) => (
-                  <chakra.h2 fontSize="xl" color="aqua" {...props} />
-                ),
-                h3: (props) => <chakra.h3 fontSize="lg" {...props} />,
-                h4: (props) => <chakra.h4 fontSize="md" {...props} />,
+                p: (props) => <Text {...props} />,
+                h1: (props) => <Heading variant="h1" {...props} />,
+                h2: (props) => <Heading variant='h2' {...props} />,
+                h3: (props) => <Heading variant='h3' {...props} />,
+                h4: (props) => <Heading variant='h4' {...props} />,
+                h5: (props) => <Heading variant='h5' {...props} />,
+                h6: (props) => <Heading variant='h6' {...props} />,
+                CodeSnippet,
+                Filesystem,
               }}
-              defaultValue={undefined}
             />
           </Box>
           <Box position="sticky" top="80px">

@@ -1,6 +1,6 @@
 import React from "react";
 import { HeadFC, graphql } from "gatsby";
-import { Box, ChakraProvider, Flex, Grid } from "@chakra-ui/react";
+import { Box, ChakraProvider, Flex, Grid, Text } from "@chakra-ui/react";
 import TopNav from "../layout/navigation/TopNav";
 import LeftNav from "../layout/navigation/LeftNav";
 import RightNav from "../layout/navigation/RightNav";
@@ -28,7 +28,7 @@ const PageTree = () => {
         return (
           <div key={page.id}>
             {page.id} {page.slug} (
-            {generatePageOriginPath(manager.pageTree, page)})
+              {generatePageOriginPath(manager.pageTree, page)})
           </div>
         );
       })}

@@ -153,17 +153,16 @@ const FilesystemItem: FC<IFilesystemItemProps> = ({ item, intendation, isChild }
     )
 }
 
-export interface IFileSystemProps extends IMainContentComponentBaseProps {
+export interface IFileSystemProps {
     structure: TFilesystemItem[];
 }
 /**
  * Filesystem component for displaying filesystem structures.
  */
-const Filesystem: FC<IFileSystemProps> = ({ baseProps, structure }) => {
-
+const Filesystem: FC<IFileSystemProps> = ({ structure }) => {
     return (
         <Box
-            {...baseProps}
+            {...mainComponentBaseStyle.baseProps}
             w='fit-content'
             px={5}
             py={3}
@@ -178,10 +177,11 @@ const Filesystem: FC<IFileSystemProps> = ({ baseProps, structure }) => {
             transition='box-shadow 0.2s ease-in-out'
         >
             {
-                structure.map((item, i) => <FilesystemItem item={item} intendation={0} key={i} />)
+                structure && Array.isArray(structure) && structure?.map((item, i) => <FilesystemItem item={item} intendation={0} key={i} />)
             }
         </Box>
     )
 };
+Filesystem.defaultProps = {};
 
 export default Filesystem;

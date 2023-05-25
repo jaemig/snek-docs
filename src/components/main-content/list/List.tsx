@@ -20,7 +20,7 @@ const List: FC<IListProps> = ({ baseProps, variant, items }) => {
     if (variant === 'ordered') ListComp = OrderedList;
 
     return (
-        <ListComp {...baseProps}>
+        <ListComp {...baseProps} styleType='disc'>
             {items.map((item, index) => (
                 <ChList key={index}>
                     <ListItem>{item.text}</ListItem>

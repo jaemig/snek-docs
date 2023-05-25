@@ -3,6 +3,7 @@ import React, { Dispatch, FC, ReactNode, SetStateAction } from "react";
 import FaHashtag from "../../icons/fontawesome/FaHashtag";
 import { IMainContentComponentBaseProps } from "../../../layout/main/mainContent.types";
 import Link from "../../Link";
+import { mainComponentBaseStyle } from "../../../layout/main/mainContent.vars";
 
 // Font sizes for the different heading variants
 const variantFontSizes = {
@@ -31,7 +32,7 @@ export interface IHeadingProps extends IMainContentComponentBaseProps {
     noSpacing?: boolean;
     activeLink?: boolean;
     setActiveLink?: () => void;
-    children: ReactNode;
+    children?: ReactNode;
 }
 
 /**
@@ -91,6 +92,9 @@ const Heading: FC<IHeadingProps> = ({ baseProps, variant = 'h2', id, noAnchor, c
             }
         </ChakraHeading>
     )
+}
+Heading.defaultProps = {
+    baseProps: mainComponentBaseStyle.baseProps,
 }
 
 export default Heading;

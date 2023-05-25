@@ -8,7 +8,7 @@ import { IMainContentComponentBaseProps } from "../../../layout/main/mainContent
 import { mainComponentBaseStyle } from "../../../layout/main/mainContent.vars";
 
 export interface ICodeSnippetProps extends IMainContentComponentBaseProps {
-    code: string;
+    code?: string;
     headerText?: string;
     startingLineNumber?: number;
 }
@@ -94,7 +94,7 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({ baseProps, code, headerText, start
                 showLineNumbers
                 wrapLongLines
               >
-                { code }
+                { code ?? '' }
               </SyntaxHighlighter>
               <IconButton
                 position='absolute'
@@ -112,6 +112,11 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({ baseProps, code, headerText, start
         </Box>
       </Box>
     )
+}
+CodeSnippet.defaultProps = {
+  code: '',
+  headerText: 'javascript',
+  startingLineNumber: 1,
 }
 
 export default CodeSnippet;
