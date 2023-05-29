@@ -12,9 +12,12 @@ import Heading from "../components/main-content/heading/Heading";
 import CodeSnippet from "../components/main-content/code-snippet/CodeSnippet";
 import Text from "../components/main-content/text/Text";
 import Filesystem from "../components/main-content/filesystem/Filesystem";
+import { useTocNavigation } from "../hooks/use-toc-navigation";
 
 const DocsPage = connectTemplate(
   () => {
+    const tableOfContent = useTocNavigation("documentation");
+
     return (
       <AppLayout>
         <Grid
@@ -45,17 +48,18 @@ const DocsPage = connectTemplate(
               components={{
                 p: (props) => <Text {...props} />,
                 h1: (props) => <Heading variant="h1" {...props} />,
-                h2: (props) => <Heading variant='h2' {...props} />,
-                h3: (props) => <Heading variant='h3' {...props} />,
-                h4: (props) => <Heading variant='h4' {...props} />,
-                h5: (props) => <Heading variant='h5' {...props} />,
-                h6: (props) => <Heading variant='h6' {...props} />,
+                h2: (props) => <Heading variant="h2" {...props} />,
+                h3: (props) => <Heading variant="h3" {...props} />,
+                h4: (props) => <Heading variant="h4" {...props} />,
+                h5: (props) => <Heading variant="h5" {...props} />,
+                h6: (props) => <Heading variant="h6" {...props} />,
                 CodeSnippet,
                 Filesystem,
               }}
             />
           </Box>
           <Box position="sticky" top="80px">
+            <span>{JSON.stringify(tableOfContent, null, 2)}</span>;
             <RightNav />
           </Box>
         </Grid>
