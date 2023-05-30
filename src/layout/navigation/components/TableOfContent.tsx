@@ -23,7 +23,7 @@ const TableOfContent: FC = ({ }) => {
                     >
                         <Link
                             href={'#' + item.id}
-                            paddingLeft={item.level * 4}
+                            paddingLeft={(item.level - 1) * 4}
                             opacity={isActive ? 1 : 0.7}
                             color={`rightNav.link.${isActive ? 'active' : 'inactive'}.color`}
                             fontWeight={isActive ? 'semibold' : 'normal'}
