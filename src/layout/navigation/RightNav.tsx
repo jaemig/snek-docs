@@ -80,7 +80,7 @@ const generateMenuItem = (item: NavMenuItem, intendation: number = 0) => {
     )
 };
 
-// Example links - these would be fetched from a CMS or other data source
+// Example links - these would probably be fetched from a CMS or other data source
 const links = [
     {
         name: 'Question? Give us feedback',
