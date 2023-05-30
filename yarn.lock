@@ -5601,9 +5601,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@snek-at/jaen@npm:^0.0.57":
-  version: 0.0.57
-  resolution: "@snek-at/jaen@npm:0.0.57"
+"@snek-at/jaen@npm:^0.0.64":
+  version: 0.0.64
+  resolution: "@snek-at/jaen@npm:0.0.64"
   dependencies:
     "@chakra-ui/icons": ^2.0.18
     "@chakra-ui/pro-theme": ^0.0.64
@@ -5618,7 +5618,7 @@ __metadata:
     "@mdx-js/mdx": ^2.3.0
     "@reach/router": ^1.3.4
     "@reduxjs/toolkit": ^1.8.6
-    "@snek-at/snek-finder": ^1.0.0-beta.23
+    "@snek-at/snek-finder": ^1.0.0-beta.25
     "@snek-functions/origin": ^0.2.3
     ahooks: ^3.7.7
     codemirror: ^6.0.1
@@ -5668,13 +5668,13 @@ __metadata:
     react-dom: ^18.2.0
   bin:
     jaen: dist/index.cli.mjs
-  checksum: e8c304f729bed75cdff83d0e72437b62ba75491593c1aa15f7a547dceb558d1712b0aa490a716138c27472ba60b6095392bb8c77d34b1f02813799cee982460c
+  checksum: acaa3782767da0f34062ae848a57205c941cfe6dbf859a7b80e87ceadff9fae4662385441c749e60a2f8b3b20da783e5e91def89c0a2f8553ae4032d8c652e99
   languageName: node
   linkType: hard
 
-"@snek-at/snek-finder@npm:^1.0.0-beta.23":
-  version: 1.0.0-beta.23
-  resolution: "@snek-at/snek-finder@npm:1.0.0-beta.23"
+"@snek-at/snek-finder@npm:^1.0.0-beta.25":
+  version: 1.0.0-beta.25
+  resolution: "@snek-at/snek-finder@npm:1.0.0-beta.25"
   dependencies:
     "@chakra-ui/icons": ^2
     "@chakra-ui/react": ^2.5.5
@@ -5701,7 +5701,7 @@ __metadata:
   dependenciesMeta:
     ipfs-http-client:
       optional: true
-  checksum: 82293461b1fc82c505edb4bae1e0fe421e7df481c5e0891308b56e7dfad27cac8906c15e647663143c077812e52700c585a5aa1eb8fdb0e5a32f057335b450f3
+  checksum: 74361d37a8ae788604fb0c533157b008f8515ca4bd1c604de53a2d9ff1650c7323ed2000bbf41e983c6a4aaf4e47ad1c5dc0d2ba7e489ec03fbdab1ad1500dcd
   languageName: node
   linkType: hard
 
@@ -19033,7 +19033,7 @@ __metadata:
     "@chakra-ui/theme-tools": ^2.0.16
     "@emotion/react": ^11.10.8
     "@emotion/styled": ^11.10.8
-    "@snek-at/jaen": ^0.0.57
+    "@snek-at/jaen": ^0.0.64
     "@types/node": ^18.16.2
     "@types/react": ^18.2.0
     "@types/react-dom": ^18.2.1
