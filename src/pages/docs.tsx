@@ -4,7 +4,6 @@ import { Box, ChakraProvider, Flex, Grid, Text } from "@chakra-ui/react";
 import TopNav from "../layout/navigation/TopNav";
 import LeftNav from "../layout/navigation/LeftNav";
 import RightNav from "../layout/navigation/RightNav";
-import MainWrapper from "../layout/main/MainWrapper";
 import theme from "../theme/theme";
 import AppLayout from "../layout/AppLayout";
 import {
@@ -65,7 +64,6 @@ const DocsPage = connectPage(
           >
             <LeftNav />
           </Box>
-          <MainWrapper />
           <Box position="sticky" top="80px">
             <RightNav />
           </Box>
