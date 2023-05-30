@@ -1,8 +1,9 @@
 import React, { FC } from "react";
 import { Box, Flex, Link, Text, VStack } from "@chakra-ui/react";
-import { NavMenuItem } from "./navigation.types";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import MemoizedLinks from "../../components/MemoizedLink";
+import TableOfContent from "./components/TableOfContent";
+import { NavMenuItem } from "../../types/navigation";
 
 // Example menu structure - this would be fetched from a CMS or other data source
 const menuStructure: NavMenuItem[] = [
@@ -94,7 +95,7 @@ const links = [
 /**
  * Right navigation bar.
  */
-const RightNav: FC = () => {
+const RightNav: FC = ({  }) => {
     return (
         <Box
             position='sticky'
@@ -113,7 +114,8 @@ const RightNav: FC = () => {
                 direction='column'
                 mt={5}
             >
-                {menuStructure.map((item) => generateMenuItem(item))}
+                <TableOfContent />
+                {/* {menuStructure.map((item) => generateMenuItem(item))} */}
             </Flex>
             <Box
                 mt={7}

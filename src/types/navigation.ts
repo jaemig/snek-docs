@@ -12,8 +12,15 @@ export type NavMenuSection = {
     items: NavMenuItem[];
 }
 
+// TODO: This can be removed once the real navigation is in place
 export type LinkData = {
     name: string;
     href: string;
     isActive?: boolean;
+}
+
+export type TableOfContentItem = {
+    id: string;
+    level: number;
+    text: string;
 }

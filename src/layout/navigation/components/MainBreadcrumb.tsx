@@ -30,6 +30,7 @@ const MainBreadcrumb: FC = () => {
                 fontSize='sm'
                 w='100%'
                 overflowX='auto'
+                mb={5}
             >
                 {breadCrumbParts.map((item, i) => {
                     const props: BreadcrumbLinkProps = {};

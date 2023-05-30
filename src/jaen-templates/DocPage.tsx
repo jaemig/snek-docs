@@ -4,7 +4,6 @@ import { Box, ChakraProvider, Flex, Grid, chakra } from "@chakra-ui/react";
 import TopNav from "../layout/navigation/TopNav";
 import LeftNav from "../layout/navigation/LeftNav";
 import RightNav from "../layout/navigation/RightNav";
-import MainWrapper from "../layout/main/MainWrapper";
 import theme from "../theme/theme";
 import AppLayout from "../layout/AppLayout";
 import { connectTemplate, Field } from "@snek-at/jaen";
@@ -16,6 +15,7 @@ import { useTocNavigation } from "../hooks/use-toc-navigation";
 import Link from "../components/Link";
 import List from "../components/main-content/list/List";
 import ListItem from "../components/main-content/list/ListItem";
+import MainBreadcrumb from "../layout/navigation/components/MainBreadcrumb";
 
 const DocsPage = connectTemplate(
   () => {
@@ -46,6 +46,7 @@ const DocsPage = connectTemplate(
             <LeftNav />
           </Box>
           <Box w="800px">
+            <MainBreadcrumb />
             <Field.Mdx
               name="documentation"
               components={{
