@@ -62,7 +62,7 @@ const DocsPage = connectTemplate(
                 ul: (props: any) => <List {...props}></List>,
                 ol: (props: any) => <List variant="ordered" {...props}></List>,
                 li: (props: any) => <ListItem {...props}></ListItem>,
-                a: (props: any) => <Link href={props.href} label={props.children} />,
+                a: (props: any) => <Link href={props.href} {...props} />,
                 // MISC
                 code: (props: any) => {
                   const lang = props.className?.replace('language-', '');
@@ -76,7 +76,6 @@ const DocsPage = connectTemplate(
             />
           </Box>
           <Box position="sticky" top="80px">
-            <span>{JSON.stringify(tableOfContent, null, 2)}</span>;
             <RightNav />
           </Box>
         </Grid>
