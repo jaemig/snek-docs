@@ -6,11 +6,7 @@ import NavbarControls from "./components/NavbarControls";
 /**
  * Left navigation bar.
  */
-interface LeftNavProps {
-    isMobile?: boolean;
-}
-
-const LeftNav: FC<LeftNavProps> = ({ isMobile }) => {
+const LeftNav: FC = () => {
     const [isExpanded, setIsExpanded] = useState(true);
 
     return (
