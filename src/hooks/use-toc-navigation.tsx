@@ -22,7 +22,7 @@ export const useTocNavigation = (mdxFieldName: string) => {
     value.children.forEach((node) => {
       if (node.type === "heading") {
         // @ts-expect-error
-        const text = node.children[0].value;
+        const text = node.children[0]?.value || "";
         let id = text.toLowerCase().replace(/ /g, "-");
 
         if (takenIds[id]) {
