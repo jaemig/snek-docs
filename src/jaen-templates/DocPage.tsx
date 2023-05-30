@@ -13,6 +13,9 @@ import CodeSnippet from "../components/main-content/code-snippet/CodeSnippet";
 import Text from "../components/main-content/text/Text";
 import Filesystem from "../components/main-content/filesystem/Filesystem";
 import { useTocNavigation } from "../hooks/use-toc-navigation";
+import Link from "../components/Link";
+import List from "../components/main-content/list/List";
+import ListItem from "../components/main-content/list/ListItem";
 
 const DocsPage = connectTemplate(
   () => {
@@ -46,6 +49,7 @@ const DocsPage = connectTemplate(
             <Field.Mdx
               name="documentation"
               components={{
+                // TEXT
                 p: (props) => <Text {...props} />,
                 h1: (props) => <Heading variant="h1" {...props} />,
                 h2: (props) => <Heading variant="h2" {...props} />,
@@ -53,6 +57,18 @@ const DocsPage = connectTemplate(
                 h4: (props) => <Heading variant="h4" {...props} />,
                 h5: (props) => <Heading variant="h5" {...props} />,
                 h6: (props) => <Heading variant="h6" {...props} />,
+                // LIST
+                ul: (props: any) => <List {...props}></List>,
+                ol: (props: any) => <List variant="ordered" {...props}></List>,
+                li: (props: any) => <ListItem {...props}></ListItem>,
+                a: (props: any) => <Link href={props.href} label={props.children} />,
+                // MISC
+                code: (props: any) => {
+                  const lang = props.className?.replace('language-', '');
+                  const code = props.children;
+                  return <CodeSnippet language={lang} code={code} {...props} />;
+                },
+                // CUSTOM COMPONENTS
                 CodeSnippet,
                 Filesystem,
               }}

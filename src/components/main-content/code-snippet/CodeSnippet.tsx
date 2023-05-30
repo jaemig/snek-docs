@@ -9,6 +9,7 @@ import { mainComponentBaseStyle } from "../../../layout/main/mainContent.vars";
 
 export interface ICodeSnippetProps extends IMainContentComponentBaseProps {
     code?: string;
+    language?: string;
     headerText?: string;
     startingLineNumber?: number;
 }
@@ -18,7 +19,7 @@ let timeout: NodeJS.Timeout;
 /**
  * Code snippet component for displaying code examples.
  */
-const CodeSnippet: FC<ICodeSnippetProps> = ({ baseProps, code, headerText, startingLineNumber = 1, }) => {
+const CodeSnippet: FC<ICodeSnippetProps> = ({ code, language, headerText, startingLineNumber = 1, }) => {
   const [buttonIcon, setButtonIcon] = React.useState<'copy' | 'check'>('copy');
   const theme = useColorModeValue(oneLight, oneDark);
 
@@ -33,7 +34,7 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({ baseProps, code, headerText, start
 
     return (
       <Box
-        {...baseProps}
+        {...mainComponentBaseStyle.baseProps}
         w={{ base: 'calc(100vw - 3.5rem)', md: 'auto' }}
         overflow='hidden'
         border='1px solid'
@@ -88,7 +89,7 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({ baseProps, code, headerText, start
               position='relative'
             >
               <SyntaxHighlighter 
-                language="javascript"
+                language={language}
                 style={theme}
                 startingLineNumber={startingLineNumber}
                 showLineNumbers
@@ -115,7 +116,7 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({ baseProps, code, headerText, start
 }
 CodeSnippet.defaultProps = {
   code: '',
-  headerText: 'javascript',
+  headerText: undefined,
   startingLineNumber: 1,
 }
 

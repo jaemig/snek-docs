@@ -24,3 +24,20 @@ export function getPlatform() {
 export function isTouchDevice() {
     return 'ontouchstart' in window || navigator.maxTouchPoints;
 }
+
+/**
+ *  Checks if the link is internal or external
+ * @param href  - The href of the link
+ * @returns   - Whether the link is internal or not
+ */
+export function isInternalLink(href: string) {
+    let urlObj: URL;
+    try {
+        urlObj = new URL(href);
+    } catch (e) {
+        return false; // If the URL is invalid, it is treated as an external link
+    }
+
+    // If the hostname is the same as the current hostname, it's an internal link
+    return urlObj.hostname === window.location.hostname;
+}
