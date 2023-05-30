@@ -99,7 +99,7 @@ const MemoizedColorModeMenuItems = React.memo<{currentColorMode: ColorMode, togg
                             key={i}
                             position='relative'
                             disabled={isCurrentColorMode}
-                            onClick={!isCurrentColorMode && mode !== 'System' ? toggleColorMode : undefined}
+                            onClick={!isCurrentColorMode && mode === 'light' ? toggleColorMode : undefined}
                         >
                             { mode }
                             { 
