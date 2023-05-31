@@ -45,7 +45,7 @@ const DocsPage = connectTemplate(
           >
             <LeftNav />
           </Box>
-          <Box w="800px">
+          <Box maxW="700px">
             <MainBreadcrumb />
             <Field.Mdx
               name="documentation"
