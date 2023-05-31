@@ -1,5 +1,5 @@
 import { Accordion, AccordionButton, AccordionButtonProps, AccordionIcon, AccordionItem, AccordionPanel, Center, CenterProps, Link, LinkProps, Box } from "@chakra-ui/react";
-import React, { FC, Fragment, useEffect } from "react";
+import React, { FC, Fragment, useEffect, useState } from "react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { NavMenuSection, NavMenuItem } from "../../../types/navigation";
 
@@ -141,7 +141,7 @@ const generateMenuItem = (item: NavMenuItem, isMobile: boolean, closeMobileDrawe
                 key={currentIdx}
                 css={{
                     // Remove padding from last accordion item
-                    '&:last-child .chakra-collapse .chakra-accordion__panel':  {
+                    '& .chakra-accordion__panel':  {
                         'paddingBottom': 0,
                     },
                 }}
@@ -195,7 +195,7 @@ const generateMenuItem = (item: NavMenuItem, isMobile: boolean, closeMobileDrawe
                                     borderRadius: 'full',
                                     left: '10px',
                                     width: '1px',
-                                    height: '100%',
+                                    height: 'calc(100% - 0.5rem)',
                                     backgroundColor: 'leftNav.accordion.panel.borderLeftColor',
                                 }}
                             >
