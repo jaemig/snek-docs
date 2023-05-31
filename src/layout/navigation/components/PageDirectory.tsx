@@ -1,7 +1,7 @@
 import { Accordion, AccordionButton, AccordionButtonProps, AccordionIcon, AccordionItem, AccordionPanel, Center, CenterProps, Link, LinkProps, Box } from "@chakra-ui/react";
 import React, { FC, Fragment, useEffect } from "react";
-import { NavMenuItem, NavMenuSection } from "../navigation.types";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { NavMenuSection, NavMenuItem } from "../../../types/navigation";
 
 // Example menu structure - this would be fetched from a CMS
 const menuStructure: NavMenuSection[] = [
