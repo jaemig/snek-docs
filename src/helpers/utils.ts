@@ -33,7 +33,7 @@ export function isTouchDevice() {
 export function isInternalLink(href: string) {
     let urlObj: URL;
     try {
-        urlObj = new URL(href);
+        urlObj = new URL(href, window.location.origin);
     } catch (e) {
         return false; // If the URL is invalid, it is treated as an external link
     }
