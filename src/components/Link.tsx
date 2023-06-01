@@ -1,11 +1,11 @@
 import { Link as ChLink, LinkOverlayProps, LinkProps } from "@chakra-ui/react";
 import { Link as GaLink } from "gatsby";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { isInternalLink } from "../helpers/utils";
 
 interface GatsbyLinkProps extends LinkOverlayProps {
     href?: string;
-    children?: string;
+    children?: ReactNode;
 }
 
 /**
@@ -19,7 +19,7 @@ const Link: FC<GatsbyLinkProps> = ({ href = '#', ...props }) => {
     }
 
     if (isInternalLink(href)) {
-        return <ChLink {...baseProps} as={GaLink} {...props}></ChLink>
+        return <ChLink {...baseProps} to={href} as={GaLink} {...props}></ChLink>
     }
     return <ChLink {...baseProps} href={href} {...props}></ChLink>
 }
