@@ -1,7 +1,9 @@
-import { Accordion, AccordionButton, AccordionButtonProps, AccordionIcon, AccordionItem, AccordionPanel, Center, CenterProps, Link, LinkProps, Box } from "@chakra-ui/react";
-import React, { FC, Fragment, useEffect, useState } from "react";
+import { Accordion, AccordionButton, AccordionButtonProps, AccordionIcon, AccordionItem, AccordionPanel, Center, CenterProps, LinkProps, Box, useAccordionItem } from "@chakra-ui/react";
+import React, { FC, Fragment, useEffect, useMemo, MouseEvent } from "react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { NavMenuSection, NavMenuItem } from "../../../types/navigation";
+import { IJaenPage, usePageManager } from "@snek-at/jaen";
+import Link from "../../../components/Link";
 
 // Example menu structure - this would be fetched from a CMS
 const menuStructure: NavMenuSection[] = [
@@ -78,6 +80,9 @@ const menuStructure: NavMenuSection[] = [
             }
         ],
     },
+];
+
+const baseMenuItems: NavMenuSection[] = [
     {
         name: 'More',
         items: [
@@ -92,7 +97,7 @@ const menuStructure: NavMenuSection[] = [
             },
         ],      
     },
-];
+]
 
 const baseMenuItemProps = {
     transition: 'opacity 0.2s ease-in-out, background-color 0.2s ease-in-out',
@@ -111,7 +116,18 @@ const activeMenuItemProps = {
     fontWeight: 'bold',
 };
 
-let menuIdx = 0; // Used to generate unique keys for menu items
+/**
+ * Handles clicks on links in the main navigation menu. If the target is not an anchor element, the default action is prevented, which prevents the page from reloading.
+ * @param ev  The click event that triggered the handler
+ */
+const linkClickHandler = (ev: MouseEvent<HTMLAnchorElement>) => {
+    if (ev.target instanceof HTMLAnchorElement || 
+        ev.target instanceof HTMLButtonElement || 
+        ev.target instanceof HTMLSpanElement
+    ) return;
+    ev.preventDefault()
+}
+
 /**
  * Generates a menu item for the main navigation menu.
  * @param item  The menu item to generate
@@ -132,13 +148,12 @@ const generateMenuItem = (item: NavMenuItem, isMobile: boolean, closeMobileDrawe
     // Check if the item has children and is not a section (except on mobile)
     const hasChildren = item.children && item.children.length > 0 && (isMobile || item.children.some(child => !child.isSection));
 
-    const currentIdx = menuIdx++; // Pre-save the current index so it doesn't change when rendering the children
     if (hasChildren) {
         const children = item.children?.map(child => generateMenuItem(child, isMobile, closeMobileDrawer));
         const semanticPath = `leftNav.accordion.${item.isActive ? '' : 'in'}activeItem.`;
         return (
             <AccordionItem
-                key={currentIdx}
+                key={item.href + item.name}
                 css={{
                     // Remove padding from last accordion item
                     '& .chakra-accordion__panel':  {
@@ -150,12 +165,14 @@ const generateMenuItem = (item: NavMenuItem, isMobile: boolean, closeMobileDrawe
             >
                 {({ isExpanded }) => (
                     <>
+                    <Link 
+                        href={item.href}
+                        onClick={linkClickHandler}
+                    >
                         <AccordionButton
                             {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
                             {...styleProps}
-                            as={Link}
-                            href={item.href}
-                            isExternal={item.isExternal}
+                            // isExternal={item.isExternal}
                             borderRadius='md'
                             py={1.5}
                             backgroundColor={item.isActive ? (semanticPath + 'bgColor') : undefined}
@@ -178,11 +195,13 @@ const generateMenuItem = (item: NavMenuItem, isMobile: boolean, closeMobileDrawe
                                 }}
                             >
                                 <AccordionIcon
+                                    className='prv-link'
                                     opacity='inherit'
                                     transform={`rotate(${isExpanded ? 0 : -90}deg)`}
                                 />
                             </Center>
                         </AccordionButton>
+                    </Link>
                         <AccordionPanel
                                 position='relative'
                         >
@@ -211,7 +230,7 @@ const generateMenuItem = (item: NavMenuItem, isMobile: boolean, closeMobileDrawe
         <Link
             {...item.isActive ? activeMenuItemProps : inactiveMenuItemProps}
             {...styleProps}
-            key={currentIdx}
+            key={item.href + item.name}
             href={item.href}
             isExternal={item.isExternal}
             display='block'
@@ -237,6 +256,64 @@ const generateMenuItem = (item: NavMenuItem, isMobile: boolean, closeMobileDrawe
     )
 }
 
+/**
+ * Converts a page tree to a usable menu data structure.
+ * @param pageTree  The page tree to convert
+ * @returns  The converted menu data structure and an array of indices of expanded items
+ */
+const convertPageTreeToMenu = (pageTree: IJaenPage[]) => {
+    let expandedItemIdx = 0; // The next index of an possibly expanded item
+    const result: { menu: NavMenuSection[], expandedIdx: number[] } = { menu: [], expandedIdx: [] };
+    const pageMap: {[key: string]: IJaenPage} = {};
+    pageTree.forEach(page => pageMap[page.id] = page);
+
+    const docs_page = pageTree.find(page => page.slug === 'docs');
+    if (!docs_page) return result;
+    const currentPath = window.location.pathname;
+
+    // Recursively build a menu item from a page
+    const buildMenuItem = (page_id: string, buildPath: string): NavMenuItem | undefined => {
+        const page = pageMap[page_id];
+        if (!page) return undefined;
+
+        const href = page.buildPath ?? buildPath + page.slug + '/';
+        const children = page.children.filter(child => !child.deleted)
+            .map(({ id }) => buildMenuItem(id, href))
+            .filter((item): item is NavMenuItem => !!item);
+
+        // Check if any item in the current page or its children is active
+        // If so, add the index of the current item to the expanded item index array
+        // This is used to expand the correct items in the accordion when the page is loaded
+        const hasActiveChild = children.some(child => child.isActive || child.hasActiveChild);
+        if (children.length > 0) {
+            if (hasActiveChild) result.expandedIdx.push(expandedItemIdx);
+            expandedItemIdx++;
+        }
+
+        return {
+            href: currentPath === href ? '' : href,
+            name: page.jaenPageMetadata.title ?? page.slug,
+            children: children,
+            isActive: currentPath === href,
+            hasActiveChild: hasActiveChild,
+        }
+    }
+
+    const menuData: NavMenuSection[] = [{ items: docs_page.children
+        .filter(child => !child.deleted)
+        .map(({ id }) => buildMenuItem(id, docs_page.buildPath ?? '/'))
+        .filter((item): item is NavMenuItem => !!item)
+    }];
+
+    expandedItemIdx--; // Decrement the expanded item index to get correct the index
+
+    return {
+        menu: menuData,
+        // Since the menu is built from the inside out, the first item is the last expanded item
+        expandedIdx: result.expandedIdx.map(idx => expandedItemIdx - idx),
+    };
+}
+
 interface PageDirectoryProps {
     isExpanded?: boolean;
     isMobile?: boolean;
@@ -246,11 +323,8 @@ interface PageDirectoryProps {
  * The page directory component that shows the documentation structure.
  */
 const PageDirectory: FC<PageDirectoryProps> = ({ isExpanded = true, isMobile = false, closeMobileDrawer }) => {
-
-    useEffect(() => {
-        menuIdx = 0; // Reset the menu index every time the menu is rendered
-    });
-
+    const manager = usePageManager();
+    const menuStructure = useMemo(() => convertPageTreeToMenu(manager.pageTree), [manager.pageTree]);
     return (
         <Accordion
             visibility={isExpanded ? 'visible' : 'hidden'}
@@ -266,9 +340,10 @@ const PageDirectory: FC<PageDirectoryProps> = ({ isExpanded = true, isMobile = f
             variant='leftNav'
             transition='opacity 0.2s ease-in-out, width 0.2s ease-in-out'
             mb={isMobile ? 12 : undefined}
+            defaultIndex={menuStructure.expandedIdx}
         >
         {
-            menuStructure.map((section, i) => (
+            [...menuStructure.menu, ...baseMenuItems].map((section, i) => (
                 <Fragment key={i}>
                     {
                         section.name && (
@@ -284,7 +359,7 @@ const PageDirectory: FC<PageDirectoryProps> = ({ isExpanded = true, isMobile = f
                         )
                     }
                     <Box key={1}>
-                        { section.items.map(item => generateMenuItem(item, isMobile, closeMobileDrawer)) }
+                        { section.items?.map(item => generateMenuItem(item, isMobile, closeMobileDrawer)) }
                     </Box>
                 </Fragment>
             ))

@@ -74,7 +74,7 @@ const DocsPage = connectPage(
   {
     label: "Docs",
     children: ["DocPage"],
-  }
+  },
 );
 
 export const query = graphql`
