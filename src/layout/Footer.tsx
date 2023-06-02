@@ -7,7 +7,7 @@ import {
   Text,
   useColorMode
 } from '@chakra-ui/react';
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import JaenLogoLight from '../assets/icons/jaen_light.svg';
 import JaenLogoDark from '../assets/icons/jaen_dark.svg';
 
@@ -17,7 +17,7 @@ const year = new Date().getFullYear();
  * Footer component.
  */
 const Footer: FC = () => {
-  const {colorMode} = useColorMode();
+  const { colorMode } = useColorMode();
 
   return (
     <Center as="footer" bgColor="footer.bgColor" color="footer.textColor">

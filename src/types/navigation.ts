@@ -25,3 +25,10 @@ export type TableOfContentItem = {
   level: number;
   text: string;
 };
+
+export type MainBreadcrumbPart = {
+  name: string;
+  href: string;
+  isDisabled?: boolean;
+  isActive?: boolean;
+};

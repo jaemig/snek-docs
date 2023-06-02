@@ -8,15 +8,15 @@ import {
   Image,
   useDisclosure,
   Button
-} from '@chakra-ui/react'
-import React, {FC, useState} from 'react'
-import GitHub from '../../components/icons/GitHub'
-import SnekIcon from '../../assets/icons/brand.svg'
-import MemoizedLinks from '../../components/MemoizedLink'
-import MobileNavDrawer from './MobileNavDrawer'
-import SearchMenu from '../../components/search/SearchMenu'
-import {LinkData} from '../../types/navigation'
-import Link from '../../components/Link'
+} from '@chakra-ui/react';
+import React, { FC, useState } from 'react';
+import GitHub from '../../components/icons/GitHub';
+import SnekIcon from '../../assets/icons/brand.svg';
+import MemoizedLinks from '../../components/MemoizedLink';
+import MobileNavDrawer from './MobileNavDrawer';
+import SearchMenu from '../../components/search/SearchMenu';
+import { LinkData } from '../../types/navigation';
+import Link from '../../components/Link';
 
 const links: LinkData[] = [
   {
@@ -32,39 +32,39 @@ const links: LinkData[] = [
     name: 'Contact',
     href: '/contact'
   }
-]
+];
 
 const navLinkProps = {
-  display: {base: 'none', md: 'initial'},
+  display: { base: 'none', md: 'initial' },
   opacity: 0.8,
   _hover: {
     textDecoration: 'none',
     opacity: 1
   },
   fontSize: 'sm'
-}
+};
 
 /**
  * Top navigation bar.
  */
 const TopNav: FC = () => {
-  const [hamburgerClass, setHamburgerClass] = useState('')
-  const {isOpen, onOpen, onClose} = useDisclosure() // Mobile menu drawer
+  const [hamburgerClass, setHamburgerClass] = useState('');
+  const { isOpen, onOpen, onClose } = useDisclosure(); // Mobile menu drawer
 
   const openDrawer = () => {
-    setHamburgerClass('open')
-    onOpen()
-  }
+    setHamburgerClass('open');
+    onOpen();
+  };
 
   const closeDrawer = () => {
-    setHamburgerClass('')
-    onClose()
-  }
+    setHamburgerClass('');
+    onClose();
+  };
 
   const toggleMobileMenu = () => {
-    if (hamburgerClass === 'open') closeDrawer()
-    else openDrawer()
-  }
+    if (hamburgerClass === 'open') closeDrawer();
+    else openDrawer();
+  };
 
   return (
     <>
@@ -73,19 +73,21 @@ const TopNav: FC = () => {
         position="sticky"
         top={0}
         h="64px"
-        px={{base: 5, xl: 0}}
+        px={{ base: 5, xl: 0 }}
         borderBottom="1px solid"
         borderBottomColor="topNav.borderColor"
         backgroundColor="shared.translucent.bgColor"
         backdropFilter="blur(10px)"
-        zIndex={99999999999}>
+        zIndex={99999999999}
+      >
         <Flex w="7xl">
           <Link
             href="#"
             _hover={{
               transform: 'scale(1.1)'
             }}
-            transition="transform 0.2s ease-in-out">
+            transition="transform 0.2s ease-in-out"
+          >
             <Image h="32px" src={SnekIcon} alt="Snek Logo" />
           </Link>
           <Spacer />
@@ -99,8 +101,8 @@ const TopNav: FC = () => {
                   fontWeight: 'semibold'
                 }}
               />
-              <Box display={{base: 'none', md: 'initial'}}>
-                <SearchMenu menuListProps={{width: '500px'}} />
+              <Box display={{ base: 'none', md: 'initial' }}>
+                <SearchMenu menuListProps={{ width: '500px' }} />
               </Box>
               <Link
                 display="inline-block"
@@ -111,13 +113,15 @@ const TopNav: FC = () => {
                 _hover={{
                   transform: 'scale(1.2)'
                 }}
-                transition="transform 0.2s ease-in-out">
+                transition="transform 0.2s ease-in-out"
+              >
                 <GitHub boxSize="32px" fill="topNav.GitHubFill" />
               </Link>
               <Button
                 variant="ghost"
                 size="sm"
-                display={{base: 'initial', md: 'none'}}>
+                display={{ base: 'initial', md: 'none' }}
+              >
                 <VStack
                   spacing={1.5}
                   onClick={toggleMobileMenu}
@@ -138,7 +142,8 @@ const TopNav: FC = () => {
                       transition:
                         'transform 0.2s ease-in-out, opacity 0.2s ease-in-out'
                     }
-                  }}>
+                  }}
+                >
                   <Box
                     w="24px"
                     h="2px"
@@ -167,7 +172,7 @@ const TopNav: FC = () => {
       </Center>
       <MobileNavDrawer isOpen={isOpen} onOpen={onOpen} onClose={closeDrawer} />
     </>
-  )
-}
+  );
+};
 
-export default TopNav
+export default TopNav;

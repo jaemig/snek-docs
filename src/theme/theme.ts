@@ -3,7 +3,7 @@ import {
   StyleFunctionProps,
   type ThemeConfig
 } from '@chakra-ui/react';
-import {mode} from '@chakra-ui/theme-tools';
+import { mode } from '@chakra-ui/theme-tools';
 import themeComponents from './components';
 import themeColors from './colors';
 import themeSemanticTokens from './semanticTokens';

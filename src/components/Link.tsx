@@ -1,7 +1,7 @@
-import {Link as ChLink, LinkOverlayProps, LinkProps} from '@chakra-ui/react';
-import {Link as GaLink} from 'gatsby';
-import {FC, ReactNode} from 'react';
-import {isInternalLink} from '../helpers/utils';
+import { Link as ChLink, LinkOverlayProps, LinkProps } from '@chakra-ui/react';
+import { Link as GaLink } from 'gatsby';
+import { FC, ReactNode } from 'react';
+import { isInternalLink } from '../helpers/utils';
 
 interface GatsbyLinkProps extends LinkOverlayProps {
   href?: string;
@@ -12,7 +12,7 @@ interface GatsbyLinkProps extends LinkOverlayProps {
  * Custom link component combining Chakra UI's and Gatsby's Link.
  */
 
-const Link: FC<GatsbyLinkProps> = ({href = '#', ...props}) => {
+const Link: FC<GatsbyLinkProps> = ({ href = '#', ...props }) => {
   // Props that both link variants share.
   const baseProps: LinkProps = {
     position: 'relative'

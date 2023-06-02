@@ -5,7 +5,7 @@ import {
   DrawerContent,
   DrawerOverlay
 } from '@chakra-ui/react';
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import SearchInput from '../../components/search/SearchInput';
 import PageDirectory from './components/PageDirectory';
 import NavbarControls from './components/NavbarControls';
@@ -31,7 +31,7 @@ const MobileNavDrawer: FC<MobileNavDrawerProps> = ({
       <DrawerOverlay />
       <DrawerContent zIndex={1000} bgColor="shared.body">
         <DrawerBody pt={20}>
-          <SearchMenu menuProps={{matchWidth: true}} />
+          <SearchMenu menuProps={{ matchWidth: true }} />
           <Box mt={5}>
             <PageDirectory isMobile closeMobileDrawer={onClose} />
           </Box>

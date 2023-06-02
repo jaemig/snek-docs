@@ -1,9 +1,9 @@
-import React, {FC} from 'react';
-import {Box, Flex, Link, Text, VStack} from '@chakra-ui/react';
-import {ArrowForwardIcon} from '@chakra-ui/icons';
+import React, { FC } from 'react';
+import { Box, Flex, Link, Text, VStack } from '@chakra-ui/react';
+import { ArrowForwardIcon } from '@chakra-ui/icons';
 import MemoizedLinks from '../../components/MemoizedLink';
 import TableOfContent from './components/TableOfContent';
-import {NavMenuItem} from '../../types/navigation';
+import { NavMenuItem } from '../../types/navigation';
 
 // Example links - these would probably be fetched from a CMS or other data source
 const links = [
@@ -26,7 +26,7 @@ const RightNav: FC = ({}) => {
       position="sticky"
       top="80px"
       as="aside"
-      display={{base: 'none', xl: 'block'}}
+      display={{ base: 'none', xl: 'block' }}
       color="shared.text.default"
       fontSize="sm"
     >

@@ -1,5 +1,5 @@
-import {Icon, IconProps} from '@chakra-ui/icons';
-import React, {FC} from 'react';
+import { Icon, IconProps } from '@chakra-ui/icons';
+import React, { FC } from 'react';
 
 /**
  * Hide sidebar icon.

@@ -5,16 +5,16 @@ import {
   transition,
   useColorModeValue
 } from '@chakra-ui/react';
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import 'highlight.js/styles/atom-one-dark.css';
-import {CheckIcon, CopyIcon} from '@chakra-ui/icons';
+import { CheckIcon, CopyIcon } from '@chakra-ui/icons';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import {
   oneDark,
   oneLight
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import {IMainContentComponentBaseProps} from '../../../layout/main/mainContent.types';
-import {mainComponentBaseStyle} from '../../../layout/main/mainContent.vars';
+import { IMainContentComponentBaseProps } from '../../../layout/main/mainContent.types';
+import { mainComponentBaseStyle } from '../../../layout/main/mainContent.vars';
 
 export interface ICodeSnippetProps extends IMainContentComponentBaseProps {
   code?: string;
@@ -49,7 +49,7 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({
   return (
     <Box
       {...mainComponentBaseStyle.baseProps}
-      w={{base: 'calc(100vw - 3.5rem)', md: 'auto'}}
+      w={{ base: 'calc(100vw - 3.5rem)', md: 'auto' }}
       overflow="hidden"
       border="1px solid"
       borderColor="components.codeSnippet.borderColor"

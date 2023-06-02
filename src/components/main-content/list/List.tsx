@@ -4,8 +4,8 @@ import {
   OrderedList,
   ListItem
 } from '@chakra-ui/react';
-import {ComponentType, FC, ReactNode} from 'react';
-import {IMainContentComponentBaseProps} from '../../../layout/main/mainContent.types';
+import { ComponentType, FC, ReactNode } from 'react';
+import { IMainContentComponentBaseProps } from '../../../layout/main/mainContent.types';
 
 export type ListItem = {
   text: string;
@@ -20,7 +20,11 @@ export interface IListProps extends IMainContentComponentBaseProps {
 /**
  * Component for displaying lists.
  */
-const List: FC<IListProps> = ({baseProps, variant = 'unordered', children}) => {
+const List: FC<IListProps> = ({
+  baseProps,
+  variant = 'unordered',
+  children
+}) => {
   let ListComp: typeof UnorderedList | typeof OrderedList = UnorderedList;
   if (variant === 'ordered') ListComp = OrderedList;
 

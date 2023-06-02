@@ -1,6 +1,6 @@
-import React, {FC} from 'react';
-import {LinkData} from '../layout/navigation/navigation.types';
-import {Link, LinkProps} from '@chakra-ui/react';
+import React, { FC } from 'react';
+import { LinkData } from '../layout/navigation/navigation.types';
+import { Link, LinkProps } from '@chakra-ui/react';
 
 interface LinksProps {
   links: LinkData[];
@@ -8,7 +8,7 @@ interface LinksProps {
   activeProps?: LinkProps;
 }
 
-const Links: FC<LinksProps> = ({links, props, activeProps}) => {
+const Links: FC<LinksProps> = ({ links, props, activeProps }) => {
   return (
     <>
       {links.map(link => {

@@ -1,11 +1,11 @@
-import {Box, BoxProps, Tooltip, TooltipProps} from '@chakra-ui/react';
-import React, {FC, useState} from 'react';
-import {TFilesystemItem} from './filesystem.types';
+import { Box, BoxProps, Tooltip, TooltipProps } from '@chakra-ui/react';
+import React, { FC, useState } from 'react';
+import { TFilesystemItem } from './filesystem.types';
 import BsFileEarmark from '../../icons/bootstrap/BsFileEarmark';
 import BsFolder2Open from '../../icons/bootstrap/BsFolder2Open';
 import BsFolder from '../../icons/bootstrap/BsFolder';
-import {IMainContentComponentBaseProps} from '../../../layout/main/mainContent.types';
-import {mainComponentBaseStyle} from '../../../layout/main/mainContent.vars';
+import { IMainContentComponentBaseProps } from '../../../layout/main/mainContent.types';
+import { mainComponentBaseStyle } from '../../../layout/main/mainContent.vars';
 
 interface IFilesystemItemProps {
   item: TFilesystemItem;
@@ -47,12 +47,12 @@ const FilesystemItem: FC<IFilesystemItemProps> = ({
 
   // Icon settings
   let IconComp;
-  let props: BoxProps = {transition: 'opacity 0.2s ease-in-out'};
+  let props: BoxProps = { transition: 'opacity 0.2s ease-in-out' };
   if (isFolder) {
     props = {
       ...props,
       cursor: 'pointer',
-      _hover: {...props._hover, opacity: 0.7}
+      _hover: { ...props._hover, opacity: 0.7 }
     };
     IconComp = showChildren ? BsFolder2Open : BsFolder;
   } else {
@@ -168,7 +168,7 @@ export interface IFileSystemProps {
 /**
  * Filesystem component for displaying filesystem structures.
  */
-const Filesystem: FC<IFileSystemProps> = ({structure}) => {
+const Filesystem: FC<IFileSystemProps> = ({ structure }) => {
   return (
     <Box
       {...mainComponentBaseStyle.baseProps}

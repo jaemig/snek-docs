@@ -26,7 +26,8 @@ const TableOfContent: FC = ({}) => {
                 textDecoration: 'none',
                 opacity: 1
               }}
-              transition="opacity 0.1s ease-in-out">
+              transition="opacity 0.1s ease-in-out"
+            >
               {item.text}
             </Link>
           </Box>

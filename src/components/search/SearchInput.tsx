@@ -6,8 +6,14 @@ import {
   useMenuButton,
   useMenuContext
 } from '@chakra-ui/react';
-import React, {Dispatch, FC, SetStateAction, forwardRef, useMemo} from 'react';
-import {getPlatform, isTouchDevice} from '../../helpers/utils';
+import React, {
+  Dispatch,
+  FC,
+  SetStateAction,
+  forwardRef,
+  useMemo
+} from 'react';
+import { getPlatform, isTouchDevice } from '../../helpers/utils';
 
 interface SearchInputProps {
   setSearchQuery: Dispatch<SetStateAction<string>>;
@@ -17,7 +23,7 @@ interface SearchInputProps {
  * The search input component for the search menu.
  */
 const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
-  ({setSearchQuery}, ref) => {
+  ({ setSearchQuery }, ref) => {
     const menu = useMenuContext();
     const menuButton = useMenuButton({}, ref);
 

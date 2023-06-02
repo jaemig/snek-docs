@@ -4,11 +4,11 @@ import {
   ResponsiveValue,
   ThemeTypings
 } from '@chakra-ui/react';
-import React, {Dispatch, FC, ReactNode, SetStateAction} from 'react';
+import React, { Dispatch, FC, ReactNode, SetStateAction } from 'react';
 import FaHashtag from '../../icons/fontawesome/FaHashtag';
-import {IMainContentComponentBaseProps} from '../../../layout/main/mainContent.types';
+import { IMainContentComponentBaseProps } from '../../../layout/main/mainContent.types';
 import Link from '../../Link';
-import {mainComponentBaseStyle} from '../../../layout/main/mainContent.vars';
+import { mainComponentBaseStyle } from '../../../layout/main/mainContent.vars';
 
 // Font sizes for the different heading variants
 const variantFontSizes = {

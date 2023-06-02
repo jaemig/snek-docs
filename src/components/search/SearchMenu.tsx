@@ -11,8 +11,8 @@ import {
   MenuProps,
   Text
 } from '@chakra-ui/react';
-import React, {FC, Fragment, ReactElement, useEffect, useRef} from 'react';
-import {TSearchResult, TSearchResultSection} from './search.types';
+import React, { FC, Fragment, ReactElement, useEffect, useRef } from 'react';
+import { TSearchResult, TSearchResultSection } from './search.types';
 import SearchInput from './SearchInput';
 
 const exampleSearchResult: TSearchResultSection[] = [
@@ -93,7 +93,7 @@ const highLightQuery = (text: string, query: string) => {
 /**
  * The search menu item component for displaying a specific search result item.
  */
-const SearchResultItem: FC<{item: TSearchResult; query: string}> = ({
+const SearchResultItem: FC<{ item: TSearchResult; query: string }> = ({
   item,
   query
 }) => {
@@ -133,7 +133,7 @@ const SearchResultSection: FC<{
   section: TSearchResultSection;
   idx: number;
   query: string;
-}> = ({section, idx, query}) => {
+}> = ({ section, idx, query }) => {
   return (
     <MenuGroup key={idx}>
       <Heading
@@ -162,7 +162,7 @@ interface SearchMenuProps {
 /**
  * Search menu component - shows a navigatable list of search results
  */
-const SearchMenu: FC<SearchMenuProps> = ({menuProps, menuListProps}) => {
+const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
   const r = useRef(null);
 
   const [searchQuery, setSearchQuery] = React.useState('');

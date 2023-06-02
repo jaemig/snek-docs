@@ -1,5 +1,5 @@
-import {ListItem as ChListItem} from '@chakra-ui/react';
-import React, {FC, ReactNode} from 'react';
+import { ListItem as ChListItem } from '@chakra-ui/react';
+import React, { FC, ReactNode } from 'react';
 
 interface IListItemProps {
   children: ReactNode;
@@ -7,7 +7,7 @@ interface IListItemProps {
 /**
  * Component for displaying a singble list item.
  */
-const ListItem: FC<IListItemProps> = ({children}) => {
+const ListItem: FC<IListItemProps> = ({ children }) => {
   return <ChListItem>{children}</ChListItem>;
 };
 

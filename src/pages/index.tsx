@@ -1,5 +1,5 @@
 import React from 'react';
-import type {HeadFC, PageProps} from 'gatsby';
+import type { HeadFC, PageProps } from 'gatsby';
 import AppLayout from '../layout/AppLayout';
 
 //TODO: Outsource the link style to the chakra theme

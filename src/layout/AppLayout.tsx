@@ -1,9 +1,9 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import TopNav from './navigation/TopNav';
-import {Box, ChakraProvider, Flex} from '@chakra-ui/react';
+import { Box, ChakraProvider, Flex } from '@chakra-ui/react';
 import theme from '../theme/theme';
 import Footer from './Footer';
-import {PageManagerProvider} from '@snek-at/jaen';
+import { PageManagerProvider } from '@snek-at/jaen';
 
 interface AppLayoutProps {
   children?: React.ReactNode;
@@ -13,7 +13,7 @@ interface AppLayoutProps {
  * The global layout component.
  * This should not be directly used in pages, but used in gatsby.
  */
-const AppLayout: FC<AppLayoutProps> = ({children}) => {
+const AppLayout: FC<AppLayoutProps> = ({ children }) => {
   return (
     <ChakraProvider theme={theme}>
       <PageManagerProvider>

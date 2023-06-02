@@ -1,5 +1,9 @@
-import { IJaenPage } from "@snek-at/jaen";
-import { NavMenuSection, NavMenuItem, MainBreadcrumbPart } from "../types/navigation";
+import { IJaenPage } from '@snek-at/jaen';
+import {
+  NavMenuSection,
+  NavMenuItem,
+  MainBreadcrumbPart
+} from '../types/navigation';
 
 /**
  * Get the platform of the user
@@ -18,7 +22,9 @@ export function getPlatform() {
     }
   ];
 
-  const { platform } = platforms.find(({ pattern }) => pattern.test(userAgent)) || {
+  const { platform } = platforms.find(({ pattern }) =>
+    pattern.test(userAgent)
+  ) || {
     platform: 'Unknown'
   };
 
@@ -116,25 +122,29 @@ export function convertPageTreeToMenu(pageTree: IJaenPage[]) {
     // Since the menu is built from the inside out, the first item is the last expanded item
     expandedIdx: result.expandedIdx
   };
-};
+}
 
 /**
  * Creates the breadcrumb parts for the current page
  * @param menu  The menu data structure
  * @returns  The breadcrumb parts for the current page
  */
-export function createBreadCrumbParts(menu: NavMenuSection[]): MainBreadcrumbPart[] {
+export function createBreadCrumbParts(
+  menu: NavMenuSection[]
+): MainBreadcrumbPart[] {
   const parts: MainBreadcrumbPart[] = [];
 
   // Recursively build the breadcrumb parts by finding the active menu item and its parents
   const findActiveMenuItem = (menu: NavMenuItem): boolean => {
     if (menu.isActive || menu.hasActiveChild) {
-      const activeChild = menu.children?.find(item => item.isActive || item.hasActiveChild);
+      const activeChild = menu.children?.find(
+        item => item.isActive || item.hasActiveChild
+      );
       if (!activeChild) return !!menu.isActive;
       parts.push({
         name: activeChild.name,
         href: activeChild.href
-      })
+      });
       return findActiveMenuItem(activeChild);
     }
     return false;
@@ -144,14 +154,15 @@ export function createBreadCrumbParts(menu: NavMenuSection[]): MainBreadcrumbPar
     for (const item of section.items) {
       // This adds the outest parent to the breadcrumb parts.
       // This is necessary because findActiveMenuItem only adds the active child item of each parent
-      if (item.hasActiveChild || item.isActive) parts.push({
-        name: item.name,
-        href: item.href
-      });
+      if (item.hasActiveChild || item.isActive)
+        parts.push({
+          name: item.name,
+          href: item.href
+        });
       if (findActiveMenuItem(item)) {
         parts[parts.length - 1].isActive = true;
         return parts;
-      };
+      }
     }
   }
   // This should never happen because there must always be an active item,

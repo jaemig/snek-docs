@@ -40,7 +40,8 @@ const MainBreadcrumb: FC<IMainBradcrumbProps> = ({ parts }) => {
       fontSize="sm"
       w="100%"
       overflowX="auto"
-      mb={5}>
+      mb={5}
+    >
       {parts.map((item, i) => {
         const props: BreadcrumbLinkProps = {};
 
@@ -67,12 +68,14 @@ const MainBreadcrumb: FC<IMainBradcrumbProps> = ({ parts }) => {
             isCurrentPage={item.isActive || item.isDisabled}
             overflow="hidden"
             whiteSpace="nowrap"
-            textOverflow="ellipsis">
+            textOverflow="ellipsis"
+          >
             <BreadcrumbLink
               href={item.href}
               transition="opacity 0.1s ease-in-out"
               isCurrentPage
-              {...props}>
+              {...props}
+            >
               <Text isTruncated>{item.name}</Text>
             </BreadcrumbLink>
           </BreadcrumbItem>

@@ -1,4 +1,4 @@
-import {SunIcon, MoonIcon, CheckIcon} from '@chakra-ui/icons';
+import { SunIcon, MoonIcon, CheckIcon } from '@chakra-ui/icons';
 import {
   useColorMode,
   Flex,
@@ -12,7 +12,7 @@ import {
   MenuItem,
   FlexProps
 } from '@chakra-ui/react';
-import {Dispatch, FC, SetStateAction} from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 import HideSidebarIcon from '../../../components/icons/HideSidebar';
 import React from 'react';
 
@@ -29,7 +29,7 @@ const NavbarControls: FC<NavbarControlsProps> = ({
   isExpanded,
   setIsExpanded
 }) => {
-  const {colorMode, toggleColorMode} = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   const conditional_props: FlexProps = {};
   if (isMobile) {
@@ -102,7 +102,7 @@ const MemoizedColorModeMenuItems = React.memo<{
   currentColorMode: ColorMode;
   toggleColorMode: () => void;
 }>(
-  ({currentColorMode, toggleColorMode}) => {
+  ({ currentColorMode, toggleColorMode }) => {
     return (
       <>
         {colorModes.map((mode, i) => {
