@@ -84,7 +84,7 @@ const DocsPage = connectTemplate(
   },
   {
     label: "Docs",
-    children: [],
+    children: ["DocPage"],
   }
 );
 
