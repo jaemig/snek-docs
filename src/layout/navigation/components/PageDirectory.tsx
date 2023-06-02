@@ -1,4 +1,4 @@
-import { ArrowForwardIcon } from "@chakra-ui/icons";
+import {ArrowForwardIcon} from '@chakra-ui/icons'
 import {
   Accordion,
   AccordionButton,
@@ -9,122 +9,122 @@ import {
   Box,
   Center,
   CenterProps,
-  LinkProps,
-} from "@chakra-ui/react";
-import { IJaenPage, useJaenPageTree } from "@snek-at/jaen";
-import { FC, Fragment, MouseEvent, useMemo } from "react";
-import Link from "../../../components/Link";
-import { NavMenuItem, NavMenuSection } from "../../../types/navigation";
+  LinkProps
+} from '@chakra-ui/react'
+import {IJaenPage, useJaenPageTree} from '@snek-at/jaen'
+import {FC, Fragment, MouseEvent, useMemo} from 'react'
+import Link from '../../../components/Link'
+import {NavMenuItem, NavMenuSection} from '../../../types/navigation'
 
 // Example menu structure - this would be fetched from a CMS
 const menuStructure: NavMenuSection[] = [
   {
     items: [
       {
-        name: "Introduction",
-        href: "#",
-        children: [],
+        name: 'Introduction',
+        href: '#',
+        children: []
       },
       {
-        name: "Guide",
-        href: "#",
+        name: 'Guide',
+        href: '#',
         isActive: true,
         children: [
           {
-            name: "Organize Files",
-            href: "#",
+            name: 'Organize Files',
+            href: '#'
           },
           {
-            name: "Markdown",
-            href: "#",
+            name: 'Markdown',
+            href: '#'
           },
           {
-            name: "Advanced",
-            href: "#",
+            name: 'Advanced',
+            href: '#',
             children: [
               {
-                name: "Rendering Tables",
-                href: "#",
+                name: 'Rendering Tables',
+                href: '#',
                 children: [
                   {
-                    name: "Features",
-                    href: "#",
-                    isSection: true,
+                    name: 'Features',
+                    href: '#',
+                    isSection: true
                   },
                   {
-                    name: "Syntax Support",
-                    href: "#",
-                    isSection: true,
+                    name: 'Syntax Support',
+                    href: '#',
+                    isSection: true
                   },
                   {
-                    name: "Configuration",
-                    href: "#",
-                    isSection: true,
-                  },
-                ],
+                    name: 'Configuration',
+                    href: '#',
+                    isSection: true
+                  }
+                ]
               },
               {
-                name: "Remote Content",
-                href: "#",
-              },
-            ],
-          },
-        ],
-      },
-    ],
+                name: 'Remote Content',
+                href: '#'
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   {
-    name: "Themes",
+    name: 'Themes',
     items: [
       {
-        name: "Docs Theme",
-        href: "#",
+        name: 'Docs Theme',
+        href: '#'
       },
       {
-        name: "Blog Theme",
-        href: "#",
+        name: 'Blog Theme',
+        href: '#'
       },
       {
-        name: "Custom Theme",
-        href: "#",
-      },
-    ],
-  },
-];
+        name: 'Custom Theme',
+        href: '#'
+      }
+    ]
+  }
+]
 
 const baseMenuItems: NavMenuSection[] = [
   {
-    name: "More",
+    name: 'More',
     items: [
       {
-        name: "About Snek",
-        href: "/docs/about-snek",
+        name: 'About Snek',
+        href: '/docs/about-snek'
       },
       {
-        name: "Snek CLI",
-        href: "https://snek.at",
-        isExternal: true,
-      },
-    ],
-  },
-];
+        name: 'Snek CLI',
+        href: 'https://snek.at',
+        isExternal: true
+      }
+    ]
+  }
+]
 
 const baseMenuItemProps = {
-  transition: "opacity 0.2s ease-in-out, background-color 0.2s ease-in-out",
-};
+  transition: 'opacity 0.2s ease-in-out, background-color 0.2s ease-in-out'
+}
 
 const inactiveMenuItemProps = {
   ...baseMenuItemProps,
-  opacity: 0.8,
-};
+  opacity: 0.8
+}
 
 const activeMenuItemProps = {
   ...baseMenuItemProps,
   opacity: 1,
-  bgColor: "theme.100",
-  color: "leftNav.accordion.activeItem.button.text.color",
-  fontWeight: "bold",
-};
+  bgColor: 'theme.100',
+  color: 'leftNav.accordion.activeItem.button.text.color',
+  fontWeight: 'bold'
+}
 
 /**
  * Handles clicks on links in the main navigation menu. If the target is not an anchor element, the default action is prevented, which prevents the page from reloading.
@@ -136,9 +136,9 @@ const linkClickHandler = (ev: MouseEvent<HTMLAnchorElement>) => {
     ev.target instanceof HTMLButtonElement ||
     ev.target instanceof HTMLSpanElement
   )
-    return;
-  ev.preventDefault();
-};
+    return
+  ev.preventDefault()
+}
 
 /**
  * Generates a menu item for the main navigation menu.
@@ -152,47 +152,47 @@ const generateMenuItem = (
   isMobile: boolean,
   closeMobileDrawer?: () => void
 ) => {
-  if (!isMobile && item.isSection) return;
+  if (!isMobile && item.isSection) return
 
   const externalLinkIcon = (
     <ArrowForwardIcon transform={`rotate(-45deg)`} ml={2} />
-  );
+  )
 
   const styleProps: CenterProps & AccordionButtonProps & LinkProps = {
-    _hover: { opacity: 1 },
-  };
+    _hover: {opacity: 1}
+  }
   if (item.isActive)
-    styleProps.backgroundColor = "leftNav.accordion.activeItem.bgColor";
+    styleProps.backgroundColor = 'leftNav.accordion.activeItem.bgColor'
   else if (styleProps._hover)
     styleProps._hover.backgroundColor =
-      "leftNav.accordion.inactiveItem.hoverBgColor";
+      'leftNav.accordion.inactiveItem.hoverBgColor'
 
   // Check if the item has children and is not a section (except on mobile)
   const hasChildren =
     item.children &&
     item.children.length > 0 &&
-    (isMobile || item.children.some((child) => !child.isSection));
+    (isMobile || item.children.some(child => !child.isSection))
 
   if (hasChildren) {
-    const children = item.children?.map((child) =>
+    const children = item.children?.map(child =>
       generateMenuItem(child, isMobile, closeMobileDrawer)
-    );
+    )
     const semanticPath = `leftNav.accordion.${
-      item.isActive ? "" : "in"
-    }activeItem.`;
+      item.isActive ? '' : 'in'
+    }activeItem.`
     return (
       <AccordionItem
         key={item.href + item.name}
         css={{
           // Remove padding from last accordion item
-          "& .chakra-accordion__panel": {
-            paddingBottom: 0,
-          },
+          '& .chakra-accordion__panel': {
+            paddingBottom: 0
+          }
         }}
         // This is a hack to remove the bottom border from the last accordion item
         borderBottomWidth="0 !important"
       >
-        {({ isExpanded }) => (
+        {({isExpanded}) => (
           <>
             <Link href={item.href} onClick={linkClickHandler}>
               <AccordionButton
@@ -204,7 +204,7 @@ const generateMenuItem = (
                 borderRadius="md"
                 py={1.5}
                 backgroundColor={
-                  item.isActive ? semanticPath + "bgColor" : undefined
+                  item.isActive ? semanticPath + 'bgColor' : undefined
                 }
               >
                 <Box as="span" flex="1">
@@ -218,7 +218,7 @@ const generateMenuItem = (
                   transition="background-color 0.2s ease-in-out"
                   backgroundColor="transparent"
                   _hover={{
-                    bgColor: semanticPath + "button.icon.hoverContainerBgColor",
+                    bgColor: semanticPath + 'button.icon.hoverContainerBgColor'
                   }}
                 >
                   <AccordionIcon
@@ -233,14 +233,14 @@ const generateMenuItem = (
               <Box
                 _before={{
                   content: '""',
-                  display: "block",
-                  position: "absolute",
+                  display: 'block',
+                  position: 'absolute',
                   top: 2,
-                  borderRadius: "full",
-                  left: "10px",
-                  width: "1px",
-                  height: "calc(100% - 0.5rem)",
-                  backgroundColor: "leftNav.accordion.panel.borderLeftColor",
+                  borderRadius: 'full',
+                  left: '10px',
+                  width: '1px',
+                  height: 'calc(100% - 0.5rem)',
+                  backgroundColor: 'leftNav.accordion.panel.borderLeftColor'
                 }}
               >
                 {children}
@@ -249,7 +249,7 @@ const generateMenuItem = (
           </>
         )}
       </AccordionItem>
-    );
+    )
   }
   return (
     <Link
@@ -274,8 +274,8 @@ const generateMenuItem = (
       {item.name}
       {item.isExternal && externalLinkIcon}
     </Link>
-  );
-};
+  )
+}
 
 /**
  * Converts a page tree to a usable menu data structure.
@@ -283,72 +283,72 @@ const generateMenuItem = (
  * @returns  The converted menu data structure and an array of indices of expanded items
  */
 const convertPageTreeToMenu = (pageTree: IJaenPage[]) => {
-  let expandedItemIdx = 0; // The next index of an possibly expanded item
-  const result: { menu: NavMenuSection[]; expandedIdx: number[] } = {
+  let expandedItemIdx = 0 // The next index of an possibly expanded item
+  const result: {menu: NavMenuSection[]; expandedIdx: number[]} = {
     menu: [],
-    expandedIdx: [],
-  };
-  const pageMap: { [key: string]: IJaenPage } = {};
-  pageTree.forEach((page) => (pageMap[page.id] = page));
+    expandedIdx: []
+  }
+  const pageMap: {[key: string]: IJaenPage} = {}
+  pageTree.forEach(page => (pageMap[page.id] = page))
 
-  const docs_page = pageTree.find((page) => page.slug === "docs");
-  if (!docs_page) return result;
-  const currentPath = window.location.pathname;
+  const docs_page = pageTree.find(page => page.slug === 'docs')
+  if (!docs_page) return result
+  const currentPath = window.location.pathname
 
   // Recursively build a menu item from a page
   const buildMenuItem = (
     page_id: string,
     buildPath: string
   ): NavMenuItem | undefined => {
-    const page = pageMap[page_id];
-    if (!page) return undefined;
+    const page = pageMap[page_id]
+    if (!page) return undefined
 
-    const href = page.buildPath ?? buildPath + page.slug + "/";
+    const href = page.buildPath ?? buildPath + page.slug + '/'
     const children = page.children
-      .map(({ id }) => buildMenuItem(id, href))
-      .filter((item): item is NavMenuItem => !!item);
+      .map(({id}) => buildMenuItem(id, href))
+      .filter((item): item is NavMenuItem => !!item)
 
     // Check if any item in the current page or its children is active
     // If so, add the index of the current item to the expanded item index array
     // This is used to expand the correct items in the accordion when the page is loaded
     const hasActiveChild = children.some(
-      (child) => child.isActive || child.hasActiveChild
-    );
+      child => child.isActive || child.hasActiveChild
+    )
     if (children.length > 0) {
-      if (hasActiveChild) result.expandedIdx.push(expandedItemIdx);
-      expandedItemIdx++;
+      if (hasActiveChild) result.expandedIdx.push(expandedItemIdx)
+      expandedItemIdx++
     }
 
     return {
-      href: currentPath === href ? "" : href,
+      href: currentPath === href ? '' : href,
       name: page.jaenPageMetadata.title ?? page.slug,
       children: children,
       isActive: currentPath === href,
-      hasActiveChild: hasActiveChild,
-    };
-  };
+      hasActiveChild: hasActiveChild
+    }
+  }
 
   const menuData: NavMenuSection[] = [
     {
       items: docs_page.children
-        .map(({ id }) => buildMenuItem(id, docs_page.buildPath ?? "/"))
-        .filter((item): item is NavMenuItem => !!item),
-    },
-  ];
+        .map(({id}) => buildMenuItem(id, docs_page.buildPath ?? '/'))
+        .filter((item): item is NavMenuItem => !!item)
+    }
+  ]
 
-  expandedItemIdx--; // Decrement the expanded item index to get correct the index
+  expandedItemIdx-- // Decrement the expanded item index to get correct the index
 
   return {
     menu: menuData,
     // Since the menu is built from the inside out, the first item is the last expanded item
-    expandedIdx: result.expandedIdx.map((idx) => expandedItemIdx - idx),
-  };
-};
+    expandedIdx: result.expandedIdx.map(idx => expandedItemIdx - idx)
+  }
+}
 
 interface PageDirectoryProps {
-  isExpanded?: boolean;
-  isMobile?: boolean;
-  closeMobileDrawer?: () => void;
+  isExpanded?: boolean
+  isMobile?: boolean
+  closeMobileDrawer?: () => void
 }
 /**
  * The page directory component that shows the documentation structure.
@@ -356,25 +356,25 @@ interface PageDirectoryProps {
 const PageDirectory: FC<PageDirectoryProps> = ({
   isExpanded = true,
   isMobile = false,
-  closeMobileDrawer,
+  closeMobileDrawer
 }) => {
-  const pageTree = useJaenPageTree();
+  const pageTree = useJaenPageTree()
 
   const menuStructure = useMemo(
     () => convertPageTreeToMenu(pageTree),
     [pageTree]
-  );
+  )
   return (
     <Accordion
-      visibility={isExpanded ? "visible" : "hidden"}
+      visibility={isExpanded ? 'visible' : 'hidden'}
       opacity={isExpanded ? 1 : 0}
-      w={isExpanded ? "100%" : "max-content"}
+      w={isExpanded ? '100%' : 'max-content'}
       allowMultiple
       css={{
         // Remove border from last accordion item
-        "& .chakra-accordion__item:last-child": {
-          borderBottomWidth: 0,
-        },
+        '& .chakra-accordion__item:last-child': {
+          borderBottomWidth: 0
+        }
       }}
       variant="leftNav"
       transition="opacity 0.2s ease-in-out, width 0.2s ease-in-out"
@@ -395,14 +395,14 @@ const PageDirectory: FC<PageDirectoryProps> = ({
             </Box>
           )}
           <Box key={1}>
-            {section.items?.map((item) =>
+            {section.items?.map(item =>
               generateMenuItem(item, isMobile, closeMobileDrawer)
             )}
           </Box>
         </Fragment>
       ))}
     </Accordion>
-  );
-};
+  )
+}
 
-export default PageDirectory;
+export default PageDirectory

@@ -1,30 +1,33 @@
-import { extendTheme, StyleFunctionProps, type ThemeConfig } from "@chakra-ui/react";
-import { mode } from "@chakra-ui/theme-tools";
-import themeComponents from "./components";
-import themeColors from "./colors";
-import themeSemanticTokens from "./semanticTokens";
-import themeFonts from "./fonts";
-
+import {
+  extendTheme,
+  StyleFunctionProps,
+  type ThemeConfig
+} from '@chakra-ui/react'
+import {mode} from '@chakra-ui/theme-tools'
+import themeComponents from './components'
+import themeColors from './colors'
+import themeSemanticTokens from './semanticTokens'
+import themeFonts from './fonts'
 
 const theme: ThemeConfig = extendTheme({
-    initialColorMode: 'system',
-    useSystemColorMode: true, //? This doesnt sync with the system color mode
-    /**
-     * SEMANTIC TOKENS
-     */
-    semanticTokens: themeSemanticTokens,
-    /**
-     * CUSTOM COLORS
-     */
-    colors: themeColors,
-    /**
-     * CUSTOM FONTS
-     */
-    fonts: themeFonts,
-    /**
-     * COMPONENT CUSTOMIZATIONS
-     */
-    components: themeComponents,
+  initialColorMode: 'system',
+  useSystemColorMode: true, //? This doesnt sync with the system color mode
+  /**
+   * SEMANTIC TOKENS
+   */
+  semanticTokens: themeSemanticTokens,
+  /**
+   * CUSTOM COLORS
+   */
+  colors: themeColors,
+  /**
+   * CUSTOM FONTS
+   */
+  fonts: themeFonts,
+  /**
+   * COMPONENT CUSTOMIZATIONS
+   */
+  components: themeComponents
 })
 
-export default theme;
+export default theme

@@ -1,13 +1,13 @@
-import { Box, Flex, Spacer } from "@chakra-ui/react";
-import React, { FC, useState } from "react";
-import PageDirectory from "./components/PageDirectory";
-import NavbarControls from "./components/NavbarControls";
+import {Box, Flex, Spacer} from '@chakra-ui/react'
+import React, {FC, useState} from 'react'
+import PageDirectory from './components/PageDirectory'
+import NavbarControls from './components/NavbarControls'
 
 /**
  * Left navigation bar.
  */
 const LeftNav: FC = () => {
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(true)
 
   return (
     <Flex
@@ -17,16 +17,16 @@ const LeftNav: FC = () => {
       fontSize="sm"
       flexDirection="column"
       h="calc(100vh - 100px)"
-      w={isExpanded ? "auto" : "5rem"}
+      w={isExpanded ? 'auto' : '5rem'}
       color="shared.text.default"
     >
-      <Box w={isExpanded ? "auto" : 0}>
+      <Box w={isExpanded ? 'auto' : 0}>
         <PageDirectory isExpanded={isExpanded} />
       </Box>
       <Spacer />
       <NavbarControls isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
     </Flex>
-  );
-};
+  )
+}
 
-export default LeftNav;
+export default LeftNav

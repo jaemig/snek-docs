@@ -1,6 +1,3 @@
-
-const themeFonts = {
-    
-}
+const themeFonts = {}
 
 export default themeFonts

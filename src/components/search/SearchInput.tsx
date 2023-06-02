@@ -58,11 +58,11 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
             menuButton.onClick(e)
           }}
           onInput={e => {
-            const query = e.currentTarget.value.trim();
+            const query = e.currentTarget.value.trim()
             if (!menu.isOpen && query.length > 0) {
               menu.onOpen()
-            };
-            setSearchQuery(e.currentTarget.value);
+            }
+            setSearchQuery(e.currentTarget.value)
           }}
         />
         {!isTouchDevice() && (
@@ -72,7 +72,8 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
                 borderBottomWidth={1}
                 background="transparent"
                 borderRadius={4}
-                py={0.5}>
+                py={0.5}
+              >
                 {platform} K
               </Kbd>
             }
