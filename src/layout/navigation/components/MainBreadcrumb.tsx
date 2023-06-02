@@ -1,4 +1,4 @@
-import {ChevronRightIcon} from '@chakra-ui/icons';
+import { ChevronRightIcon } from '@chakra-ui/icons';
 import {
   Breadcrumb,
   BreadcrumbLinkProps,
@@ -6,7 +6,8 @@ import {
   BreadcrumbLink,
   Text
 } from '@chakra-ui/react';
-import React, {FC} from 'react';
+import React, { FC } from 'react';
+import { MainBreadcrumbPart } from '../../../types/navigation';
 
 // Example breadcrumb parts - this would be fetched from a CMS or other data source
 const breadCrumbParts = [
@@ -26,19 +27,21 @@ const breadCrumbParts = [
   }
 ];
 
+interface IMainBradcrumbProps {
+  parts: MainBreadcrumbPart[];
+}
 /**
  *  Main breadcrumb component.
  */
-const MainBreadcrumb: FC = () => {
+const MainBreadcrumb: FC<IMainBradcrumbProps> = ({ parts }) => {
   return (
     <Breadcrumb
       separator={<ChevronRightIcon />}
       fontSize="sm"
       w="100%"
       overflowX="auto"
-      mb={5}
-    >
-      {breadCrumbParts.map((item, i) => {
+      mb={5}>
+      {parts.map((item, i) => {
         const props: BreadcrumbLinkProps = {};
 
         if (item.isActive) {
@@ -64,14 +67,12 @@ const MainBreadcrumb: FC = () => {
             isCurrentPage={item.isActive || item.isDisabled}
             overflow="hidden"
             whiteSpace="nowrap"
-            textOverflow="ellipsis"
-          >
+            textOverflow="ellipsis">
             <BreadcrumbLink
               href={item.href}
               transition="opacity 0.1s ease-in-out"
               isCurrentPage
-              {...props}
-            >
+              {...props}>
               <Text isTruncated>{item.name}</Text>
             </BreadcrumbLink>
           </BreadcrumbItem>

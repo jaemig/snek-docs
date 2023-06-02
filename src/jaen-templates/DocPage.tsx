@@ -1,25 +1,41 @@
-import React from 'react';
-import {HeadFC, graphql} from 'gatsby';
-import {Box, ChakraProvider, Flex, Grid, chakra} from '@chakra-ui/react';
+import React, { useMemo } from 'react';
+import { HeadFC, graphql } from 'gatsby';
+import { Box, ChakraProvider, Flex, Grid, chakra } from '@chakra-ui/react';
 import TopNav from '../layout/navigation/TopNav';
 import LeftNav from '../layout/navigation/LeftNav';
 import RightNav from '../layout/navigation/RightNav';
-import theme from '../theme/theme';
 import AppLayout from '../layout/AppLayout';
-import {connectTemplate, Field} from '@snek-at/jaen';
+import { connectTemplate, Field, useJaenPageTree } from '@snek-at/jaen';
 import Heading from '../components/main-content/heading/Heading';
 import CodeSnippet from '../components/main-content/code-snippet/CodeSnippet';
 import Text from '../components/main-content/text/Text';
 import Filesystem from '../components/main-content/filesystem/Filesystem';
-import {useTocNavigation} from '../hooks/use-toc-navigation';
 import Link from '../components/Link';
 import List from '../components/main-content/list/List';
 import ListItem from '../components/main-content/list/ListItem';
+import { convertPageTreeToMenu, createBreadCrumbParts } from '../helpers/utils';
+import { MainBreadcrumbPart } from '../types/navigation';
 import MainBreadcrumb from '../layout/navigation/components/MainBreadcrumb';
 
 const DocsPage = connectTemplate(
   () => {
-    const tableOfContent = useTocNavigation('documentation');
+    const pageTree = useJaenPageTree();
+
+    const menuStructure = useMemo(
+      () => convertPageTreeToMenu(pageTree),
+      [pageTree]
+    );
+
+    const breadcrumbParts: MainBreadcrumbPart[] = useMemo(() => {
+      return [
+        {
+          name: 'Documentation',
+          isDisabled: true,
+          href: '/docs'
+        },
+        ...createBreadCrumbParts(menuStructure.menu)
+      ];
+    }, [pageTree]);
 
     return (
       <AppLayout>
@@ -36,17 +52,15 @@ const DocsPage = connectTemplate(
             xl: 'minmax(auto, 250px) minmax(auto, 4fr) minmax(auto, 250px)'
           }}
           gap={10}
-          px={{base: 7, xl: 0}}
-        >
+          px={{ base: 7, xl: 0 }}>
           <Box
-            display={{base: 'none', md: 'block'}}
+            display={{ base: 'none', md: 'block' }}
             position="sticky"
-            top="110px"
-          >
-            <LeftNav />
+            top="110px">
+            <LeftNav menuData={menuStructure} />
           </Box>
           <Box maxW="700px">
-            <MainBreadcrumb />
+            <MainBreadcrumb parts={breadcrumbParts} />
             <Field.Mdx
               name="documentation"
               components={{
@@ -104,4 +118,4 @@ export const query = graphql`
   }
 `;
 
-export {Head} from '@snek-at/jaen';
+export { Head } from '@snek-at/jaen';
