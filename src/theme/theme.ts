@@ -2,12 +2,12 @@ import {
   extendTheme,
   StyleFunctionProps,
   type ThemeConfig
-} from '@chakra-ui/react'
-import {mode} from '@chakra-ui/theme-tools'
-import themeComponents from './components'
-import themeColors from './colors'
-import themeSemanticTokens from './semanticTokens'
-import themeFonts from './fonts'
+} from '@chakra-ui/react';
+import {mode} from '@chakra-ui/theme-tools';
+import themeComponents from './components';
+import themeColors from './colors';
+import themeSemanticTokens from './semanticTokens';
+import themeFonts from './fonts';
 
 const theme: ThemeConfig = extendTheme({
   initialColorMode: 'system',
@@ -28,6 +28,6 @@ const theme: ThemeConfig = extendTheme({
    * COMPONENT CUSTOMIZATIONS
    */
   components: themeComponents
-})
+});
 
-export default theme
+export default theme;

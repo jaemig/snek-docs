@@ -4,23 +4,26 @@ import {
   Text,
   transition,
   useColorModeValue
-} from '@chakra-ui/react'
-import React, {FC} from 'react'
-import 'highlight.js/styles/atom-one-dark.css'
-import {CheckIcon, CopyIcon} from '@chakra-ui/icons'
-import SyntaxHighlighter from 'react-syntax-highlighter'
-import {oneDark, oneLight} from 'react-syntax-highlighter/dist/esm/styles/prism'
-import {IMainContentComponentBaseProps} from '../../../layout/main/mainContent.types'
-import {mainComponentBaseStyle} from '../../../layout/main/mainContent.vars'
+} from '@chakra-ui/react';
+import React, {FC} from 'react';
+import 'highlight.js/styles/atom-one-dark.css';
+import {CheckIcon, CopyIcon} from '@chakra-ui/icons';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import {
+  oneDark,
+  oneLight
+} from 'react-syntax-highlighter/dist/esm/styles/prism';
+import {IMainContentComponentBaseProps} from '../../../layout/main/mainContent.types';
+import {mainComponentBaseStyle} from '../../../layout/main/mainContent.vars';
 
 export interface ICodeSnippetProps extends IMainContentComponentBaseProps {
-  code?: string
-  language?: string
-  headerText?: string
-  startingLineNumber?: number
+  code?: string;
+  language?: string;
+  headerText?: string;
+  startingLineNumber?: number;
 }
 
-let timeout: NodeJS.Timeout
+let timeout: NodeJS.Timeout;
 
 /**
  * Code snippet component for displaying code examples.
@@ -31,17 +34,17 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({
   headerText,
   startingLineNumber = 1
 }) => {
-  const [buttonIcon, setButtonIcon] = React.useState<'copy' | 'check'>('copy')
-  const theme = useColorModeValue(oneLight, oneDark)
+  const [buttonIcon, setButtonIcon] = React.useState<'copy' | 'check'>('copy');
+  const theme = useColorModeValue(oneLight, oneDark);
 
   /**
    * Copy code to clipboard.
    */
   const copyToClipboard = () => {
-    setButtonIcon('check')
-    clearTimeout(timeout)
-    timeout = setTimeout(() => setButtonIcon('copy'), 2000)
-  }
+    setButtonIcon('check');
+    clearTimeout(timeout);
+    timeout = setTimeout(() => setButtonIcon('copy'), 2000);
+  };
 
   return (
     <Box
@@ -122,12 +125,12 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({
         </Box>
       </Box>
     </Box>
-  )
-}
+  );
+};
 CodeSnippet.defaultProps = {
   code: '',
   headerText: undefined,
   startingLineNumber: 1
-}
+};
 
-export default CodeSnippet
+export default CodeSnippet;

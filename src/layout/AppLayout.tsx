@@ -1,12 +1,12 @@
-import React, {FC} from 'react'
-import TopNav from './navigation/TopNav'
-import {Box, ChakraProvider, Flex} from '@chakra-ui/react'
-import theme from '../theme/theme'
-import Footer from './Footer'
-import {PageManagerProvider} from '@snek-at/jaen'
+import React, {FC} from 'react';
+import TopNav from './navigation/TopNav';
+import {Box, ChakraProvider, Flex} from '@chakra-ui/react';
+import theme from '../theme/theme';
+import Footer from './Footer';
+import {PageManagerProvider} from '@snek-at/jaen';
 
 interface AppLayoutProps {
-  children?: React.ReactNode
+  children?: React.ReactNode;
 }
 
 /**
@@ -30,7 +30,7 @@ const AppLayout: FC<AppLayoutProps> = ({children}) => {
         <Footer />
       </PageManagerProvider>
     </ChakraProvider>
-  )
-}
+  );
+};
 
-export default AppLayout
+export default AppLayout;

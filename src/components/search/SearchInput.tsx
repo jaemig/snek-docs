@@ -5,12 +5,12 @@ import {
   Kbd,
   useMenuButton,
   useMenuContext
-} from '@chakra-ui/react'
-import React, {Dispatch, FC, SetStateAction, forwardRef, useMemo} from 'react'
-import {getPlatform, isTouchDevice} from '../../helpers/utils'
+} from '@chakra-ui/react';
+import React, {Dispatch, FC, SetStateAction, forwardRef, useMemo} from 'react';
+import {getPlatform, isTouchDevice} from '../../helpers/utils';
 
 interface SearchInputProps {
-  setSearchQuery: Dispatch<SetStateAction<string>>
+  setSearchQuery: Dispatch<SetStateAction<string>>;
 }
 
 /**
@@ -18,19 +18,19 @@ interface SearchInputProps {
  */
 const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
   ({setSearchQuery}, ref) => {
-    const menu = useMenuContext()
-    const menuButton = useMenuButton({}, ref)
+    const menu = useMenuContext();
+    const menuButton = useMenuButton({}, ref);
 
     const platform = useMemo(() => {
       switch (getPlatform()) {
         case 'mac':
-          return '⌘'
+          return '⌘';
         case 'windows':
-          return 'Ctrl'
+          return 'Ctrl';
         default:
-          return ''
+          return '';
       }
-    }, [])
+    }, []);
 
     return (
       <InputGroup size="sm">
@@ -47,22 +47,22 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
           focusBorderColor="theme.500"
           {...menuButton}
           onClick={e => {
-            const value = e.currentTarget.value
+            const value = e.currentTarget.value;
 
             // Cancel if the value is empty
             if (!value) {
-              return
+              return;
             }
 
             // Otherwise use the default behavior
-            menuButton.onClick(e)
+            menuButton.onClick(e);
           }}
           onInput={e => {
-            const query = e.currentTarget.value.trim()
+            const query = e.currentTarget.value.trim();
             if (!menu.isOpen && query.length > 0) {
-              menu.onOpen()
+              menu.onOpen();
             }
-            setSearchQuery(e.currentTarget.value)
+            setSearchQuery(e.currentTarget.value);
           }}
         />
         {!isTouchDevice() && (
@@ -82,8 +82,8 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
           />
         )}
       </InputGroup>
-    )
+    );
   }
-)
+);
 
-export default SearchInput
+export default SearchInput;

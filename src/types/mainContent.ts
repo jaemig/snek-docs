@@ -1,9 +1,9 @@
-import {ChakraProps} from '@chakra-ui/react'
-import {ICodeSnippetProps} from '../components/main-content/code-snippet/CodeSnippet'
-import {IFileSystemProps} from '../components/main-content/filesystem/Filesystem'
-import {IHeadingProps} from '../components/main-content/heading/Heading'
-import {IListProps} from '../components/main-content/list/List'
-import {ITextProps} from '../components/main-content/text/Text'
+import {ChakraProps} from '@chakra-ui/react';
+import {ICodeSnippetProps} from '../components/main-content/code-snippet/CodeSnippet';
+import {IFileSystemProps} from '../components/main-content/filesystem/Filesystem';
+import {IHeadingProps} from '../components/main-content/heading/Heading';
+import {IListProps} from '../components/main-content/list/List';
+import {ITextProps} from '../components/main-content/text/Text';
 
 export enum MainContentType {
   Heading,
@@ -14,37 +14,37 @@ export enum MainContentType {
 }
 
 export interface IMainContentComponentBaseProps {
-  baseProps?: ChakraProps
+  baseProps?: ChakraProps;
 }
 
 export interface IMainContentComponent {
-  type: MainContentType
+  type: MainContentType;
 }
 
 export interface IHeadingComponent
   extends IMainContentComponent,
     IHeadingProps {
-  type: MainContentType.Heading
+  type: MainContentType.Heading;
 }
 
 export interface ITextComponent extends IMainContentComponent, ITextProps {
-  type: MainContentType.Text
+  type: MainContentType.Text;
 }
 
 export interface IListComponent extends IMainContentComponent, IListProps {
-  type: MainContentType.List
+  type: MainContentType.List;
 }
 
 export interface IFilesystemComponent
   extends IMainContentComponent,
     IFileSystemProps {
-  type: MainContentType.Filesystem
+  type: MainContentType.Filesystem;
 }
 
 export interface ICodeSnippetComponent
   extends IMainContentComponent,
     ICodeSnippetProps {
-  type: MainContentType.CodeSnippet
+  type: MainContentType.CodeSnippet;
 }
 
 export type MainContentItem =
@@ -52,4 +52,4 @@ export type MainContentItem =
   | ITextComponent
   | IListComponent
   | IFilesystemComponent
-  | ICodeSnippetComponent
+  | ICodeSnippetComponent;

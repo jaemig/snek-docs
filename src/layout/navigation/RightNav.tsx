@@ -1,9 +1,9 @@
-import React, {FC} from 'react'
-import {Box, Flex, Link, Text, VStack} from '@chakra-ui/react'
-import {ArrowForwardIcon} from '@chakra-ui/icons'
-import MemoizedLinks from '../../components/MemoizedLink'
-import TableOfContent from './components/TableOfContent'
-import {NavMenuItem} from '../../types/navigation'
+import React, {FC} from 'react';
+import {Box, Flex, Link, Text, VStack} from '@chakra-ui/react';
+import {ArrowForwardIcon} from '@chakra-ui/icons';
+import MemoizedLinks from '../../components/MemoizedLink';
+import TableOfContent from './components/TableOfContent';
+import {NavMenuItem} from '../../types/navigation';
 
 // Example links - these would probably be fetched from a CMS or other data source
 const links = [
@@ -15,7 +15,7 @@ const links = [
     name: 'Edit this page on GitHub',
     href: '#'
   }
-]
+];
 
 /**
  * Right navigation bar.
@@ -55,7 +55,7 @@ const RightNav: FC = ({}) => {
         </VStack>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default RightNav
+export default RightNav;

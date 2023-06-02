@@ -24,6 +24,6 @@ const themeLinkComponent = {
       transition: 'opacity 0.1s ease-in-out'
     }
   }
-}
+};
 
-export default themeLinkComponent
+export default themeLinkComponent;

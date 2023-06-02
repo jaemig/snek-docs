@@ -1,11 +1,11 @@
-import {ChevronLeftIcon, ChevronRightIcon} from '@chakra-ui/icons'
-import {Flex, Link, Spacer, Text} from '@chakra-ui/react'
-import React, {FC} from 'react'
-import {LinkData} from '../../types/navigation'
+import {ChevronLeftIcon, ChevronRightIcon} from '@chakra-ui/icons';
+import {Flex, Link, Spacer, Text} from '@chakra-ui/react';
+import React, {FC} from 'react';
+import {LinkData} from '../../types/navigation';
 
 interface MainBottomNavProps {
-  previousPage?: LinkData
-  nextPage?: LinkData
+  previousPage?: LinkData;
+  nextPage?: LinkData;
 }
 
 const props = {
@@ -16,7 +16,7 @@ const props = {
     color: 'main.bottomNav.linkHoverColor',
     opacity: 1
   }
-}
+};
 
 /**
  * Main bottom navigation component.
@@ -49,7 +49,7 @@ const MainBottomNav: FC<MainBottomNavProps> = ({previousPage, nextPage}) => {
         </Link>
       )}
     </Flex>
-  )
-}
+  );
+};
 
-export default MainBottomNav
+export default MainBottomNav;

@@ -1,21 +1,21 @@
-import React from 'react'
-import {HeadFC, graphql} from 'gatsby'
-import {Box, ChakraProvider, Flex, Grid, Text} from '@chakra-ui/react'
-import TopNav from '../layout/navigation/TopNav'
-import LeftNav from '../layout/navigation/LeftNav'
-import RightNav from '../layout/navigation/RightNav'
-import theme from '../theme/theme'
-import AppLayout from '../layout/AppLayout'
+import React from 'react';
+import {HeadFC, graphql} from 'gatsby';
+import {Box, ChakraProvider, Flex, Grid, Text} from '@chakra-ui/react';
+import TopNav from '../layout/navigation/TopNav';
+import LeftNav from '../layout/navigation/LeftNav';
+import RightNav from '../layout/navigation/RightNav';
+import theme from '../theme/theme';
+import AppLayout from '../layout/AppLayout';
 import {
   connectPage,
   usePageManager,
   PageManagerProvider,
   generatePageOriginPath
-} from '@snek-at/jaen'
+} from '@snek-at/jaen';
 
 //TODO: Use this to build the page tree
 const PageTree = () => {
-  const manager = usePageManager()
+  const manager = usePageManager();
 
   return (
     <span>
@@ -29,11 +29,11 @@ const PageTree = () => {
             {page.id} {page.slug} (
             {generatePageOriginPath(manager.pageTree, page)})
           </div>
-        )
+        );
       })}
     </span>
-  )
-}
+  );
+};
 
 const DocsPage = connectPage(
   () => {
@@ -69,13 +69,13 @@ const DocsPage = connectPage(
           </Box>
         </Grid>
       </AppLayout>
-    )
+    );
   },
   {
     label: 'Docs',
     children: ['DocPage']
   }
-)
+);
 
 export const query = graphql`
   query ($jaenPageId: String!) {
@@ -89,8 +89,8 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
-export default DocsPage
+export default DocsPage;
 
-export {Head} from '@snek-at/jaen'
+export {Head} from '@snek-at/jaen';

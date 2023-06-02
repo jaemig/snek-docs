@@ -190,8 +190,7 @@ const generateMenuItem = (
           }
         }}
         // This is a hack to remove the bottom border from the last accordion item
-        borderBottomWidth="0 !important"
-      >
+        borderBottomWidth="0 !important">
         {({isExpanded}) => (
           <>
             <Link href={item.href} onClick={linkClickHandler}>
@@ -205,8 +204,7 @@ const generateMenuItem = (
                 py={1.5}
                 backgroundColor={
                   item.isActive ? semanticPath + 'bgColor' : undefined
-                }
-              >
+                }>
                 <Box as="span" flex="1">
                   {item.name}
                   {item.isExternal && externalLinkIcon}
@@ -219,8 +217,7 @@ const generateMenuItem = (
                   backgroundColor="transparent"
                   _hover={{
                     bgColor: semanticPath + 'button.icon.hoverContainerBgColor'
-                  }}
-                >
+                  }}>
                   <AccordionIcon
                     className="prv-link"
                     opacity="inherit"
@@ -241,8 +238,7 @@ const generateMenuItem = (
                   width: '1px',
                   height: 'calc(100% - 0.5rem)',
                   backgroundColor: 'leftNav.accordion.panel.borderLeftColor'
-                }}
-              >
+                }}>
                 {children}
               </Box>
             </AccordionPanel>
@@ -264,8 +260,7 @@ const generateMenuItem = (
       mt={1}
       cursor="pointer"
       borderRadius="md"
-      onClick={closeMobileDrawer}
-    >
+      onClick={closeMobileDrawer}>
       {item.isSection && (
         <Box key={-5} as="span" mr={2} fontSize="sm" color="gray.400">
           #
@@ -379,8 +374,7 @@ const PageDirectory: FC<PageDirectoryProps> = ({
       variant="leftNav"
       transition="opacity 0.2s ease-in-out, width 0.2s ease-in-out"
       mb={isMobile ? 12 : undefined}
-      defaultIndex={menuStructure.expandedIdx}
-    >
+      defaultIndex={menuStructure.expandedIdx}>
       {[...menuStructure.menu, ...baseMenuItems].map((section, i) => (
         <Fragment key={i}>
           {section.name && (
@@ -389,8 +383,7 @@ const PageDirectory: FC<PageDirectoryProps> = ({
               mt={i === 0 ? 0 : 9}
               fontSize="sm"
               fontWeight="bold"
-              ml={4}
-            >
+              ml={4}>
               {section.name}
             </Box>
           )}

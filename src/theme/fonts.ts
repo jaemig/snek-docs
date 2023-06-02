@@ -1,3 +1,3 @@
-const themeFonts = {}
+const themeFonts = {};
 
-export default themeFonts
+export default themeFonts;

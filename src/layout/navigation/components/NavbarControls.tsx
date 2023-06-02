@@ -1,4 +1,4 @@
-import {SunIcon, MoonIcon, CheckIcon} from '@chakra-ui/icons'
+import {SunIcon, MoonIcon, CheckIcon} from '@chakra-ui/icons';
 import {
   useColorMode,
   Flex,
@@ -11,15 +11,15 @@ import {
   ColorMode,
   MenuItem,
   FlexProps
-} from '@chakra-ui/react'
-import {Dispatch, FC, SetStateAction} from 'react'
-import HideSidebarIcon from '../../../components/icons/HideSidebar'
-import React from 'react'
+} from '@chakra-ui/react';
+import {Dispatch, FC, SetStateAction} from 'react';
+import HideSidebarIcon from '../../../components/icons/HideSidebar';
+import React from 'react';
 
 interface NavbarControlsProps {
-  isMobile?: boolean
-  isExpanded?: boolean
-  setIsExpanded?: Dispatch<SetStateAction<boolean>>
+  isMobile?: boolean;
+  isExpanded?: boolean;
+  setIsExpanded?: Dispatch<SetStateAction<boolean>>;
 }
 /**
  * The navbar controls including the expand/collapse and color mode toggle button.
@@ -29,18 +29,18 @@ const NavbarControls: FC<NavbarControlsProps> = ({
   isExpanded,
   setIsExpanded
 }) => {
-  const {colorMode, toggleColorMode} = useColorMode()
+  const {colorMode, toggleColorMode} = useColorMode();
 
-  const conditional_props: FlexProps = {}
+  const conditional_props: FlexProps = {};
   if (isMobile) {
-    isExpanded = true
-    conditional_props.position = 'absolute'
-    conditional_props.bottom = 0
-    conditional_props.bgColor = 'shared.body'
-    conditional_props.w = 'calc(100% - 3rem)'
+    isExpanded = true;
+    conditional_props.position = 'absolute';
+    conditional_props.bottom = 0;
+    conditional_props.bgColor = 'shared.body';
+    conditional_props.w = 'calc(100% - 3rem)';
   }
 
-  const isLightColorMode = colorMode === 'light'
+  const isLightColorMode = colorMode === 'light';
   return (
     <Flex
       w="100%"
@@ -90,24 +90,24 @@ const NavbarControls: FC<NavbarControlsProps> = ({
         />
       )}
     </Flex>
-  )
-}
+  );
+};
 
 /**
  * Memoized color mode menu items.
  */
-const colorModes = ['Light', 'Dark', 'System']
+const colorModes = ['Light', 'Dark', 'System'];
 //TODO: Fix system color mode toggle (doesnt work - doesnt stay in sync with system)
 const MemoizedColorModeMenuItems = React.memo<{
-  currentColorMode: ColorMode
-  toggleColorMode: () => void
+  currentColorMode: ColorMode;
+  toggleColorMode: () => void;
 }>(
   ({currentColorMode, toggleColorMode}) => {
     return (
       <>
         {colorModes.map((mode, i) => {
           const isCurrentColorMode =
-            currentColorMode === mode.toLocaleLowerCase()
+            currentColorMode === mode.toLocaleLowerCase();
           return (
             <MenuItem
               key={i}
@@ -130,13 +130,13 @@ const MemoizedColorModeMenuItems = React.memo<{
                 />
               )}
             </MenuItem>
-          )
+          );
         })}
       </>
-    )
+    );
   },
   (prevProps, nextProps) =>
     prevProps.currentColorMode === nextProps.currentColorMode
-)
+);
 
-export default NavbarControls
+export default NavbarControls;

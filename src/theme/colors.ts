@@ -12,6 +12,6 @@ const themeColors = {
     800: '#006980',
     900: '#003f4d'
   }
-}
+};
 
-export default themeColors
+export default themeColors;

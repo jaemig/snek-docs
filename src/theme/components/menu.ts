@@ -39,6 +39,6 @@ const themeMenuComponent = {
       }
     }
   }
-}
+};
 
-export default themeMenuComponent
+export default themeMenuComponent;

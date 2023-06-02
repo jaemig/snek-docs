@@ -13,6 +13,6 @@ const themeButtonComponent = {
       }
     }
   }
-}
+};
 
-export default themeButtonComponent
+export default themeButtonComponent;

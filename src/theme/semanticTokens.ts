@@ -316,6 +316,6 @@ const themeSemanticTokens = {
       }
     }
   }
-}
+};
 
-export default themeSemanticTokens
+export default themeSemanticTokens;

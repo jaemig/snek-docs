@@ -1,5 +1,5 @@
-import {Icon, IconProps} from '@chakra-ui/react'
-import React from 'react'
+import {Icon, IconProps} from '@chakra-ui/react';
+import React from 'react';
 
 /**
  * Feather icon for a file.
@@ -19,7 +19,7 @@ const FeatherFile = (props: IconProps) => {
       <line x1="16" y1="13" x2="8" y2="13"></line>
       <line x1="16" y1="17" x2="8" y2="17"></line>
     </Icon>
-  )
-}
+  );
+};
 
-export default FeatherFile
+export default FeatherFile;

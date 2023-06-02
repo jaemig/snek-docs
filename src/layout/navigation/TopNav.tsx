@@ -13,14 +13,14 @@ import {
   Image,
   useDisclosure,
   Button
-} from '@chakra-ui/react'
-import React, {FC, useEffect, useState} from 'react'
-import GitHub from '../../components/icons/GitHub'
-import SnekIcon from '../../assets/icons/brand.svg'
-import MemoizedLinks from '../../components/MemoizedLink'
-import {LinkData} from './navigation.types'
-import MobileNavDrawer from './MobileNavDrawer'
-import SearchMenu from '../../components/search/SearchMenu'
+} from '@chakra-ui/react';
+import React, {FC, useEffect, useState} from 'react';
+import GitHub from '../../components/icons/GitHub';
+import SnekIcon from '../../assets/icons/brand.svg';
+import MemoizedLinks from '../../components/MemoizedLink';
+import {LinkData} from './navigation.types';
+import MobileNavDrawer from './MobileNavDrawer';
+import SearchMenu from '../../components/search/SearchMenu';
 
 const links: LinkData[] = [
   {
@@ -36,7 +36,7 @@ const links: LinkData[] = [
     name: 'Contact',
     href: '#'
   }
-]
+];
 
 const navLinkProps = {
   display: {base: 'none', md: 'initial'},
@@ -46,29 +46,29 @@ const navLinkProps = {
     opacity: 1
   },
   fontSize: 'sm'
-}
+};
 
 /**
  * Top navigation bar.
  */
 const TopNav: FC = () => {
-  const [hamburgerClass, setHamburgerClass] = useState('')
-  const {isOpen, onOpen, onClose} = useDisclosure() // Mobile menu drawer
+  const [hamburgerClass, setHamburgerClass] = useState('');
+  const {isOpen, onOpen, onClose} = useDisclosure(); // Mobile menu drawer
 
   const openDrawer = () => {
-    setHamburgerClass('open')
-    onOpen()
-  }
+    setHamburgerClass('open');
+    onOpen();
+  };
 
   const closeDrawer = () => {
-    setHamburgerClass('')
-    onClose()
-  }
+    setHamburgerClass('');
+    onClose();
+  };
 
   const toggleMobileMenu = () => {
-    if (hamburgerClass === 'open') closeDrawer()
-    else openDrawer()
-  }
+    if (hamburgerClass === 'open') closeDrawer();
+    else openDrawer();
+  };
 
   return (
     <>
@@ -176,7 +176,7 @@ const TopNav: FC = () => {
       </Center>
       <MobileNavDrawer isOpen={isOpen} onOpen={onOpen} onClose={closeDrawer} />
     </>
-  )
-}
+  );
+};
 
-export default TopNav
+export default TopNav;

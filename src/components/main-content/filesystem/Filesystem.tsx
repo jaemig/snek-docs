@@ -1,16 +1,16 @@
-import {Box, BoxProps, Tooltip, TooltipProps} from '@chakra-ui/react'
-import React, {FC, useState} from 'react'
-import {TFilesystemItem} from './filesystem.types'
-import BsFileEarmark from '../../icons/bootstrap/BsFileEarmark'
-import BsFolder2Open from '../../icons/bootstrap/BsFolder2Open'
-import BsFolder from '../../icons/bootstrap/BsFolder'
-import {IMainContentComponentBaseProps} from '../../../layout/main/mainContent.types'
-import {mainComponentBaseStyle} from '../../../layout/main/mainContent.vars'
+import {Box, BoxProps, Tooltip, TooltipProps} from '@chakra-ui/react';
+import React, {FC, useState} from 'react';
+import {TFilesystemItem} from './filesystem.types';
+import BsFileEarmark from '../../icons/bootstrap/BsFileEarmark';
+import BsFolder2Open from '../../icons/bootstrap/BsFolder2Open';
+import BsFolder from '../../icons/bootstrap/BsFolder';
+import {IMainContentComponentBaseProps} from '../../../layout/main/mainContent.types';
+import {mainComponentBaseStyle} from '../../../layout/main/mainContent.vars';
 
 interface IFilesystemItemProps {
-  item: TFilesystemItem
-  intendation: number
-  isChild?: boolean
+  item: TFilesystemItem;
+  intendation: number;
+  isChild?: boolean;
 }
 /**
  * A single item in the filesystem
@@ -20,16 +20,16 @@ const FilesystemItem: FC<IFilesystemItemProps> = ({
   intendation,
   isChild
 }) => {
-  const isFolder = item.type === 'folder'
+  const isFolder = item.type === 'folder';
 
   const [showChildren, setShowChildren] = useState(
     isFolder && (item.defaultOpen ?? true)
-  )
-  const toggleShowChildren = () => setShowChildren(!showChildren)
+  );
+  const toggleShowChildren = () => setShowChildren(!showChildren);
 
   // Tooltip sttings
   const tooltipText =
-    typeof item.tooltip === 'string' ? item.tooltip : item.tooltip?.text
+    typeof item.tooltip === 'string' ? item.tooltip : item.tooltip?.text;
   let tooltipProps: TooltipProps = {
     label: tooltipText,
     bgColor: 'components.filesystem.tooltip.bgColor',
@@ -37,48 +37,48 @@ const FilesystemItem: FC<IFilesystemItemProps> = ({
     borderRadius: 'md',
     placement: 'right',
     children: undefined
-  }
+  };
   if (typeof item.tooltip === 'object') {
     tooltipProps = {
       ...tooltipProps,
       ...item.tooltip
-    }
+    };
   }
 
   // Icon settings
-  let IconComp
-  let props: BoxProps = {transition: 'opacity 0.2s ease-in-out'}
+  let IconComp;
+  let props: BoxProps = {transition: 'opacity 0.2s ease-in-out'};
   if (isFolder) {
     props = {
       ...props,
       cursor: 'pointer',
       _hover: {...props._hover, opacity: 0.7}
-    }
-    IconComp = showChildren ? BsFolder2Open : BsFolder
+    };
+    IconComp = showChildren ? BsFolder2Open : BsFolder;
   } else {
-    props.cursor = tooltipText ? 'pointer' : 'default'
-    IconComp = BsFileEarmark
+    props.cursor = tooltipText ? 'pointer' : 'default';
+    IconComp = BsFileEarmark;
   }
 
   // Colorization settings
   if (item.isSelected) {
     const color = `components.filesystem.selected.color.${
       item.lowContrast ? 'lowContrast' : 'default'
-    }`
+    }`;
     props = {
       ...props,
       color,
       fill: color
-    }
+    };
   } else {
     const color = `components.filesystem.color.${
       item.lowContrast ? 'lowContrast.initial' : 'default'
-    }`
+    }`;
     props = {
       ...props,
       color,
       fill: color
-    }
+    };
   }
 
   if (item.lowContrast) {
@@ -89,7 +89,7 @@ const FilesystemItem: FC<IFilesystemItemProps> = ({
         ...props._hover,
         opacity: 1
       }
-    }
+    };
   }
 
   if (isChild) {
@@ -106,7 +106,7 @@ const FilesystemItem: FC<IFilesystemItemProps> = ({
         width: 2,
         bg: 'components.filesystem.'
       }
-    }
+    };
   }
 
   const itemContent = (
@@ -119,7 +119,7 @@ const FilesystemItem: FC<IFilesystemItemProps> = ({
       />
       {item.name}
     </Box>
-  )
+  );
 
   return (
     <Box ml={intendation * 3} mb={1}>
@@ -159,11 +159,11 @@ const FilesystemItem: FC<IFilesystemItemProps> = ({
         </Box>
       )}
     </Box>
-  )
-}
+  );
+};
 
 export interface IFileSystemProps {
-  structure: TFilesystemItem[]
+  structure: TFilesystemItem[];
 }
 /**
  * Filesystem component for displaying filesystem structures.
@@ -191,8 +191,8 @@ const Filesystem: FC<IFileSystemProps> = ({structure}) => {
           <FilesystemItem item={item} intendation={0} key={i} />
         ))}
     </Box>
-  )
-}
-Filesystem.defaultProps = {}
+  );
+};
+Filesystem.defaultProps = {};
 
-export default Filesystem
+export default Filesystem;

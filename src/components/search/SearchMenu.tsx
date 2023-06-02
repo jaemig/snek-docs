@@ -10,10 +10,10 @@ import {
   MenuListProps,
   MenuProps,
   Text
-} from '@chakra-ui/react'
-import React, {FC, Fragment, ReactElement, useEffect, useRef} from 'react'
-import {TSearchResult, TSearchResultSection} from './search.types'
-import SearchInput from './SearchInput'
+} from '@chakra-ui/react';
+import React, {FC, Fragment, ReactElement, useEffect, useRef} from 'react';
+import {TSearchResult, TSearchResultSection} from './search.types';
+import SearchInput from './SearchInput';
 
 const exampleSearchResult: TSearchResultSection[] = [
   {
@@ -50,10 +50,10 @@ const exampleSearchResult: TSearchResultSection[] = [
       }
     ]
   }
-]
+];
 
 // Index key for the menu component
-let menuIdx = 0
+let menuIdx = 0;
 
 /**
  * Highlight all occurences the search query in the text
@@ -62,14 +62,14 @@ let menuIdx = 0
  * @returns  The text with highlighted query
  */
 const highLightQuery = (text: string, query: string) => {
-  const lowercase_text = text.toLowerCase()
-  const lowercase_query = query.toLowerCase()
-  let searchIdx = 0 // The index of the last search
-  let occ // The index of the current occurrence
-  const textParts = []
+  const lowercase_text = text.toLowerCase();
+  const lowercase_query = query.toLowerCase();
+  let searchIdx = 0; // The index of the last search
+  let occ; // The index of the current occurrence
+  const textParts = [];
   while ((occ = lowercase_text.indexOf(lowercase_query, searchIdx)) !== -1) {
-    const prefix = text.substring(searchIdx, occ)
-    searchIdx = occ + query.length
+    const prefix = text.substring(searchIdx, occ);
+    searchIdx = occ + query.length;
     textParts.push(
       <Fragment key={occ}>
         {prefix}
@@ -77,7 +77,7 @@ const highLightQuery = (text: string, query: string) => {
           {text.substring(occ, occ + query.length)}
         </Text>
       </Fragment>
-    )
+    );
   }
   // Add the last part of the text
   if (searchIdx < text.length) {
@@ -85,10 +85,10 @@ const highLightQuery = (text: string, query: string) => {
       <Fragment key={text.length}>
         {text.substring(searchIdx, text.length)}
       </Fragment>
-    )
+    );
   }
-  return textParts.length > 0 ? <>{textParts}</> : text
-}
+  return textParts.length > 0 ? <>{textParts}</> : text;
+};
 
 /**
  * The search menu item component for displaying a specific search result item.
@@ -123,16 +123,16 @@ const SearchResultItem: FC<{item: TSearchResult; query: string}> = ({
         </Text>
       </Box>
     </MenuItem>
-  )
-}
+  );
+};
 
 /**
  * The search menu section component for displaying a search result section containing multiple search result items.
  */
 const SearchResultSection: FC<{
-  section: TSearchResultSection
-  idx: number
-  query: string
+  section: TSearchResultSection;
+  idx: number;
+  query: string;
 }> = ({section, idx, query}) => {
   return (
     <MenuGroup key={idx}>
@@ -151,28 +151,28 @@ const SearchResultSection: FC<{
         <SearchResultItem item={result} query={query} key={i} />
       ))}
     </MenuGroup>
-  )
-}
+  );
+};
 
 interface SearchMenuProps {
-  menuProps?: Partial<MenuProps>
-  menuListProps?: Partial<MenuListProps>
+  menuProps?: Partial<MenuProps>;
+  menuListProps?: Partial<MenuListProps>;
 }
 
 /**
  * Search menu component - shows a navigatable list of search results
  */
 const SearchMenu: FC<SearchMenuProps> = ({menuProps, menuListProps}) => {
-  const r = useRef(null)
+  const r = useRef(null);
 
-  const [searchQuery, setSearchQuery] = React.useState('')
+  const [searchQuery, setSearchQuery] = React.useState('');
 
   useEffect(() => {
     // Reset the menu index when the search query changes
-    menuIdx = 0
-  })
+    menuIdx = 0;
+  });
 
-  let searchResults
+  let searchResults;
 
   if (searchQuery.length > 0) {
     searchResults = exampleSearchResult.map((section, idx) => (
@@ -182,13 +182,13 @@ const SearchMenu: FC<SearchMenuProps> = ({menuProps, menuListProps}) => {
         query={searchQuery}
         key={idx}
       />
-    ))
+    ));
     if (!searchResults.length) {
       searchResults = (
         <Center my={5} color="components.menu.noResults.color">
           No results found.
         </Center>
-      )
+      );
     }
   }
 
@@ -207,7 +207,7 @@ const SearchMenu: FC<SearchMenuProps> = ({menuProps, menuListProps}) => {
         </MenuList>
       )}
     </Menu>
-  )
-}
+  );
+};
 
-export default SearchMenu
+export default SearchMenu;

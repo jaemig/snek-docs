@@ -1,12 +1,12 @@
-import {ChevronRightIcon} from '@chakra-ui/icons'
+import {ChevronRightIcon} from '@chakra-ui/icons';
 import {
   Breadcrumb,
   BreadcrumbLinkProps,
   BreadcrumbItem,
   BreadcrumbLink,
   Text
-} from '@chakra-ui/react'
-import React, {FC} from 'react'
+} from '@chakra-ui/react';
+import React, {FC} from 'react';
 
 // Example breadcrumb parts - this would be fetched from a CMS or other data source
 const breadCrumbParts = [
@@ -24,7 +24,7 @@ const breadCrumbParts = [
     href: '#',
     isActive: true
   }
-]
+];
 
 /**
  *  Main breadcrumb component.
@@ -39,21 +39,21 @@ const MainBreadcrumb: FC = () => {
       mb={5}
     >
       {breadCrumbParts.map((item, i) => {
-        const props: BreadcrumbLinkProps = {}
+        const props: BreadcrumbLinkProps = {};
 
         if (item.isActive) {
-          props.opacity = 1
-          props.color = 'main.breadcrumb.active.color'
-          props.fontWeight = 'semibold'
+          props.opacity = 1;
+          props.color = 'main.breadcrumb.active.color';
+          props.fontWeight = 'semibold';
         } else {
           // props.opacity = 0.7;
-          props.color = 'main.breadcrumb.inactive.color'
+          props.color = 'main.breadcrumb.inactive.color';
           if (!item.isDisabled) {
             props._hover = {
               opacity: 1,
               textDecoration: 'none',
               color: 'main.breadcrumb.inactive.hover.color'
-            }
+            };
           }
         }
 
@@ -75,10 +75,10 @@ const MainBreadcrumb: FC = () => {
               <Text isTruncated>{item.name}</Text>
             </BreadcrumbLink>
           </BreadcrumbItem>
-        )
+        );
       })}
     </Breadcrumb>
-  )
-}
+  );
+};
 
-export default MainBreadcrumb
+export default MainBreadcrumb;

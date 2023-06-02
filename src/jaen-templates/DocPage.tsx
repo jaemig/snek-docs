@@ -1,25 +1,25 @@
-import React from 'react'
-import {HeadFC, graphql} from 'gatsby'
-import {Box, ChakraProvider, Flex, Grid, chakra} from '@chakra-ui/react'
-import TopNav from '../layout/navigation/TopNav'
-import LeftNav from '../layout/navigation/LeftNav'
-import RightNav from '../layout/navigation/RightNav'
-import theme from '../theme/theme'
-import AppLayout from '../layout/AppLayout'
-import {connectTemplate, Field} from '@snek-at/jaen'
-import Heading from '../components/main-content/heading/Heading'
-import CodeSnippet from '../components/main-content/code-snippet/CodeSnippet'
-import Text from '../components/main-content/text/Text'
-import Filesystem from '../components/main-content/filesystem/Filesystem'
-import {useTocNavigation} from '../hooks/use-toc-navigation'
-import Link from '../components/Link'
-import List from '../components/main-content/list/List'
-import ListItem from '../components/main-content/list/ListItem'
-import MainBreadcrumb from '../layout/navigation/components/MainBreadcrumb'
+import React from 'react';
+import {HeadFC, graphql} from 'gatsby';
+import {Box, ChakraProvider, Flex, Grid, chakra} from '@chakra-ui/react';
+import TopNav from '../layout/navigation/TopNav';
+import LeftNav from '../layout/navigation/LeftNav';
+import RightNav from '../layout/navigation/RightNav';
+import theme from '../theme/theme';
+import AppLayout from '../layout/AppLayout';
+import {connectTemplate, Field} from '@snek-at/jaen';
+import Heading from '../components/main-content/heading/Heading';
+import CodeSnippet from '../components/main-content/code-snippet/CodeSnippet';
+import Text from '../components/main-content/text/Text';
+import Filesystem from '../components/main-content/filesystem/Filesystem';
+import {useTocNavigation} from '../hooks/use-toc-navigation';
+import Link from '../components/Link';
+import List from '../components/main-content/list/List';
+import ListItem from '../components/main-content/list/ListItem';
+import MainBreadcrumb from '../layout/navigation/components/MainBreadcrumb';
 
 const DocsPage = connectTemplate(
   () => {
-    const tableOfContent = useTocNavigation('documentation')
+    const tableOfContent = useTocNavigation('documentation');
 
     return (
       <AppLayout>
@@ -65,9 +65,9 @@ const DocsPage = connectTemplate(
                 a: (props: any) => <Link href={props.href} {...props} />,
                 // MISC
                 code: (props: any) => {
-                  const lang = props.className?.replace('language-', '')
-                  const code = props.children
-                  return <CodeSnippet language={lang} code={code} {...props} />
+                  const lang = props.className?.replace('language-', '');
+                  const code = props.children;
+                  return <CodeSnippet language={lang} code={code} {...props} />;
                 },
                 // CUSTOM COMPONENTS
                 CodeSnippet,
@@ -80,15 +80,15 @@ const DocsPage = connectTemplate(
           </Box>
         </Grid>
       </AppLayout>
-    )
+    );
   },
   {
     label: 'Docs',
     children: ['DocPage']
   }
-)
+);
 
-export default DocsPage
+export default DocsPage;
 
 export const query = graphql`
   query ($jaenPageId: String!) {
@@ -102,6 +102,6 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
-export {Head} from '@snek-at/jaen'
+export {Head} from '@snek-at/jaen';

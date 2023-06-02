@@ -1,19 +1,19 @@
-import {FC, ReactNode} from 'react'
-import {useTocNavigation} from '../../../hooks/use-toc-navigation'
-import {TableOfContentItem} from '../../../types/navigation'
-import {Box} from '@chakra-ui/react'
-import Link from '../../../components/Link'
+import {FC, ReactNode} from 'react';
+import {useTocNavigation} from '../../../hooks/use-toc-navigation';
+import {TableOfContentItem} from '../../../types/navigation';
+import {Box} from '@chakra-ui/react';
+import Link from '../../../components/Link';
 
 /**
  * Component for the table of content.
  */
 const TableOfContent: FC = ({}) => {
-  const data = useTocNavigation('documentation')
+  const data = useTocNavigation('documentation');
 
   return (
     <>
       {data.map((item: TableOfContentItem) => {
-        const isActive = false //TODO: implement active state
+        const isActive = false; //TODO: implement active state
         return (
           <Box display="block" key={item.id} py={1}>
             <Link
@@ -31,10 +31,10 @@ const TableOfContent: FC = ({}) => {
               {item.text}
             </Link>
           </Box>
-        )
+        );
       })}
     </>
-  )
-}
+  );
+};
 
-export default TableOfContent
+export default TableOfContent;

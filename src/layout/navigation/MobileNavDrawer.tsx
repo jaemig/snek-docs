@@ -4,17 +4,17 @@ import {
   DrawerBody,
   DrawerContent,
   DrawerOverlay
-} from '@chakra-ui/react'
-import React, {FC} from 'react'
-import SearchInput from '../../components/search/SearchInput'
-import PageDirectory from './components/PageDirectory'
-import NavbarControls from './components/NavbarControls'
-import SearchMenu from '../../components/search/SearchMenu'
+} from '@chakra-ui/react';
+import React, {FC} from 'react';
+import SearchInput from '../../components/search/SearchInput';
+import PageDirectory from './components/PageDirectory';
+import NavbarControls from './components/NavbarControls';
+import SearchMenu from '../../components/search/SearchMenu';
 
 interface MobileNavDrawerProps {
-  isOpen: boolean
-  onOpen: () => void
-  onClose: () => void
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
 }
 
 /**
@@ -39,7 +39,7 @@ const MobileNavDrawer: FC<MobileNavDrawerProps> = ({
         </DrawerBody>
       </DrawerContent>
     </Drawer>
-  )
-}
+  );
+};
 
-export default MobileNavDrawer
+export default MobileNavDrawer;

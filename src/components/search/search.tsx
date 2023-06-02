@@ -1,4 +1,4 @@
-var FlexSearch = require('flexsearch')
+var FlexSearch = require('flexsearch');
 /**
  *  Gets the search results from the server
  * @param searchTerm  The search term to search for
@@ -10,5 +10,5 @@ const getSearchResults = (searchTerm: string) => {
     document: {
       id: 'id'
     }
-  })
-}
+  });
+};
