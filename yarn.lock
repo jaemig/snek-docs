@@ -11409,9 +11409,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gatsby-plugin-jaen@npm:^0.0.22":
-  version: 0.0.22
-  resolution: "gatsby-plugin-jaen@npm:0.0.22"
+"gatsby-plugin-jaen@npm:^0.0.23":
+  version: 0.0.23
+  resolution: "gatsby-plugin-jaen@npm:0.0.23"
   dependencies:
     "@chakra-ui/gatsby-plugin": ^3.1.1
     gatsby-plugin-compile-es6-packages: ^2.1.1
@@ -11425,7 +11425,7 @@ __metadata:
     gatsby-plugin-image: ^3
     gatsby-plugin-sharp: ^5
     gatsby-transformer-sharp: ^5
-  checksum: 629ea445e10a01aa62aabcf0ba7b64e2e5c946da173672b60db48b53553e549b8eb63f7e94959a344486d06b1a45b2be9f76963628b41365a18e849979275957
+  checksum: 74d71cf1eddbdb5c105b47cbbeeb7d5bec4c544c97e770b057f4f8489c65eccbcff1fbecfeb690de27459d3e489cd2dfc739daae89f81e63cc6d28611b851ccd
   languageName: node
   linkType: hard
 
@@ -19069,7 +19069,7 @@ __metadata:
     framer-motion: ^10.12.7
     gatsby: ^5.9.0
     gatsby-plugin-image: ^3.9.0
-    gatsby-plugin-jaen: ^0.0.22
+    gatsby-plugin-jaen: ^0.0.23
     gatsby-plugin-react-svg: ^3.3.0
     gatsby-plugin-sharp: ^5.9.0
     gatsby-source-filesystem: ^5.9.0
