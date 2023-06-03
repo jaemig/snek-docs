@@ -94,7 +94,7 @@ export function convertPageTreeToMenu(pageTree: IJaenPage[]) {
       child => child.isActive || child.hasActiveChild
     );
     if (children.length > 0) {
-      if (hasActiveChild) result.expandedIdx.push(expandedItemIdx);
+      if (hasActiveChild || currentPath === href) result.expandedIdx.push(expandedItemIdx);
       expandedItemIdx++;
     }
 
@@ -120,7 +120,7 @@ export function convertPageTreeToMenu(pageTree: IJaenPage[]) {
   return {
     menu: menuData,
     // Since the menu is built from the inside out, the first item is the last expanded item
-    expandedIdx: result.expandedIdx
+    expandedIdx: result.expandedIdx.map(idx => expandedItemIdx - idx)
   };
 }
 
