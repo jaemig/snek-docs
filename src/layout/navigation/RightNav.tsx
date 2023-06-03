@@ -1,19 +1,17 @@
 import React, { FC } from 'react';
-import { Box, Flex, Link, Text, VStack } from '@chakra-ui/react';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { Box, Flex, Text, VStack } from '@chakra-ui/react';
 import MemoizedLinks from '../../components/MemoizedLink';
 import TableOfContent from './components/TableOfContent';
-import { NavMenuItem } from '../../types/navigation';
 
 // Example links - these would probably be fetched from a CMS or other data source
 const links = [
   {
     name: 'Question? Give us feedback',
-    href: '#'
+    href: 'https://snek.at/'
   },
   {
     name: 'Edit this page on GitHub',
-    href: '#'
+    href: 'https://github.com/Jan-Emig/snek-docs'
   }
 ];
 
@@ -28,8 +26,7 @@ const RightNav: FC = ({}) => {
       as="aside"
       display={{ base: 'none', xl: 'block' }}
       color="shared.text.default"
-      fontSize="sm"
-    >
+      fontSize="sm">
       <Text color="rightNav.titleTop.color" fontWeight="semibold">
         On This Page
       </Text>
@@ -41,8 +38,7 @@ const RightNav: FC = ({}) => {
         pt={7}
         borderTop="1px solid"
         borderTopColor="components.separator.borderColor"
-        fontSize="xs"
-      >
+        fontSize="xs">
         <VStack rowGap={1} textAlign="left">
           <MemoizedLinks
             links={links}
