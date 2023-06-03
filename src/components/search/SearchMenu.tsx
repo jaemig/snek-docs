@@ -12,8 +12,8 @@ import {
   Text
 } from '@chakra-ui/react';
 import React, { FC, Fragment, ReactElement, useEffect, useRef } from 'react';
-import { TSearchResult, TSearchResultSection } from './search.types';
 import SearchInput from './SearchInput';
+import { TSearchResultSection, TSearchResult } from '../../types/search';
 
 const exampleSearchResult: TSearchResultSection[] = [
   {
@@ -108,14 +108,12 @@ const SearchResultItem: FC<{ item: TSearchResult; query: string }> = ({
         bgColor: 'components.menu.item.focus.bgColor',
         boxShadow: '0 0 0 2px #00bce6'
       }}
-      transition="background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out"
-    >
+      transition="background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out">
       <Box>
         <Heading
           size="sm"
           transition="color 0.2s ease-in-out"
-          color="shared.text.bright"
-        >
+          color="shared.text.bright">
           {highLightQuery(item.title, query)}
         </Heading>
         <Text color="text.default">
@@ -142,8 +140,7 @@ const SearchResultSection: FC<{
         mb={2}
         mt={idx === 0 ? 2 : 5}
         textTransform="uppercase"
-        color="components.menu.groupTitle.color"
-      >
+        color="components.menu.groupTitle.color">
         {section.title}
       </Heading>
       <MenuDivider />
@@ -166,6 +163,23 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
   const r = useRef(null);
 
   const [searchQuery, setSearchQuery] = React.useState('');
+
+  useEffect(() => {
+    retrieveSearchData();
+  }, []);
+
+  const retrieveSearchData = async () => {
+    try {
+      const res = await fetch('/search-index-alpha.json', {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await res.json();
+    } catch (err) {
+      console.error('Could not retrieve search data.');
+    }
+  };
 
   useEffect(() => {
     // Reset the menu index when the search query changes
@@ -201,8 +215,7 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
           fontSize="sm"
           //TODO: Fix the backdrop blur not working
           backdropBlur={8}
-          {...menuListProps}
-        >
+          {...menuListProps}>
           {searchResults}
         </MenuList>
       )}
