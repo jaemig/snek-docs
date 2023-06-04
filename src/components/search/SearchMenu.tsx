@@ -11,10 +11,10 @@ import {
   MenuProps,
   Text
 } from '@chakra-ui/react';
-import React, { FC, Fragment, useEffect, useMemo, useRef } from 'react';
+import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
 import SearchInput from './SearchInput';
 import { TSearchResultSection, TSearchResult } from '../../types/search';
-import { retrieveSearchData } from '../../functions/search';
+import { highLightQuery, searchDocs } from '../../functions/search';
 
 const exampleSearchResult: TSearchResultSection[] = [
   {
@@ -55,42 +55,6 @@ const exampleSearchResult: TSearchResultSection[] = [
 
 // Index key for the menu component
 let menuIdx = 0;
-
-/**
- * Highlight all occurences the search query in the text
- * @param text  The text to highlight
- * @param query  The search query
- * @returns  The text with highlighted query
- */
-const highLightQuery = (text: string, query: string) => {
-  const lowercase_text = text.toLowerCase();
-  const lowercase_query = query.toLowerCase();
-  let searchIdx = 0; // The index of the last search
-  let occ; // The index of the current occurrence
-  const textParts = [];
-  while ((occ = lowercase_text.indexOf(lowercase_query, searchIdx)) !== -1) {
-    const prefix = text.substring(searchIdx, occ);
-    searchIdx = occ + query.length;
-    textParts.push(
-      <Fragment key={occ}>
-        {prefix}
-        <Text as="span" color="theme.600">
-          {text.substring(occ, occ + query.length)}
-        </Text>
-      </Fragment>
-    );
-  }
-  // Add the last part of the text
-  if (searchIdx < text.length) {
-    textParts.push(
-      <Fragment key={text.length}>
-        {text.substring(searchIdx, text.length)}
-      </Fragment>
-    );
-  }
-  return textParts.length > 0 ? <>{textParts}</> : text;
-};
-
 /**
  * The search menu item component for displaying a specific search result item.
  */
@@ -115,7 +79,7 @@ const SearchResultItem: FC<{ item: TSearchResult; query: string }> = ({
           size="sm"
           transition="color 0.2s ease-in-out"
           color="shared.text.bright">
-          {highLightQuery(item.title, query)}
+          {highLightQuery(item.title, query, 0)}
         </Heading>
         <Text color="text.default">
           {highLightQuery(item.description, query)}
@@ -163,45 +127,51 @@ interface SearchMenuProps {
 const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
   const r = useRef(null);
 
-  const [searchQuery, setSearchQuery] = React.useState('');
-  const searchData = useMemo(retrieveSearchData, []);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResultData, setSearchResultData] = useState<
+    TSearchResultSection[]
+  >([]);
+  const resultItems = useMemo(() => {
+    if (searchResultData.length > 0) {
+      return searchResultData.map((section, idx) => (
+        <SearchResultSection
+          section={section}
+          idx={idx}
+          query={searchQuery}
+          key={idx}
+        />
+      ));
+    }
+    return (
+      <Center my={5} color="components.menu.noResults.color">
+        No results found.
+      </Center>
+    );
+  }, [searchResultData]);
 
   useEffect(() => {
     // Reset the menu index when the search query changes
     menuIdx = 0;
   });
 
-  let searchResults;
-
-  if (searchQuery.length > 0) {
-    searchResults = exampleSearchResult.map((section, idx) => (
-      <SearchResultSection
-        section={section}
-        idx={idx}
-        query={searchQuery}
-        key={idx}
-      />
-    ));
-    if (!searchResults.length) {
-      searchResults = (
-        <Center my={5} color="components.menu.noResults.color">
-          No results found.
-        </Center>
-      );
-    }
-  }
+  useEffect(() => {
+    if (searchQuery.length > 0) {
+      // Retrieve the search data
+      searchDocs(searchQuery).then(setSearchResultData);
+    } else setSearchResultData([]);
+  }, [searchQuery]);
 
   return (
     <Menu variant="search-result" initialFocusRef={r} isLazy {...menuProps}>
       <SearchInput ref={r} setSearchQuery={setSearchQuery} />
 
-      {searchResults && (
+      {searchResultData && (
         <MenuList
           fontSize="sm"
           //TODO: Fix the backdrop blur not working
           backdropBlur={8}
           {...menuListProps}>
-          {searchResults}
+          {resultItems}
         </MenuList>
       )}
     </Menu>
