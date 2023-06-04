@@ -14,7 +14,7 @@ import {
 import { FC, Fragment, MouseEvent } from 'react';
 import Link from '../../../components/Link';
 import { NavMenuItem, NavMenuSection } from '../../../types/navigation';
-import { convertPageTreeToMenu } from '../../../helpers/utils';
+import { convertPageTreeToMenu } from '../../../functions/utils';
 
 // Example menu structure - this would be fetched from a CMS
 const menuStructure: NavMenuSection[] = [

@@ -13,9 +13,12 @@ import Filesystem from '../components/main-content/filesystem/Filesystem';
 import Link from '../components/Link';
 import List from '../components/main-content/list/List';
 import ListItem from '../components/main-content/list/ListItem';
-import { convertPageTreeToMenu, createBreadCrumbParts } from '../helpers/utils';
 import { MainBreadcrumbPart } from '../types/navigation';
 import MainBreadcrumb from '../layout/navigation/components/MainBreadcrumb';
+import {
+  convertPageTreeToMenu,
+  createBreadCrumbParts
+} from '../functions/navigation';
 
 const DocsPage = connectTemplate(
   () => {
@@ -52,13 +55,11 @@ const DocsPage = connectTemplate(
             xl: 'minmax(auto, 250px) minmax(auto, 4fr) minmax(auto, 250px)'
           }}
           gap={10}
-          px={{ base: 7, xl: 0 }}
-        >
+          px={{ base: 7, xl: 0 }}>
           <Box
             display={{ base: 'none', md: 'block' }}
             position="sticky"
-            top="110px"
-          >
+            top="110px">
             <LeftNav menuData={menuStructure} />
           </Box>
           <Box maxW="700px">

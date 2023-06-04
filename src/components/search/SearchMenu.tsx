@@ -11,9 +11,10 @@ import {
   MenuProps,
   Text
 } from '@chakra-ui/react';
-import React, { FC, Fragment, ReactElement, useEffect, useRef } from 'react';
+import React, { FC, Fragment, useEffect, useMemo, useRef } from 'react';
 import SearchInput from './SearchInput';
 import { TSearchResultSection, TSearchResult } from '../../types/search';
+import { retrieveSearchData } from '../../functions/search';
 
 const exampleSearchResult: TSearchResultSection[] = [
   {
@@ -163,23 +164,7 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
   const r = useRef(null);
 
   const [searchQuery, setSearchQuery] = React.useState('');
-
-  useEffect(() => {
-    retrieveSearchData();
-  }, []);
-
-  const retrieveSearchData = async () => {
-    try {
-      const res = await fetch('/search-index-alpha.json', {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      const data = await res.json();
-    } catch (err) {
-      console.error('Could not retrieve search data.');
-    }
-  };
+  const searchData = useMemo(retrieveSearchData, []);
 
   useEffect(() => {
     // Reset the menu index when the search query changes

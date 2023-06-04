@@ -1,7 +1,7 @@
 import { Link as ChLink, LinkOverlayProps, LinkProps } from '@chakra-ui/react';
 import { Link as GaLink } from 'gatsby';
 import { FC, ReactNode } from 'react';
-import { isInternalLink } from '../helpers/utils';
+import { isInternalLink } from '../functions/utils';
 
 interface GatsbyLinkProps extends LinkOverlayProps {
   href?: string;
