@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { Box, Flex, Text, VStack } from '@chakra-ui/react';
 import MemoizedLinks from '../../components/MemoizedLink';
 import TableOfContent from './components/TableOfContent';
@@ -19,6 +19,9 @@ const links = [
  * Right navigation bar.
  */
 const RightNav: FC = ({}) => {
+  // This can be memoized since it doesn't change and switching pages re-renders most of the app anyway.
+  const MemoizedToc = memo(TableOfContent, () => false);
+
   return (
     <Box
       position="sticky"
@@ -31,7 +34,7 @@ const RightNav: FC = ({}) => {
         On This Page
       </Text>
       <Flex as="nav" direction="column" mt={5}>
-        <TableOfContent />
+        <MemoizedToc />
       </Flex>
       <Box
         mt={7}
