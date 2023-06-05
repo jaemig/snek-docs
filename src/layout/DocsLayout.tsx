@@ -32,7 +32,7 @@ const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
       },
       ...createBreadCrumbParts(menuStructure.menu)
     ];
-  }, [pageTree]);
+  }, [pageTree, path]);
 
   const navOffset = useNavOffset();
 
@@ -62,7 +62,8 @@ const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
       </Box>
       <Box>
         <MainBreadcrumb parts={breadcrumbParts} />
-        {memoedChildren}
+
+        <Box>{memoedChildren}</Box>
       </Box>
     </Grid>
   );
