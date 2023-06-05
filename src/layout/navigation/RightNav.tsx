@@ -22,7 +22,7 @@ const RightNav: FC = ({}) => {
   return (
     <Box
       position="sticky"
-      top="80px"
+      // top="80px"
       as="aside"
       display={{ base: 'none', xl: 'block' }}
       color="shared.text.default"

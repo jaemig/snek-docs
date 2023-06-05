@@ -2,8 +2,8 @@ import { Box, Flex, Spacer } from '@chakra-ui/react';
 import React, { FC, useState } from 'react';
 import PageDirectory from './components/PageDirectory';
 import NavbarControls from './components/NavbarControls';
-import { convertPageTreeToMenu } from '../../functions/utils';
 import { useNavOffset } from '../../hooks/use-nav-offset';
+import { convertPageTreeToMenu } from '../../functions/navigation';
 
 interface ILeftNavProps {
   menuData: ReturnType<typeof convertPageTreeToMenu>;
@@ -20,11 +20,11 @@ const LeftNav: FC<ILeftNavProps> = ({ menuData }) => {
   return (
     <Flex
       position="sticky"
-      top={`calc(80px + ${navTopOffset})`}
+      top={`calc(70px + ${navTopOffset})`}
       as="nav"
       fontSize="sm"
       flexDirection="column"
-      h="calc(100vh - 100px)"
+      h={`calc(100vh - 100px - ${navTopOffset})`}
       w={isExpanded ? 'auto' : '5rem'}
       color="shared.text.default">
       <Box w={isExpanded ? 'auto' : 0}>

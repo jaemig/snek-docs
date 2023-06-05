@@ -1,9 +1,7 @@
 import React, { FC, useMemo } from 'react';
-import { Box, Grid, Heading, Link, List, ListItem } from '@chakra-ui/react';
-import { Field, useJaenPageTree } from '@snek-at/jaen';
-import CodeSnippet from '../components/main-content/code-snippet/CodeSnippet';
+import { Box, Grid } from '@chakra-ui/react';
+import { useJaenPageTree } from '@snek-at/jaen';
 import LeftNav from './navigation/LeftNav';
-import RightNav from './navigation/RightNav';
 import MainBreadcrumb from './navigation/components/MainBreadcrumb';
 import {
   convertPageTreeToMenu,
@@ -58,12 +56,12 @@ const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
       <Box
         display={{ base: 'none', md: 'block' }}
         position="sticky"
-        top={`calc(110px + ${navOffset})`}>
+        // top={`calc(100px + ${navOffset})`}
+      >
         <LeftNav menuData={menuStructure} />
       </Box>
       <Box>
         <MainBreadcrumb parts={breadcrumbParts} />
-
         {memoedChildren}
       </Box>
     </Grid>
