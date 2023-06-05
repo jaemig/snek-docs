@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react';
 import PageDirectory from './components/PageDirectory';
 import NavbarControls from './components/NavbarControls';
 import { convertPageTreeToMenu } from '../../functions/utils';
+import { useNavOffset } from '../../hooks/use-nav-offset';
 
 interface ILeftNavProps {
   menuData: ReturnType<typeof convertPageTreeToMenu>;
@@ -14,10 +15,12 @@ interface ILeftNavProps {
 const LeftNav: FC<ILeftNavProps> = ({ menuData }) => {
   const [isExpanded, setIsExpanded] = useState(true);
 
+  const navTopOffset = useNavOffset();
+
   return (
     <Flex
       position="sticky"
-      top="80px"
+      top={`calc(80px + ${navTopOffset})`}
       as="nav"
       fontSize="sm"
       flexDirection="column"

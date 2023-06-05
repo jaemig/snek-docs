@@ -17,6 +17,7 @@ import MobileNavDrawer from './MobileNavDrawer';
 import SearchMenu from '../../components/search/SearchMenu';
 import { LinkData } from '../../types/navigation';
 import Link from '../../components/Link';
+import { useNavOffset } from '../../hooks/use-nav-offset';
 
 const links: LinkData[] = [
   {
@@ -51,6 +52,8 @@ const TopNav: FC = () => {
   const [hamburgerClass, setHamburgerClass] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure(); // Mobile menu drawer
 
+  const navTopOffset = useNavOffset();
+
   const openDrawer = () => {
     setHamburgerClass('open');
     onOpen();
@@ -71,23 +74,21 @@ const TopNav: FC = () => {
       <Center
         as="nav"
         position="sticky"
-        top={0}
+        top={navTopOffset}
         h="64px"
         px={{ base: 5, xl: 0 }}
         borderBottom="1px solid"
         borderBottomColor="topNav.borderColor"
         backgroundColor="shared.translucent.bgColor"
         backdropFilter="blur(10px)"
-        zIndex={99999999999}
-      >
+        zIndex={1}>
         <Flex w="7xl">
           <Link
             href="#"
             _hover={{
               transform: 'scale(1.1)'
             }}
-            transition="transform 0.2s ease-in-out"
-          >
+            transition="transform 0.2s ease-in-out">
             <Image h="32px" src={SnekIcon} alt="Snek Logo" />
           </Link>
           <Spacer />
@@ -113,15 +114,13 @@ const TopNav: FC = () => {
                 _hover={{
                   transform: 'scale(1.2)'
                 }}
-                transition="transform 0.2s ease-in-out"
-              >
+                transition="transform 0.2s ease-in-out">
                 <GitHub boxSize="32px" fill="topNav.GitHubFill" />
               </Link>
               <Button
                 variant="ghost"
                 size="sm"
-                display={{ base: 'initial', md: 'none' }}
-              >
+                display={{ base: 'initial', md: 'none' }}>
                 <VStack
                   spacing={1.5}
                   onClick={toggleMobileMenu}
@@ -142,8 +141,7 @@ const TopNav: FC = () => {
                       transition:
                         'transform 0.2s ease-in-out, opacity 0.2s ease-in-out'
                     }
-                  }}
-                >
+                  }}>
                   <Box
                     w="24px"
                     h="2px"

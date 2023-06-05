@@ -5618,9 +5618,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@snek-at/jaen@npm:^0.0.72":
-  version: 0.0.72
-  resolution: "@snek-at/jaen@npm:0.0.72"
+"@snek-at/jaen@npm:^0.0.74":
+  version: 0.0.74
+  resolution: "@snek-at/jaen@npm:0.0.74"
   dependencies:
     "@chakra-ui/icons": ^2.0.18
     "@chakra-ui/pro-theme": ^0.0.64
@@ -5685,7 +5685,7 @@ __metadata:
     react-dom: ^18.2.0
   bin:
     jaen: dist/index.cli.mjs
-  checksum: 8e2bcc17a40caea139fbaf3c0226e56a3ccf9b5af7fdb2f73efbd8cc2fa6ba1cfbdeb41b0e8d9f2d24b77f8d5ddfb0c7e8d6cb6bc404d0d40aab2bedf7c370cc
+  checksum: 886a4b728a5eddb965ce2849ad2b753c2ff557587c46e6d1b49b2ca1b995c874cccb5bd0d094e0718ce38dad73554a8976f1b81b85245cbc58dc0cdc7b4457a1
   languageName: node
   linkType: hard
 
@@ -19060,7 +19060,7 @@ __metadata:
     "@chakra-ui/theme-tools": ^2.0.16
     "@emotion/react": ^11.10.8
     "@emotion/styled": ^11.10.8
-    "@snek-at/jaen": ^0.0.72
+    "@snek-at/jaen": ^0.0.74
     "@types/node": ^18.16.2
     "@types/react": ^18.2.0
     "@types/react-dom": ^18.2.1

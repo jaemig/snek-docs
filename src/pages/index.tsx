@@ -4,7 +4,7 @@ import AppLayout from '../layout/AppLayout';
 
 //TODO: Outsource the link style to the chakra theme
 const IndexPage: React.FC<PageProps> = () => {
-  return <AppLayout></AppLayout>;
+  return <></>;
 };
 
 export default IndexPage;
