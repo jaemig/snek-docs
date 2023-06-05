@@ -4,10 +4,18 @@ import {
   InputGroup,
   InputRightElement,
   Kbd,
+  Text,
   useMenuButton,
-  useMenuContext
+  useMenuContext,
+  useMenuList
 } from '@chakra-ui/react';
-import { Dispatch, SetStateAction, forwardRef, useMemo } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  forwardRef,
+  useEffect,
+  useMemo
+} from 'react';
 
 import { getPlatform, isTouchDevice } from '../../functions/utils';
 
@@ -21,21 +29,49 @@ interface SearchInputProps {
 const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
   ({ setSearchQuery }, ref) => {
     const menu = useMenuContext();
-    const menuButton = useMenuButton({}, ref);
+    const menuButton = useMenuButton(
+      {
+        onKeyDown: e => {
+          if (e.key === 'Escape') {
+            menu.onClose();
 
-    const platform = useMemo(() => {
-      switch (getPlatform()) {
-        case 'mac':
-          return '⌘';
-        case 'windows':
-          return 'Ctrl';
-        default:
-          return '';
+            // Clear input
+            e.target.value = '';
+          } else if (e.key === 'ArrowDown') {
+            if (menu.isOpen) {
+              menu.setFocusedIndex(0);
+            }
+
+            // Prevent default behavior
+            e.preventDefault();
+          }
+        }
+      },
+      ref
+    );
+
+    const kbd = useMemo(() => {
+      const platform = getPlatform();
+
+      if (menu.isOpen) {
+        return 'Esc';
       }
-    }, []);
+
+      return platform === 'mac' ? '⌘K' : 'Ctrl+K';
+    }, [menu.isOpen]);
+
+    const isFocusLocked = useMemo(() => {
+      return menu.isOpen && menu.focusedIndex === -1;
+    }, [menu.isOpen, menu.focusedIndex]);
+
+    useEffect(() => {
+      if (!menu.isOpen) {
+        menu.setFocusedIndex(-1);
+      }
+    }, [menu.isOpen]);
 
     return (
-      <FocusLock isDisabled={!menu.isOpen}>
+      <FocusLock isDisabled={!isFocusLocked}>
         <InputGroup size="sm">
           <Input
             type="text"
@@ -76,7 +112,7 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
                   background="transparent"
                   borderRadius={4}
                   py={0.5}>
-                  {platform} K
+                  {kbd}
                 </Kbd>
               }
               pr="10px"

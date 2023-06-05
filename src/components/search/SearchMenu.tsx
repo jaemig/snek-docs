@@ -30,6 +30,13 @@ const SearchResultItem: FC<{
     <MenuItem
       key={id}
       fontWeight="normal"
+      _active={{
+        '.chakra-heading': {
+          color: 'components.menu.item.focus.headingColor'
+        },
+        bgColor: 'components.menu.item.focus.bgColor',
+        boxShadow: '0 0 0 2px #00bce6'
+      }}
       _hover={{
         '.chakra-heading': {
           color: 'components.menu.item.focus.headingColor'
@@ -121,7 +128,7 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
   }, [searchQuery]);
 
   return (
-    <Menu variant="search-result" {...menuProps}>
+    <Menu variant="search-result" {...menuProps} autoSelect={false}>
       <SearchInput setSearchQuery={setSearchQuery} />
 
       <MenuList
