@@ -159,11 +159,22 @@ export function highLightQuery(text: string, query: string, charLimit = 100) {
   let searchIdx = 0; // The index of the last search
   let occ; // The index of the current occurrence
   const textParts = [];
+
   while ((occ = lowercase_text.indexOf(lowercase_query, searchIdx)) !== -1) {
     if (searchIdx === 0 && charLimit > 0) {
       // Trim the whole text to the charLimit around the first occurrence
-      const startIdx = Math.max(0, occ - charLimit);
-      const endIdx = Math.min(text.length, occ + charLimit);
+      let startIdx = Math.max(0, occ - charLimit);
+      if (startIdx > 0 && text[startIdx] != ' ') {
+        // If the start index is not at the beginning of a word, move it to the next space in case it is not too far away
+        const spaceIdx = text.indexOf(' ', startIdx);
+        if (spaceIdx < startIdx + charLimit * 0.2) startIdx = spaceIdx;
+      }
+      let endIdx = Math.min(text.length, occ + charLimit);
+      if (endIdx < text.length && text[endIdx] != ' ') {
+        // If the end index is not at the end of a word, move it to the previous space in case it is not too far away
+        const spaceIdx = text.lastIndexOf(' ', endIdx);
+        if (spaceIdx > endIdx - charLimit * 0.2) endIdx = spaceIdx;
+      }
       const suffix = endIdx != text.length ? '...' : '';
       lowercase_text = lowercase_text.substring(startIdx, endIdx);
       text = text.substring(startIdx, endIdx) + suffix;

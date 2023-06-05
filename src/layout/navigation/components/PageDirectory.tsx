@@ -189,6 +189,7 @@ const generateMenuItem = (
             paddingBottom: 0
           }
         }}
+        my={1}
         // This is a hack to remove the bottom border from the last accordion item
         borderBottomWidth="0 !important">
         {({ isExpanded }) => (
