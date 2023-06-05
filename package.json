@@ -28,7 +28,7 @@
     "framer-motion": "^10.12.7",
     "gatsby": "^5.9.0",
     "gatsby-plugin-image": "^3.9.0",
-    "gatsby-plugin-jaen": "^0.0.23",
+    "gatsby-plugin-jaen": "^0.0.25",
     "gatsby-plugin-react-svg": "^3.3.0",
     "gatsby-plugin-sharp": "^5.9.0",
     "gatsby-source-filesystem": "^5.9.0",
