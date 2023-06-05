@@ -16,56 +16,19 @@ import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { highLightQuery, searchDocs } from '../../functions/search';
 import { TSearchResult, TSearchResultSection } from '../../types/search';
 import SearchInput from './SearchInput';
+import Link from '../Link';
 
-const exampleSearchResult: TSearchResultSection[] = [
-  {
-    title: 'Page Configuration',
-    results: [
-      {
-        title: 'Page Configuration',
-        description:
-          'In Nextra, the site and page structure can be configured via the co-located _meta.json files. In the docs theme, there are some extra options available to customize it further.Those configurations affect the overall ',
-        href: '#'
-      },
-      {
-        title: 'Layouts',
-        description:
-          'By default, each page has "layout": "default" in their theme config, which is the default behavior.',
-        href: '#'
-      }
-    ]
-  },
-  {
-    title: 'Custom Theme',
-    results: [
-      {
-        title: 'Custom Theme',
-        description:
-          'A theme in Nextra works like a layout, that will be rendered as a wrapper for all pages',
-        href: '#'
-      },
-      {
-        title: 'Create a Basic Theme',
-        description:
-          'Inside your theme layout, you can use CSS imports or other ways to style it. Next.js hooks such as useRouter, Head are also available.',
-        href: '#'
-      }
-    ]
-  }
-];
-
-// Index key for the menu component
-let menuIdx = 0;
 /**
  * The search menu item component for displaying a specific search result item.
  */
-const SearchResultItem: FC<{ item: TSearchResult; query: string }> = ({
-  item,
-  query
-}) => {
+const SearchResultItem: FC<{
+  item: TSearchResult;
+  query: string;
+  id: number;
+}> = ({ item, query, id }) => {
   return (
     <MenuItem
-      key={menuIdx++}
+      key={id}
       fontWeight="normal"
       _hover={{
         '.chakra-heading': {
@@ -75,7 +38,7 @@ const SearchResultItem: FC<{ item: TSearchResult; query: string }> = ({
         boxShadow: '0 0 0 2px #00bce6'
       }}
       transition="background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out">
-      <Box>
+      <Link href={item.href}>
         <Heading
           size="sm"
           transition="color 0.2s ease-in-out"
@@ -85,7 +48,7 @@ const SearchResultItem: FC<{ item: TSearchResult; query: string }> = ({
         <Text color="text.default">
           {highLightQuery(item.description, query)}
         </Text>
-      </Box>
+      </Link>
     </MenuItem>
   );
 };
@@ -111,7 +74,7 @@ const SearchResultSection: FC<{
       </Heading>
       <MenuDivider />
       {section.results.map((result, i) => (
-        <SearchResultItem item={result} query={query} key={i} />
+        <SearchResultItem item={result} query={query} id={i} key={i} />
       ))}
     </MenuGroup>
   );
@@ -149,11 +112,6 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
       </Center>
     );
   }, [searchResultData]);
-
-  useEffect(() => {
-    // Reset the menu index when the search query changes
-    menuIdx = 0;
-  });
 
   useEffect(() => {
     if (searchQuery.length > 0) {
