@@ -11,10 +11,11 @@ import {
   MenuProps,
   Text
 } from '@chakra-ui/react';
-import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
-import SearchInput from './SearchInput';
-import { TSearchResultSection, TSearchResult } from '../../types/search';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
+
 import { highLightQuery, searchDocs } from '../../functions/search';
+import { TSearchResult, TSearchResultSection } from '../../types/search';
+import SearchInput from './SearchInput';
 
 const exampleSearchResult: TSearchResultSection[] = [
   {
@@ -66,7 +67,7 @@ const SearchResultItem: FC<{ item: TSearchResult; query: string }> = ({
     <MenuItem
       key={menuIdx++}
       fontWeight="normal"
-      _focus={{
+      _hover={{
         '.chakra-heading': {
           color: 'components.menu.item.focus.headingColor'
         },
@@ -162,18 +163,16 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
   }, [searchQuery]);
 
   return (
-    <Menu variant="search-result" initialFocusRef={r} isLazy {...menuProps}>
-      <SearchInput ref={r} setSearchQuery={setSearchQuery} />
+    <Menu variant="search-result" {...menuProps}>
+      <SearchInput setSearchQuery={setSearchQuery} />
 
-      {searchResultData && (
-        <MenuList
-          fontSize="sm"
-          //TODO: Fix the backdrop blur not working
-          backdropBlur={8}
-          {...menuListProps}>
-          {resultItems}
-        </MenuList>
-      )}
+      <MenuList
+        fontSize="sm"
+        //TODO: Fix the backdrop blur not working
+        backdropBlur={8}
+        {...menuListProps}>
+        {resultItems}
+      </MenuList>
     </Menu>
   );
 };

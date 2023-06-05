@@ -1,18 +1,14 @@
 import {
-  InputGroup,
+  FocusLock,
   Input,
+  InputGroup,
   InputRightElement,
   Kbd,
   useMenuButton,
   useMenuContext
 } from '@chakra-ui/react';
-import React, {
-  Dispatch,
-  FC,
-  SetStateAction,
-  forwardRef,
-  useMemo
-} from 'react';
+import { Dispatch, SetStateAction, forwardRef, useMemo } from 'react';
+
 import { getPlatform, isTouchDevice } from '../../functions/utils';
 
 interface SearchInputProps {
@@ -39,54 +35,56 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
     }, []);
 
     return (
-      <InputGroup size="sm">
-        <Input
-          type="text"
-          htmlSize={20}
-          placeholder="Search documentation"
-          borderRadius="md"
-          backgroundColor="blackAlpha.50"
-          pr="45px"
-          _focus={{
-            backgroundColor: 'topNav.input.focus.bgColor'
-          }}
-          focusBorderColor="theme.500"
-          {...menuButton}
-          onClick={e => {
-            const value = e.currentTarget.value;
+      <FocusLock isDisabled={!menu.isOpen}>
+        <InputGroup size="sm">
+          <Input
+            type="text"
+            htmlSize={20}
+            placeholder="Search documentation"
+            borderRadius="md"
+            backgroundColor="blackAlpha.50"
+            pr="45px"
+            _focus={{
+              backgroundColor: 'topNav.input.focus.bgColor'
+            }}
+            focusBorderColor="theme.500"
+            {...menuButton}
+            onClick={e => {
+              const value = e.currentTarget.value;
 
-            // Cancel if the value is empty
-            if (!value) {
-              return;
-            }
+              // Cancel if the value is empty
+              if (!value) {
+                return;
+              }
 
-            // Otherwise use the default behavior
-            menuButton.onClick(e);
-          }}
-          onInput={e => {
-            const query = e.currentTarget.value.trim();
-            if (!menu.isOpen && query.length > 0) {
-              menu.onOpen();
-            }
-            setSearchQuery(e.currentTarget.value);
-          }}
-        />
-        {!isTouchDevice() && (
-          <InputRightElement
-            children={
-              <Kbd
-                borderBottomWidth={1}
-                background="transparent"
-                borderRadius={4}
-                py={0.5}>
-                {platform} K
-              </Kbd>
-            }
-            pr="10px"
-            color="rgb(107, 114, 128)"
+              // Otherwise use the default behavior
+              menuButton.onClick(e);
+            }}
+            onInput={e => {
+              const query = e.currentTarget.value.trim();
+              if (!menu.isOpen && query.length > 0) {
+                menu.onOpen();
+              }
+              setSearchQuery(e.currentTarget.value);
+            }}
           />
-        )}
-      </InputGroup>
+          {!isTouchDevice() && (
+            <InputRightElement
+              children={
+                <Kbd
+                  borderBottomWidth={1}
+                  background="transparent"
+                  borderRadius={4}
+                  py={0.5}>
+                  {platform} K
+                </Kbd>
+              }
+              pr="10px"
+              color="rgb(107, 114, 128)"
+            />
+          )}
+        </InputGroup>
+      </FocusLock>
     );
   }
 );
