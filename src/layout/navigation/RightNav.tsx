@@ -2,6 +2,7 @@ import React, { FC, memo } from 'react';
 import { Box, Flex, Text, VStack } from '@chakra-ui/react';
 import MemoizedLinks from '../../components/MemoizedLink';
 import TableOfContent from './components/TableOfContent';
+import { useNavOffset } from '../../hooks/use-nav-offset';
 
 // Example links - these would probably be fetched from a CMS or other data source
 const links = [
@@ -21,11 +22,12 @@ const links = [
 const RightNav: FC = ({}) => {
   // This can be memoized since it doesn't change and switching pages re-renders most of the app anyway.
   const MemoizedToc = memo(TableOfContent, () => false);
+  const navTopOffset = useNavOffset();
 
   return (
     <Box
       position="sticky"
-      // top="80px"
+      top={`calc(70px + ${navTopOffset})`}
       as="aside"
       display={{ base: 'none', xl: 'block' }}
       color="shared.text.default"
