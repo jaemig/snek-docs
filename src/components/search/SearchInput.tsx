@@ -4,42 +4,42 @@ import {
   InputGroup,
   InputRightElement,
   Kbd,
-  Text,
   useMenuButton,
-  useMenuContext,
-  useMenuList
+  useMenuContext
 } from '@chakra-ui/react';
 import {
   Dispatch,
   SetStateAction,
   forwardRef,
   useEffect,
-  useMemo
+  useMemo,
+  KeyboardEvent as ReactKeyboardEvent
 } from 'react';
 
 import { getPlatform, isTouchDevice } from '../../functions/utils';
 
 interface SearchInputProps {
   setSearchQuery: Dispatch<SetStateAction<string>>;
+  openFirstLink: () => void;
 }
 
 /**
  * The search input component for the search menu.
  */
 const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
-  ({ setSearchQuery }, ref) => {
+  ({ setSearchQuery, openFirstLink }, ref) => {
     const menu = useMenuContext();
     const menuButton = useMenuButton(
       {
-        onKeyDown: e => {
+        onKeyDown: (e: ReactKeyboardEvent<HTMLInputElement>) => {
           if (e.key === 'Escape') {
             menu.onClose();
 
             // Clear input
-            e.target.value = '';
+            e.currentTarget.value = '';
           } else if (e.key === 'ArrowDown') {
             if (menu.isOpen) {
-              menu.setFocusedIndex(0);
+              menu.setFocusedIndex(1);
             }
 
             // Prevent default behavior
@@ -57,12 +57,30 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
         return 'Esc';
       }
 
-      return platform === 'mac' ? '⌘K' : 'Ctrl+K';
+      return platform === 'mac' ? '⌘ K' : 'Ctrl+K';
     }, [menu.isOpen]);
 
     const isFocusLocked = useMemo(() => {
       return menu.isOpen && menu.focusedIndex === -1;
     }, [menu.isOpen, menu.focusedIndex]);
+
+    useEffect(() => {
+      // Focus the input when the user presses the shortcut
+      const handleGlobalKeydown = (e: KeyboardEvent) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k')
+          menu.buttonRef.current?.focus();
+
+        if (e.key === 'Enter' && menu.isOpen) {
+          openFirstLink();
+        }
+      };
+
+      window.addEventListener('keydown', handleGlobalKeydown);
+
+      return () => {
+        window.removeEventListener('keydown', handleGlobalKeydown);
+      };
+    }, []);
 
     useEffect(() => {
       if (!menu.isOpen) {
@@ -102,6 +120,24 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
                 menu.onOpen();
               }
               setSearchQuery(e.currentTarget.value);
+            }}
+            onKeyDownCapture={e => {
+              console.log(e.key, menu.isOpen, menu.focusedIndex);
+              if (e.key === 'Escape') {
+                // Close the menu and blur the input when the user presses the escape key
+                menu.onClose();
+                e.currentTarget.blur();
+              } else if (
+                e.key === 'Enter' &&
+                menu.isOpen &&
+                menu.focusedIndex === -1
+              ) {
+                // Open the link from the first result item
+                // and close the menu automatically
+                // when the user presses the enter key
+                openFirstLink();
+                menu.onClose();
+              }
             }}
           />
           {!isTouchDevice() && (

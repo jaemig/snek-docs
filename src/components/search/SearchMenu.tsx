@@ -6,6 +6,7 @@ import {
   MenuDivider,
   MenuGroup,
   MenuItem,
+  MenuItemProps,
   MenuList,
   MenuListProps,
   MenuProps,
@@ -17,6 +18,8 @@ import { highLightQuery, searchDocs } from '../../functions/search';
 import { TSearchResult, TSearchResultSection } from '../../types/search';
 import SearchInput from './SearchInput';
 import Link from '../Link';
+import { isInternalLink } from '../../functions/utils';
+import { navigate } from 'gatsby';
 
 /**
  * The search menu item component for displaying a specific search result item.
@@ -25,12 +28,23 @@ const SearchResultItem: FC<{
   item: TSearchResult;
   query: string;
   id: number;
-}> = ({ item, query, id }) => {
+  defaultFocus?: boolean;
+}> = ({ item, query, id, defaultFocus = false }) => {
+  let props: MenuItemProps = {};
+
+  if (defaultFocus) {
+    props = {
+      ...props,
+      bgColor: 'components.menu.item.focus.bgColor',
+      boxShadow: '0 0 0 2px #00bce6'
+    };
+  }
+
   return (
     <MenuItem
       key={id}
       fontWeight="normal"
-      _active={{
+      _focus={{
         '.chakra-heading': {
           color: 'components.menu.item.focus.headingColor'
         },
@@ -44,12 +58,24 @@ const SearchResultItem: FC<{
         bgColor: 'components.menu.item.focus.bgColor',
         boxShadow: '0 0 0 2px #00bce6'
       }}
+      onKeyDownCapture={e => {
+        if (e.key === 'Enter') {
+          // Redirect to the item's link if the user presses enter
+          if (isInternalLink(item.href)) navigate(item.href);
+          else window.location.href = item.href;
+        }
+      }}
+      {...props}
       transition="background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out">
       <Link href={item.href}>
         <Heading
           size="sm"
           transition="color 0.2s ease-in-out"
-          color="shared.text.bright">
+          color={
+            defaultFocus
+              ? 'components.menu.item.focus.headingColor'
+              : 'shared.text.bright'
+          }>
           {highLightQuery(item.title, query, 0)}
         </Heading>
         <Text color="text.default">
@@ -67,7 +93,8 @@ const SearchResultSection: FC<{
   section: TSearchResultSection;
   idx: number;
   query: string;
-}> = ({ section, idx, query }) => {
+  defaultHighlight?: boolean;
+}> = ({ section, idx, query, defaultHighlight }) => {
   return (
     <MenuGroup key={idx}>
       <Heading
@@ -81,7 +108,13 @@ const SearchResultSection: FC<{
       </Heading>
       <MenuDivider />
       {section.results.map((result, i) => (
-        <SearchResultItem item={result} query={query} id={i} key={i} />
+        <SearchResultItem
+          item={result}
+          query={query}
+          id={i}
+          key={i}
+          defaultFocus={defaultHighlight && i === 0}
+        />
       ))}
     </MenuGroup>
   );
@@ -102,6 +135,7 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
   const [searchResultData, setSearchResultData] = useState<
     TSearchResultSection[]
   >([]);
+  const [isAnyItemFocused, setIsAnyItemFocused] = useState(false);
   const resultItems = useMemo(() => {
     if (searchResultData.length > 0) {
       return searchResultData.map((section, idx) => (
@@ -110,6 +144,7 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
           idx={idx}
           query={searchQuery}
           key={idx}
+          defaultHighlight={idx === 0 && !isAnyItemFocused}
         />
       ));
     }
@@ -118,7 +153,19 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
         No results found.
       </Center>
     );
-  }, [searchResultData]);
+  }, [searchResultData, isAnyItemFocused]);
+
+  const openFirstLink = () => {
+    if (
+      searchResultData.length > 0 &&
+      searchResultData[0]?.results.length > 0
+    ) {
+      const href = searchResultData[0].results[0].href;
+      if (isInternalLink(href)) navigate(href);
+      else window.location.href = href;
+      setIsAnyItemFocused(false);
+    }
+  };
 
   useEffect(() => {
     if (searchQuery.length > 0) {
@@ -128,14 +175,28 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
   }, [searchQuery]);
 
   return (
-    <Menu variant="search-result" {...menuProps} autoSelect={false}>
-      <SearchInput setSearchQuery={setSearchQuery} />
+    <Menu
+      variant="search-result"
+      {...menuProps}
+      autoSelect={false}
+      onClose={() => {
+        setIsAnyItemFocused(false);
+      }}>
+      <SearchInput
+        setSearchQuery={setSearchQuery}
+        openFirstLink={openFirstLink}
+      />
 
       <MenuList
         fontSize="sm"
         //TODO: Fix the backdrop blur not working
         backdropBlur={8}
-        {...menuListProps}>
+        {...menuListProps}
+        onFocusCapture={e => {
+          // If the user focuses on any result item for the first time, set the isAnyItemFocused state to true
+          if (!isAnyItemFocused && e.target instanceof HTMLButtonElement)
+            setIsAnyItemFocused(true);
+        }}>
         {resultItems}
       </MenuList>
     </Menu>
