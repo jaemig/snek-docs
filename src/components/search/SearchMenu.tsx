@@ -10,6 +10,7 @@ import {
   MenuList,
   MenuListProps,
   MenuProps,
+  Portal,
   Text
 } from '@chakra-ui/react';
 import { FC, useEffect, useMemo, useRef, useState } from 'react';
@@ -187,18 +188,20 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
         openFirstLink={openFirstLink}
       />
 
-      <MenuList
-        fontSize="sm"
-        //TODO: Fix the backdrop blur not working
-        backdropBlur={8}
-        {...menuListProps}
-        onFocusCapture={e => {
-          // If the user focuses on any result item for the first time, set the isAnyItemFocused state to true
-          if (!isAnyItemFocused && e.target instanceof HTMLButtonElement)
-            setIsAnyItemFocused(true);
-        }}>
-        {resultItems}
-      </MenuList>
+      <Portal>
+        <MenuList
+          fontSize="sm"
+          backgroundColor="rgba(255, 255, 255, 0.8)"
+          backdropBlur={8}
+          {...menuListProps}
+          onFocusCapture={e => {
+            // If the user focuses on any result item for the first time, set the isAnyItemFocused state to true
+            if (!isAnyItemFocused && e.target instanceof HTMLButtonElement)
+              setIsAnyItemFocused(true);
+          }}>
+          {resultItems}
+        </MenuList>
+      </Portal>
     </Menu>
   );
 };
