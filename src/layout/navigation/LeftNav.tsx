@@ -4,6 +4,7 @@ import PageDirectory from './components/PageDirectory';
 import NavbarControls from './components/NavbarControls';
 import { useNavOffset } from '../../hooks/use-nav-offset';
 import { convertPageTreeToMenu } from '../../functions/navigation';
+import { useMenuContext } from '../../contexts/menu';
 
 interface ILeftNavProps {
   menuData: ReturnType<typeof convertPageTreeToMenu>;
@@ -17,6 +18,8 @@ const LeftNav: FC<ILeftNavProps> = ({ menuData }) => {
 
   const navTopOffset = useNavOffset();
 
+  const { menuStructure } = useMenuContext();
+
   return (
     <Flex
       position="sticky"
@@ -28,7 +31,7 @@ const LeftNav: FC<ILeftNavProps> = ({ menuData }) => {
       w={isExpanded ? 'auto' : '5rem'}
       color="shared.text.default">
       <Box w={isExpanded ? 'auto' : 0}>
-        <PageDirectory data={menuData} isExpanded={isExpanded} />
+        <PageDirectory data={menuStructure} isExpanded={isExpanded} />
       </Box>
       <Spacer />
       <NavbarControls isExpanded={isExpanded} setIsExpanded={setIsExpanded} />

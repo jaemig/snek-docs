@@ -14,83 +14,7 @@ import {
 import { FC, Fragment, MouseEvent } from 'react';
 import Link from '../../../components/Link';
 import { NavMenuItem, NavMenuSection } from '../../../types/navigation';
-import { convertPageTreeToMenu } from '../../../functions/utils';
-
-// Example menu structure - this would be fetched from a CMS
-const menuStructure: NavMenuSection[] = [
-  {
-    items: [
-      {
-        name: 'Introduction',
-        href: '#',
-        children: []
-      },
-      {
-        name: 'Guide',
-        href: '#',
-        isActive: true,
-        children: [
-          {
-            name: 'Organize Files',
-            href: '#'
-          },
-          {
-            name: 'Markdown',
-            href: '#'
-          },
-          {
-            name: 'Advanced',
-            href: '#',
-            children: [
-              {
-                name: 'Rendering Tables',
-                href: '#',
-                children: [
-                  {
-                    name: 'Features',
-                    href: '#',
-                    isSection: true
-                  },
-                  {
-                    name: 'Syntax Support',
-                    href: '#',
-                    isSection: true
-                  },
-                  {
-                    name: 'Configuration',
-                    href: '#',
-                    isSection: true
-                  }
-                ]
-              },
-              {
-                name: 'Remote Content',
-                href: '#'
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    name: 'Themes',
-    items: [
-      {
-        name: 'Docs Theme',
-        href: '#'
-      },
-      {
-        name: 'Blog Theme',
-        href: '#'
-      },
-      {
-        name: 'Custom Theme',
-        href: '#'
-      }
-    ]
-  }
-];
+import { convertPageTreeToMenu } from '../../../functions/navigation';
 
 const baseMenuItems: NavMenuSection[] = [
   {
@@ -317,7 +241,7 @@ const PageDirectory: FC<PageDirectoryProps> = ({
             </Box>
           )}
           <Box key={1}>
-            {section.items?.map(item =>
+            {section.items?.map((item: NavMenuItem) =>
               generateMenuItem(item, isMobile, closeMobileDrawer)
             )}
           </Box>

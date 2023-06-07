@@ -74,6 +74,34 @@ export function convertPageTreeToMenu(pageTree: IJaenPage[]) {
   };
 }
 
+export function buildActiveMenuItemIndexArray(sections: NavMenuSection[]) {
+  let result: number[] = [];
+
+  // Recursively build the breadcrumb parts by finding the active menu item and its parents
+  const findActiveMenuItem = (menu: NavMenuItem): boolean => {
+    if (menu.isActive || menu.hasActiveChild) {
+      const activeChildIdx = menu.children?.findIndex(
+        item => item.isActive || item.hasActiveChild
+      );
+      if (!activeChildIdx || activeChildIdx === -1 || !menu.children) return !!menu.isActive;
+      result.push(activeChildIdx);
+      return findActiveMenuItem(menu.children[activeChildIdx]);
+    }
+    return false;
+  };
+
+  for (let i = 0; i < sections.length; i++) {
+    for (let j = 0; j < sections[i].items.length; j++) {
+      if (findActiveMenuItem(sections[i].items[j])) {
+        result.push(j);
+        return result;
+      }
+    }
+    result = []; // Reset the result array if no active item was found in the current section
+  }
+  return result;
+}
+
 /**
  * Creates the breadcrumb parts for the current page
  * @param menu  The menu data structure

@@ -11,6 +11,7 @@ import ListItem from './main-content/list/ListItem';
 import Text from './main-content/text/Text';
 import { useNavOffset } from '../hooks/use-nav-offset';
 import RightNav from '../layout/navigation/RightNav';
+import MainBottomNav from '../layout/navigation/MainBottomNav';
 
 export interface DocContentProps {}
 
@@ -47,6 +48,7 @@ export const DocContent: React.FC<DocContentProps> = () => {
             Filesystem
           }}
         />
+        <MainBottomNav />
       </Box>
 
       <Box position="sticky" top={`calc(0px + ${navTopOffset})`}>

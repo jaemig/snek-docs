@@ -1,6 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { Flex, Link, Spacer, Text } from '@chakra-ui/react';
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { LinkData } from '../../types/navigation';
 
 interface MainBottomNavProps {
