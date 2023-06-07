@@ -18,7 +18,7 @@ import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { highLightQuery, searchDocs } from '../../functions/search';
 import { TSearchResult, TSearchResultSection } from '../../types/search';
 import SearchInput from './SearchInput';
-import Link from '../Link';
+import Link from '../app/Link';
 import { isInternalLink } from '../../functions/utils';
 import { navigate } from 'gatsby';
 

@@ -1,13 +1,11 @@
 import { FC } from 'react';
 import { Box, Card, CardProps, Image, Text } from '@chakra-ui/react';
-import {
-  IMainContentComponentBaseProps,
-  TImageData
-} from '../../../types/mainContent';
-import Link from '../../Link';
+import { IMainContentComponentBaseProps } from '../../../types/mainContent/mainContent';
+import Link from '../../app/Link';
 import { mainComponentBaseStyle } from '../../../layout/main/mainContent.vars';
 import { LinkData } from '../../../types/navigation';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { TImageData } from '../../../types/mainContent/imageCard';
 
 interface IImageCardProps extends IMainContentComponentBaseProps {
   image: TImageData;

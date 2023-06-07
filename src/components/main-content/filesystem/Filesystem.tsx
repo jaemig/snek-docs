@@ -1,10 +1,10 @@
 import { Box, BoxProps, Tooltip, TooltipProps } from '@chakra-ui/react';
 import React, { FC, useState } from 'react';
-import { TFilesystemItem } from './filesystem.types';
 import BsFileEarmark from '../../icons/bootstrap/BsFileEarmark';
 import BsFolder2Open from '../../icons/bootstrap/BsFolder2Open';
 import BsFolder from '../../icons/bootstrap/BsFolder';
 import { mainComponentBaseStyle } from '../../../layout/main/mainContent.vars';
+import { TFilesystemItem } from '../../../types/mainContent/filesystem';
 
 interface IFilesystemItemProps {
   item: TFilesystemItem;

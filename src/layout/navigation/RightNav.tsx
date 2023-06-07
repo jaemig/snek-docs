@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 import { Box, Flex, Text, VStack } from '@chakra-ui/react';
-import MemoizedLinks from '../../components/MemoizedLink';
+import MemoizedLinks from '../../components/app/MemoizedLink';
 import TableOfContent from './components/TableOfContent';
 import { useNavOffset } from '../../hooks/use-nav-offset';
 

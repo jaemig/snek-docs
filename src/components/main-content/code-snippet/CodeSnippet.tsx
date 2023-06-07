@@ -14,7 +14,7 @@ import {
   oneLight
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { mainComponentBaseStyle } from '../../../layout/main/mainContent.vars';
-import { IMainContentComponentBaseProps } from '../../../types/mainContent';
+import { IMainContentComponentBaseProps } from '../../../types/mainContent/mainContent';
 
 export interface ICodeSnippetProps extends IMainContentComponentBaseProps {
   code?: string;

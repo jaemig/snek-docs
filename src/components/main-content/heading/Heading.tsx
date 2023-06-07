@@ -6,9 +6,9 @@ import {
 } from '@chakra-ui/react';
 import React, { Dispatch, FC, ReactNode, SetStateAction } from 'react';
 import FaHashtag from '../../icons/fontawesome/FaHashtag';
-import Link from '../../Link';
+import Link from '../../app/Link';
 import { mainComponentBaseStyle } from '../../../layout/main/mainContent.vars';
-import { IMainContentComponentBaseProps } from '../../../types/mainContent';
+import { IMainContentComponentBaseProps } from '../../../types/mainContent/mainContent';
 
 // Font sizes for the different heading variants
 const variantFontSizes = {

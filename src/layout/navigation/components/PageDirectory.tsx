@@ -12,7 +12,7 @@ import {
   LinkProps
 } from '@chakra-ui/react';
 import { FC, Fragment, MouseEvent } from 'react';
-import Link from '../../../components/Link';
+import Link from '../../../components/app/Link';
 import { NavMenuItem, NavMenuSection } from '../../../types/navigation';
 import { convertPageTreeToMenu } from '../../../functions/navigation';
 

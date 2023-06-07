@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { LinkProps } from '@chakra-ui/react';
-import { LinkData } from '../types/navigation';
+import { LinkData } from '../../types/navigation';
 import Link from './Link';
 
 interface LinksProps {

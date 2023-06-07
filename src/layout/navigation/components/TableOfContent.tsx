@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 import { useTocNavigation } from '../../../hooks/use-toc-navigation';
 import { TableOfContentItem } from '../../../types/navigation';
 import { Box, VStack } from '@chakra-ui/react';
-import Link from '../../../components/Link';
+import Link from '../../../components/app/Link';
 
 /**
  * Component for the table of content.

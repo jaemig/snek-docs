@@ -2,7 +2,7 @@ import { Box, Stack } from '@chakra-ui/react';
 import { Field } from '@snek-at/jaen';
 import React from 'react';
 
-import Link from './Link';
+import Link from './app/Link';
 import CodeSnippet from './main-content/code-snippet/CodeSnippet';
 import Filesystem from './main-content/filesystem/Filesystem';
 import Heading from './main-content/heading/Heading';

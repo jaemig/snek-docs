@@ -1,9 +1,9 @@
 import { ChakraProps } from '@chakra-ui/react';
-import { ICodeSnippetProps } from '../components/main-content/code-snippet/CodeSnippet';
-import { IFileSystemProps } from '../components/main-content/filesystem/Filesystem';
-import { IHeadingProps } from '../components/main-content/heading/Heading';
-import { IListProps } from '../components/main-content/list/List';
-import { ITextProps } from '../components/main-content/text/Text';
+import { ICodeSnippetProps } from '../../components/main-content/code-snippet/CodeSnippet';
+import { IFileSystemProps } from '../../components/main-content/filesystem/Filesystem';
+import { IHeadingProps } from '../../components/main-content/heading/Heading';
+import { IListProps } from '../../components/main-content/list/List';
+import { ITextProps } from '../../components/main-content/text/Text';
 
 export enum MainContentType {
   Heading,
@@ -53,11 +53,3 @@ export type MainContentItem =
   | IListComponent
   | IFilesystemComponent
   | ICodeSnippetComponent;
-
-/**
- * COMPONENTS
- */
-export type TImageData = {
-  src: string;
-  alt: string;
-}

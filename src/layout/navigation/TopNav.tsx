@@ -12,11 +12,11 @@ import {
 import React, { FC, useState } from 'react';
 import GitHub from '../../components/icons/GitHub';
 import SnekIcon from '../../assets/icons/brand.svg';
-import MemoizedLinks from '../../components/MemoizedLink';
+import MemoizedLinks from '../../components/app/MemoizedLink';
 import MobileNavDrawer from './MobileNavDrawer';
 import SearchMenu from '../../components/search/SearchMenu';
 import { LinkData } from '../../types/navigation';
-import Link from '../../components/Link';
+import Link from '../../components/app/Link';
 import { useNavOffset } from '../../hooks/use-nav-offset';
 
 const links: LinkData[] = [
