@@ -5,7 +5,7 @@ interface IListItemProps {
   children: ReactNode;
 }
 /**
- * Component for displaying a singble list item.
+ * Component for displaying a single list item.
  */
 const ListItem: FC<IListItemProps> = ({ children }) => {
   return <ChListItem>{children}</ChListItem>;

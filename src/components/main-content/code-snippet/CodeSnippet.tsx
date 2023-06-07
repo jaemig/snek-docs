@@ -13,8 +13,8 @@ import {
   oneDark,
   oneLight
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { IMainContentComponentBaseProps } from '../../../layout/main/mainContent.types';
 import { mainComponentBaseStyle } from '../../../layout/main/mainContent.vars';
+import { IMainContentComponentBaseProps } from '../../../types/mainContent';
 
 export interface ICodeSnippetProps extends IMainContentComponentBaseProps {
   code?: string;
@@ -57,8 +57,7 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({
       _hover={{
         boxShadow: 'md'
       }}
-      transition="box-shadow 0.2s cubic-bezier(0.000, 0.735, 0.580, 1.000)"
-    >
+      transition="box-shadow 0.2s cubic-bezier(0.000, 0.735, 0.580, 1.000)">
       <Box
         fontSize="sm"
         borderRadius="md"
@@ -89,14 +88,12 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({
             boxShadow: 'lg'
           }
         }}
-        transition="box-shadow 0.2s cubic-bezier(0.000, 0.735, 0.580, 1.000)"
-      >
+        transition="box-shadow 0.2s cubic-bezier(0.000, 0.735, 0.580, 1.000)">
         {headerText && (
           <Text
             bgColor="components.codeSnippet.header.bgColor"
             fontSize="xs"
-            p={3}
-          >
+            p={3}>
             {headerText}
           </Text>
         )}
@@ -106,8 +103,7 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({
             style={theme}
             startingLineNumber={startingLineNumber}
             showLineNumbers
-            wrapLongLines
-          >
+            wrapLongLines>
             {code ?? ''}
           </SyntaxHighlighter>
           <IconButton

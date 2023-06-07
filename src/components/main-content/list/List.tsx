@@ -5,7 +5,7 @@ import {
   ListItem
 } from '@chakra-ui/react';
 import { ComponentType, FC, ReactNode } from 'react';
-import { IMainContentComponentBaseProps } from '../../../layout/main/mainContent.types';
+import { IMainContentComponentBaseProps } from '../../../types/mainContent';
 
 export type ListItem = {
   text: string;
