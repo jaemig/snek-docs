@@ -6,6 +6,7 @@ import { mainComponentBaseStyle } from '../../../layout/main/mainContent.vars';
 import { LinkData } from '../../../types/navigation';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { TImageData } from '../../../types/mainContent/imageCard';
+import themeCardComponent from '../../../theme/components/card';
 
 interface IImageCardProps extends IMainContentComponentBaseProps {
   image: TImageData;
@@ -27,18 +28,14 @@ const ImageCard: FC<IImageCardProps> = ({
       {...baseProps}
       w="fit-content"
       maxW={size}
-      border="1px solid"
-      borderColor="gray.200"
-      overflow="hidden"
       _hover={{
-        borderColor: 'gray.300',
-        boxShadow: 'md',
+        ...themeCardComponent.variants.grayOutline.container._hover,
         'sd-cmp-image-card-link-icon': {
           marginLeft: 3
         }
       }}
-      transition="border-color .2s ease-in-out, box-shadow .2s ease-in-out"
-      bgColor="gray.100">
+      overflow="hidden"
+      variant="grayOutline">
       <Link href={link.href}>
         <Image {...image} w="100%" objectFit="cover" />
         <Box p={4}>
