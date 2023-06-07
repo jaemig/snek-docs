@@ -6,9 +6,9 @@ import {
 } from '@chakra-ui/react';
 import React, { Dispatch, FC, ReactNode, SetStateAction } from 'react';
 import FaHashtag from '../../icons/fontawesome/FaHashtag';
-import { IMainContentComponentBaseProps } from '../../../layout/main/mainContent.types';
 import Link from '../../Link';
 import { mainComponentBaseStyle } from '../../../layout/main/mainContent.vars';
+import { IMainContentComponentBaseProps } from '../../../types/mainContent';
 
 // Font sizes for the different heading variants
 const variantFontSizes = {
@@ -84,8 +84,7 @@ const Heading: FC<IHeadingProps> = ({
         '& a': {
           opacity: 1
         }
-      }}
-    >
+      }}>
       {children}
       {!noAnchor && id && (
         <Link
@@ -98,8 +97,7 @@ const Heading: FC<IHeadingProps> = ({
           fontSize={variantLinkFontSizes[variant]}
           lineHeight={Number(variantLinkFontSizes[variant]) + 5 + 'px'}
           verticalAlign="top"
-          onClick={handleClick}
-        >
+          onClick={handleClick}>
           <FaHashtag />
         </Link>
       )}

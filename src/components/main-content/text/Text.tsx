@@ -1,7 +1,7 @@
 import { Text as ChText } from '@chakra-ui/react';
-import { IMainContentComponentBaseProps } from '../../../layout/main/mainContent.types';
 import React, { FC, ReactNode } from 'react';
 import { mainComponentBaseStyle } from '../../../layout/main/mainContent.vars';
+import { IMainContentComponentBaseProps } from '../../../types/mainContent';
 
 export interface ITextProps extends IMainContentComponentBaseProps {
   children?: ReactNode;
