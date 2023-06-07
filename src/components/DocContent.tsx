@@ -12,6 +12,7 @@ import Text from './main-content/text/Text';
 import { useNavOffset } from '../hooks/use-nav-offset';
 import RightNav from '../layout/navigation/RightNav';
 import MainBottomNav from '../layout/navigation/MainBottomNav';
+import ImageCard from './main-content/image-card/ImageCard';
 
 export interface DocContentProps {}
 
@@ -45,7 +46,8 @@ export const DocContent: React.FC<DocContentProps> = () => {
             },
             // CUSTOM COMPONENTS
             CodeSnippet,
-            Filesystem
+            Filesystem,
+            ImageCard
           }}
         />
         <MainBottomNav />

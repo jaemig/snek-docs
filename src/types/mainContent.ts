@@ -23,7 +23,7 @@ export interface IMainContentComponent {
 
 export interface IHeadingComponent
   extends IMainContentComponent,
-    IHeadingProps {
+  IHeadingProps {
   type: MainContentType.Heading;
 }
 
@@ -37,13 +37,13 @@ export interface IListComponent extends IMainContentComponent, IListProps {
 
 export interface IFilesystemComponent
   extends IMainContentComponent,
-    IFileSystemProps {
+  IFileSystemProps {
   type: MainContentType.Filesystem;
 }
 
 export interface ICodeSnippetComponent
   extends IMainContentComponent,
-    ICodeSnippetProps {
+  ICodeSnippetProps {
   type: MainContentType.CodeSnippet;
 }
 
@@ -53,3 +53,11 @@ export type MainContentItem =
   | IListComponent
   | IFilesystemComponent
   | ICodeSnippetComponent;
+
+/**
+ * COMPONENTS
+ */
+export type TImageData = {
+  src: string;
+  alt: string;
+}
