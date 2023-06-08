@@ -4,6 +4,7 @@ import {
   NavMenuItem,
   MainBreadcrumbPart
 } from '../types/navigation';
+import { TMenuStructure } from '../types/menu';
 
 /**
  * Converts a page tree to a usable menu data structure.
@@ -12,9 +13,9 @@ import {
  */
 export function convertPageTreeToMenu(pageTree: IJaenPage[]) {
   let expandedItemIdx = 0; // The next index of an possibly expanded item
-  const result: { menu: NavMenuSection[]; expandedIdx: number[] } = {
+  const result: TMenuStructure = {
     menu: [],
-    expandedIdx: []
+    activeIdx: []
   };
   const pageMap: { [key: string]: IJaenPage } = {};
   pageTree.forEach(page => (pageMap[page.id] = page));
@@ -39,14 +40,7 @@ export function convertPageTreeToMenu(pageTree: IJaenPage[]) {
     // Check if any item in the current page or its children is active
     // If so, add the index of the current item to the expanded item index array
     // This is used to expand the correct items in the accordion when the page is loaded
-    const hasActiveChild = children.some(
-      child => child.isActive || child.hasActiveChild
-    );
-    if (children.length > 0) {
-      if (hasActiveChild || currentPath === href)
-        result.expandedIdx.push(expandedItemIdx);
-      expandedItemIdx++;
-    }
+    const hasActiveChild = children.length > 0 && children.some(child => child.isActive || child.hasActiveChild);
 
     return {
       href: currentPath === href ? '' : href,
@@ -70,20 +64,26 @@ export function convertPageTreeToMenu(pageTree: IJaenPage[]) {
   return {
     menu: menuData,
     // Since the menu is built from the inside out, the first item is the last expanded item
-    expandedIdx: result.expandedIdx.map(idx => expandedItemIdx - idx)
+    // expandedIdx: result.expandedIdx.map(idx => expandedItemIdx - idx).reverse()
+    activeIdx: buildActiveMenuItemIndexArray(menuData),
   };
 }
 
-export function buildActiveMenuItemIndexArray(sections: NavMenuSection[]) {
+/**
+ *  Builds an flat array of indices of the active menu item and its parents (outer to inner, left to right)
+ * @param sections  The menu data structure
+ * @returns The array of indices representing the way to the active menu item
+ */
+export function buildActiveMenuItemIndexArray(sections: NavMenuSection[]): number[] {
   let result: number[] = [];
 
-  // Recursively build the breadcrumb parts by finding the active menu item and its parents
+  // Recursively build a flat array of indices of the active menu item and its parents (outer to inner, left to right)
   const findActiveMenuItem = (menu: NavMenuItem): boolean => {
     if (menu.isActive || menu.hasActiveChild) {
       const activeChildIdx = menu.children?.findIndex(
         item => item.isActive || item.hasActiveChild
       );
-      if (!activeChildIdx || activeChildIdx === -1 || !menu.children) return !!menu.isActive;
+      if (activeChildIdx === undefined || activeChildIdx === -1 || !menu.children) return !!menu.isActive;
       result.push(activeChildIdx);
       return findActiveMenuItem(menu.children[activeChildIdx]);
     }
@@ -93,7 +93,9 @@ export function buildActiveMenuItemIndexArray(sections: NavMenuSection[]) {
   for (let i = 0; i < sections.length; i++) {
     for (let j = 0; j < sections[i].items.length; j++) {
       if (findActiveMenuItem(sections[i].items[j])) {
-        result.push(j);
+        // Add the index of the current section and its outermost active item to the result array
+        // This is necessary because the outermost menu item is not added to the result array by the function above
+        result.unshift(i, j);
         return result;
       }
     }
@@ -104,46 +106,39 @@ export function buildActiveMenuItemIndexArray(sections: NavMenuSection[]) {
 
 /**
  * Creates the breadcrumb parts for the current page
- * @param menu  The menu data structure
+ * @param data  The menu data structure
+ * @param activeIdxArray  The array of indices of the active menu item and its parents
  * @returns  The breadcrumb parts for the current page
  */
 export function createBreadCrumbParts(
-  menu: NavMenuSection[]
+  data: TMenuStructure,
 ): MainBreadcrumbPart[] {
   const parts: MainBreadcrumbPart[] = [];
 
-  // Recursively build the breadcrumb parts by finding the active menu item and its parents
-  const findActiveMenuItem = (menu: NavMenuItem): boolean => {
-    if (menu.isActive || menu.hasActiveChild) {
-      const activeChild = menu.children?.find(
-        item => item.isActive || item.hasActiveChild
-      );
-      if (!activeChild) return !!menu.isActive;
-      parts.push({
-        name: activeChild.name,
-        href: activeChild.href
-      });
-      return findActiveMenuItem(activeChild);
-    }
-    return false;
-  };
+  // Recursively build the breadcrumb parts by traversing the menu data structure
+  const buildBreadcrumbPart = (menuItem: NavMenuItem, idx: number): boolean => {
+    const child = menuItem.children?.[data.activeIdx[idx]];
+    if (!child) return false;
+    parts.push({
+      name: child.name,
+      href: child.href
+    });
 
-  for (const section of menu) {
-    for (const item of section.items) {
-      // This adds the outest parent to the breadcrumb parts.
-      // This is necessary because findActiveMenuItem only adds the active child item of each parent
-      if (item.hasActiveChild || item.isActive)
-        parts.push({
-          name: item.name,
-          href: item.href
-        });
-      if (findActiveMenuItem(item)) {
-        parts[parts.length - 1].isActive = true;
-        return parts;
-      }
-    }
+    if (!child.hasActiveChild && !child.isActive) return !!child.isActive;
+    return buildBreadcrumbPart(child, idx + 1);
   }
-  // This should never happen because there must always be an active item,
-  // but if it does, just return an empty array
+
+  if (data.activeIdx.length < data.activeIdx[0]) return parts;
+  const activeSection = data.menu[data.activeIdx[0]];
+  if (activeSection.items.length < data.activeIdx[1]) return parts;
+  const activeItem = activeSection.items[data.activeIdx[1]];
+  // Add the first breadcrumb part
+  // This is necessary because the first breadcrumb part is not added to the result array by the function above
+  parts.push({
+    name: activeItem.name,
+    href: activeItem.href
+  });
+
+  buildBreadcrumbPart(activeItem, 2);
   return parts;
 }

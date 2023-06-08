@@ -1,7 +1,12 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { Flex, Link, Spacer, Text } from '@chakra-ui/react';
-import React, { FC, useMemo } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 import { LinkData } from '../../types/navigation';
+import { useJaenPageTree } from '@snek-at/jaen';
+import {
+  buildActiveMenuItemIndexArray,
+  convertPageTreeToMenu
+} from '../../functions/navigation';
 
 interface MainBottomNavProps {
   previousPage?: LinkData;
@@ -23,6 +28,21 @@ const props = {
  * This shows links to the respective previous and next page.
  */
 const MainBottomNav: FC<MainBottomNavProps> = ({ previousPage, nextPage }) => {
+  const pageTree = useJaenPageTree();
+
+  const pages = {
+    previousPage: undefined,
+    nextPage: undefined
+  };
+
+  useEffect(() => {
+    console.log('menu: ', convertPageTreeToMenu(pageTree).menu);
+    console.log(
+      'result:',
+      buildActiveMenuItemIndexArray(convertPageTreeToMenu(pageTree).menu)
+    );
+  }, [pageTree]);
+
   return (
     <Flex
       borderTop="1px solid"

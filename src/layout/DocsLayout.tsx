@@ -4,6 +4,7 @@ import { useJaenPageTree } from '@snek-at/jaen';
 import LeftNav from './navigation/LeftNav';
 import MainBreadcrumb from './navigation/components/MainBreadcrumb';
 import {
+  buildActiveMenuItemIndexArray,
   convertPageTreeToMenu,
   createBreadCrumbParts
 } from '../functions/navigation';
@@ -24,6 +25,7 @@ const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
     convertPageTreeToMenu(pageTree)
   );
 
+  console.log('ms: ', convertPageTreeToMenu(pageTree));
   // const menuStructure = useMemo(
   //   () => convertPageTreeToMenu(pageTree),
   //   [pageTree, path]
@@ -36,17 +38,17 @@ const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
         isDisabled: true,
         href: '/docs'
       },
-      ...createBreadCrumbParts(menuStructure.menu)
+      ...createBreadCrumbParts(menuStructure)
     ];
   }, [pageTree, path]);
 
-  const navOffset = useNavOffset();
+  // const navOffset = useNavOffset();
 
   const memoedChildren = useMemo(() => children, [children]);
 
   //Bug: This causes a render loop
   // useEffect(() => {
-  //   setMenuStructure(convertPageTreeToMenu(pageTree));
+  //   setMenuStructure(convertPageTreeToMenu(pageTree
   // }, [pageTree, path]);
 
   return (

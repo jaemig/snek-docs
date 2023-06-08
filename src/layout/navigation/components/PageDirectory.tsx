@@ -11,7 +11,7 @@ import {
   CenterProps,
   LinkProps
 } from '@chakra-ui/react';
-import { FC, Fragment, MouseEvent } from 'react';
+import { FC, Fragment, MouseEvent, useMemo } from 'react';
 import Link from '../../../components/app/Link';
 import { NavMenuItem, NavMenuSection } from '../../../types/navigation';
 import { convertPageTreeToMenu } from '../../../functions/navigation';
@@ -212,6 +212,15 @@ const PageDirectory: FC<PageDirectoryProps> = ({
   isMobile = false,
   closeMobileDrawer
 }) => {
+  // Calculate the expanded indices for the accordion
+  const expandedIdx = useMemo(() => {
+    let idx = 0;
+    return data.activeIdx.map(i => {
+      idx += i + 1;
+      return idx - 1;
+    });
+  }, [data.activeIdx]);
+
   return (
     <Accordion
       visibility={isExpanded ? 'visible' : 'hidden'}
@@ -227,7 +236,7 @@ const PageDirectory: FC<PageDirectoryProps> = ({
       variant="leftNav"
       transition="opacity 0.2s ease-in-out, width 0.2s ease-in-out"
       mb={isMobile ? 12 : undefined}
-      defaultIndex={data.expandedIdx}>
+      defaultIndex={expandedIdx}>
       {[...data.menu, ...baseMenuItems].map((section, i) => (
         <Fragment key={i}>
           {section.name && (
