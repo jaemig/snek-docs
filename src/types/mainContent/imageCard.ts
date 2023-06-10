@@ -1,4 +1,5 @@
 export type TImageData = {
-    src: string;
-    alt: string;
-}
+  id?: string;
+  src: string;
+  alt: string;
+};

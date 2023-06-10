@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 import { Box, Flex, Text, VStack } from '@chakra-ui/react';
-import MemoizedLinks from '../../components/app/MemoizedLink';
+import MemoizedLinks from '../../components/core/MemoizedLink';
 import TableOfContent from './components/TableOfContent';
 import { useNavOffset } from '../../hooks/use-nav-offset';
 
@@ -31,7 +31,8 @@ const RightNav: FC = ({}) => {
       as="aside"
       display={{ base: 'none', xl: 'block' }}
       color="shared.text.default"
-      fontSize="sm">
+      fontSize="sm"
+    >
       <Text color="rightNav.titleTop.color" fontWeight="semibold">
         On This Page
       </Text>
@@ -43,7 +44,8 @@ const RightNav: FC = ({}) => {
         pt={7}
         borderTop="1px solid"
         borderTopColor="components.separator.borderColor"
-        fontSize="xs">
+        fontSize="xs"
+      >
         <VStack rowGap={1} textAlign="left">
           <MemoizedLinks
             links={links}

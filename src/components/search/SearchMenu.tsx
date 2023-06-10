@@ -18,7 +18,7 @@ import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { highLightQuery, searchDocs } from '../../functions/search';
 import { TSearchResult, TSearchResultSection } from '../../types/search';
 import SearchInput from './SearchInput';
-import Link from '../app/Link';
+import Link from '../core/Link';
 import { isInternalLink } from '../../functions/utils';
 import { navigate } from 'gatsby';
 
@@ -67,7 +67,8 @@ const SearchResultItem: FC<{
         }
       }}
       {...props}
-      transition="background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out">
+      transition="background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out"
+    >
       <Link href={item.href}>
         <Heading
           size="sm"
@@ -76,7 +77,8 @@ const SearchResultItem: FC<{
             defaultFocus
               ? 'components.menu.item.focus.headingColor'
               : 'shared.text.bright'
-          }>
+          }
+        >
           {highLightQuery(item.title, query, 0)}
         </Heading>
         <Text color="text.default">
@@ -104,7 +106,8 @@ const SearchResultSection: FC<{
         mb={2}
         mt={idx === 0 ? 2 : 5}
         textTransform="uppercase"
-        color="components.menu.groupTitle.color">
+        color="components.menu.groupTitle.color"
+      >
         {section.title}
       </Heading>
       <MenuDivider />
@@ -182,7 +185,8 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
       autoSelect={false}
       onClose={() => {
         setIsAnyItemFocused(false);
-      }}>
+      }}
+    >
       <SearchInput
         setSearchQuery={setSearchQuery}
         openFirstLink={openFirstLink}
@@ -198,7 +202,8 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
             // If the user focuses on any result item for the first time, set the isAnyItemFocused state to true
             if (!isAnyItemFocused && e.target instanceof HTMLButtonElement)
               setIsAnyItemFocused(true);
-          }}>
+          }}
+        >
           {resultItems}
         </MenuList>
       </Portal>

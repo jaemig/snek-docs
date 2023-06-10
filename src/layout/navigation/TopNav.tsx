@@ -12,11 +12,11 @@ import {
 import React, { FC, useState } from 'react';
 import GitHub from '../../components/icons/GitHub';
 import SnekIcon from '../../assets/icons/brand.svg';
-import MemoizedLinks from '../../components/app/MemoizedLink';
+import MemoizedLinks from '../../components/core/MemoizedLink';
 import MobileNavDrawer from './MobileNavDrawer';
 import SearchMenu from '../../components/search/SearchMenu';
 import { LinkData } from '../../types/navigation';
-import Link from '../../components/app/Link';
+import Link from '../../components/core/Link';
 import { useNavOffset } from '../../hooks/use-nav-offset';
 
 const links: LinkData[] = [
@@ -81,14 +81,16 @@ const TopNav: FC = () => {
         borderBottomColor="topNav.borderColor"
         backgroundColor="shared.translucent.bgColor"
         backdropFilter="blur(10px)"
-        zIndex={1}>
+        zIndex={1}
+      >
         <Flex w="7xl">
           <Link
             href="#"
             _hover={{
               transform: 'scale(1.1)'
             }}
-            transition="transform 0.2s ease-in-out">
+            transition="transform 0.2s ease-in-out"
+          >
             <Image h="32px" src={SnekIcon} alt="Snek Logo" />
           </Link>
           <Spacer />
@@ -114,13 +116,15 @@ const TopNav: FC = () => {
                 _hover={{
                   transform: 'scale(1.2)'
                 }}
-                transition="transform 0.2s ease-in-out">
+                transition="transform 0.2s ease-in-out"
+              >
                 <GitHub boxSize="32px" fill="topNav.GitHubFill" />
               </Link>
               <Button
                 variant="ghost"
                 size="sm"
-                display={{ base: 'initial', md: 'none' }}>
+                display={{ base: 'initial', md: 'none' }}
+              >
                 <VStack
                   spacing={1.5}
                   onClick={toggleMobileMenu}
@@ -141,7 +145,8 @@ const TopNav: FC = () => {
                       transition:
                         'transform 0.2s ease-in-out, opacity 0.2s ease-in-out'
                     }
-                  }}>
+                  }}
+                >
                   <Box
                     w="24px"
                     h="2px"

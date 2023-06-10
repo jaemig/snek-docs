@@ -134,7 +134,8 @@ const FilesystemItem: FC<IFilesystemItemProps> = ({
             {...tooltipProps}
             label={tooltipText}
             borderRadius="md"
-            openDelay={500}>
+            openDelay={500}
+          >
             {itemContent}
           </Tooltip>
         ) : (
@@ -144,7 +145,8 @@ const FilesystemItem: FC<IFilesystemItemProps> = ({
       {item.type === 'folder' && showChildren && (
         <Box
           borderLeft="1px solid"
-          borderColor="leftNav.accordion.panel.borderLeftColor">
+          borderColor="leftNav.accordion.panel.borderLeftColor"
+        >
           {item.children?.map((child, i) => (
             <FilesystemItem
               item={child}
@@ -180,7 +182,8 @@ const Filesystem: FC<IFileSystemProps> = ({ structure }) => {
       _hover={{
         boxShadow: 'base'
       }}
-      transition="box-shadow 0.2s ease-in-out">
+      transition="box-shadow 0.2s ease-in-out"
+    >
       {structure &&
         Array.isArray(structure) &&
         structure?.map((item, i) => (

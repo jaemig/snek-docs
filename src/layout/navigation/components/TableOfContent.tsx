@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 import { useTocNavigation } from '../../../hooks/use-toc-navigation';
 import { TableOfContentItem } from '../../../types/navigation';
 import { Box, VStack } from '@chakra-ui/react';
-import Link from '../../../components/app/Link';
+import Link from '../../../components/core/Link';
 
 /**
  * Component for the table of content.
@@ -28,7 +28,8 @@ const TableOfContent: FC = ({}) => {
               textDecoration: 'none',
               opacity: 1
             }}
-            transition="opacity 0.1s ease-in-out">
+            transition="opacity 0.1s ease-in-out"
+          >
             {item.text}
           </Link>
         );

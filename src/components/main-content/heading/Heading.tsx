@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react';
 import React, { Dispatch, FC, ReactNode, SetStateAction } from 'react';
 import FaHashtag from '../../icons/fontawesome/FaHashtag';
-import Link from '../../app/Link';
+import Link from '../../core/Link';
 import { mainComponentBaseStyle } from '../../../layout/main/mainContent.vars';
 import { IMainContentComponentBaseProps } from '../../../types/mainContent/mainContent';
 
@@ -84,7 +84,8 @@ const Heading: FC<IHeadingProps> = ({
         '& a': {
           opacity: 1
         }
-      }}>
+      }}
+    >
       {children}
       {!noAnchor && id && (
         <Link
@@ -97,7 +98,8 @@ const Heading: FC<IHeadingProps> = ({
           fontSize={variantLinkFontSizes[variant]}
           lineHeight={Number(variantLinkFontSizes[variant]) + 5 + 'px'}
           verticalAlign="top"
-          onClick={handleClick}>
+          onClick={handleClick}
+        >
           <FaHashtag />
         </Link>
       )}

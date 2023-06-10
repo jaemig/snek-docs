@@ -29,7 +29,8 @@ const LeftNav: FC<ILeftNavProps> = ({ menuData }) => {
       flexDirection="column"
       h={`calc(100vh - 100px - ${navTopOffset})`}
       w={isExpanded ? 'auto' : '5rem'}
-      color="shared.text.default">
+      color="shared.text.default"
+    >
       <Box w={isExpanded ? 'auto' : 0}>
         <PageDirectory data={menuStructure} isExpanded={isExpanded} />
       </Box>

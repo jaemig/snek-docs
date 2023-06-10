@@ -66,7 +66,8 @@ const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
           xl: 'minmax(auto, 250px) minmax(auto, 4fr)'
         }}
         gap={10}
-        px={{ base: 7, xl: 0 }}>
+        px={{ base: 7, xl: 0 }}
+      >
         <Box
           display={{ base: 'none', md: 'block' }}
           position="sticky"

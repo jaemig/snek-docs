@@ -9,7 +9,7 @@ const themeComponents = {
   Link: themeLinkComponent,
   Button: themeButtonComponent,
   Menu: themeMenuComponent,
-  Card: themeCardComponent,
+  Card: themeCardComponent
 };
 
 export default themeComponents;

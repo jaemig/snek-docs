@@ -18,7 +18,8 @@ const Links: FC<LinksProps> = ({ links, props, activeProps }) => {
             key={link.name}
             href={link.href}
             {...props}
-            {...(link.isActive ? activeProps : {})}>
+            {...(link.isActive ? activeProps : {})}
+          >
             {link.name}
           </Link>
         );

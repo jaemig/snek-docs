@@ -40,7 +40,9 @@ export function convertPageTreeToMenu(pageTree: IJaenPage[]) {
     // Check if any item in the current page or its children is active
     // If so, add the index of the current item to the expanded item index array
     // This is used to expand the correct items in the accordion when the page is loaded
-    const hasActiveChild = children.length > 0 && children.some(child => child.isActive || child.hasActiveChild);
+    const hasActiveChild =
+      children.length > 0 &&
+      children.some(child => child.isActive || child.hasActiveChild);
 
     return {
       href: currentPath === href ? '' : href,
@@ -65,7 +67,7 @@ export function convertPageTreeToMenu(pageTree: IJaenPage[]) {
     menu: menuData,
     // Since the menu is built from the inside out, the first item is the last expanded item
     // expandedIdx: result.expandedIdx.map(idx => expandedItemIdx - idx).reverse()
-    activeIdx: buildActiveMenuItemIndexArray(menuData),
+    activeIdx: buildActiveMenuItemIndexArray(menuData)
   };
 }
 
@@ -74,7 +76,9 @@ export function convertPageTreeToMenu(pageTree: IJaenPage[]) {
  * @param sections  The menu data structure
  * @returns The array of indices representing the way to the active menu item
  */
-export function buildActiveMenuItemIndexArray(sections: NavMenuSection[]): number[] {
+export function buildActiveMenuItemIndexArray(
+  sections: NavMenuSection[]
+): number[] {
   let result: number[] = [];
 
   // Recursively build a flat array of indices of the active menu item and its parents (outer to inner, left to right)
@@ -83,7 +87,12 @@ export function buildActiveMenuItemIndexArray(sections: NavMenuSection[]): numbe
       const activeChildIdx = menu.children?.findIndex(
         item => item.isActive || item.hasActiveChild
       );
-      if (activeChildIdx === undefined || activeChildIdx === -1 || !menu.children) return !!menu.isActive;
+      if (
+        activeChildIdx === undefined ||
+        activeChildIdx === -1 ||
+        !menu.children
+      )
+        return !!menu.isActive;
       result.push(activeChildIdx);
       return findActiveMenuItem(menu.children[activeChildIdx]);
     }
@@ -111,7 +120,7 @@ export function buildActiveMenuItemIndexArray(sections: NavMenuSection[]): numbe
  * @returns  The breadcrumb parts for the current page
  */
 export function createBreadCrumbParts(
-  data: TMenuStructure,
+  data: TMenuStructure
 ): MainBreadcrumbPart[] {
   const parts: MainBreadcrumbPart[] = [];
 
@@ -126,7 +135,7 @@ export function createBreadCrumbParts(
 
     if (!child.hasActiveChild && !child.isActive) return !!child.isActive;
     return buildBreadcrumbPart(child, idx + 1);
-  }
+  };
 
   if (data.activeIdx.length < data.activeIdx[0]) return parts;
   const activeSection = data.menu[data.activeIdx[0]];

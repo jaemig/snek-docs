@@ -29,7 +29,8 @@ const AppLayout: FC<AppLayoutProps> = ({ children, isDocs, path }) => {
           h="max(100%, 100vh)"
           minH="100vh"
           direction="column"
-          pb={5}>
+          pb={5}
+        >
           <TopNav />
           <Box flex="1" mt={navTopOffset}>
             {isDocs ? (

@@ -147,7 +147,8 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
                   borderBottomWidth={1}
                   background="transparent"
                   borderRadius={4}
-                  py={0.5}>
+                  py={0.5}
+                >
                   {kbd}
                 </Kbd>
               }

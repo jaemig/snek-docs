@@ -5,10 +5,10 @@ export type FilesystemItemType = 'file' | 'folder';
 export type TFilesystemItem = TFilesystemFolder | TFilesystemFile;
 
 export type TFilesystemItemBase = {
-    name: string;
-    type: FilesystemItemType;
-    isSelected?: boolean;
-    tooltip?:
+  name: string;
+  type: FilesystemItemType;
+  isSelected?: boolean;
+  tooltip?:
     | string
     | {
         text: string;
@@ -16,16 +16,16 @@ export type TFilesystemItemBase = {
         color?: string;
         placement?: PlacementWithLogical;
         hasArrow?: boolean;
-    };
-    lowContrast?: boolean;
+      };
+  lowContrast?: boolean;
 };
 
 export type TFilesystemFolder = TFilesystemItemBase & {
-    type: 'folder';
-    defaultOpen?: boolean;
-    children?: Array<TFilesystemItem>;
+  type: 'folder';
+  defaultOpen?: boolean;
+  children?: Array<TFilesystemItem>;
 };
 
 export type TFilesystemFile = TFilesystemItemBase & {
-    type: 'file';
+  type: 'file';
 };
