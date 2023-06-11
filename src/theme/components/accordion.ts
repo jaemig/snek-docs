@@ -1,4 +1,4 @@
-export const themeAccordionComponent = {
+const themeAccordionComponent = {
   variants: {
     leftNav: {
       root: {
@@ -20,3 +20,5 @@ export const themeAccordionComponent = {
     }
   }
 };
+
+export default themeAccordionComponent;
