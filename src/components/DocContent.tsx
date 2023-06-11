@@ -14,6 +14,7 @@ import RightNav from '../layout/navigation/RightNav';
 import MainBottomNav from '../layout/navigation/MainBottomNav';
 import ImageCard from './main-content/image-card/ImageCard';
 import Callout from './main-content/callout/Callouts';
+import IconCard from './main-content/icon-card/IconCard';
 
 export interface DocContentProps {}
 
@@ -49,7 +50,8 @@ export const DocContent: React.FC<DocContentProps> = () => {
             CodeSnippet,
             Filesystem,
             ImageCard,
-            Callout
+            Callout,
+            IconCard
           }}
         />
         <MainBottomNav />
