@@ -1,3 +1,6 @@
+/**
+ * The "callout" component is called "alert" in chakra-ui.
+ */
 const border = '1px solid'; // This only works with the variants below
 
 const themeAlertComponent = {

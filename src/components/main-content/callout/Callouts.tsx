@@ -1,12 +1,5 @@
-import {
-  Alert,
-  AlertIcon,
-  AlertProps,
-  AlertStatus,
-  Box
-} from '@chakra-ui/react';
+import { Alert, AlertIcon, Box } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
-import { CalloutType } from '../../../types/mainContent/callout';
 
 interface ICalloutProps {
   type?: 'default' | 'info' | 'warning' | 'error';
@@ -15,7 +8,8 @@ interface ICalloutProps {
 }
 
 /**
- * Component for displaying a callout/alert
+ * Component for displaying a callout/alert.
+ * Note: The theming for this component runs under the chakra-ui name "Alert"
  */
 const Callout: FC<ICalloutProps> = ({ type = 'default', icon, children }) => {
   return (
