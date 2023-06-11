@@ -1,4 +1,5 @@
-import { themeAccordionComponent } from './components/accordion';
+import themeAccordionComponent from './components/accordion';
+import themeAlertComponent from './components/alert';
 import themeButtonComponent from './components/button';
 import themeCardComponent from './components/card';
 import themeLinkComponent from './components/link';
@@ -9,7 +10,8 @@ const themeComponents = {
   Link: themeLinkComponent,
   Button: themeButtonComponent,
   Menu: themeMenuComponent,
-  Card: themeCardComponent
+  Card: themeCardComponent,
+  Alert: themeAlertComponent,
 };
 
 export default themeComponents;
