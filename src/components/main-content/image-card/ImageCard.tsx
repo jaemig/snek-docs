@@ -6,7 +6,7 @@ import { mainComponentBaseStyle } from '../../../layout/main/mainContent.vars';
 import { LinkData } from '../../../types/navigation';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { TImageData } from '../../../types/mainContent/imageCard';
-import themeCardComponent from '../../../theme/components/card';
+// import themeCardComponent from '../../../theme/components/card';
 import Image from '../../core/Image';
 
 interface IImageCardProps extends IMainContentComponentBaseProps {
@@ -31,14 +31,19 @@ const ImageCard: FC<IImageCardProps> = ({
       {...baseProps}
       w="fit-content"
       maxW={size}
+      bgColor="components.imageCard.bgColor"
+      border="1px solid"
+      borderColor="components.imageCard.borderColor"
       _hover={{
-        ...themeCardComponent.variants.grayOutline.container._hover,
-        'sd-cmp-image-card-link-icon': {
+        bgColor: 'components.imageCard.hover.bgColor',
+        boxShadow: 'components.imageCard.hover.boxShadow',
+        borderColor: 'components.imageCard.hover.borderColor',
+        '& .sd-cmp-image-card-link-icon': {
           marginLeft: 3
         }
       }}
       overflow="hidden"
-      variant="grayOutline"
+      transition="border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out"
     >
       <Link href={link.href}>
         <Image
@@ -50,7 +55,6 @@ const ImageCard: FC<IImageCardProps> = ({
             objectFit: 'cover'
           }}
         />
-        {/* <Image {...image} w="100%" objectFit="cover" /> */}
         <Box p={4}>
           <Text fontSize="16px" fontWeight="semibold">
             {link.name}
