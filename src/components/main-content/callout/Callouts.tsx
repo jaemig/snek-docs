@@ -19,7 +19,7 @@ interface ICalloutProps {
  */
 const Callout: FC<ICalloutProps> = ({ type = 'default', icon, children }) => {
   return (
-    <Alert variant={type} borderRadius="lg" p={4} mb={4}>
+    <Alert variant={type} borderRadius="lg" p={4} mt={8}>
       <AlertIcon>{icon}</AlertIcon>
       <Box
         __css={{
