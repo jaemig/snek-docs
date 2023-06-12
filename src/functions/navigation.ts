@@ -65,8 +65,6 @@ export function convertPageTreeToMenu(pageTree: IJaenPage[]) {
   ];
 
   expandedItemIdx--; // Decrement the expanded item index to get correct the index
-
-  console.log('menu: ', menuData);
   return {
     menu: menuData,
     // Since the menu is built from the inside out, the first item is the last expanded item
@@ -165,7 +163,6 @@ export function getAdjacentPages(idxArray: number[], menu: NavMenuSection[]): TA
   const result: TAdjacentPages = {};
 
   const getAdjacentPage = (menuItem: NavMenuItem, idx: number, parentMenuItem?: NavMenuItem): boolean => {
-    // if (idxArray.length - 1 < idx) return false;
     const posIdx = idxArray[idx];
     const activeChild = menuItem.children?.[posIdx];
     // console.log('mbn idx:', posIdx, idx, activeChild, menuItem);
@@ -175,19 +172,25 @@ export function getAdjacentPages(idxArray: number[], menu: NavMenuSection[]): TA
       let prev;
       if (posIdx > 0) {
         prev = menuItem.children?.[posIdx - 1];
-      } else if (parentMenuItem) {
+      } else {
+        // If the current item is already the most outer item, get the previous item via the section
+        if (!parentMenuItem) {
+          // Since this is a section, we need to box it into a NavMenuItem
+          const section = menu[idxArray[0]];
+          parentMenuItem = {
+            href: '',
+            name: section.name ?? '',
+            children: section.items
+          };
+        }
         // If the current item is the last item in the index array, get the previous item via the parent item
         if (posIdx === undefined && parentMenuItem.children && idxArray[idxArray.length - 1] > 0) {
           const prevSibling = parentMenuItem.children[idxArray[idxArray.length - 1] - 1];
           let lastChild = prevSibling.children?.[prevSibling.children.length - 1];
-          // debugger;
-          // while (lastChild) {
-          //   lastChild = lastChild.children?.[lastChild.children.length - 1];
-          //   if (!lastChild?.children) break;
-          // }
-          console.log('mbn last   child:', lastChild);
+          while (lastChild && lastChild.children && lastChild.children.length > 0) {
+            lastChild = lastChild.children?.[lastChild.children.length - 1];
+          }
           prev = lastChild;
-          // prev = parentMenuItem.children[idxArray[idxArray.length - 1] - 1];
         } else {
           prev = parentMenuItem;
         }
@@ -218,7 +221,6 @@ export function getAdjacentPages(idxArray: number[], menu: NavMenuSection[]): TA
     return !!menuItem.isActive;
   }
 
-  // debugger;
   getAdjacentPage(menu[idxArray[0]].items[idxArray[1]], 2);
 
 
