@@ -1,4 +1,4 @@
-import { NavMenuSection } from './navigation';
+import { NavMenuItem, NavMenuSection } from './navigation';
 
 export type TMenuStructure = {
   menu: NavMenuSection[];

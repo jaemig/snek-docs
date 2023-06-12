@@ -25,7 +25,7 @@ const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
     convertPageTreeToMenu(pageTree)
   );
 
-  console.log('ms: ', convertPageTreeToMenu(pageTree));
+  // console.log('ms: ', convertPageTreeToMenu(pageTree));
   // const menuStructure = useMemo(
   //   () => convertPageTreeToMenu(pageTree),
   //   [pageTree, path]

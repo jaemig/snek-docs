@@ -1,11 +1,12 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { Flex, Link, Spacer, Text } from '@chakra-ui/react';
 import React, { FC, useEffect, useMemo } from 'react';
-import { LinkData } from '../../types/navigation';
+import { TAdjacentPages, LinkData } from '../../types/navigation';
 import { useJaenPageTree } from '@snek-at/jaen';
 import {
   buildActiveMenuItemIndexArray,
-  convertPageTreeToMenu
+  convertPageTreeToMenu,
+  getAdjacentPages
 } from '../../functions/navigation';
 
 interface MainBottomNavProps {
@@ -27,20 +28,19 @@ const props = {
  * Main bottom navigation component.
  * This shows links to the respective previous and next page.
  */
-const MainBottomNav: FC<MainBottomNavProps> = ({ previousPage, nextPage }) => {
+const MainBottomNav: FC<MainBottomNavProps> = ({}) => {
   const pageTree = useJaenPageTree();
 
-  const pages = {
-    previousPage: undefined,
-    nextPage: undefined
+  const pages: TAdjacentPages = {
+    prev: undefined,
+    next: undefined
   };
 
   useEffect(() => {
-    console.log('menu: ', convertPageTreeToMenu(pageTree).menu);
-    console.log(
-      'result:',
-      buildActiveMenuItemIndexArray(convertPageTreeToMenu(pageTree).menu)
-    );
+    const menu = convertPageTreeToMenu(pageTree).menu;
+    const idxArr = buildActiveMenuItemIndexArray(menu);
+    console.log('mbn: ', idxArr);
+    console.log('mbn pages: ', getAdjacentPages(idxArr, menu));
   }, [pageTree]);
 
   return (
@@ -51,19 +51,19 @@ const MainBottomNav: FC<MainBottomNavProps> = ({ previousPage, nextPage }) => {
       pt={5}
       pb="8px" // This is to make the nav controls align with the bottom of this nav
     >
-      {previousPage && (
-        <Link href={previousPage.href} {...props}>
+      {pages.prev && (
+        <Link href={pages.prev.href} {...props}>
           <ChevronLeftIcon mr={2} />
           <Text as="span" verticalAlign="middle">
-            {previousPage.name}
+            {pages.prev.name}
           </Text>
         </Link>
       )}
       <Spacer minW={10} />
-      {nextPage && (
-        <Link href={nextPage.href} {...props} textAlign="right">
+      {pages.next && (
+        <Link href={pages.next.href} {...props} textAlign="right">
           <Text as="span" verticalAlign="middle">
-            {nextPage.name}
+            {pages.next.name}
           </Text>
           <ChevronRightIcon ml={2} />
         </Link>

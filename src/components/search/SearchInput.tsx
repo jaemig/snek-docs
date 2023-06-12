@@ -122,7 +122,6 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
               setSearchQuery(e.currentTarget.value);
             }}
             onKeyDownCapture={e => {
-              console.log(e.key, menu.isOpen, menu.focusedIndex);
               if (e.key === 'Escape') {
                 // Close the menu and blur the input when the user presses the escape key
                 menu.onClose();

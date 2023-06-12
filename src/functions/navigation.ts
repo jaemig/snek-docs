@@ -2,7 +2,8 @@ import { IJaenPage } from '@snek-at/jaen';
 import {
   NavMenuSection,
   NavMenuItem,
-  MainBreadcrumbPart
+  MainBreadcrumbPart,
+  TAdjacentPages
 } from '../types/navigation';
 import { TMenuStructure } from '../types/menu';
 
@@ -34,6 +35,7 @@ export function convertPageTreeToMenu(pageTree: IJaenPage[]) {
 
     const href = page.buildPath ?? buildPath + page.slug + '/';
     const children = page.children
+      .filter(child => !child.deleted)
       .map(({ id }) => buildMenuItem(id, href))
       .filter((item): item is NavMenuItem => !!item);
 
@@ -56,6 +58,7 @@ export function convertPageTreeToMenu(pageTree: IJaenPage[]) {
   const menuData: NavMenuSection[] = [
     {
       items: docs_page.children
+        .filter(child => !child.deleted)
         .map(({ id }) => buildMenuItem(id, docs_page.buildPath ?? '/'))
         .filter((item): item is NavMenuItem => !!item)
     }
@@ -63,6 +66,7 @@ export function convertPageTreeToMenu(pageTree: IJaenPage[]) {
 
   expandedItemIdx--; // Decrement the expanded item index to get correct the index
 
+  console.log('menu: ', menuData);
   return {
     menu: menuData,
     // Since the menu is built from the inside out, the first item is the last expanded item
@@ -150,4 +154,73 @@ export function createBreadCrumbParts(
 
   buildBreadcrumbPart(activeItem, 2);
   return parts;
+}
+
+/**
+ * Gets the names of the pages adjacent to the current page
+ * @param idxArray  The array of indices of the active menu item and its parents
+ * @returns  The data of the pages adjacent to the current page
+ */
+export function getAdjacentPages(idxArray: number[], menu: NavMenuSection[]): TAdjacentPages {
+  const result: TAdjacentPages = {};
+
+  const getAdjacentPage = (menuItem: NavMenuItem, idx: number, parentMenuItem?: NavMenuItem): boolean => {
+    // if (idxArray.length - 1 < idx) return false;
+    const posIdx = idxArray[idx];
+    const activeChild = menuItem.children?.[posIdx];
+    // console.log('mbn idx:', posIdx, idx, activeChild, menuItem);
+    if (activeChild) getAdjacentPage(activeChild, idx + 1, menuItem);
+
+    if (!result.prev) {
+      let prev;
+      if (posIdx > 0) {
+        prev = menuItem.children?.[posIdx - 1];
+      } else if (parentMenuItem) {
+        // If the current item is the last item in the index array, get the previous item via the parent item
+        if (posIdx === undefined && parentMenuItem.children && idxArray[idxArray.length - 1] > 0) {
+          const prevSibling = parentMenuItem.children[idxArray[idxArray.length - 1] - 1];
+          let lastChild = prevSibling.children?.[prevSibling.children.length - 1];
+          // debugger;
+          // while (lastChild) {
+          //   lastChild = lastChild.children?.[lastChild.children.length - 1];
+          //   if (!lastChild?.children) break;
+          // }
+          console.log('mbn last   child:', lastChild);
+          prev = lastChild;
+          // prev = parentMenuItem.children[idxArray[idxArray.length - 1] - 1];
+        } else {
+          prev = parentMenuItem;
+        }
+      }
+      if (prev) {
+        result.prev = {
+          name: prev.name,
+          href: prev.href
+        };
+      }
+    }
+    if (!result.next && parentMenuItem?.children) {
+      let next;
+      if (posIdx < parentMenuItem.children.length - 1) {
+        next = parentMenuItem.children[posIdx + 1];
+      } else if (parentMenuItem.children && idxArray[idxArray.length - 1] < parentMenuItem.children.length - 1) {
+        next = parentMenuItem.children[idxArray[idxArray.length - 1] + 1];
+      }
+
+      const nextChild = menuItem.children?.[posIdx + 1];
+      if (nextChild) {
+        result.next = {
+          name: nextChild.name,
+          href: nextChild.href
+        };
+      }
+    }
+    return !!menuItem.isActive;
+  }
+
+  // debugger;
+  getAdjacentPage(menu[idxArray[0]].items[idxArray[1]], 2);
+
+
+  return result;
 }

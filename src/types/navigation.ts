@@ -32,3 +32,11 @@ export type MainBreadcrumbPart = {
   isDisabled?: boolean;
   isActive?: boolean;
 };
+
+/**
+ * Stores the data of the previous and next page
+ */
+export type TAdjacentPages = {
+  prev?: LinkData;
+  next?: LinkData;
+}
