@@ -22,8 +22,8 @@ export const DocContent: React.FC<DocContentProps> = () => {
   const navTopOffset = useNavOffset();
 
   return (
-    <Stack spacing={12} direction="row">
-      <Box maxW="700px" w="full">
+    <Stack spacing={{ base: 0, xl: 12 }} direction="row">
+      <Box maxW="900px" w="full">
         <Field.Mdx
           name="documentation"
           components={{
