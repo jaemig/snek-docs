@@ -162,10 +162,10 @@ export function createBreadCrumbParts(
 export function getAdjacentPages(idxArray: number[], menu: NavMenuSection[]): TAdjacentPages {
   const result: TAdjacentPages = {};
 
-  const getAdjacentPage = (menuItem: NavMenuItem, idx: number, parentMenuItem?: NavMenuItem): boolean => {
+  const getAdjacentPage = (menuItem: NavMenuItem, idx: number, parentMenuItem: NavMenuItem) => {
+    //* posIdx is undefined for the last recursive call
     const posIdx = idxArray[idx];
     const activeChild = menuItem.children?.[posIdx];
-    // console.log('mbn idx:', posIdx, idx, activeChild, menuItem);
     if (activeChild) getAdjacentPage(activeChild, idx + 1, menuItem);
 
     if (!result.prev) {
@@ -174,24 +174,17 @@ export function getAdjacentPages(idxArray: number[], menu: NavMenuSection[]): TA
         prev = menuItem.children?.[posIdx - 1];
       } else {
         // If the current item is already the most outer item, get the previous item via the section
-        if (!parentMenuItem) {
-          // Since this is a section, we need to box it into a NavMenuItem
-          const section = menu[idxArray[0]];
-          parentMenuItem = {
-            href: '',
-            name: section.name ?? '',
-            children: section.items
-          };
-        }
-        // If the current item is the last item in the index array, get the previous item via the parent item
         if (posIdx === undefined && parentMenuItem.children && idxArray[idxArray.length - 1] > 0) {
+          // If there's a previous sibling of the item, get the most inner child of that sibling
           const prevSibling = parentMenuItem.children[idxArray[idxArray.length - 1] - 1];
           let lastChild = prevSibling.children?.[prevSibling.children.length - 1];
           while (lastChild && lastChild.children && lastChild.children.length > 0) {
             lastChild = lastChild.children?.[lastChild.children.length - 1];
           }
           prev = lastChild;
-        } else {
+        } else if (idx > 2) {
+          // If the current item is the first child of the parent item, just get the parent item
+          // (We check for idx > 2 because the the first idx's parent is always a section)
           prev = parentMenuItem;
         }
       }
@@ -202,27 +195,38 @@ export function getAdjacentPages(idxArray: number[], menu: NavMenuSection[]): TA
         };
       }
     }
-    if (!result.next && parentMenuItem?.children) {
-      let next;
-      if (posIdx < parentMenuItem.children.length - 1) {
-        next = parentMenuItem.children[posIdx + 1];
-      } else if (parentMenuItem.children && idxArray[idxArray.length - 1] < parentMenuItem.children.length - 1) {
-        next = parentMenuItem.children[idxArray[idxArray.length - 1] + 1];
-      }
-
-      const nextChild = menuItem.children?.[posIdx + 1];
-      if (nextChild) {
+    if (!result.next) {
+      if (posIdx === undefined && menuItem.children && menuItem.children.length > 0) {
+        // If the current item has children, get the first child (most inner item only)
+        const firstChild = menuItem.children[0];
         result.next = {
-          name: nextChild.name,
-          href: nextChild.href
+          name: firstChild.name,
+          href: firstChild.href
         };
+      } else if (parentMenuItem.children) {
+        // If the parent item has a next sibling, get that sibling
+        const parentPosIdx = Math.max(0, idxArray[idx - 1]);
+        if (parentPosIdx < parentMenuItem.children.length - 1) {
+          const next = parentMenuItem.children[parentPosIdx + 1];
+          if (next) {
+            result.next = {
+              name: next.name,
+              href: next.href
+            };
+          }
+        }
       }
     }
-    return !!menuItem.isActive;
   }
 
-  getAdjacentPage(menu[idxArray[0]].items[idxArray[1]], 2);
+  // We box the section in an MenuItem object so we can feed the recursive function with it
+  const boxedSection = {
+    href: '',
+    name: menu[idxArray[0]].name ?? '',
+    children: menu[idxArray[0]].items
+  }
 
+  getAdjacentPage(menu[idxArray[0]].items[idxArray[1]], 2, boxedSection);
 
   return result;
 }

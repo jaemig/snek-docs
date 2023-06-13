@@ -1,5 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
-import { Flex, Link, Spacer, Text } from '@chakra-ui/react';
+import { Flex, Spacer, Text } from '@chakra-ui/react';
 import React, { FC, useEffect, useMemo } from 'react';
 import { TAdjacentPages, LinkData } from '../../types/navigation';
 import { useJaenPageTree } from '@snek-at/jaen';
@@ -8,6 +8,7 @@ import {
   convertPageTreeToMenu,
   getAdjacentPages
 } from '../../functions/navigation';
+import Link from '../../components/core/Link';
 
 interface MainBottomNavProps {
   previousPage?: LinkData;
@@ -31,16 +32,10 @@ const props = {
 const MainBottomNav: FC<MainBottomNavProps> = ({}) => {
   const pageTree = useJaenPageTree();
 
-  const pages: TAdjacentPages = {
-    prev: undefined,
-    next: undefined
-  };
-
-  useEffect(() => {
+  const pages: TAdjacentPages = useMemo(() => {
     const menu = convertPageTreeToMenu(pageTree).menu;
     const idxArr = buildActiveMenuItemIndexArray(menu);
-    console.log('mbn: ', idxArr);
-    console.log('mbn pages: ', getAdjacentPages(idxArr, menu));
+    return getAdjacentPages(idxArr, menu);
   }, [pageTree]);
 
   return (
