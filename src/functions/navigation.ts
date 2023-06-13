@@ -157,6 +157,7 @@ export function createBreadCrumbParts(
 /**
  * Gets the names of the pages adjacent to the current page
  * @param idxArray  The array of indices of the active menu item and its parents
+ * @param menu  The menu data structure
  * @returns  The data of the pages adjacent to the current page
  */
 export function getAdjacentPages(idxArray: number[], menu: NavMenuSection[]): TAdjacentPages {
