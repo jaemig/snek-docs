@@ -14,7 +14,10 @@ import {
 import { FC, Fragment, MouseEvent, useMemo } from 'react';
 import Link from '../../../components/core/Link';
 import { NavMenuItem, NavMenuSection } from '../../../types/navigation';
-import { convertPageTreeToMenu } from '../../../functions/navigation';
+import {
+  convertPageTreeToMenu,
+  getExpandedMenuItemIndices
+} from '../../../functions/navigation';
 
 const baseMenuItems: NavMenuSection[] = [
   {
@@ -219,11 +222,7 @@ const PageDirectory: FC<PageDirectoryProps> = ({
 }) => {
   // Calculate the expanded indices for the accordion
   const expandedIdx = useMemo(() => {
-    let idx = 0;
-    return data.activeIdx.map(i => {
-      idx += i + 1;
-      return idx - 1;
-    });
+    return getExpandedMenuItemIndices(data.menu);
   }, [data.activeIdx]);
 
   return (

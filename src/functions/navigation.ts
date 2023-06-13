@@ -163,6 +163,12 @@ export function createBreadCrumbParts(
 export function getAdjacentPages(idxArray: number[], menu: NavMenuSection[]): TAdjacentPages {
   const result: TAdjacentPages = {};
 
+  /**
+   * Recursively gets the adjacent page
+   * @param menuItem  The current menu item
+   * @param idx  The current index in the index array
+   * @param parentMenuItem  The parent menu item
+   */
   const getAdjacentPage = (menuItem: NavMenuItem, idx: number, parentMenuItem: NavMenuItem) => {
     //* posIdx is undefined for the last recursive call
     const posIdx = idxArray[idx];
@@ -230,4 +236,52 @@ export function getAdjacentPages(idxArray: number[], menu: NavMenuSection[]): TA
   getAdjacentPage(menu[idxArray[0]].items[idxArray[1]], 2, boxedSection);
 
   return result;
+}
+
+/**
+ * Gets the indices of the expanded menu items
+ * @param menu  The menu data structure
+ * @returns  The indices of the expanded menu items
+ */
+export function getExpandedMenuItemIndices(menu: NavMenuSection[]): number[] {
+  const expandedIdx: number[] = [];
+
+  let idx = -1; // We start at -1 because the first item is always a section
+  /**
+   * Recursively gets the indices of the expanded menu items by traversing the menu data structure
+   * @param menuItem  The menu item to check
+   * @returns  Whether the menu item is the active one
+   */
+  const getExpandedMenuItem = (menuItem: NavMenuItem): boolean => {
+    const isActive = menuItem.isActive;
+    if (menuItem.hasActiveChild || isActive) {
+      // We only push the index if the item is active or has an active child since chakra indices ignore non-expandalbe items 
+      expandedIdx.push(idx);
+      if (isActive) return true;
+    }
+    if (!menuItem.children || !menuItem.children.length) return false;
+    idx++;
+    for (const child of menuItem.children) {
+      // We must check all other children too since some of them could be expandable
+      if (getExpandedMenuItem(child)) return true;
+    }
+    return false;
+  }
+
+
+  for (let i = 0; i < menu.length; i++) {
+    // We box the section in an MenuItem object so we can feed the recursive function with it
+    const boxedSection: NavMenuItem = {
+      href: '',
+      name: menu[i].name ?? '',
+      children: menu[i].items,
+      hasActiveChild: menu[i].items.some(item => item.hasActiveChild),
+    }
+    const isActiveItemFound = getExpandedMenuItem(boxedSection);
+    if (isActiveItemFound) break; // We stop the loop if the active item is found
+  }
+
+  // Remove the first item in case the active item is the child of a section
+  if (expandedIdx[0] < 0) expandedIdx.shift();
+  return expandedIdx;
 }
