@@ -1,17 +1,10 @@
-import React, { FC, useContext, useEffect, useMemo, useState } from 'react';
+import React, { FC, useMemo } from 'react';
 import { Box, Grid } from '@chakra-ui/react';
-import { useJaenPageTree } from '@snek-at/jaen';
 import LeftNav from './navigation/LeftNav';
 import MainBreadcrumb from './navigation/components/MainBreadcrumb';
-import {
-  convertPageTreeToMenu,
-  createBreadCrumbParts
-} from '../functions/navigation';
+import { createBreadCrumbParts } from '../functions/navigation';
 import { MainBreadcrumbPart } from '../types/navigation';
-import { useNavOffset } from '../hooks/use-nav-offset';
-import { MenuContext, useMenuContext } from '../contexts/menu';
-import { TMenuStructure } from '../types/menu';
-import { useLocation } from '@reach/router';
+import { useMenuContext } from '../contexts/menu';
 
 interface DocsLayoutProps {
   children?: React.ReactNode;
@@ -19,14 +12,7 @@ interface DocsLayoutProps {
 }
 
 const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
-  const pageTree = useJaenPageTree();
-
   const { menuStructure } = useMenuContext();
-
-  // const menuStructure = useMemo(
-  //   () => convertPageTreeToMenu(pageTree),
-  //   [pageTree, path]
-  // );
 
   const breadcrumbParts: MainBreadcrumbPart[] = useMemo(() => {
     return [
@@ -37,16 +23,9 @@ const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
       },
       ...createBreadCrumbParts(menuStructure)
     ];
-  }, [pageTree, path]);
-
-  // const navOffset = useNavOffset();
+  }, [menuStructure]);
 
   const memoedChildren = useMemo(() => children, [children]);
-
-  //Bug: This causes a render loop
-  // useEffect(() => {
-  //   setMenuStructure(convertPageTreeToMenu(pageTree
-  // }, [pageTree, path]);
 
   return (
     <Grid
