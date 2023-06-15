@@ -50,7 +50,7 @@ const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
       >
         <LeftNav menuData={menuStructure} />
       </Box>
-      <Box>
+      <Box overflow="hidden">
         <MainBreadcrumb parts={breadcrumbParts} />
 
         <Box>{memoedChildren}</Box>

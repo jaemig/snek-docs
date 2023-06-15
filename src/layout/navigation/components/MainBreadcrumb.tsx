@@ -36,13 +36,7 @@ interface IMainBradcrumbProps {
  */
 const MainBreadcrumb: FC<IMainBradcrumbProps> = ({ parts }) => {
   return (
-    <Breadcrumb
-      separator={<ChevronRightIcon />}
-      fontSize="sm"
-      w="100%"
-      overflowX="auto"
-      mb={5}
-    >
+    <Breadcrumb separator={<ChevronRightIcon />} fontSize="sm" mb={5}>
       {parts.map((item, i) => {
         const props: BreadcrumbLinkProps = {};
 
@@ -67,18 +61,17 @@ const MainBreadcrumb: FC<IMainBradcrumbProps> = ({ parts }) => {
           <BreadcrumbItem
             key={i}
             isCurrentPage={item.isActive || item.isDisabled}
-            overflow="hidden"
-            whiteSpace="nowrap"
-            textOverflow="ellipsis"
+            isTruncated
           >
             <BreadcrumbLink
               as={Link}
               href={item.href}
               transition="opacity 0.1s ease-in-out"
               isCurrentPage
+              isTruncated
               {...props}
             >
-              <Text isTruncated>{item.name}</Text>
+              {item.name}
             </BreadcrumbLink>
           </BreadcrumbItem>
         );
