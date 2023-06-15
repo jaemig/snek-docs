@@ -10,6 +10,7 @@ import SearchInput from '../../components/search/SearchInput';
 import PageDirectory from './components/PageDirectory';
 import NavbarControls from './components/NavbarControls';
 import SearchMenu from '../../components/search/SearchMenu';
+import { useMenuContext } from '../../contexts/menu';
 
 interface MobileNavDrawerProps {
   isOpen: boolean;
@@ -26,6 +27,8 @@ const MobileNavDrawer: FC<MobileNavDrawerProps> = ({
   onOpen,
   onClose
 }) => {
+  const { menuStructure } = useMenuContext();
+
   return (
     <Drawer isOpen={isOpen} onClose={onClose} placement="top" size="full">
       <DrawerOverlay />
@@ -33,7 +36,11 @@ const MobileNavDrawer: FC<MobileNavDrawerProps> = ({
         <DrawerBody pt={20}>
           <SearchMenu menuProps={{ matchWidth: true }} />
           <Box mt={5}>
-            <PageDirectory isMobile closeMobileDrawer={onClose} />
+            <PageDirectory
+              isMobile
+              closeMobileDrawer={onClose}
+              data={menuStructure}
+            />
           </Box>
           <NavbarControls isMobile />
         </DrawerBody>

@@ -9,7 +9,7 @@ import {
 } from '../functions/navigation';
 import { MainBreadcrumbPart } from '../types/navigation';
 import { useNavOffset } from '../hooks/use-nav-offset';
-import { MenuContext } from '../contexts/menu';
+import { MenuContext, useMenuContext } from '../contexts/menu';
 import { TMenuStructure } from '../types/menu';
 import { useLocation } from '@reach/router';
 
@@ -21,12 +21,7 @@ interface DocsLayoutProps {
 const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
   const pageTree = useJaenPageTree();
 
-  const location = useLocation();
-
-  //TODO: This only works on first load, but not on page change
-  const [menuStructure, setMenuStructure] = useState<TMenuStructure>(
-    convertPageTreeToMenu(pageTree, location.pathname)
-  );
+  const { menuStructure } = useMenuContext();
 
   // const menuStructure = useMemo(
   //   () => convertPageTreeToMenu(pageTree),
@@ -54,36 +49,34 @@ const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
   // }, [pageTree, path]);
 
   return (
-    <MenuContext.Provider value={{ menuStructure, setMenuStructure }}>
-      <Grid
-        flex={1}
-        mt={5}
-        maxW="7xl"
-        h="100%"
-        mx="auto"
-        templateRows="1fr"
-        templateColumns={{
-          base: '1fr',
-          md: '0.8fr 2fr',
-          xl: 'minmax(auto, 250px) minmax(auto, 4fr)'
-        }}
-        gap={10}
-        px={{ base: 7, xl: 0 }}
+    <Grid
+      flex={1}
+      mt={5}
+      maxW="7xl"
+      h="100%"
+      mx="auto"
+      templateRows="1fr"
+      templateColumns={{
+        base: '1fr',
+        md: '0.8fr 2fr',
+        xl: 'minmax(auto, 250px) minmax(auto, 4fr)'
+      }}
+      gap={10}
+      px={{ base: 7, xl: 0 }}
+    >
+      <Box
+        display={{ base: 'none', md: 'block' }}
+        position="sticky"
+        // top={`calc(100px + ${navOffset})`}
       >
-        <Box
-          display={{ base: 'none', md: 'block' }}
-          position="sticky"
-          // top={`calc(100px + ${navOffset})`}
-        >
-          <LeftNav menuData={menuStructure} />
-        </Box>
-        <Box>
-          <MainBreadcrumb parts={breadcrumbParts} />
+        <LeftNav menuData={menuStructure} />
+      </Box>
+      <Box>
+        <MainBreadcrumb parts={breadcrumbParts} />
 
-          <Box>{memoedChildren}</Box>
-        </Box>
-      </Grid>
-    </MenuContext.Provider>
+        <Box>{memoedChildren}</Box>
+      </Box>
+    </Grid>
   );
 };
 

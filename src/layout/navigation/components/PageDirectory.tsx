@@ -222,7 +222,7 @@ const PageDirectory: FC<PageDirectoryProps> = ({
 }) => {
   // Calculate the expanded indices for the accordion
   const expandedIdx = useMemo(() => {
-    return getExpandedMenuItemIndices(data.menu);
+    return data.menu ? getExpandedMenuItemIndices(data.menu) : [];
   }, [data.activeIdx]);
 
   return (
