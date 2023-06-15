@@ -6,12 +6,14 @@ export const wrapPageElement: GatsbySSR['wrapPageElement'] = ({
   element,
   props
 }) => {
-  if (props.path.startsWith('/admin')) {
+  const path = props.location.pathname;
+
+  if (path.startsWith('/admin')) {
     return element;
   }
 
   return (
-    <AppLayout isDocs={props.path.startsWith('/docs')} path={props.path}>
+    <AppLayout isDocs={path.startsWith('/docs')} path={path}>
       {element}
     </AppLayout>
   );

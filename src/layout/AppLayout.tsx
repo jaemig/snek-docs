@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import TopNav from './navigation/TopNav';
-import { Box, ChakraProvider, Flex } from '@chakra-ui/react';
+import { Box, Button, ChakraProvider, Flex } from '@chakra-ui/react';
 import theme from '../theme/theme';
 import Footer from './Footer';
 import { PageManagerProvider, useJaenPageTree } from '@snek-at/jaen';
@@ -14,7 +14,7 @@ import { MenuContext } from '../contexts/menu';
 
 interface AppLayoutProps {
   children?: React.ReactNode;
-  isDocs?: React.ReactNode;
+  isDocs?: boolean;
   path?: string;
 }
 
