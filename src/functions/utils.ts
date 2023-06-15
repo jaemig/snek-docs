@@ -6,7 +6,7 @@ import { WindowLocation } from "@reach/router";
  */
 export function getPlatform() {
   const userAgent =
-    typeof window.navigator !== 'undefined' ? window.navigator.userAgent : '';
+    (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') ? window.navigator.userAgent : '';
 
   const platforms = [
     { pattern: /Mac/, platform: 'mac' },

@@ -19,9 +19,7 @@ import { highLightQuery, searchDocs } from '../../functions/search';
 import { TSearchResult, TSearchResultSection } from '../../types/search';
 import SearchInput from './SearchInput';
 import Link from '../core/Link';
-import { isInternalLink } from '../../functions/utils';
-import { navigate } from 'gatsby';
-import { useLocation } from '@reach/router';
+import { useLocation, navigate } from '@reach/router';
 
 /**
  * The search menu item component for displaying a specific search result item.
@@ -65,8 +63,7 @@ const SearchResultItem: FC<{
       onKeyDownCapture={e => {
         if (e.key === 'Enter') {
           // Redirect to the item's link if the user presses enter
-          if (isInternalLink(item.href, location)) navigate(item.href);
-          else window.location.href = item.href;
+          navigate(item.href);
         }
       }}
       {...props}
@@ -138,7 +135,6 @@ interface SearchMenuProps {
 const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
   const r = useRef(null);
 
-  const location = useLocation();
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResultData, setSearchResultData] = useState<
     TSearchResultSection[]
@@ -170,8 +166,7 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
       searchResultData[0]?.results.length > 0
     ) {
       const href = searchResultData[0].results[0].href;
-      if (isInternalLink(href, location)) navigate(href);
-      else window.location.href = href;
+      navigate(href);
       setIsAnyItemFocused(false);
     }
   };

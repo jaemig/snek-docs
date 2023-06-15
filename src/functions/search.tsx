@@ -25,7 +25,7 @@ export async function searchDocs(
     document: {
       id: 'id',
       index: 'content',
-      store: ['title']
+      store: ['title', 'url']
     }
   });
 
@@ -73,6 +73,7 @@ export async function searchDocs(
     // Add the page to the page index.
     pageIndex.add({
       id: pageId,
+      url: path,
       title: item.title,
       content: pageContent
     });

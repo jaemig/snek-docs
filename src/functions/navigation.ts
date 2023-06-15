@@ -24,7 +24,6 @@ export function convertPageTreeToMenu(pageTree: IJaenPage[], currentPath: string
 
   const docs_page = pageTree.find(page => page.slug === 'docs');
   if (!docs_page) return result;
-  // const currentPath = window.location.pathname;
 
   // Recursively build a menu item from a page
   const buildMenuItem = (
@@ -257,7 +256,7 @@ export function getExpandedMenuItemIndices(menu: NavMenuSection[]): number[] {
   const getExpandedMenuItem = (menuItem: NavMenuItem): boolean => {
     const isActive = menuItem.isActive;
     if (menuItem.hasActiveChild || isActive) {
-      // We only push the index if the item is active or has an active child since chakra indices ignore non-expandalbe items 
+      // We only push the index if the item is active or has an active child since chakra indices ignore non-expandalbe items
       expandedIdx.push(idx);
       if (isActive) return true;
     }
