@@ -141,7 +141,7 @@ export function createBreadCrumbParts(
 
   if (data.activeIdx.length < data.activeIdx[0]) return parts;
   const activeSection = data.menu[data.activeIdx[0]];
-  if (activeSection.items.length < data.activeIdx[1]) return parts;
+  if (!activeSection || activeSection.items.length < data.activeIdx[1]) return parts;
   const activeItem = activeSection.items[data.activeIdx[1]];
   // Add the first breadcrumb part
   // This is necessary because the first breadcrumb part is not added to the result array by the function above
