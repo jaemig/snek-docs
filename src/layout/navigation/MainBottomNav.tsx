@@ -9,6 +9,7 @@ import {
   getAdjacentPages
 } from '../../functions/navigation';
 import Link from '../../components/core/Link';
+import { useLocation } from '@reach/router';
 
 interface MainBottomNavProps {
   previousPage?: LinkData;
@@ -32,8 +33,11 @@ const props = {
 const MainBottomNav: FC<MainBottomNavProps> = ({}) => {
   const pageTree = useJaenPageTree();
 
+  const location = useLocation();
+
+  // Memoized adjacent pages object to navigate to previous and next page.
   const pages: TAdjacentPages = useMemo(() => {
-    const menu = convertPageTreeToMenu(pageTree).menu;
+    const menu = convertPageTreeToMenu(pageTree, location.pathname).menu;
     const idxArr = buildActiveMenuItemIndexArray(menu);
     return getAdjacentPages(idxArr, menu);
   }, [pageTree]);

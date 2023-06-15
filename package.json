@@ -23,6 +23,7 @@
     "@chakra-ui/theme-tools": "^2.0.16",
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
+    "@reach/router": "^1.3.4",
     "@snek-at/jaen": "^0.0.74",
     "flexsearch": "^0.7.31",
     "framer-motion": "^10.12.7",

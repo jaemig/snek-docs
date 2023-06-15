@@ -4,7 +4,6 @@ import { useJaenPageTree } from '@snek-at/jaen';
 import LeftNav from './navigation/LeftNav';
 import MainBreadcrumb from './navigation/components/MainBreadcrumb';
 import {
-  buildActiveMenuItemIndexArray,
   convertPageTreeToMenu,
   createBreadCrumbParts
 } from '../functions/navigation';
@@ -12,6 +11,7 @@ import { MainBreadcrumbPart } from '../types/navigation';
 import { useNavOffset } from '../hooks/use-nav-offset';
 import { MenuContext } from '../contexts/menu';
 import { TMenuStructure } from '../types/menu';
+import { useLocation } from '@reach/router';
 
 interface DocsLayoutProps {
   children?: React.ReactNode;
@@ -20,12 +20,14 @@ interface DocsLayoutProps {
 
 const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
   const pageTree = useJaenPageTree();
+
+  const location = useLocation();
+
   //TODO: This only works on first load, but not on page change
   const [menuStructure, setMenuStructure] = useState<TMenuStructure>(
-    convertPageTreeToMenu(pageTree)
+    convertPageTreeToMenu(pageTree, location.pathname)
   );
 
-  // console.log('ms: ', convertPageTreeToMenu(pageTree));
   // const menuStructure = useMemo(
   //   () => convertPageTreeToMenu(pageTree),
   //   [pageTree, path]

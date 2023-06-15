@@ -2,6 +2,7 @@ import { Link as ChLink, LinkOverlayProps, LinkProps } from '@chakra-ui/react';
 import { Link as GaLink } from 'gatsby';
 import { FC, ReactNode } from 'react';
 import { isInternalLink } from '../../functions/utils';
+import { useLocation } from '@reach/router';
 
 interface GatsbyLinkProps extends LinkOverlayProps {
   href?: string;
@@ -18,7 +19,9 @@ const Link: FC<GatsbyLinkProps> = ({ href = '#', ...props }) => {
     position: 'relative'
   };
 
-  if (isInternalLink(href)) {
+  const location = useLocation();
+
+  if (isInternalLink(href, location)) {
     return <ChLink {...baseProps} to={href} as={GaLink} {...props}></ChLink>;
   }
   return <ChLink {...baseProps} href={href} {...props}></ChLink>;

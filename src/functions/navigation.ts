@@ -10,9 +10,10 @@ import { TMenuStructure } from '../types/menu';
 /**
  * Converts a page tree to a usable menu data structure.
  * @param pageTree  The page tree to convert
+ * @param currentPath  The current path of the page
  * @returns  The converted menu data structure and an array of indices of expanded items
  */
-export function convertPageTreeToMenu(pageTree: IJaenPage[]) {
+export function convertPageTreeToMenu(pageTree: IJaenPage[], currentPath: string) {
   let expandedItemIdx = 0; // The next index of an possibly expanded item
   const result: TMenuStructure = {
     menu: [],
@@ -23,7 +24,7 @@ export function convertPageTreeToMenu(pageTree: IJaenPage[]) {
 
   const docs_page = pageTree.find(page => page.slug === 'docs');
   if (!docs_page) return result;
-  const currentPath = window.location.pathname;
+  // const currentPath = window.location.pathname;
 
   // Recursively build a menu item from a page
   const buildMenuItem = (
@@ -226,15 +227,16 @@ export function getAdjacentPages(idxArray: number[], menu: NavMenuSection[]): TA
     }
   }
 
-  // We box the section in an MenuItem object so we can feed the recursive function with it
-  const boxedSection = {
-    href: '',
-    name: menu[idxArray[0]].name ?? '',
-    children: menu[idxArray[0]].items
+  if (menu.length >= idxArray[0]) {
+    // We box the section in an MenuItem object so we can feed the recursive function with it
+    const boxedSection = {
+      href: '',
+      name: menu[idxArray[0]].name ?? '',
+      children: menu[idxArray[0]].items
+    }
+
+    getAdjacentPage(menu[idxArray[0]].items[idxArray[1]], 2, boxedSection);
   }
-
-  getAdjacentPage(menu[idxArray[0]].items[idxArray[1]], 2, boxedSection);
-
   return result;
 }
 

@@ -58,7 +58,7 @@ export const DocContent: React.FC<DocContentProps> = () => {
       </Box>
 
       <Box position="sticky" top={`calc(0px + ${navTopOffset})`}>
-        <RightNav />
+        <RightNav />2
       </Box>
     </Stack>
   );

@@ -1,3 +1,5 @@
+import { WindowLocation } from "@reach/router";
+
 /**
  * Get the platform of the user
  * @returns {string} platform  - The platform of the user
@@ -35,16 +37,17 @@ export function isTouchDevice() {
 /**
  *  Checks if the link is internal or external
  * @param href  - The href of the link
+ * @param location  - The location object from @reach/router
  * @returns   - Whether the link is internal or not
  */
-export function isInternalLink(href: string) {
+export function isInternalLink(href: string, location: WindowLocation) {
   let urlObj: URL;
   try {
-    urlObj = new URL(href, window.location.origin);
+    urlObj = new URL(href, location.origin);
   } catch (e) {
     return false; // If the URL is invalid, it is treated as an external link
   }
 
   // If the hostname is the same as the current hostname, it's an internal link
-  return urlObj.hostname === window.location.hostname;
+  return urlObj.hostname === location.hostname;
 }
