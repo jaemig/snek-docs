@@ -6,8 +6,11 @@ export type TMenuContext = {
   setMenuStructure: (menuStructure: TMenuStructure) => void;
 };
 
+/**
+ * The menu context representing the menu structure.
+ */
 export const MenuContext = createContext<TMenuContext>({
-  menuStructure: { menu: [], expandedIdx: [] },
+  menuStructure: { menu: [], activeIdx: [] },
   setMenuStructure: () => {}
 });
 
