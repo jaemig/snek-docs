@@ -31,7 +31,7 @@ export function getPlatform() {
  * @returns {boolean} isTouchDevice - Whether the user is on a touch device or not
  */
 export function isTouchDevice() {
-  return 'ontouchstart' in window || navigator.maxTouchPoints;
+  return typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints);
 }
 
 /**
