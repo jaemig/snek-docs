@@ -1,15 +1,13 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useMemo } from 'react';
 import TopNav from './navigation/TopNav';
 import { Box, Button, ChakraProvider, Flex } from '@chakra-ui/react';
 import theme from '../theme/theme';
 import Footer from './Footer';
 import { PageManagerProvider, useJaenPageTree } from '@snek-at/jaen';
-import Filesystem from '../components/main-content/filesystem/Filesystem';
 import DocsLayout from './DocsLayout';
 import { useNavOffset } from '../hooks/use-nav-offset';
 import { useLocation } from '@reach/router';
 import { convertPageTreeToMenu } from '../functions/navigation';
-import { TMenuStructure } from '../types/menu';
 import { MenuContext } from '../contexts/menu';
 
 interface AppLayoutProps {
@@ -25,9 +23,11 @@ interface AppLayoutProps {
 const AppLayout: FC<AppLayoutProps> = ({ children, isDocs, path }) => {
   const pageTree = useJaenPageTree();
   const location = useLocation();
-  //TODO: This only works on first load, but not on page change
-  const [menuStructure, setMenuStructure] = useState<TMenuStructure>(
-    convertPageTreeToMenu(pageTree, location.pathname)
+
+  // This generates the menu structure from the page tree that is used over the whole app by accessing the context.
+  const menuStructure = useMemo(
+    () => convertPageTreeToMenu(pageTree, location.pathname),
+    [pageTree, path]
   );
 
   const navTopOffset = useNavOffset();
@@ -35,7 +35,7 @@ const AppLayout: FC<AppLayoutProps> = ({ children, isDocs, path }) => {
   return (
     <ChakraProvider theme={theme}>
       <PageManagerProvider>
-        <MenuContext.Provider value={{ menuStructure, setMenuStructure }}>
+        <MenuContext.Provider value={{ menuStructure }}>
           <Flex
             minW="210px"
             h="max(100%, 100vh)"
