@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react';
 import React, { FC } from 'react';
 import { MainBreadcrumbPart } from '../../../types/navigation';
+import Link from '../../../components/core/Link';
 
 // Example breadcrumb parts - this would be fetched from a CMS or other data source
 const breadCrumbParts = [
@@ -71,6 +72,7 @@ const MainBreadcrumb: FC<IMainBradcrumbProps> = ({ parts }) => {
             textOverflow="ellipsis"
           >
             <BreadcrumbLink
+              as={Link}
               href={item.href}
               transition="opacity 0.1s ease-in-out"
               isCurrentPage
