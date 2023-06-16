@@ -10,24 +10,6 @@ import React, { FC } from 'react';
 import { MainBreadcrumbPart } from '../../../types/navigation';
 import Link from '../../../components/core/Link';
 
-// Example breadcrumb parts - this would be fetched from a CMS or other data source
-const breadCrumbParts = [
-  {
-    name: 'Documentation',
-    href: '#',
-    isDisabled: true
-  },
-  {
-    name: 'Guide',
-    href: '#'
-  },
-  {
-    name: 'Quick Start',
-    href: '#',
-    isActive: true
-  }
-];
-
 interface IMainBradcrumbProps {
   parts: MainBreadcrumbPart[];
 }
@@ -41,7 +23,6 @@ const MainBreadcrumb: FC<IMainBradcrumbProps> = ({ parts }) => {
         const props: BreadcrumbLinkProps = {};
 
         if (item.isActive) {
-          props.opacity = 1;
           props.color = 'main.breadcrumb.active.color';
           props.fontWeight = 'semibold';
         } else {
@@ -49,7 +30,6 @@ const MainBreadcrumb: FC<IMainBradcrumbProps> = ({ parts }) => {
           props.color = 'main.breadcrumb.inactive.color';
           if (!item.isDisabled) {
             props._hover = {
-              opacity: 1,
               textDecoration: 'none',
               color: 'main.breadcrumb.inactive.hover.color'
             };
@@ -66,9 +46,9 @@ const MainBreadcrumb: FC<IMainBradcrumbProps> = ({ parts }) => {
             <BreadcrumbLink
               as={Link}
               href={item.href}
-              transition="opacity 0.1s ease-in-out"
               isCurrentPage
               isTruncated
+              transition="color 0.2s ease-in-out"
               {...props}
             >
               {item.name}

@@ -151,6 +151,7 @@ export function createBreadCrumbParts(
   });
 
   buildBreadcrumbPart(activeItem, 2);
+  parts[parts.length - 1].isActive = true; // The last breadcrumb part is always the active one
   return parts;
 }
 
@@ -255,8 +256,9 @@ export function getExpandedMenuItemIndices(menu: NavMenuSection[]): number[] {
    */
   const getExpandedMenuItem = (menuItem: NavMenuItem): boolean => {
     const isActive = menuItem.isActive;
-    if (menuItem.hasActiveChild || isActive) {
+    if (menuItem.hasActiveChild || (isActive && menuItem.children && menuItem.children.length > 0)) {
       // We only push the index if the item is active or has an active child since chakra indices ignore non-expandalbe items
+      // debugger;s
       expandedIdx.push(idx);
       if (isActive) return true;
     }
