@@ -1,5 +1,5 @@
 import { Box, Flex, Spacer } from '@chakra-ui/react';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import PageDirectory from './components/PageDirectory';
 import NavbarControls from './components/NavbarControls';
 import { useNavOffset } from '../../hooks/use-nav-offset';

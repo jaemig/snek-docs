@@ -11,7 +11,16 @@ import {
   CenterProps,
   LinkProps
 } from '@chakra-ui/react';
-import { FC, Fragment, MouseEvent, useMemo } from 'react';
+import {
+  FC,
+  Fragment,
+  MouseEvent,
+  MouseEventHandler,
+  createRef,
+  useEffect,
+  useMemo,
+  useState
+} from 'react';
 import Link from '../../../components/core/Link';
 import { NavMenuItem, NavMenuSection } from '../../../types/navigation';
 import {
@@ -77,9 +86,13 @@ const linkClickHandler = (ev: MouseEvent<HTMLAnchorElement>) => {
 const generateMenuItem = (
   item: NavMenuItem,
   isMobile: boolean,
+  updateExpandedIdx: (idx: number, mode: 'toggle' | 'set') => void,
+  expandedIdx: number,
   closeMobileDrawer?: () => void
 ) => {
-  if (!isMobile && item.isSection) return;
+  if (!isMobile && item.isSection) return { idx: expandedIdx };
+
+  const accordionItemRef = createRef<HTMLDivElement>();
 
   const externalLinkIcon = (
     <ArrowForwardIcon transform={`rotate(-45deg)`} ml={2} />
@@ -100,15 +113,30 @@ const generateMenuItem = (
     item.children.length > 0 &&
     (isMobile || item.children.some(child => !child.isSection));
 
+  const resultObj: { idx: number; item?: JSX.Element | JSX.Element[] } = {
+    idx: expandedIdx
+  };
+  console.log('before result ', resultObj.idx, 'for item', item.name);
+
   if (hasChildren) {
-    const children = item.children?.map(child =>
-      generateMenuItem(child, isMobile, closeMobileDrawer)
-    );
+    resultObj.idx++;
+    const children = item.children?.map(child => {
+      const res = generateMenuItem(
+        child,
+        isMobile,
+        updateExpandedIdx,
+        resultObj.idx,
+        closeMobileDrawer
+      );
+      resultObj.idx = res.idx;
+      return res;
+    });
     const semanticPath = `leftNav.accordion.${
       item.isActive ? '' : 'in'
     }activeItem.`;
-    return (
+    resultObj.item = (
       <AccordionItem
+        ref={accordionItemRef}
         key={item.href + item.name}
         css={{
           // Remove padding from last accordion item
@@ -122,13 +150,25 @@ const generateMenuItem = (
       >
         {({ isExpanded }) => (
           <>
-            <Link href={item.href} onClick={linkClickHandler}>
+            <Link
+              href={item.href}
+              onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+                const target = e.target as HTMLElement;
+                const hasClickedOnArrow =
+                  target instanceof SVGElement ||
+                  target instanceof SVGPathElement;
+                updateExpandedIdx(
+                  expandedIdx,
+                  hasClickedOnArrow ? 'toggle' : 'set'
+                );
+                linkClickHandler(e);
+              }}
+            >
               <AccordionButton
                 {...(item.isActive
                   ? activeMenuItemProps
                   : inactiveMenuItemProps)}
                 {...styleProps}
-                // isExternal={item.isExternal}
                 borderRadius="md"
                 py={1.5}
                 backgroundColor={
@@ -171,38 +211,40 @@ const generateMenuItem = (
                   backgroundColor: 'leftNav.accordion.panel.borderLeftColor'
                 }}
               >
-                {children}
+                {children?.map(child => child.item)}
               </Box>
             </AccordionPanel>
           </>
         )}
       </AccordionItem>
     );
+  } else {
+    resultObj.item = (
+      <Link
+        {...(item.isActive ? activeMenuItemProps : inactiveMenuItemProps)}
+        {...styleProps}
+        key={item.href + item.name}
+        href={item.href}
+        isExternal={item.isExternal}
+        display="block"
+        py={1.5}
+        px={4}
+        mt={1}
+        cursor="pointer"
+        borderRadius="md"
+        onClick={closeMobileDrawer}
+      >
+        {item.isSection && (
+          <Box key={-5} as="span" mr={2} fontSize="sm" color="gray.400">
+            #
+          </Box>
+        )}
+        {item.name}
+        {item.isExternal && externalLinkIcon}
+      </Link>
+    );
   }
-  return (
-    <Link
-      {...(item.isActive ? activeMenuItemProps : inactiveMenuItemProps)}
-      {...styleProps}
-      key={item.href + item.name}
-      href={item.href}
-      isExternal={item.isExternal}
-      display="block"
-      py={1.5}
-      px={4}
-      mt={1}
-      cursor="pointer"
-      borderRadius="md"
-      onClick={closeMobileDrawer}
-    >
-      {item.isSection && (
-        <Box key={-5} as="span" mr={2} fontSize="sm" color="gray.400">
-          #
-        </Box>
-      )}
-      {item.name}
-      {item.isExternal && externalLinkIcon}
-    </Link>
-  );
+  return resultObj;
 };
 
 interface PageDirectoryProps {
@@ -220,11 +262,27 @@ const PageDirectory: FC<PageDirectoryProps> = ({
   isMobile = false,
   closeMobileDrawer
 }) => {
-  // Calculate the expanded indices for the accordion
-  const expandedIdx = useMemo(() => {
+  // Calculate the default expanded indices for the accordion
+  const defaultExpandedIdx = useMemo(() => {
     return data.menu ? getExpandedMenuItemIndices(data.menu) : [];
   }, [data.activeIdx]);
 
+  // Keep track of the items that have been expanded by the user
+  const [expandedIdx, setExpandedIdx] = useState<number[]>(defaultExpandedIdx);
+
+  const updateExpandedIdx = (idx: number, mode: 'toggle' | 'set') => {
+    console.log('updating idx', idx, 'for array', expandedIdx, 'mode: ', mode);
+
+    const isIncluded = expandedIdx.includes(idx);
+    if (mode === 'toggle' && isIncluded) {
+      setExpandedIdx(expandedIdx.filter(i => i !== idx));
+      return;
+    }
+
+    if (!isIncluded) setExpandedIdx([...expandedIdx, idx]);
+  };
+
+  let menuRootExpandedIdx = 0;
   return (
     <Accordion
       visibility={isExpanded ? 'visible' : 'hidden'}
@@ -240,7 +298,7 @@ const PageDirectory: FC<PageDirectoryProps> = ({
       variant="leftNav"
       transition="opacity 0.2s ease-in-out, width 0.2s ease-in-out"
       mb={isMobile ? 12 : undefined}
-      defaultIndex={expandedIdx}
+      index={expandedIdx}
     >
       {[...data.menu, ...baseMenuItems].map((section, i) => (
         <Fragment key={i}>
@@ -256,9 +314,17 @@ const PageDirectory: FC<PageDirectoryProps> = ({
             </Box>
           )}
           <Box key={1}>
-            {section.items?.map((item: NavMenuItem) =>
-              generateMenuItem(item, isMobile, closeMobileDrawer)
-            )}
+            {section.items?.map((item: NavMenuItem) => {
+              const res = generateMenuItem(
+                item,
+                isMobile,
+                updateExpandedIdx,
+                menuRootExpandedIdx,
+                closeMobileDrawer
+              );
+              menuRootExpandedIdx = res.idx++;
+              return res.item;
+            })}
           </Box>
         </Fragment>
       ))}

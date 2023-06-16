@@ -36,7 +36,6 @@ const MainBreadcrumb: FC<IMainBradcrumbProps> = ({ parts }) => {
           }
         }
 
-        //TODO: Improve responsiveness of breadcrumb
         return (
           <BreadcrumbItem
             key={i}
@@ -46,7 +45,6 @@ const MainBreadcrumb: FC<IMainBradcrumbProps> = ({ parts }) => {
             <BreadcrumbLink
               as={Link}
               href={item.href}
-              isCurrentPage
               isTruncated
               transition="color 0.2s ease-in-out"
               {...props}
