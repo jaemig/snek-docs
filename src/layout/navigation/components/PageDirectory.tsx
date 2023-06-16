@@ -116,7 +116,6 @@ const generateMenuItem = (
   const resultObj: { idx: number; item?: JSX.Element | JSX.Element[] } = {
     idx: expandedIdx
   };
-  console.log('before result ', resultObj.idx, 'for item', item.name);
 
   if (hasChildren) {
     resultObj.idx++;
@@ -271,14 +270,11 @@ const PageDirectory: FC<PageDirectoryProps> = ({
   const [expandedIdx, setExpandedIdx] = useState<number[]>(defaultExpandedIdx);
 
   const updateExpandedIdx = (idx: number, mode: 'toggle' | 'set') => {
-    console.log('updating idx', idx, 'for array', expandedIdx, 'mode: ', mode);
-
     const isIncluded = expandedIdx.includes(idx);
     if (mode === 'toggle' && isIncluded) {
       setExpandedIdx(expandedIdx.filter(i => i !== idx));
       return;
     }
-
     if (!isIncluded) setExpandedIdx([...expandedIdx, idx]);
   };
 

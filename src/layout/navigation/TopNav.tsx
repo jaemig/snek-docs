@@ -81,7 +81,6 @@ const TopNav: FC = () => {
         borderBottomColor="topNav.borderColor"
         backgroundColor="shared.translucent.bgColor"
         backdropFilter="blur(10px)"
-        zIndex={1}
       >
         <Flex w="7xl">
           <Link
@@ -105,7 +104,10 @@ const TopNav: FC = () => {
                 }}
               />
               <Box display={{ base: 'none', md: 'initial' }}>
-                <SearchMenu menuListProps={{ width: '500px' }} />
+                <SearchMenu
+                  // width base 0 is a hack to prevent the menu from causing a horizontal scrollbar
+                  menuListProps={{ width: { base: 0, md: '500px' } }}
+                />
               </Box>
               <Link
                 display="inline-block"

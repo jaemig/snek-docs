@@ -186,6 +186,7 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
       onClose={() => {
         setIsAnyItemFocused(false);
       }}
+      isLazy
     >
       <SearchInput
         setSearchQuery={setSearchQuery}

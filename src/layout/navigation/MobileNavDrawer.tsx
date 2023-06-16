@@ -31,10 +31,9 @@ const MobileNavDrawer: FC<MobileNavDrawerProps> = ({
 
   return (
     <Drawer isOpen={isOpen} onClose={onClose} placement="top" size="full">
-      <DrawerOverlay />
-      <DrawerContent zIndex={1000} bgColor="shared.body">
+      <DrawerContent bgColor="shared.body">
         <DrawerBody pt={20}>
-          <SearchMenu menuProps={{ matchWidth: true }} />
+          <SearchMenu />
           <Box mt={5}>
             <PageDirectory
               isMobile
