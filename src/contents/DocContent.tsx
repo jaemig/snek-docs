@@ -2,19 +2,23 @@ import { Box, Stack } from '@chakra-ui/react';
 import { Field } from '@snek-at/jaen';
 import React from 'react';
 
-import Link from './core/Link';
-import CodeSnippet from './main-content/code-snippet/CodeSnippet';
-import Filesystem from './main-content/filesystem/Filesystem';
-import Heading from './main-content/heading/Heading';
-import List from './main-content/list/List';
-import ListItem from './main-content/list/ListItem';
-import Text from './main-content/text/Text';
 import { useNavOffset } from '../hooks/use-nav-offset';
 import RightNav from '../layout/navigation/RightNav';
 import MainBottomNav from '../layout/navigation/MainBottomNav';
-import ImageCard from './main-content/image-card/ImageCard';
-import Callout from './main-content/callout/Callouts';
-import IconCard from './main-content/icon-card/IconCard';
+
+// Default custom components (replaces HTML tags)
+import Text from '../components/main-content/text/Text';
+import Heading from '../components/main-content/heading/Heading';
+import List from '../components/main-content/list/List';
+import ListItem from '../components/main-content/list/ListItem';
+import CodeSnippet from '../components/main-content/code-snippet/CodeSnippet';
+import Link from '../components/core/Link';
+
+// Insertable custom components (via Jaen)
+import Filesystem from '../components/main-content/filesystem/Filesystem';
+import ImageCard from '../components/main-content/image-card/ImageCard';
+import Callout from '../components/main-content/callout/Callouts';
+import IconCard from '../components/main-content/icon-card/IconCard';
 
 export interface DocContentProps {}
 

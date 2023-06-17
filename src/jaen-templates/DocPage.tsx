@@ -1,6 +1,6 @@
 import { connectTemplate } from '@snek-at/jaen';
 import { graphql } from 'gatsby';
-import { DocContent } from '../components/DocContent';
+import { DocContent } from '../contents/DocContent';
 
 const DocsPage = connectTemplate(
   () => {

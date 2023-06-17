@@ -1,14 +1,14 @@
 import { connectPage } from '@snek-at/jaen';
 import { graphql } from 'gatsby';
-import { DocContent } from '../contents/DocContent';
+import ContactContent from '../contents/ContactContent';
 
-const DocsPage = connectPage(
+const ContactPage = connectPage(
   () => {
-    return <DocContent />;
+    return <ContactContent />;
   },
   {
-    label: 'Docs',
-    children: ['DocPage']
+    label: 'Contact',
+    children: ['ContactPage']
   }
 );
 
@@ -26,6 +26,6 @@ export const query = graphql`
   }
 `;
 
-export default DocsPage;
+export default ContactPage;
 
 export { Head } from '@snek-at/jaen';

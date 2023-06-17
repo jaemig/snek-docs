@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Link, HeadFC, PageProps } from 'gatsby';
+import { Link, HeadFC, PageProps, graphql } from 'gatsby';
+import { connectPage } from '@snek-at/jaen';
 
 const pageStyles = {
   color: '#232129',
@@ -23,7 +24,21 @@ const codeStyles = {
   borderRadius: 4
 };
 
-const NotFoundPage: React.FC<PageProps> = () => {
+export const query = graphql`
+  query ($jaenPageId: String!) {
+    ...JaenPageQuery
+    allJaenPage {
+      nodes {
+        ...JaenPageData
+        children {
+          ...JaenPageData
+        }
+      }
+    }
+  }
+`;
+
+const NotFoundPage: React.FC = ({}) => {
   return (
     <main style={pageStyles}>
       <h1 style={headingStyles}>Page not found</h1>
@@ -44,6 +59,9 @@ const NotFoundPage: React.FC<PageProps> = () => {
   );
 };
 
-export default NotFoundPage;
+export default connectPage(NotFoundPage, {
+  label: '404',
+  children: ['NotFoundPage']
+});
 
 export const Head: HeadFC = () => <title>Not found</title>;
