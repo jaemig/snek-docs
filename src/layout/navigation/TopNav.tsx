@@ -9,29 +9,32 @@ import {
   useDisclosure,
   Button
 } from '@chakra-ui/react';
-import React, { FC, useState } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import GitHub from '../../components/icons/GitHub';
 import SnekIcon from '../../assets/icons/brand.svg';
 import MemoizedLinks from '../../components/core/MemoizedLink';
 import MobileNavDrawer from './MobileNavDrawer';
 import SearchMenu from '../../components/search/SearchMenu';
-import { LinkData } from '../../types/navigation';
+import { TTopNavLinkData } from '../../types/navigation';
 import Link from '../../components/core/Link';
 import { useNavOffset } from '../../hooks/use-nav-offset';
+import { useLocation } from '@reach/router';
 
-const links: LinkData[] = [
+const links: TTopNavLinkData[] = [
   {
     name: 'Documentation',
     href: '/docs',
-    isActive: true
+    matchMethod: 'includes'
   },
   {
     name: 'About',
-    href: '/about'
+    matchMethod: 'exact',
+    href: '/about/'
   },
   {
     name: 'Contact',
-    href: '/contact'
+    matchMethod: 'exact',
+    href: '/contact/'
   }
 ];
 
@@ -53,6 +56,25 @@ const TopNav: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure(); // Mobile menu drawer
 
   const navTopOffset = useNavOffset();
+  const location = useLocation();
+
+  const activatedLinks = useMemo(() => {
+    let activeLinkFound = false;
+    return links.map(link => {
+      if (activeLinkFound) return link;
+      const isActive = link.matchMethod
+        ? link.matchMethod === 'exact'
+          ? location.pathname === link.href
+          : location.pathname.includes(link.href)
+        : false;
+
+      if (isActive) activeLinkFound = true;
+      return {
+        ...link,
+        isActive
+      };
+    });
+  }, [location.pathname]);
 
   const openDrawer = () => {
     setHamburgerClass('open');
@@ -85,7 +107,7 @@ const TopNav: FC = () => {
       >
         <Flex w="7xl">
           <Link
-            href="#"
+            href="/"
             _hover={{
               transform: 'scale(1.1)'
             }}
@@ -97,7 +119,7 @@ const TopNav: FC = () => {
           <Center>
             <HStack spacing={4}>
               <MemoizedLinks
-                links={links}
+                links={activatedLinks}
                 props={navLinkProps}
                 activeProps={{
                   opacity: 1,

@@ -1,6 +1,6 @@
 import React, { FC, useMemo } from 'react';
 import TopNav from './navigation/TopNav';
-import { Box, Button, ChakraProvider, Flex } from '@chakra-ui/react';
+import { Box, ChakraProvider, Flex } from '@chakra-ui/react';
 import theme from '../theme/theme';
 import Footer from './Footer';
 import { PageManagerProvider, useJaenPageTree } from '@snek-at/jaen';
