@@ -81,6 +81,7 @@ const TopNav: FC = () => {
         borderBottomColor="topNav.borderColor"
         backgroundColor="shared.translucent.bgColor"
         backdropFilter="blur(10px)"
+        zIndex={100}
       >
         <Flex w="7xl">
           <Link
