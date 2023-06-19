@@ -9,7 +9,11 @@ interface IBaseContentLayoutProps {
  * The base layout for all content pages that require no special layout setup.
  */
 const BaseContentLayout: FC<IBaseContentLayoutProps> = ({ children }) => {
-  return <Container maxW="7xl">{children}</Container>;
+  return (
+    <Container maxW="7xl" my={10}>
+      {children}
+    </Container>
+  );
 };
 
 export default BaseContentLayout;
