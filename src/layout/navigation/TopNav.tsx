@@ -179,14 +179,12 @@ const TopNav: FC = () => {
                     borderRadius="full"
                   />
                   <Box
-                    mt="5px"
                     w="24px"
                     h="2px"
                     backgroundColor="topNav.mobile.hamburger.bgColor"
                     borderRadius="full"
                   />
                   <Box
-                    mt="5px"
                     w="24px"
                     h="2px"
                     backgroundColor="topNav.mobile.hamburger.bgColor"
