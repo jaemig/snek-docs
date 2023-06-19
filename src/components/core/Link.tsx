@@ -1,10 +1,10 @@
-import { Link as ChLink, LinkOverlayProps, LinkProps } from '@chakra-ui/react';
+import { Link as ChLink, LinkProps } from '@chakra-ui/react';
 import { Link as GaLink } from 'gatsby';
 import { FC, ReactNode } from 'react';
 import { isInternalLink } from '../../functions/utils';
 import { useLocation } from '@reach/router';
 
-interface GatsbyLinkProps extends LinkOverlayProps {
+interface GatsbyLinkProps extends LinkProps {
   href?: string;
   children?: ReactNode;
 }
