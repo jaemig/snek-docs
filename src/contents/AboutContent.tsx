@@ -28,7 +28,7 @@ const AboutContent: FC = () => {
           </Heading>
           <Text>
             Jaen CMS allows us to build, manage and deliver documentation like
-            never before. It’s highly flexible and provides a better content
+            never before. It's highly flexible and provides a better content
             management experience.
           </Text>
         </Box>
