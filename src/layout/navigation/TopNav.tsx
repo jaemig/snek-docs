@@ -9,7 +9,7 @@ import {
   useDisclosure,
   Button
 } from '@chakra-ui/react';
-import React, { FC, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import GitHub from '../../components/icons/GitHub';
 import SnekIcon from '../../assets/icons/brand.svg';
 import MemoizedLinks from '../../components/core/MemoizedLink';
@@ -19,6 +19,7 @@ import { TTopNavLinkData } from '../../types/navigation';
 import Link from '../../components/core/Link';
 import { useNavOffset } from '../../hooks/use-nav-offset';
 import { useLocation } from '@reach/router';
+import useWindowSize from '../../hooks/use-current-window-size';
 
 const links: TTopNavLinkData[] = [
   {
@@ -57,6 +58,7 @@ const TopNav: FC = () => {
 
   const navTopOffset = useNavOffset();
   const location = useLocation();
+  const windowSize = useWindowSize();
 
   const activatedLinks = useMemo(() => {
     let activeLinkFound = false;
@@ -75,6 +77,10 @@ const TopNav: FC = () => {
       };
     });
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (windowSize.width >= 768) closeDrawer();
+  }, [windowSize.width]);
 
   const openDrawer = () => {
     setHamburgerClass('open');
@@ -103,7 +109,7 @@ const TopNav: FC = () => {
         borderBottomColor="topNav.borderColor"
         backgroundColor="shared.translucent.bgColor"
         backdropFilter="blur(10px)"
-        zIndex={100}
+        zIndex={2}
       >
         <Flex w="7xl">
           <Link
@@ -129,7 +135,9 @@ const TopNav: FC = () => {
               <Box display={{ base: 'none', md: 'initial' }}>
                 <SearchMenu
                   // width base 0 is a hack to prevent the menu from causing a horizontal scrollbar
-                  menuListProps={{ width: { base: 0, md: '500px' } }}
+                  menuListProps={{
+                    width: { base: 0, md: '500px' }
+                  }}
                 />
               </Box>
               <Link
@@ -157,13 +165,13 @@ const TopNav: FC = () => {
                   __css={{
                     '&.open': {
                       '& > div:nth-child(1)': {
-                        transform: 'rotate(-45deg) translate(-5px, 5px)'
+                        transform: 'rotate(45deg)'
                       },
                       '& > div:nth-child(2)': {
                         opacity: 0
                       },
                       '& > div:nth-child(3)': {
-                        transform: 'rotate(45deg) translate(-5px, -5px)'
+                        transform: 'rotate(-45deg)'
                       }
                     },
                     '& > div': {
@@ -173,6 +181,7 @@ const TopNav: FC = () => {
                   }}
                 >
                   <Box
+                    transformOrigin="left"
                     w="24px"
                     h="2px"
                     backgroundColor="topNav.mobile.hamburger.bgColor"
@@ -185,6 +194,7 @@ const TopNav: FC = () => {
                     borderRadius="full"
                   />
                   <Box
+                    transformOrigin="left"
                     w="24px"
                     h="2px"
                     backgroundColor="topNav.mobile.hamburger.bgColor"

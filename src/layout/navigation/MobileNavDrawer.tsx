@@ -1,16 +1,11 @@
-import {
-  Box,
-  Drawer,
-  DrawerBody,
-  DrawerContent,
-  DrawerOverlay
-} from '@chakra-ui/react';
+import { Box, Collapse, Flex, Spacer } from '@chakra-ui/react';
 import React, { FC } from 'react';
-import SearchInput from '../../components/search/SearchInput';
 import PageDirectory from './components/PageDirectory';
 import NavbarControls from './components/NavbarControls';
 import SearchMenu from '../../components/search/SearchMenu';
 import { useMenuContext } from '../../contexts/menu';
+import { Global } from '@emotion/react';
+import { useNavOffset } from '../../hooks/use-nav-offset';
 
 interface MobileNavDrawerProps {
   isOpen: boolean;
@@ -28,23 +23,46 @@ const MobileNavDrawer: FC<MobileNavDrawerProps> = ({
   onClose
 }) => {
   const { menuStructure } = useMenuContext();
+  const navOffset = useNavOffset();
 
   return (
-    <Drawer isOpen={isOpen} onClose={onClose} placement="top" size="full">
-      <DrawerContent bgColor="shared.body">
-        <DrawerBody pt={20}>
-          <SearchMenu />
-          <Box mt={5}>
-            <PageDirectory
-              isMobile
-              closeMobileDrawer={onClose}
-              data={menuStructure}
-            />
-          </Box>
-          <NavbarControls isMobile />
-        </DrawerBody>
-      </DrawerContent>
-    </Drawer>
+    <>
+      <Global
+        styles={{
+          body: {
+            overflow: isOpen ? 'hidden' : 'auto'
+          }
+        }}
+      />
+      <Box
+        position="fixed"
+        top={`calc(64px + ${navOffset})`}
+        left={0}
+        zIndex={1}
+      >
+        <Collapse in={isOpen} animateOpacity>
+          <Flex
+            direction="column"
+            w="100vw"
+            h={`calc(100vh - ${navOffset} - 64px)`}
+            bg="shared.body"
+            pt={10}
+            px={5}
+          >
+            <SearchMenu menuProps={{ matchWidth: true }} />
+            <Box mt={5}>
+              <PageDirectory
+                isMobile
+                closeMobileDrawer={onClose}
+                data={menuStructure}
+              />
+            </Box>
+            <Spacer />
+            <NavbarControls isMobile />
+          </Flex>
+        </Collapse>
+      </Box>
+    </>
   );
 };
 
