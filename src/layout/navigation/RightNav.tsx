@@ -12,7 +12,7 @@ const links = [
   },
   {
     name: 'Edit this page on GitHub',
-    href: 'https://github.com/Jan-Emig/snek-docs'
+    href: '/admin/#/pages'
   }
 ];
 
