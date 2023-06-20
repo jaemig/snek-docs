@@ -136,7 +136,8 @@ const TopNav: FC = () => {
                 <SearchMenu
                   // width base 0 is a hack to prevent the menu from causing a horizontal scrollbar
                   menuListProps={{
-                    width: { base: 0, md: '500px' }
+                    width: { base: 0, md: '500px' },
+                    zIndex: 3
                   }}
                 />
               </Box>
