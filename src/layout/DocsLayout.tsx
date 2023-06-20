@@ -1,10 +1,10 @@
-import React, { FC, useMemo } from 'react';
 import { Box, Grid } from '@chakra-ui/react';
-import LeftNav from './navigation/LeftNav';
-import MainBreadcrumb from './navigation/components/MainBreadcrumb';
+import React, { FC, useMemo } from 'react';
+import { useMenuContext } from '../contexts/menu';
 import { createBreadCrumbParts } from '../functions/navigation';
 import { MainBreadcrumbPart } from '../types/navigation';
-import { useMenuContext } from '../contexts/menu';
+import LeftNav from './navigation/LeftNav';
+import MainBreadcrumb from './navigation/components/MainBreadcrumb';
 
 interface DocsLayoutProps {
   children?: React.ReactNode;
@@ -50,9 +50,11 @@ const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
       >
         <LeftNav menuData={menuStructure} />
       </Box>
-      <Box overflow="hidden">
-        <MainBreadcrumb parts={breadcrumbParts} />
 
+      <Box minW="full">
+        <Box overflow="hidden">
+          <MainBreadcrumb parts={breadcrumbParts} />
+        </Box>
         <Box>{memoedChildren}</Box>
       </Box>
     </Grid>
