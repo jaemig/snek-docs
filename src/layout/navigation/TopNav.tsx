@@ -1,25 +1,24 @@
 import {
+  Box,
+  Button,
   Center,
   Flex,
-  Spacer,
   HStack,
-  VStack,
-  Box,
   Image,
-  useDisclosure,
-  Button
+  Spacer,
+  useDisclosure
 } from '@chakra-ui/react';
-import React, { FC, useEffect, useMemo, useState } from 'react';
-import GitHub from '../../components/icons/GitHub';
-import SnekIcon from '../../assets/icons/brand.svg';
-import MemoizedLinks from '../../components/core/MemoizedLink';
-import MobileNavDrawer from './MobileNavDrawer';
-import SearchMenu from '../../components/search/SearchMenu';
-import { TTopNavLinkData } from '../../types/navigation';
-import Link from '../../components/core/Link';
-import { useNavOffset } from '../../hooks/use-nav-offset';
 import { useLocation } from '@reach/router';
+import { FC, useEffect, useMemo, useState } from 'react';
+import SnekIcon from '../../assets/icons/brand.svg';
+import Link from '../../components/core/Link';
+import MemoizedLinks from '../../components/core/MemoizedLink';
+import GitHub from '../../components/icons/GitHub';
+import SearchMenu from '../../components/search/SearchMenu';
 import useWindowSize from '../../hooks/use-current-window-size';
+import { useNavOffset } from '../../hooks/use-nav-offset';
+import { TTopNavLinkData } from '../../types/navigation';
+import MobileNavDrawer from './MobileNavDrawer';
 
 const links: TTopNavLinkData[] = [
   {
@@ -159,49 +158,56 @@ const TopNav: FC = () => {
                 size="sm"
                 display={{ base: 'initial', md: 'none' }}
               >
-                <VStack
-                  spacing={1.5}
+                <Box
+                  position="relative"
+                  boxSize="11px"
                   onClick={toggleMobileMenu}
                   className={hamburgerClass}
                   __css={{
                     '&.open': {
-                      '& > div:nth-child(1)': {
+                      '& > div:nth-of-type(1)': {
+                        top: '8px',
                         transform: 'rotate(45deg)'
                       },
-                      '& > div:nth-child(2)': {
+                      '& > div:nth-of-type(2)': {
                         opacity: 0
                       },
-                      '& > div:nth-child(3)': {
+                      '& > div:nth-of-type(3)': {
+                        top: '8px',
                         transform: 'rotate(-45deg)'
                       }
                     },
                     '& > div': {
                       transition:
-                        'transform 0.2s ease-in-out, opacity 0.2s ease-in-out'
+                        'transform 0.2s ease-in-out, opacity 0.2s ease-in-out, top 0.2s ease-in-out, background-color 0.2s ease-in-out'
                     }
                   }}
                 >
                   <Box
-                    transformOrigin="left"
-                    w="24px"
+                    position="absolute"
+                    top={0}
+                    w="11px"
                     h="2px"
                     backgroundColor="topNav.mobile.hamburger.bgColor"
                     borderRadius="full"
                   />
                   <Box
-                    w="24px"
+                    position="absolute"
+                    top="5px"
+                    w="11px"
                     h="2px"
                     backgroundColor="topNav.mobile.hamburger.bgColor"
                     borderRadius="full"
                   />
                   <Box
-                    transformOrigin="left"
-                    w="24px"
+                    position="absolute"
+                    top="10px"
+                    w="11px"
                     h="2px"
                     backgroundColor="topNav.mobile.hamburger.bgColor"
                     borderRadius="full"
                   />
-                </VStack>
+                </Box>
               </Button>
             </HStack>
           </Center>
