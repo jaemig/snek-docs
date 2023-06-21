@@ -49,7 +49,10 @@ const MobileNavDrawer: FC<MobileNavDrawerProps> = ({
             pt={10}
             px={5}
           >
-            <SearchMenu menuProps={{ matchWidth: true }} />
+            <SearchMenu
+              menuProps={{ matchWidth: true }}
+              onItemClickCapture={onClose}
+            />
             <Box mt={5}>
               <PageDirectory
                 isMobile

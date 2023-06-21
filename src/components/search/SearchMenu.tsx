@@ -29,13 +29,20 @@ const SearchResultItem: FC<{
   query: string;
   id: number;
   defaultFocus?: boolean;
-}> = ({ item, query, id, defaultFocus = false }) => {
+  onClickCapture?: () => void;
+}> = ({
+  item,
+  query,
+  id,
+  defaultFocus = false,
+  onClickCapture = undefined
+}) => {
   let props: MenuItemProps = {};
 
   if (defaultFocus) {
     props = {
       ...props,
-      bgColor: 'components.menu.item.focus.bgColor',
+      bgColor: 'components.menu.item.focus.bgColor'
       boxShadow: '0 0 0 2px #00bce6'
     };
   }
@@ -50,6 +57,7 @@ const SearchResultItem: FC<{
         },
         bgColor: 'components.menu.item.focus.bgColor',
         boxShadow: '0 0 0 2px #00bce6'
+        bgColor: 'components.menu.item.focus.bgColor'
       }}
       _hover={{
         '.chakra-heading': {
@@ -64,6 +72,7 @@ const SearchResultItem: FC<{
           navigate(item.href);
         }
       }}
+      onClickCapture={onClickCapture}
       {...props}
       transition="background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out"
     >
@@ -95,7 +104,8 @@ const SearchResultSection: FC<{
   idx: number;
   query: string;
   defaultHighlight?: boolean;
-}> = ({ section, idx, query, defaultHighlight }) => {
+  onItemClickCapture?: () => void;
+}> = ({ section, idx, query, defaultHighlight, onItemClickCapture }) => {
   return (
     <MenuGroup key={idx}>
       <Heading
@@ -116,6 +126,7 @@ const SearchResultSection: FC<{
           id={i}
           key={i}
           defaultFocus={defaultHighlight && i === 0}
+          onClickCapture={onItemClickCapture}
         />
       ))}
     </MenuGroup>
@@ -125,12 +136,17 @@ const SearchResultSection: FC<{
 interface SearchMenuProps {
   menuProps?: Partial<MenuProps>;
   menuListProps?: Partial<MenuListProps>;
+  onItemClickCapture?: () => void;
 }
 
 /**
  * Search menu component - shows a navigatable list of search results
  */
-const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
+const SearchMenu: FC<SearchMenuProps> = ({
+  menuProps,
+  menuListProps,
+  onItemClickCapture
+}) => {
   const r = useRef(null);
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -147,6 +163,7 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
           query={searchQuery}
           key={idx}
           defaultHighlight={idx === 0 && !isAnyItemFocused}
+          onItemClickCapture={onItemClickCapture}
         />
       ));
     }
