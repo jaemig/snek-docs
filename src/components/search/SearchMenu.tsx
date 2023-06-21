@@ -32,8 +32,6 @@ const SearchResultItem: FC<{
 }> = ({ item, query, id, defaultFocus = false }) => {
   let props: MenuItemProps = {};
 
-  const location = useLocation();
-
   if (defaultFocus) {
     props = {
       ...props,
@@ -194,19 +192,43 @@ const SearchMenu: FC<SearchMenuProps> = ({ menuProps, menuListProps }) => {
       />
 
       <Portal>
-        <MenuList
-          fontSize="sm"
-          backgroundColor="rgba(255, 255, 255, 0.8)"
-          backdropBlur={8}
-          {...menuListProps}
-          onFocusCapture={e => {
-            // If the user focuses on any result item for the first time, set the isAnyItemFocused state to true
-            if (!isAnyItemFocused && e.target instanceof HTMLButtonElement)
-              setIsAnyItemFocused(true);
+        <Box
+          __css={{
+            '.sd-search-menu-list::-webkit-scrollbar-thumb': {
+              borderRadius: 'full',
+              backgroundColor: 'shared.scrollbar.thumb.bgColor',
+              '&:hover': {
+                backgroundColor: 'shared.scrollbar.thumb.hover.bgColor'
+              }
+            },
+            '.sd-search-menu-list::-webkit-scrollbar': {
+              width: '4px',
+              backgroundColor: 'transparent'
+            }
           }}
         >
-          {resultItems}
-        </MenuList>
+          <MenuList
+            className="sd-search-menu-list"
+            style={{
+              scrollbarColor: 'red'
+            }}
+            fontSize="sm"
+            backgroundColor="shared.translucent.bgColor"
+            backdropBlur={8}
+            h="50%"
+            height="auto"
+            maxHeight="xs"
+            overflowY="scroll"
+            {...menuListProps}
+            onFocusCapture={e => {
+              // If the user focuses on any result item for the first time, set the isAnyItemFocused state to true
+              if (!isAnyItemFocused && e.target instanceof HTMLButtonElement)
+                setIsAnyItemFocused(true);
+            }}
+          >
+            {resultItems}
+          </MenuList>
+        </Box>
       </Portal>
     </Menu>
   );
