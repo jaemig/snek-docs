@@ -161,6 +161,9 @@ const generateMenuItem = (
                   hasClickedOnArrow ? 'toggle' : 'set'
                 );
                 linkClickHandler(e);
+                if (!hasClickedOnArrow && closeMobileDrawer) {
+                  closeMobileDrawer();
+                }
               }}
             >
               <AccordionButton
