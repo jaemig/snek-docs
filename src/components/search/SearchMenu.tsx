@@ -43,7 +43,7 @@ const SearchResultItem: FC<{
     props = {
       ...props,
       bgColor: 'components.menu.item.focus.bgColor'
-      boxShadow: '0 0 0 2px #00bce6'
+      // boxShadow: '0 0 0 2px #00bce6'
     };
   }
 
@@ -55,16 +55,17 @@ const SearchResultItem: FC<{
         '.chakra-heading': {
           color: 'components.menu.item.focus.headingColor'
         },
-        bgColor: 'components.menu.item.focus.bgColor',
-        boxShadow: '0 0 0 2px #00bce6'
+        outline: 'none',
+        border: '0px',
         bgColor: 'components.menu.item.focus.bgColor'
+        // boxShadow: '0 0 0 2px #00bce6'
       }}
       _hover={{
         '.chakra-heading': {
           color: 'components.menu.item.focus.headingColor'
         },
-        bgColor: 'components.menu.item.focus.bgColor',
-        boxShadow: '0 0 0 2px #00bce6'
+        bgColor: 'components.menu.item.focus.bgColor'
+        // boxShadow: '0 0 0 2px #00bce6'
       }}
       onKeyDownCapture={e => {
         if (e.key === 'Enter') {
