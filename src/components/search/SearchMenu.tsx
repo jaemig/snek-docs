@@ -208,7 +208,6 @@ const SearchMenu: FC<SearchMenuProps> = ({
         setSearchQuery={setSearchQuery}
         openFirstLink={openFirstLink}
       />
-
       <Portal>
         <Box
           __css={{

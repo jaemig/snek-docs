@@ -23,7 +23,7 @@ import MobileNavDrawer from './MobileNavDrawer';
 const links: TTopNavLinkData[] = [
   {
     name: 'Documentation',
-    href: '/docs',
+    href: '/docs/',
     matchMethod: 'includes'
   },
   {
@@ -213,7 +213,7 @@ const TopNav: FC = () => {
           </Center>
         </Flex>
       </Center>
-      <MobileNavDrawer isOpen={isOpen} onOpen={onOpen} onClose={closeDrawer} />
+      {/* <MobileNavDrawer isOpen={isOpen} onOpen={onOpen} onClose={closeDrawer} /> */}
     </>
   );
 };

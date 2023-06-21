@@ -13,7 +13,8 @@ import {
   forwardRef,
   useEffect,
   useMemo,
-  KeyboardEvent as ReactKeyboardEvent
+  KeyboardEvent as ReactKeyboardEvent,
+  useState
 } from 'react';
 
 import { getPlatform, isTouchDevice } from '../../functions/utils';
@@ -31,6 +32,7 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
     const menu = useMenuContext();
     const menuButton = useMenuButton(
       {
+        id: 'search-input',
         onKeyDown: (e: ReactKeyboardEvent<HTMLInputElement>) => {
           if (e.key === 'Escape') {
             menu.onClose();
@@ -50,15 +52,19 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
       ref
     );
 
-    const kbd = useMemo(() => {
+    console.log("menuButton['aria-controls']", menuButton['aria-controls']);
+
+    const [kbd, setKbd] = useState<string | null>(null);
+
+    useEffect(() => {
       const platform = getPlatform();
 
       if (menu.isOpen) {
-        return 'Esc';
+        setKbd('Esc');
+      } else {
+        setKbd(platform === 'mac' ? '⌘ K' : 'Ctrl+K');
       }
-
-      return platform === 'mac' ? '⌘ K' : 'Ctrl+K';
-    }, [menu.isOpen]);
+    }, [kbd]);
 
     const isFocusLocked = useMemo(() => {
       return menu.isOpen && menu.focusedIndex === -1;
@@ -89,74 +95,71 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
     }, [menu.isOpen]);
 
     return (
-      <FocusLock isDisabled={!isFocusLocked}>
-        <InputGroup size="sm">
-          <Input
-            type="text"
-            htmlSize={20}
-            placeholder="Search documentation"
-            borderRadius="md"
-            backgroundColor="blackAlpha.50"
-            pr="45px"
-            _focus={{
-              backgroundColor: 'topNav.input.focus.bgColor'
-            }}
-            focusBorderColor="theme.500"
-            {...menuButton}
-            onClick={e => {
-              const value = e.currentTarget.value;
+      <InputGroup size="sm" {...menuButton}>
+        <Input
+          type="text"
+          htmlSize={20}
+          placeholder="Search documentation"
+          borderRadius="md"
+          backgroundColor="blackAlpha.50"
+          pr="45px"
+          _focus={{
+            backgroundColor: 'topNav.input.focus.bgColor'
+          }}
+          focusBorderColor="theme.500"
+          onClick={e => {
+            const value = e.currentTarget.value;
 
-              // Cancel if the value is empty
-              if (!value) {
-                return;
-              }
+            // Cancel if the value is empty
+            if (!value) {
+              return;
+            }
 
-              // Otherwise use the default behavior
-              menuButton.onClick(e);
-            }}
-            onInput={e => {
-              const query = e.currentTarget.value.trim();
-              if (!menu.isOpen && query.length > 0) {
-                menu.onOpen();
-              }
-              setSearchQuery(e.currentTarget.value);
-            }}
-            onKeyDownCapture={e => {
-              if (e.key === 'Escape') {
-                // Close the menu and blur the input when the user presses the escape key
-                menu.onClose();
-                e.currentTarget.blur();
-              } else if (
-                e.key === 'Enter' &&
-                menu.isOpen &&
-                menu.focusedIndex === -1
-              ) {
-                // Open the link from the first result item
-                // and close the menu automatically
-                // when the user presses the enter key
-                openFirstLink();
-                menu.onClose();
-              }
-            }}
+            // Otherwise use the default behavior
+            menuButton.onClick(e);
+          }}
+          onInput={e => {
+            const query = e.currentTarget.value.trim();
+            if (!menu.isOpen && query.length > 0) {
+              menu.onOpen();
+            }
+            setSearchQuery(e.currentTarget.value);
+          }}
+          onKeyDownCapture={e => {
+            if (e.key === 'Escape') {
+              // Close the menu and blur the input when the user presses the escape key
+              menu.onClose();
+              e.currentTarget.blur();
+            } else if (
+              e.key === 'Enter' &&
+              menu.isOpen &&
+              menu.focusedIndex === -1
+            ) {
+              // Open the link from the first result item
+              // and close the menu automatically
+              // when the user presses the enter key
+              openFirstLink();
+              menu.onClose();
+            }
+          }}
+        />
+        {!isTouchDevice() && (
+          <InputRightElement
+            children={
+              <Kbd
+                borderBottomWidth={1}
+                background="transparent"
+                borderRadius={4}
+                py={0.5}
+              >
+                {kbd}
+              </Kbd>
+            }
+            pr="10px"
+            color="rgb(107, 114, 128)"
           />
-          {!isTouchDevice() && (
-            <InputRightElement
-              children={
-                <Kbd
-                  borderBottomWidth={1}
-                  background="transparent"
-                  borderRadius={4}
-                  py={0.5}
-                >
-                  {kbd}
-                </Kbd>
-              }
-              pr="10px"
-              color="rgb(107, 114, 128)"
-            />
-          )}
-        </InputGroup>
-      </FocusLock>
+        )}
+      </InputGroup>
     );
   }
 );
