@@ -79,7 +79,7 @@ const TopNav: FC = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    if (windowSize.width >= 768) closeDrawer();
+    if (windowSize.width >= 768 && isOpen) closeDrawer();
   }, [windowSize.width]);
 
   const openDrawer = () => {
