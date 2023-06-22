@@ -3,6 +3,7 @@ const FlexSearch = require('flexsearch');
 import { Fragment } from 'react';
 import {
   TSearchIndexData,
+  TSearchMetadata,
   TSearchResult,
   TSearchResultSection
 } from '../types/search';
@@ -26,6 +27,11 @@ export async function searchDocs(
       id: 'id',
       index: 'content',
       store: ['title', 'url']
+    },
+    context: {
+      resolution: 9,
+      depth: 2,
+      bidirectional: true
     }
   });
 
@@ -35,9 +41,9 @@ export async function searchDocs(
     tokenize: 'full',
     document: {
       id: 'id',
-      index: ['content'],
+      index: 'content',
       tag: 'pageId',
-      store: ['title', 'content', 'url']
+      store: ['title', 'content', 'url', 'display']
     },
     context: {
       resolution: 9,
@@ -57,9 +63,19 @@ export async function searchDocs(
       const text = item.data[heading];
 
       const content = text ?? title;
+      // console.log('search result content: ', content, 'title: ', title);
 
       sectionIndex.add({
         id: url,
+        url,
+        title,
+        pageId: `page_${pageId}`,
+        content: title,
+        display: content
+      });
+
+      sectionIndex.add({
+        id: `${url}_content`,
         url,
         title,
         pageId: `page_${pageId}`,
@@ -67,7 +83,7 @@ export async function searchDocs(
         text
       });
 
-      pageContent += content;
+      pageContent += ` ${title} ${content}`;
     }
 
     // Add the page to the page index.
@@ -88,21 +104,44 @@ export async function searchDocs(
       suggest: true
     })[0]?.result ?? [];
 
-  const searchResults: TSearchResultSection[] = [];
-  let i = 0;
-  for (const pageResult of pageResults) {
-    const searchResultItems: TSearchResult[] = [];
+  const searchResults: Array<TSearchResultSection & TSearchMetadata> = [];
+  const pageTitleMatches: Record<number, number> = {};
+  let offsetIdx = 0;
+  //! Current issue: If the query matches a subtitle of a page or the page title itself, the page result is empty because pageContent doesnt contain those texts.
+  for (let i = 0; i < pageResults.length; i++) {
+    pageTitleMatches[i] = 0;
+    const pageResult = pageResults[i];
+    const searchResultItems: Array<TSearchResult> = [];
+
     // Search for hits in the sections of the page.
     const sectionResults =
-      sectionIndex.search(query, {
-        offset: i++ * 5, // Without it, limit seems to be applied before the tag filter is applied.
-        limit: 5,
+      sectionIndex.search(query, 5, {
+        offset: offsetIdx++ * 5, // Without it, limit seems to be applied before the tag filter is applied.
+        // limit: 5,
         enrich: true,
         suggest: true,
         tag: `page_${pageResult.id}`
       })[0]?.result ?? [];
 
-    for (const sectionResult of sectionResults) {
+    console.log('search section results: ', sectionResults);
+
+    const occured: Record<string, boolean> = {};
+    for (let j = 0; j < sectionResults.length; j++) {
+      const sectionResult = sectionResults[j];
+      if (sectionResult.doc.display !== undefined) {
+        pageTitleMatches[i]++;
+      }
+
+      const key =
+        sectionResult.doc.url +
+        '@' +
+        (sectionResult.doc.display ?? sectionResult.doc.content);
+
+      if (occured[key]) {
+        continue;
+      }
+      occured[key] = true;
+
       searchResultItems.push({
         title: sectionResult.doc.title,
         description: sectionResult.doc.content ?? sectionResult.doc.title,
@@ -110,22 +149,31 @@ export async function searchDocs(
       });
     }
 
-    // If there are no section results, add the page itself.
-    if (searchResultItems.length === 0) {
-      searchResultItems.push({
-        title: pageResult.doc.title,
-        description: pageResult.doc.title,
-        href: pageResult.doc.url
-      });
-    }
+    console.log('section results', sectionResults);
+    // if (sectionResults.length === 0) continue;
 
     // Add the result section to the search results.
     searchResults.push({
+      _page_matches: pageTitleMatches[i],
+      _section_matches: sectionResults.length,
       title: pageResult.doc.title,
       results: searchResultItems
     });
   }
-  return searchResults;
+  //TODO: Return this directly after testing.
+  const res = searchResults.sort((a, b) => {
+    const aPageMatches = pageTitleMatches[a._page_matches];
+    const bPageMatches = pageTitleMatches[b._page_matches];
+    if (
+      pageTitleMatches[a._page_matches] === pageTitleMatches[b._page_matches]
+    ) {
+      if (a._section_matches === b._section_matches) return 0;
+      return b._section_matches - a._section_matches;
+    }
+    return bPageMatches - aPageMatches;
+  });
+  console.log('search results', res);
+  return res;
 }
 
 /**
@@ -182,6 +230,7 @@ export function highLightQuery(text: string, query: string, charLimit = 100) {
       occ -= startIdx;
     }
 
+    console.log('last occ: ', occ);
     const prefix = text.substring(searchIdx, occ);
     searchIdx = occ + query.length;
     textParts.push(
