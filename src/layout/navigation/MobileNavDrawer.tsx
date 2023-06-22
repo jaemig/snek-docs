@@ -46,8 +46,8 @@ const MobileNavDrawer: FC<MobileNavDrawerProps> = ({
             w="100vw"
             h={`calc(100vh - ${navOffset} - 64px)`}
             bg="shared.body"
-            pt={10}
-            px={5}
+            pt={9}
+            px={9}
           >
             <SearchMenu
               menuProps={{ matchWidth: true }}
