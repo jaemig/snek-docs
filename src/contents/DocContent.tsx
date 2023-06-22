@@ -1,4 +1,4 @@
-import { Box, Stack } from '@chakra-ui/react';
+import { Box, Stack, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
 import { Field } from '@snek-at/jaen';
 import React from 'react';
 
@@ -44,6 +44,15 @@ export const DocContent: React.FC<DocContentProps> = () => {
             ol: (props: any) => <List variant="ordered" {...props}></List>,
             li: (props: any) => <ListItem {...props}></ListItem>,
             a: (props: any) => <Link href={props.href} {...props} />,
+            // TABLE
+            table: (props: any) => (
+              <Table variant="striped" w="fit-content" {...props} />
+            ),
+            thead: (props: any) => <Thead {...props} />,
+            tbody: (props: any) => <Tbody {...props} />,
+            tr: (props: any) => <Tr {...props} />,
+            th: (props: any) => <Th {...props} />,
+            td: (props: any) => <Td {...props} />,
             // MISC
             code: (props: any) => {
               const lang = props.className?.replace('language-', '');
