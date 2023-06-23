@@ -1,13 +1,12 @@
 const FlexSearch = require('flexsearch');
 
-import { Fragment } from 'react';
 import {
   TSearchIndexData,
   TSearchMetadata,
   TSearchResult,
   TSearchResultSection
 } from '../types/search';
-import { Text } from '@chakra-ui/react';
+import { filterWhitespaceItems } from './utils';
 
 /**
  * Searches the docs for the given query.
@@ -63,7 +62,6 @@ export async function searchDocs(
       const text = item.data[heading];
 
       const content = text ?? title;
-      // console.log('search result content: ', content, 'title: ', title);
 
       sectionIndex.add({
         id: url,
@@ -74,14 +72,21 @@ export async function searchDocs(
         display: content
       });
 
-      sectionIndex.add({
-        id: `${url}_content`,
-        url,
-        title,
-        pageId: `page_${pageId}`,
-        content,
-        text
-      });
+      const splittedParagraphs = filterWhitespaceItems(text.split('\n'));
+
+      for (let i = 0; i < splittedParagraphs.length; i++) {
+        const paragraph = splittedParagraphs[i];
+        const paragraphUrl = `${url}#${i}`;
+
+        sectionIndex.add({
+          id: paragraphUrl,
+          url: paragraphUrl,
+          title,
+          pageId: `page_${pageId}`,
+          content: paragraph,
+          display: paragraph
+        });
+      }
 
       pageContent += ` ${title} ${content}`;
     }
@@ -95,7 +100,6 @@ export async function searchDocs(
     });
     pageId++;
   }
-
   // Search for hits in the whole pages.
   const pageResults =
     pageIndex.search(query, {
@@ -106,7 +110,7 @@ export async function searchDocs(
 
   const searchResults: Array<TSearchResultSection & TSearchMetadata> = [];
   const pageTitleMatches: Record<number, number> = {};
-  let offsetIdx = 0;
+  //TODO: We need to provide a search data record for the first page title and the first paragraph. Otherwise, the page itself will never be shown, but only it's sections.
   //! Current issue: If the query matches a subtitle of a page or the page title itself, the page result is empty because pageContent doesnt contain those texts.
   for (let i = 0; i < pageResults.length; i++) {
     pageTitleMatches[i] = 0;
@@ -116,17 +120,16 @@ export async function searchDocs(
     // Search for hits in the sections of the page.
     const sectionResults =
       sectionIndex.search(query, 5, {
-        offset: offsetIdx++ * 5, // Without it, limit seems to be applied before the tag filter is applied.
+        // offset: i * 5,
         // limit: 5,
         enrich: true,
         suggest: true,
         tag: `page_${pageResult.id}`
       })[0]?.result ?? [];
 
-    console.log('search section results: ', sectionResults);
-
     const occured: Record<string, boolean> = {};
-    for (let j = 0; j < sectionResults.length; j++) {
+    //* We set an additional limit since flexsearch doesn't seem to work with the offset and either ot both limit parameters.
+    for (let j = 0; j < Math.min(sectionResults.length, 5); j++) {
       const sectionResult = sectionResults[j];
       if (sectionResult.doc.display !== undefined) {
         pageTitleMatches[i]++;
@@ -149,8 +152,14 @@ export async function searchDocs(
       });
     }
 
-    console.log('section results', sectionResults);
-    // if (sectionResults.length === 0) continue;
+    if (sectionResults.length === 0) {
+      //* This is a temporary solution until we have a page record in the search data (see todo above loop).
+      searchResultItems.push({
+        title: pageResult.doc.title,
+        description: pageResult.doc.content ?? pageResult.doc.title,
+        href: pageResult.doc.url
+      });
+    }
 
     // Add the result section to the search results.
     searchResults.push({
@@ -162,17 +171,13 @@ export async function searchDocs(
   }
   //TODO: Return this directly after testing.
   const res = searchResults.sort((a, b) => {
-    const aPageMatches = pageTitleMatches[a._page_matches];
-    const bPageMatches = pageTitleMatches[b._page_matches];
-    if (
-      pageTitleMatches[a._page_matches] === pageTitleMatches[b._page_matches]
-    ) {
-      if (a._section_matches === b._section_matches) return 0;
-      return b._section_matches - a._section_matches;
+    if (a._page_matches !== b._page_matches) {
+      return b._page_matches - a._page_matches;
     }
-    return bPageMatches - aPageMatches;
+    return a._section_matches === b._section_matches
+      ? 0
+      : b._section_matches - a._section_matches;
   });
-  console.log('search results', res);
   return res;
 }
 
@@ -193,62 +198,4 @@ export async function retrieveSearchData(): Promise<TSearchIndexData> {
     console.error('Could not retrieve search data.');
     return {};
   }
-}
-
-/**
- * Highlight all occurences the search query in the text
- * @param text  The text to highlight
- * @param query  The search query
- * @param charLimit  The maximum number of characters to show before and after the first occurrence. Use 0 to show the whole text.
- * @returns  The text with highlighted query
- */
-export function highLightQuery(text: string, query: string, charLimit = 100) {
-  let lowercase_text = text.toLowerCase();
-  const lowercase_query = query.toLowerCase();
-  let searchIdx = 0; // The index of the last search
-  let occ; // The index of the current occurrence
-  const textParts = [];
-
-  while ((occ = lowercase_text.indexOf(lowercase_query, searchIdx)) !== -1) {
-    if (searchIdx === 0 && charLimit > 0) {
-      // Trim the whole text to the charLimit around the first occurrence
-      let startIdx = Math.max(0, occ - charLimit);
-      if (startIdx > 0 && text[startIdx] != ' ') {
-        // If the start index is not at the beginning of a word, move it to the next space in case it is not too far away
-        const spaceIdx = text.indexOf(' ', startIdx);
-        if (spaceIdx < startIdx + charLimit * 0.2) startIdx = spaceIdx;
-      }
-      let endIdx = Math.min(text.length, occ + charLimit);
-      if (endIdx < text.length && text[endIdx] != ' ') {
-        // If the end index is not at the end of a word, move it to the previous space in case it is not too far away
-        const spaceIdx = text.lastIndexOf(' ', endIdx);
-        if (spaceIdx > endIdx - charLimit * 0.2) endIdx = spaceIdx;
-      }
-      const suffix = endIdx != text.length ? '...' : '';
-      lowercase_text = lowercase_text.substring(startIdx, endIdx);
-      text = text.substring(startIdx, endIdx) + suffix;
-      occ -= startIdx;
-    }
-
-    console.log('last occ: ', occ);
-    const prefix = text.substring(searchIdx, occ);
-    searchIdx = occ + query.length;
-    textParts.push(
-      <Fragment key={occ}>
-        {prefix}
-        <Text as="span" color="theme.600">
-          {text.substring(occ, occ + query.length)}
-        </Text>
-      </Fragment>
-    );
-  }
-  // Add the last part of the text
-  if (searchIdx < text.length) {
-    textParts.push(
-      <Fragment key={text.length}>
-        {text.substring(searchIdx, text.length)}
-      </Fragment>
-    );
-  }
-  return textParts.length > 0 ? <>{textParts} </> : text;
 }

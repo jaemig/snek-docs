@@ -34,7 +34,11 @@ const themeSemanticTokens = {
               default: 'theme.600',
               _dark: 'theme.600'
             }
-          }
+          },
+          highlight: {
+            default: 'theme.600',
+            _dark: 'theme.600'
+          },
         },
         groupTitle: {
           color: {
