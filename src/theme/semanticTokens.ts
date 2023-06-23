@@ -253,8 +253,8 @@ const themeSemanticTokens = {
     shared: {
       translucent: {
         bgColor: {
-          default: 'rgba(255, 255, 255, 0.5)',
-          _dark: 'rgba(26, 32, 44, 0.5)'
+          default: 'rgba(255, 255, 255, 0.8)',
+          _dark: 'rgba(26, 32, 44, 0.8)'
         }
       },
       text: {
