@@ -42,18 +42,9 @@ export function isTouchDevice() {
 /**
  *  Checks if the link is internal or external
  * @param href  - The href of the link
- * @param location  - The location object from @reach/router
  * @returns   - Whether the link is internal or not
  */
-export function isInternalLink(href: string, location: WindowLocation) {
-  let urlObj: URL;
-  try {
-    console.log(href, location.origin);
-    urlObj = new URL(href);
-  } catch (e) {
-    return false; // If the URL is invalid, it is treated as an external link
-  }
-
-  // If the hostname is the same as the current hostname, it's an internal link
-  return urlObj.hostname === location.hostname;
+export function isInternalLink(href: string) {
+  // Check if the link starts with a forward slash (/) or a dot (./ or ../)
+  return /^\/|^\.+\//.test(href);
 }

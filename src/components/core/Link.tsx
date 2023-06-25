@@ -19,9 +19,7 @@ const Link: FC<GatsbyLinkProps> = ({ href = '#', ...props }) => {
     position: 'relative'
   };
 
-  const location = useLocation();
-
-  if (isInternalLink(href, location)) {
+  if (isInternalLink(href)) {
     return <ChLink {...baseProps} to={href} as={GaLink} {...props}></ChLink>;
   }
   return <ChLink {...baseProps} href={href} {...props}></ChLink>;
