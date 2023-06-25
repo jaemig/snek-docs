@@ -20,6 +20,7 @@ import { TSearchResult, TSearchResultSection } from '../../types/search';
 import SearchInput from './SearchInput';
 import Link from '../core/Link';
 import { useLocation, navigate } from '@reach/router';
+import { SearchProvider, useSearch } from '@snek-at/jaen';
 
 /**
  * The search menu item component for displaying a specific search result item.
@@ -187,10 +188,12 @@ const SearchMenu: FC<SearchMenuProps> = ({
     }
   };
 
+  const search = useSearch();
+
   useEffect(() => {
     if (searchQuery.length > 0) {
       // Retrieve the search data
-      searchDocs(searchQuery).then(setSearchResultData);
+      searchDocs(searchQuery, search.searchIndex).then(setSearchResultData);
     } else setSearchResultData([]);
   }, [searchQuery]);
 
@@ -205,10 +208,12 @@ const SearchMenu: FC<SearchMenuProps> = ({
       isLazy
       id="search-menu"
     >
-      <SearchInput
-        setSearchQuery={setSearchQuery}
-        openFirstLink={openFirstLink}
-      />
+      <SearchProvider>
+        <SearchInput
+          setSearchQuery={setSearchQuery}
+          openFirstLink={openFirstLink}
+        />
+      </SearchProvider>
 
       <Portal>
         <Box

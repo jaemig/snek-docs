@@ -1,5 +1,5 @@
 const FlexSearch = require('flexsearch');
-
+import { useSearch } from '@snek-at/jaen';
 import { Fragment } from 'react';
 import {
   TSearchIndexData,
@@ -14,10 +14,9 @@ import { Text } from '@chakra-ui/react';
  * @returns  The search results
  */
 export async function searchDocs(
-  query: string
+  query: string,
+  data: ReturnType<typeof useSearch>['searchIndex']
 ): Promise<TSearchResultSection[]> {
-  const data = await retrieveSearchData();
-
   // This indexes a whole page by its content and stores the title.
   const pageIndex = new FlexSearch.Document({
     cache: 100,
@@ -126,25 +125,6 @@ export async function searchDocs(
     });
   }
   return searchResults;
-}
-
-/**
- *  Retrieves the search index data from the server.
- * @returns The search index data
- */
-export async function retrieveSearchData(): Promise<TSearchIndexData> {
-  try {
-    const res = await fetch('/search-index-alpha.json', {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    const data: TSearchIndexData = await res.json();
-    return data;
-  } catch (err) {
-    console.error('Could not retrieve search data.');
-    return {};
-  }
 }
 
 /**
