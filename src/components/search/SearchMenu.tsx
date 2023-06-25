@@ -203,11 +203,13 @@ const SearchMenu: FC<SearchMenuProps> = ({
         setIsAnyItemFocused(false);
       }}
       isLazy
+      id="search-menu"
     >
       <SearchInput
         setSearchQuery={setSearchQuery}
         openFirstLink={openFirstLink}
       />
+
       <Portal>
         <Box
           __css={{
