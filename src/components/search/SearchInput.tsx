@@ -13,7 +13,8 @@ import {
   forwardRef,
   useEffect,
   useMemo,
-  KeyboardEvent as ReactKeyboardEvent
+  KeyboardEvent as ReactKeyboardEvent,
+  useState
 } from 'react';
 
 import { getPlatform, isTouchDevice } from '../../functions/utils';
@@ -50,15 +51,19 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
       ref
     );
 
-    const kbd = useMemo(() => {
+    console.log("menuButton['aria-controls']", menuButton['aria-label']);
+
+    const [kbd, setKbd] = useState<string | null>(null);
+
+    useEffect(() => {
       const platform = getPlatform();
 
       if (menu.isOpen) {
-        return 'Esc';
+        setKbd('Esc');
+      } else {
+        setKbd(platform === 'mac' ? '⌘ K' : 'Ctrl+K');
       }
-
-      return platform === 'mac' ? '⌘ K' : 'Ctrl+K';
-    }, [menu.isOpen]);
+    }, [kbd]);
 
     const isFocusLocked = useMemo(() => {
       return menu.isOpen && menu.focusedIndex === -1;

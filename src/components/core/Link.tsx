@@ -1,4 +1,4 @@
-import { Link as ChLink, LinkProps } from '@chakra-ui/react';
+import { Link as ChLink, LinkProps, Text } from '@chakra-ui/react';
 import { Link as GaLink } from 'gatsby';
 import { FC, ReactNode } from 'react';
 import { isInternalLink } from '../../functions/utils';

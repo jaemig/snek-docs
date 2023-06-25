@@ -44,7 +44,7 @@ const ContactContent: FC = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <VStack spacing={7} alignItems="start">
           <HStack spacing={4} w="full">
-            <FormControl isInvalid={!!errors.name}>
+            <FormControl id="contact-form-name" isInvalid={!!errors.name}>
               <FormLabel htmlFor="name">Name</FormLabel>
               <Input
                 id="name"
@@ -53,7 +53,7 @@ const ContactContent: FC = () => {
                 {...register('name', { required: true, minLength: 3 })}
               />
             </FormControl>
-            <FormControl isInvalid={!!errors.email}>
+            <FormControl id="contact-form-email" isInvalid={!!errors.email}>
               <FormLabel htmlFor="email">Email</FormLabel>
               <Input
                 id="email"
@@ -63,7 +63,7 @@ const ContactContent: FC = () => {
               />
             </FormControl>
           </HStack>
-          <FormControl isInvalid={!!errors.message}>
+          <FormControl id="contact-form-message" isInvalid={!!errors.message}>
             <FormLabel htmlFor="message">Message</FormLabel>
             <Textarea
               id="message"
@@ -71,7 +71,10 @@ const ContactContent: FC = () => {
               {...register('message', { required: true, minLength: 20 })}
             />
           </FormControl>
-          <FormControl isInvalid={!!errors.agreement}>
+          <FormControl
+            id="contact-form-agreement"
+            isInvalid={!!errors.agreement}
+          >
             <Checkbox
               colorScheme="theme"
               variant="rounded"

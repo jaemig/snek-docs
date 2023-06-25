@@ -23,7 +23,7 @@ import MobileNavDrawer from './MobileNavDrawer';
 const links: TTopNavLinkData[] = [
   {
     name: 'Documentation',
-    href: '/docs',
+    href: '/docs/',
     matchMethod: 'includes'
   },
   {

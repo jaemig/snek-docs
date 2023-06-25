@@ -1434,6 +1434,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.18.6":
+  version: 7.22.5
+  resolution: "@babel/runtime@npm:7.22.5"
+  dependencies:
+    regenerator-runtime: ^0.13.11
+  checksum: 12a50b7de2531beef38840d17af50c55a094253697600cee255311222390c68eed704829308d4fd305e1b3dfbce113272e428e9d9d45b1730e0fede997eaceb1
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.18.10, @babel/template@npm:^7.20.7":
   version: 7.20.7
   resolution: "@babel/template@npm:7.20.7"
@@ -3168,7 +3177,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/commands@npm:^6.0.0":
+"@codemirror/commands@npm:^6.0.0, @codemirror/commands@npm:^6.1.0":
   version: 6.2.4
   resolution: "@codemirror/commands@npm:6.2.4"
   dependencies:
@@ -3471,7 +3480,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/theme-one-dark@npm:^6.1.2":
+"@codemirror/state@npm:^6.1.1":
+  version: 6.2.1
+  resolution: "@codemirror/state@npm:6.2.1"
+  checksum: d12a321d0471b264b9d3259042bff913a8b939e8d28d408ff452004538a71ca9d5329df3f8a1d8a9183f5b42a7ef5b200737bcab1065714f5ae8e0a5ba9d59d3
+  languageName: node
+  linkType: hard
+
+"@codemirror/theme-one-dark@npm:^6.0.0":
   version: 6.1.2
   resolution: "@codemirror/theme-one-dark@npm:6.1.2"
   dependencies:
@@ -5651,16 +5667,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@snek-at/jaen@npm:^0.0.85":
-  version: 0.0.85
-  resolution: "@snek-at/jaen@npm:0.0.85"
+"@snek-at/jaen@npm:^0.0.92":
+  version: 0.0.92
+  resolution: "@snek-at/jaen@npm:0.0.92"
   dependencies:
     "@chakra-ui/icons": ^2.0.18
     "@chakra-ui/pro-theme": ^0.0.64
     "@chakra-ui/react": ^2.5.5
     "@codemirror/lang-markdown": ^6.1.1
     "@codemirror/language-data": ^6.3.1
-    "@codemirror/theme-one-dark": ^6.1.2
     "@emotion/react": ^11.10.4
     "@emotion/styled": ^11.10.4
     "@mdx-js/mdx": ^2.3.0
@@ -5668,16 +5683,14 @@ __metadata:
     "@reduxjs/toolkit": ^1.8.6
     "@snek-at/snek-finder": ^1.0.0-beta.29
     "@snek-functions/origin": ^0.2.3
+    "@uiw/react-codemirror": ^4.21.4
     ahooks: ^3.7.7
-    codemirror: ^6.0.1
     commander: ^9.4.1
     deepmerge: ^4.2.2
     dompurify: ^3.0.3
     form-data: ^4.0.0
     framer-motion: ^7.6.1
-    highlight.js: ^11.8.0
     jaen-utils: "*"
-    lowlight: ^2.8.1
     mdast-util-directive: ^2.2.4
     mdast-util-frontmatter: ^1.0.1
     mdast-util-gfm: ^2.0.2
@@ -5705,7 +5718,6 @@ __metadata:
     remark-gfm: ^3.0.1
     remark-math: ^5.1.1
     remark-unwrap-images: ^3.0.1
-    rodemirror: ^2.0.0
     snek-query: "*"
     use-debounce: ^9.0.4
     uuid: ^9.0.0
@@ -5722,7 +5734,7 @@ __metadata:
     react-dom: ^18.2.0
   bin:
     jaen: dist/index.cli.mjs
-  checksum: c7ef6ba159120f63384959afa087780b5107e7c569cdb4672fe9a4f04000f6f0a3b1cbece01df0f0c5665980131ed88ee3be09ac505a9bb0980817ae7b27011e
+  checksum: d481ef4865d7c46d60553f62ede61d5ac36e762fa7a6298274f87089626598da47471b2bda98452fac79ed0a18eedea37f464e1ac92344d06779c83c23a4418a
   languageName: node
   linkType: hard
 
@@ -6408,6 +6420,51 @@ __metadata:
     "@typescript-eslint/types": 5.59.6
     eslint-visitor-keys: ^3.3.0
   checksum: 8f216411344f5ed618ab838fa3fc4b04f3041f33e08d9b160df4db988f496c71f934c4b0362f686ce63ecf7f5d926c67190d5116c91945c1957544728449ec6b
+  languageName: node
+  linkType: hard
+
+"@uiw/codemirror-extensions-basic-setup@npm:4.21.4":
+  version: 4.21.4
+  resolution: "@uiw/codemirror-extensions-basic-setup@npm:4.21.4"
+  dependencies:
+    "@codemirror/autocomplete": ^6.0.0
+    "@codemirror/commands": ^6.0.0
+    "@codemirror/language": ^6.0.0
+    "@codemirror/lint": ^6.0.0
+    "@codemirror/search": ^6.0.0
+    "@codemirror/state": ^6.0.0
+    "@codemirror/view": ^6.0.0
+  peerDependencies:
+    "@codemirror/autocomplete": ">=6.0.0"
+    "@codemirror/commands": ">=6.0.0"
+    "@codemirror/language": ">=6.0.0"
+    "@codemirror/lint": ">=6.0.0"
+    "@codemirror/search": ">=6.0.0"
+    "@codemirror/state": ">=6.0.0"
+    "@codemirror/view": ">=6.0.0"
+  checksum: f73ae45cd9067f10b97814efaf767baf06e2a97137a762cc41568b39e6f35fc68f8487b4b0d4ba2e964688687811ab5d3ad71439188c1480d9184a2ffe253801
+  languageName: node
+  linkType: hard
+
+"@uiw/react-codemirror@npm:^4.21.4":
+  version: 4.21.4
+  resolution: "@uiw/react-codemirror@npm:4.21.4"
+  dependencies:
+    "@babel/runtime": ^7.18.6
+    "@codemirror/commands": ^6.1.0
+    "@codemirror/state": ^6.1.1
+    "@codemirror/theme-one-dark": ^6.0.0
+    "@uiw/codemirror-extensions-basic-setup": 4.21.4
+    codemirror: ^6.0.0
+  peerDependencies:
+    "@babel/runtime": ">=7.11.0"
+    "@codemirror/state": ">=6.0.0"
+    "@codemirror/theme-one-dark": ">=6.0.0"
+    "@codemirror/view": ">=6.0.0"
+    codemirror: ">=6.0.0"
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: de35e8f61d8cf8435f7d541b29f8f0541fdd2213880cbcab870bc19327d8e194e05ad41314affcbbae061568e2efb071545ec0d61fb4ff1054fade70cf75b30d
   languageName: node
   linkType: hard
 
@@ -8103,7 +8160,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"codemirror@npm:^6.0.1":
+"codemirror@npm:^6.0.0":
   version: 6.0.1
   resolution: "codemirror@npm:6.0.1"
   dependencies:
@@ -12506,7 +12563,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"highlight.js@npm:^11.8.0, highlight.js@npm:~11.8.0":
+"highlight.js@npm:~11.8.0":
   version: 11.8.0
   resolution: "highlight.js@npm:11.8.0"
   checksum: d2578a57aee7315946ff19379053fd0a28b127baabf7617ab1d28d62cdc4eaf3d75053569cb8479a5afdc7a68f1ba9a6c1d612d8ae399b4b9aa43093b4fb6831
@@ -14269,7 +14326,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lowlight@npm:^2.0.0, lowlight@npm:^2.8.1":
+"lowlight@npm:^2.0.0":
   version: 2.9.0
   resolution: "lowlight@npm:2.9.0"
   dependencies:
@@ -18636,17 +18693,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rodemirror@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "rodemirror@npm:2.0.0"
-  peerDependencies:
-    "@codemirror/state": ^6
-    "@codemirror/view": ^6
-    react: ^16 || ^17 || ^18
-  checksum: 617386c8f4915389e9b0f51886ce45909eeaaf10841f4f27f109aab273b7bf55520604eeffaaef97a2546d2b50cdac47152b75932520aa725eddd0f7bc5f67f8
-  languageName: node
-  linkType: hard
-
 "run-async@npm:^2.4.0":
   version: 2.4.1
   resolution: "run-async@npm:2.4.1"
@@ -19110,7 +19156,7 @@ __metadata:
     "@emotion/react": ^11.10.8
     "@emotion/styled": ^11.10.8
     "@reach/router": ^1.3.4
-    "@snek-at/jaen": ^0.0.85
+    "@snek-at/jaen": ^0.0.92
     "@types/node": ^18.16.2
     "@types/react": ^18.2.0
     "@types/react-dom": ^18.2.1

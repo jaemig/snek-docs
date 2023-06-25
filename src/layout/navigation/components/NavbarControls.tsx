@@ -50,7 +50,13 @@ const NavbarControls: FC<NavbarControlsProps> = ({
       alignItems="center"
       {...conditional_props}
     >
-      <Menu placement="top" variant="brand-hover" matchWidth={isMobile} isLazy>
+      <Menu
+        id="navbar-color-mode-menu"
+        placement="top"
+        variant="brand-hover"
+        matchWidth={isMobile}
+        isLazy
+      >
         <MenuButton
           as={Button}
           size="sm"
