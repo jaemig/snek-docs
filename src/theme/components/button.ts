@@ -11,6 +11,31 @@ const themeButtonComponent = {
         bgColor: 'components.button.ghost.hover.bgColor',
         opacity: 1
       }
+    },
+    'pq-outline': {
+      bgColor: 'rgba(2, 116, 192, 0.07)',
+      border: '1px solid',
+      borderColor: 'pq.500',
+      color: 'pq.500',
+      px: 5,
+      borderRadius: 'lg',
+      _hover: {
+        bgColor: 'rgba(2, 116, 192, 1)',
+        color: 'white',
+        transform: 'scale(1.05)'
+      },
+      transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.2s ease-in-out'
+    },
+    'pq-solid': {
+      bgColor: 'pq.500',
+      color: 'white',
+      px: 5,
+      borderRadius: 'lg',
+      _hover: {
+        transform: 'scale(1.05)',
+        boxShadow: '3x 3px 10px rgba(2, 116, 192, 0.5)'
+      },
+      transition: 'background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
     }
   }
 };

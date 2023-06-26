@@ -1,0 +1,192 @@
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  Flex,
+  HStack,
+  Image,
+  Spacer,
+  VStack
+} from '@chakra-ui/react';
+import { FC, ReactNode } from 'react';
+import { useNavOffset } from '../../hooks/use-nav-offset';
+import { Field } from '@snek-at/jaen';
+
+import UniWienLogo from '../assets/icons/uni-wien-logo-gray.svg';
+import Link from '../../components/core/Link';
+
+const Footer: FC = () => {
+  const navOffset = useNavOffset();
+
+  const links = [
+    [
+      {
+        label: 'Links',
+        isTitle: true
+      },
+      {
+        label: 'Terms & Conditions',
+        href: '#'
+      },
+      {
+        label: 'Imprint',
+        href: '#'
+      }
+    ],
+    [
+      {
+        label: 'Partners',
+        isTitle: true
+      },
+      {
+        label: 'Christian Doppler Forschungsgesellschaft',
+        href: '#'
+      },
+      {
+        label: 'University of Vienna',
+        href: '#'
+      }
+    ],
+    [
+      {
+        label: 'PhotonQ is brought to you by',
+        isTitle: true
+      },
+      {
+        label: 'Christian Doppler Laboratory for Photonic Quantum Computing',
+        href: '#'
+      },
+      {
+        label: 'Walther Group',
+        href: '#'
+      },
+      {
+        label: 'Faculty of Phsycis, University of Vienna',
+        href: '#'
+      }
+    ]
+  ];
+
+  const linkElmnts: ReactNode[] = [];
+
+  for (const linkGroup of links) {
+    linkElmnts.push(
+      <VStack spacing={3} alignItems="start">
+        {linkGroup.map(link => {
+          if ('isTitle' in link) {
+            return (
+              <Field.Text
+                name={'FooterLinkTitle' + link.label}
+                defaultValue={link.label}
+                fontWeight="500"
+              />
+            );
+          }
+          return (
+            <Link
+              href={link.href}
+              color="white"
+              opacity={0.7}
+              _hover={{
+                opacity: 1
+              }}
+            >
+              <Field.Text
+                name={'FooterLink' + link.label}
+                defaultValue={link.label}
+              />
+            </Link>
+          );
+        })}
+      </VStack>
+    );
+  }
+
+  return (
+    <Box pb={20} position="relative">
+      <Box
+        position="absolute"
+        top="-122px"
+        left="10%"
+        zIndex={-1}
+        bgColor="pq.500"
+        boxSize="290px"
+        filter="blur(140px)"
+      />
+      <Box
+        position="absolute"
+        top="-122px"
+        right="10%"
+        zIndex={-1}
+        bgColor="#A71C48"
+        boxSize="290px"
+        filter="blur(140px)"
+      />
+      <Container maxW="7xl" h="100%">
+        <Box mt="20vh" color="white">
+          <Flex maxW="75%">
+            <Box w="fit-content">
+              <Field.Text
+                name="FooterTitleLine1"
+                defaultValue="Exploring"
+                fontSize="6xl"
+                fontWeight="500"
+                w="fit-content"
+              />
+              <Field.Text
+                name="FooterTitleLine2"
+                defaultValue="Quantum Frontiers"
+                fontSize="6xl"
+                fontWeight="500"
+                w="fit-content"
+              />
+            </Box>
+            <Spacer />
+            <Button
+              variant="pq-outline"
+              colorScheme="blue"
+              borderRadius="xl"
+              bgColor="rgba(2, 116, 192, 0.07)"
+              px={5}
+              mt="auto"
+              mr="auto"
+              mb={3}
+            >
+              <Field.Text name="FooterButtonText" defaultValue="Register Now" />
+            </Button>
+          </Flex>
+          <Field.Text
+            name="FooterText"
+            defaultValue="Join us on our journey to push the boundaries of quantum computing and unlock the potential of this transformative technology, as we strive to make quantum accessible to all and shape the future of computing."
+            mt={10}
+            maxW="50%"
+            fontSize="xl"
+          />
+        </Box>
+        <Flex mt={20} color="white">
+          <Image h="50px" src={UniWienLogo}></Image>
+          <Spacer minW="25%" />
+          <HStack alignItems="start" spacing={20}>
+            {linkElmnts}
+          </HStack>
+        </Flex>
+        <Divider mt={20} opacity={0.1} />
+        <Field.Text
+          name="FooterBottomText"
+          defaultValue="Copyright © 2023 Walther Group, Faculty of Physics, University of Vienna. All rights reserved."
+          mt={5}
+          color="white"
+          opacity={0.2}
+          _hover={{
+            opacity: 1
+          }}
+          cursor="default"
+          transition="opacity 0.2s ease-in-out"
+        />
+      </Container>
+    </Box>
+  );
+};
+
+export default Footer;

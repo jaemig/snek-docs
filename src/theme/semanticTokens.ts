@@ -13,9 +13,11 @@ import smtLeftNav from "./semanticTokens/layout/leftNav";
 import smtMain from "./semanticTokens/layout/main";
 import smtRightNav from "./semanticTokens/layout/rightNav";
 import smtTopNav from "./semanticTokens/layout/topNav";
-import smtPqTopNav from "./semanticTokens/photonq/layout/topNav";
-import smtPqShared from "./semanticTokens/photonq/shared";
+import smtPqTopNav from "./photonq/semanticTokens/layout/topNav";
+import smtPqShared from "./photonq/semanticTokens/shared";
 import smtShared from "./semanticTokens/shared";
+import smtPqSectionLabel from "./photonq/semanticTokens/components/sectionLabel";
+import smtPqFeatureCard from "./photonq/semanticTokens/components/featureCard";
 
 const themeSemanticTokens = {
   colors: {
@@ -45,6 +47,10 @@ const themeSemanticTokens = {
       shared: smtPqShared,
       layout: {
         topNav: smtPqTopNav,
+      },
+      components: {
+        sectionLabel: smtPqSectionLabel,
+        featureCard: smtPqFeatureCard,
       }
     }
   }
