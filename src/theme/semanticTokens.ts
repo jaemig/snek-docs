@@ -18,6 +18,7 @@ import smtPqShared from "./photonq/semanticTokens/shared";
 import smtShared from "./semanticTokens/shared";
 import smtPqSectionLabel from "./photonq/semanticTokens/components/sectionLabel";
 import smtPqFeatureCard from "./photonq/semanticTokens/components/featureCard";
+import smtcodeResultPreviewComponent from "./semanticTokens/components/codeResultPreview";
 
 const themeSemanticTokens = {
   colors: {
@@ -27,6 +28,7 @@ const themeSemanticTokens = {
       drawer: smtDrawerComponent,
       menu: smtMenuComponent,
       codeSnippet: smtCodeSnippetComponent,
+      codeResultPreview: smtcodeResultPreviewComponent,
       filesystem: smtFilesystemComponent,
       heading: smtHeadingComponent,
       callout: smtCalloutComponent,

@@ -1,11 +1,15 @@
 import {
   Box,
+  BoxProps,
+  Button,
+  Flex,
   IconButton,
+  Spacer,
   Text,
   transition,
   useColorModeValue
 } from '@chakra-ui/react';
-import React, { FC } from 'react';
+import React, { Dispatch, FC, SetStateAction } from 'react';
 import 'highlight.js/styles/atom-one-dark.css';
 import { CheckIcon, CopyIcon } from '@chakra-ui/icons';
 import SyntaxHighlighter from 'react-syntax-highlighter';
@@ -21,6 +25,11 @@ export interface ICodeSnippetProps extends IMainContentComponentBaseProps {
   language?: string;
   headerText?: string;
   startingLineNumber?: number;
+  isStandalone?: boolean;
+  isExecutable?: boolean;
+  isExecuting?: boolean;
+  executeCode?: (code: string) => void;
+  containerProps?: BoxProps;
 }
 
 let timeout: NodeJS.Timeout;
@@ -32,6 +41,11 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({
   code,
   language,
   headerText,
+  containerProps,
+  isStandalone = true,
+  isExecutable,
+  isExecuting,
+  executeCode,
   startingLineNumber = 1
 }) => {
   const [buttonIcon, setButtonIcon] = React.useState<'copy' | 'check'>('copy');
@@ -43,12 +57,16 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({
   const copyToClipboard = () => {
     setButtonIcon('check');
     clearTimeout(timeout);
+    if (code) navigator.clipboard.writeText(code);
     timeout = setTimeout(() => setButtonIcon('copy'), 2000);
   };
 
+  let baseProps = {};
+  if (isStandalone) baseProps = mainComponentBaseStyle.baseProps;
+
   return (
     <Box
-      {...mainComponentBaseStyle.baseProps}
+      {...baseProps}
       w={{ base: 'calc(100vw - 3.5rem)', md: 'auto' }}
       overflow="hidden"
       border="1px solid"
@@ -58,6 +76,7 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({
         boxShadow: 'md'
       }}
       transition="box-shadow 0.2s cubic-bezier(0.000, 0.735, 0.580, 1.000)"
+      {...containerProps}
     >
       <Box
         fontSize="sm"
@@ -91,14 +110,42 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({
         }}
         transition="box-shadow 0.2s cubic-bezier(0.000, 0.735, 0.580, 1.000)"
       >
-        {headerText && (
-          <Text
+        {(headerText || isExecutable) && (
+          <Flex
             bgColor="components.codeSnippet.header.bgColor"
-            fontSize="xs"
+            color="components.codeSnippet.header.text.color"
+            _hover={{
+              color: 'components.codeSnippet.header._hover.text.color'
+            }}
+            transition="color 0.2s cubic-bezier(0.000, 0.735, 0.580, 1.000)"
             p={3}
           >
-            {headerText}
-          </Text>
+            {headerText && (
+              <Text fontSize="xs" my="auto">
+                {headerText}
+              </Text>
+            )}
+            {isExecutable && (
+              <>
+                <Spacer />
+                <Button
+                  size="sm"
+                  colorScheme="theme"
+                  my="auto"
+                  _hover={{
+                    transform: 'scale(1.05)'
+                  }}
+                  transition="transform 0.2s cubic-bezier(0.000, 0.735, 0.580, 1.000)"
+                  isLoading={isExecuting}
+                  onClick={
+                    executeCode && code ? () => executeCode(code) : undefined
+                  }
+                >
+                  Execute
+                </Button>
+              </>
+            )}
+          </Flex>
         )}
         <Box position="relative">
           <SyntaxHighlighter

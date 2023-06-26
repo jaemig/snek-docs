@@ -1,4 +1,4 @@
-const smtCodeSnippetComponent = {
+const smtcodeResultPreviewComponent = {
     header: {
         bgColor: {
             default: 'gray.100',
@@ -10,20 +10,20 @@ const smtCodeSnippetComponent = {
                 _dark: 'gray.400'
             },
         },
-        _hover: {
-            text: {
-                color: {
-                    default: 'gray.700',
-                    _dark: 'gray.100'
-                },
-            }
+    },
+    noResult: {
+        text: {
+            color: {
+                default: 'gray.400',
+                _dark: 'gray.500'
+            },
         },
     },
-    body: {
-        bgColor: {
-            default: 'gray.50',
-            _dark: '#011627'
-        }
+    loadingSpinner: {
+        color: {
+            default: 'gray.400',
+            _dark: 'gray.500'
+        },
     },
     borderColor: {
         default: 'gray.200',
@@ -31,4 +31,4 @@ const smtCodeSnippetComponent = {
     }
 }
 
-export default smtCodeSnippetComponent;
+export default smtcodeResultPreviewComponent;
