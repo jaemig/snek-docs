@@ -1,4 +1,4 @@
-import { WindowLocation } from "@reach/router";
+import { WindowLocation } from '@reach/router';
 
 /**
  * Get the platform of the user
@@ -6,7 +6,9 @@ import { WindowLocation } from "@reach/router";
  */
 export function getPlatform() {
   const userAgent =
-    (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') ? window.navigator.userAgent : '';
+    typeof window !== 'undefined' && typeof window.navigator !== 'undefined'
+      ? window.navigator.userAgent
+      : '';
 
   const platforms = [
     { pattern: /Mac/, platform: 'mac' },
@@ -31,25 +33,20 @@ export function getPlatform() {
  * @returns {boolean} isTouchDevice - Whether the user is on a touch device or not
  */
 export function isTouchDevice() {
-  return typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints);
+  return (
+    typeof window !== 'undefined' &&
+    ('ontouchstart' in window || navigator.maxTouchPoints)
+  );
 }
 
 /**
  *  Checks if the link is internal or external
  * @param href  - The href of the link
- * @param location  - The location object from @reach/router
  * @returns   - Whether the link is internal or not
  */
-export function isInternalLink(href: string, location: WindowLocation) {
-  let urlObj: URL;
-  try {
-    urlObj = new URL(href, location.origin);
-  } catch (e) {
-    return false; // If the URL is invalid, it is treated as an external link
-  }
-
-  // If the hostname is the same as the current hostname, it's an internal link
-  return urlObj.hostname === location.hostname;
+export function isInternalLink(href: string) {
+  // Check if the link starts with a forward slash (/) or a dot (./ or ../)
+  return /^\/|^\.+\//.test(href);
 }
 
 /**

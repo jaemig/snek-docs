@@ -8,7 +8,7 @@ export const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({
 }) => {
   const path = props.location.pathname;
 
-  if (path.startsWith('/admin')) {
+  if (path.startsWith('/admin') || path === '/photonq/') {
     return element;
   }
 

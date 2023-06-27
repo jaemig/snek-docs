@@ -22,6 +22,14 @@ const themeLinkComponent = {
         // textDecoration: 'none',
       },
       transition: 'opacity 0.1s ease-in-out'
+    },
+    'pq-footer': {
+      fontWeight: 500,
+      opacity: 0.6,
+      _hover: {
+        opacity: 1
+      },
+      transition: 'opacity 0.2s ease-in-out'
     }
   }
 };

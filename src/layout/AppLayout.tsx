@@ -34,27 +34,25 @@ const AppLayout: FC<AppLayoutProps> = ({ children, isDocs, path }) => {
 
   return (
     <ChakraProvider theme={theme}>
-      <PageManagerProvider>
-        <MenuContext.Provider value={{ menuStructure }}>
-          <Flex
-            minW="210px"
-            h="max(100%, 100vh)"
-            minH="100vh"
-            direction="column"
-            pb={5}
-          >
-            <TopNav />
-            <Box flex="1" mt={navTopOffset}>
-              {isDocs ? (
-                <DocsLayout path={path}>{children}</DocsLayout>
-              ) : (
-                <>{children}</>
-              )}
-            </Box>
-          </Flex>
-        </MenuContext.Provider>
-        <Footer />
-      </PageManagerProvider>
+      <MenuContext.Provider value={{ menuStructure }}>
+        <Flex
+          minW="210px"
+          h="max(100%, 100vh)"
+          minH="100vh"
+          direction="column"
+          pb={5}
+        >
+          <TopNav />
+          <Box flex="1" mt={navTopOffset}>
+            {isDocs ? (
+              <DocsLayout path={path}>{children}</DocsLayout>
+            ) : (
+              <>{children}</>
+            )}
+          </Box>
+        </Flex>
+      </MenuContext.Provider>
+      <Footer />
     </ChakraProvider>
   );
 };

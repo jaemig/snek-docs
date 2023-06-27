@@ -137,6 +137,7 @@ const generateMenuItem = (
       <AccordionItem
         ref={accordionItemRef}
         key={item.href + item.name}
+        id={item.href + item.name}
         css={{
           // Remove padding from last accordion item
           '& .chakra-accordion__panel': {
@@ -284,6 +285,7 @@ const PageDirectory: FC<PageDirectoryProps> = ({
   let menuRootExpandedIdx = 0;
   return (
     <Accordion
+      id="left-nav-accordion"
       visibility={isExpanded ? 'visible' : 'hidden'}
       opacity={isExpanded ? 1 : 0}
       w={isExpanded ? '100%' : 'max-content'}

@@ -19,11 +19,12 @@ import useWindowSize from '../../hooks/use-current-window-size';
 import { useNavOffset } from '../../hooks/use-nav-offset';
 import { TTopNavLinkData } from '../../types/navigation';
 import MobileNavDrawer from './MobileNavDrawer';
+import HamburgerMenuIcon from '../../components/core/HamburgerMenuIcon';
 
 const links: TTopNavLinkData[] = [
   {
     name: 'Documentation',
-    href: '/docs',
+    href: '/docs/',
     matchMethod: 'includes'
   },
   {
@@ -158,56 +159,10 @@ const TopNav: FC = () => {
                 size="sm"
                 display={{ base: 'initial', md: 'none' }}
               >
-                <Box
-                  position="relative"
-                  boxSize="11px"
-                  onClick={toggleMobileMenu}
-                  className={hamburgerClass}
-                  __css={{
-                    '&.open': {
-                      '& > div:nth-of-type(1)': {
-                        top: '8px',
-                        transform: 'rotate(45deg)'
-                      },
-                      '& > div:nth-of-type(2)': {
-                        opacity: 0
-                      },
-                      '& > div:nth-of-type(3)': {
-                        top: '8px',
-                        transform: 'rotate(-45deg)'
-                      }
-                    },
-                    '& > div': {
-                      transition:
-                        'transform 0.2s ease-in-out, opacity 0.2s ease-in-out, top 0.2s ease-in-out, background-color 0.2s ease-in-out'
-                    }
-                  }}
-                >
-                  <Box
-                    position="absolute"
-                    top={0}
-                    w="11px"
-                    h="2px"
-                    backgroundColor="topNav.mobile.hamburger.bgColor"
-                    borderRadius="full"
-                  />
-                  <Box
-                    position="absolute"
-                    top="5px"
-                    w="11px"
-                    h="2px"
-                    backgroundColor="topNav.mobile.hamburger.bgColor"
-                    borderRadius="full"
-                  />
-                  <Box
-                    position="absolute"
-                    top="10px"
-                    w="11px"
-                    h="2px"
-                    backgroundColor="topNav.mobile.hamburger.bgColor"
-                    borderRadius="full"
-                  />
-                </Box>
+                <HamburgerMenuIcon
+                  handleClick={toggleMobileMenu}
+                  wrapperProps={{ className: hamburgerClass }}
+                />
               </Button>
             </HStack>
           </Center>

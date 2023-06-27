@@ -19,6 +19,7 @@ import Filesystem from '../components/main-content/filesystem/Filesystem';
 import ImageCard from '../components/main-content/image-card/ImageCard';
 import Callout from '../components/main-content/callout/Callouts';
 import IconCard from '../components/main-content/icon-card/IconCard';
+import CodePlayground from '../components/main-content/code-playground/CodePlayground';
 
 export interface DocContentProps {}
 
@@ -64,7 +65,8 @@ export const DocContent: React.FC<DocContentProps> = () => {
             Filesystem,
             ImageCard,
             Callout,
-            IconCard
+            IconCard,
+            CodePlayground
           }}
         />
         <MainBottomNav />

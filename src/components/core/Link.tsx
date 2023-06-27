@@ -1,4 +1,4 @@
-import { Link as ChLink, LinkProps } from '@chakra-ui/react';
+import { Link as ChLink, LinkProps, Text } from '@chakra-ui/react';
 import { Link as GaLink } from 'gatsby';
 import { FC, ReactNode } from 'react';
 import { isInternalLink } from '../../functions/utils';
@@ -19,9 +19,7 @@ const Link: FC<GatsbyLinkProps> = ({ href = '#', ...props }) => {
     position: 'relative'
   };
 
-  const location = useLocation();
-
-  if (isInternalLink(href, location)) {
+  if (isInternalLink(href)) {
     return <ChLink {...baseProps} to={href} as={GaLink} {...props}></ChLink>;
   }
   return <ChLink {...baseProps} href={href} {...props}></ChLink>;
