@@ -71,7 +71,7 @@ const CodePlayground: FC<ICodePlaygroundProps> = ({
 
 CodePlayground.defaultProps = {
   codeEditorProps: {
-    code: '',
+    children: '',
     headerText: 'Editable Code',
     startingLineNumber: 1,
     language: 'javascript'

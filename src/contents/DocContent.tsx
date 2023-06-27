@@ -58,7 +58,7 @@ export const DocContent: React.FC<DocContentProps> = () => {
             code: (props: any) => {
               const lang = props.className?.replace('language-', '');
               const code = props.children;
-              return <CodeSnippet language={lang} code={code} {...props} />;
+              return <CodeSnippet language={lang} {...props} />;
             },
             // CUSTOM COMPONENTS
             CodeSnippet,

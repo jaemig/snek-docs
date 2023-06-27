@@ -21,7 +21,7 @@ import { mainComponentBaseStyle } from '../../../layout/main/mainContent.vars';
 import { IMainContentComponentBaseProps } from '../../../types/mainContent/mainContent';
 
 export interface ICodeSnippetProps extends IMainContentComponentBaseProps {
-  code?: string;
+  children?: string;
   language?: string;
   headerText?: string;
   startingLineNumber?: number;
@@ -38,7 +38,7 @@ let timeout: NodeJS.Timeout;
  * Code snippet component for displaying code examples.
  */
 const CodeSnippet: FC<ICodeSnippetProps> = ({
-  code,
+  children,
   language,
   headerText,
   containerProps,
@@ -57,7 +57,7 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({
   const copyToClipboard = () => {
     setButtonIcon('check');
     clearTimeout(timeout);
-    if (code) navigator.clipboard.writeText(code);
+    if (children) navigator.clipboard.writeText(children);
     timeout = setTimeout(() => setButtonIcon('copy'), 2000);
   };
 
@@ -138,7 +138,9 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({
                   transition="transform 0.2s cubic-bezier(0.000, 0.735, 0.580, 1.000)"
                   isLoading={isExecuting}
                   onClick={
-                    executeCode && code ? () => executeCode(code) : undefined
+                    executeCode && children
+                      ? () => executeCode(children)
+                      : undefined
                   }
                 >
                   Execute
@@ -155,7 +157,7 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({
             showLineNumbers
             wrapLongLines
           >
-            {code ?? ''}
+            {children ?? ''}
           </SyntaxHighlighter>
           <IconButton
             position="absolute"
@@ -175,7 +177,7 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({
   );
 };
 CodeSnippet.defaultProps = {
-  code: '',
+  children: '',
   headerText: undefined,
   startingLineNumber: 1
 };
