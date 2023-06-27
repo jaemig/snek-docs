@@ -15,10 +15,11 @@ import {
 } from '@chakra-ui/react';
 import { FC, useEffect, useMemo, useRef, useState } from 'react';
 
-import { highLightQuery, searchDocs } from '../../functions/search';
+import { searchDocs } from '../../functions/search';
 import { TSearchResult, TSearchResultSection } from '../../types/search';
 import SearchInput from './SearchInput';
 import Link from '../core/Link';
+import Highlighter from 'react-highlight-words';
 import { useLocation, navigate } from '@reach/router';
 import { SearchProvider, useSearch } from '@snek-at/jaen';
 
@@ -47,6 +48,15 @@ const SearchResultItem: FC<{
       // boxShadow: '0 0 0 2px #00bce6'
     };
   }
+
+  const queryTokens = query.split(' ').filter(token => /\S/.test(token));
+  const highlightTag = ({ children }: any) => (
+    <Text
+      as="span"
+      color="components.menu.item.highlight"
+      children={children}
+    />
+  );
 
   return (
     <MenuItem
@@ -88,10 +98,18 @@ const SearchResultItem: FC<{
               : 'shared.text.bright'
           }
         >
-          {highLightQuery(item.title, query, 0)}
+          <Highlighter
+            searchWords={queryTokens}
+            textToHighlight={item.title}
+            highlightTag={highlightTag}
+          />
         </Heading>
         <Text color="text.default">
-          {highLightQuery(item.description, query)}
+          <Highlighter
+            searchWords={queryTokens}
+            textToHighlight={item.description}
+            highlightTag={highlightTag}
+          />
         </Text>
       </Link>
     </MenuItem>

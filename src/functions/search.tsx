@@ -3,10 +3,11 @@ import { useSearch } from '@snek-at/jaen';
 import { Fragment } from 'react';
 import {
   TSearchIndexData,
+  TSearchMetadata,
   TSearchResult,
   TSearchResultSection
 } from '../types/search';
-import { Text } from '@chakra-ui/react';
+import { filterWhitespaceItems } from './utils';
 
 /**
  * Searches the docs for the given query.
@@ -25,6 +26,11 @@ export async function searchDocs(
       id: 'id',
       index: 'content',
       store: ['title', 'url']
+    },
+    context: {
+      resolution: 9,
+      depth: 2,
+      bidirectional: true
     }
   });
 
@@ -34,9 +40,9 @@ export async function searchDocs(
     tokenize: 'full',
     document: {
       id: 'id',
-      index: ['content'],
+      index: 'content',
       tag: 'pageId',
-      store: ['title', 'content', 'url']
+      store: ['title', 'content', 'url', 'display']
     },
     context: {
       resolution: 9,
@@ -62,11 +68,27 @@ export async function searchDocs(
         url,
         title,
         pageId: `page_${pageId}`,
-        content,
-        text
+        content: title,
+        display: content
       });
 
-      pageContent += content;
+      const splittedParagraphs = filterWhitespaceItems(text.split('\n'));
+
+      for (let i = 0; i < splittedParagraphs.length; i++) {
+        const paragraph = splittedParagraphs[i];
+        const paragraphUrl = `${url}#${i}`;
+
+        sectionIndex.add({
+          id: paragraphUrl,
+          url: paragraphUrl,
+          title,
+          pageId: `page_${pageId}`,
+          content: paragraph,
+          display: paragraph
+        });
+      }
+
+      pageContent += ` ${title} ${content}`;
     }
 
     // Add the page to the page index.
@@ -78,7 +100,6 @@ export async function searchDocs(
     });
     pageId++;
   }
-
   // Search for hits in the whole pages.
   const pageResults =
     pageIndex.search(query, {
@@ -87,21 +108,43 @@ export async function searchDocs(
       suggest: true
     })[0]?.result ?? [];
 
-  const searchResults: TSearchResultSection[] = [];
-  let i = 0;
-  for (const pageResult of pageResults) {
-    const searchResultItems: TSearchResult[] = [];
+  const searchResults: Array<TSearchResultSection & TSearchMetadata> = [];
+  const pageTitleMatches: Record<number, number> = {};
+  //TODO: We need to provide a search data record for the first page title and the first paragraph. Otherwise, the page itself will never be shown, but only it's sections.
+  //! Current issue: If the query matches a subtitle of a page or the page title itself, the page result is empty because pageContent doesnt contain those texts.
+  for (let i = 0; i < pageResults.length; i++) {
+    pageTitleMatches[i] = 0;
+    const pageResult = pageResults[i];
+    const searchResultItems: Array<TSearchResult> = [];
+
     // Search for hits in the sections of the page.
     const sectionResults =
-      sectionIndex.search(query, {
-        offset: i++ * 5, // Without it, limit seems to be applied before the tag filter is applied.
-        limit: 5,
+      sectionIndex.search(query, 5, {
+        // offset: i * 5,
+        // limit: 5,
         enrich: true,
         suggest: true,
         tag: `page_${pageResult.id}`
       })[0]?.result ?? [];
 
-    for (const sectionResult of sectionResults) {
+    const occured: Record<string, boolean> = {};
+    //* We set an additional limit since flexsearch doesn't seem to work with the offset and either ot both limit parameters.
+    for (let j = 0; j < Math.min(sectionResults.length, 5); j++) {
+      const sectionResult = sectionResults[j];
+      if (sectionResult.doc.display !== undefined) {
+        pageTitleMatches[i]++;
+      }
+
+      const key =
+        sectionResult.doc.url +
+        '@' +
+        (sectionResult.doc.display ?? sectionResult.doc.content);
+
+      if (occured[key]) {
+        continue;
+      }
+      occured[key] = true;
+
       searchResultItems.push({
         title: sectionResult.doc.title,
         description: sectionResult.doc.content ?? sectionResult.doc.title,
@@ -109,77 +152,31 @@ export async function searchDocs(
       });
     }
 
-    // If there are no section results, add the page itself.
-    if (searchResultItems.length === 0) {
+    if (sectionResults.length === 0) {
+      //* This is a temporary solution until we have a page record in the search data (see todo above loop).
       searchResultItems.push({
         title: pageResult.doc.title,
-        description: pageResult.doc.title,
+        description: pageResult.doc.content ?? pageResult.doc.title,
         href: pageResult.doc.url
       });
     }
 
     // Add the result section to the search results.
     searchResults.push({
+      _page_matches: pageTitleMatches[i],
+      _section_matches: sectionResults.length,
       title: pageResult.doc.title,
       results: searchResultItems
     });
   }
-  return searchResults;
-}
-
-/**
- * Highlight all occurences the search query in the text
- * @param text  The text to highlight
- * @param query  The search query
- * @param charLimit  The maximum number of characters to show before and after the first occurrence. Use 0 to show the whole text.
- * @returns  The text with highlighted query
- */
-export function highLightQuery(text: string, query: string, charLimit = 100) {
-  let lowercase_text = text.toLowerCase();
-  const lowercase_query = query.toLowerCase();
-  let searchIdx = 0; // The index of the last search
-  let occ; // The index of the current occurrence
-  const textParts = [];
-
-  while ((occ = lowercase_text.indexOf(lowercase_query, searchIdx)) !== -1) {
-    if (searchIdx === 0 && charLimit > 0) {
-      // Trim the whole text to the charLimit around the first occurrence
-      let startIdx = Math.max(0, occ - charLimit);
-      if (startIdx > 0 && text[startIdx] != ' ') {
-        // If the start index is not at the beginning of a word, move it to the next space in case it is not too far away
-        const spaceIdx = text.indexOf(' ', startIdx);
-        if (spaceIdx < startIdx + charLimit * 0.2) startIdx = spaceIdx;
-      }
-      let endIdx = Math.min(text.length, occ + charLimit);
-      if (endIdx < text.length && text[endIdx] != ' ') {
-        // If the end index is not at the end of a word, move it to the previous space in case it is not too far away
-        const spaceIdx = text.lastIndexOf(' ', endIdx);
-        if (spaceIdx > endIdx - charLimit * 0.2) endIdx = spaceIdx;
-      }
-      const suffix = endIdx != text.length ? '...' : '';
-      lowercase_text = lowercase_text.substring(startIdx, endIdx);
-      text = text.substring(startIdx, endIdx) + suffix;
-      occ -= startIdx;
+  //TODO: Return this directly after testing.
+  const res = searchResults.sort((a, b) => {
+    if (a._page_matches !== b._page_matches) {
+      return b._page_matches - a._page_matches;
     }
-
-    const prefix = text.substring(searchIdx, occ);
-    searchIdx = occ + query.length;
-    textParts.push(
-      <Fragment key={occ}>
-        {prefix}
-        <Text as="span" color="theme.600">
-          {text.substring(occ, occ + query.length)}
-        </Text>
-      </Fragment>
-    );
-  }
-  // Add the last part of the text
-  if (searchIdx < text.length) {
-    textParts.push(
-      <Fragment key={text.length}>
-        {text.substring(searchIdx, text.length)}
-      </Fragment>
-    );
-  }
-  return textParts.length > 0 ? <>{textParts} </> : text;
+    return a._section_matches === b._section_matches
+      ? 0
+      : b._section_matches - a._section_matches;
+  });
+  return res;
 }

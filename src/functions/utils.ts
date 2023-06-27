@@ -48,3 +48,12 @@ export function isInternalLink(href: string) {
   // Check if the link starts with a forward slash (/) or a dot (./ or ../)
   return /^\/|^\.+\//.test(href);
 }
+
+/**
+ * Filters out whitespace items from an array
+ * @param items  - The array to filter
+ * @returns  - The filtered array
+ */
+export function filterWhitespaceItems(items: string[]) {
+  return items.filter(item => /\S/.test(item));
+}
