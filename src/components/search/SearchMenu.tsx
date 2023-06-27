@@ -45,7 +45,6 @@ const SearchResultItem: FC<{
     props = {
       ...props,
       bgColor: 'components.menu.item.focus.bgColor'
-      // boxShadow: '0 0 0 2px #00bce6'
     };
   }
 
@@ -69,14 +68,12 @@ const SearchResultItem: FC<{
         outline: 'none',
         border: '0px',
         bgColor: 'components.menu.item.focus.bgColor'
-        // boxShadow: '0 0 0 2px #00bce6'
       }}
       _hover={{
         '.chakra-heading': {
           color: 'components.menu.item.focus.headingColor'
         },
         bgColor: 'components.menu.item.focus.bgColor'
-        // boxShadow: '0 0 0 2px #00bce6'
       }}
       onKeyDownCapture={e => {
         if (e.key === 'Enter') {
@@ -100,14 +97,14 @@ const SearchResultItem: FC<{
         >
           <Highlighter
             searchWords={queryTokens}
-            textToHighlight={item.title}
+            textToHighlight={item.title ?? ''}
             highlightTag={highlightTag}
           />
         </Heading>
         <Text color="text.default">
           <Highlighter
             searchWords={queryTokens}
-            textToHighlight={item.description}
+            textToHighlight={item.description ?? ''}
             highlightTag={highlightTag}
           />
         </Text>

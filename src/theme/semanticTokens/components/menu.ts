@@ -1,5 +1,9 @@
 const smtMenuComponent = {
     item: {
+        highlight: {
+            default: 'theme.600',
+            _dark: 'theme.600'
+        },
         focus: {
             bgColor: {
                 default: 'theme.100',
