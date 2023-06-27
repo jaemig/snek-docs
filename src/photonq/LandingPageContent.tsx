@@ -7,7 +7,7 @@ import { Global } from '@emotion/react';
 import PhotonQ from './sections/PhotonQ';
 import AboutUs from './sections/AboutUs';
 import Footer from './sections/Footer';
-import TopNav from '../theme/photonq/semanticTokens/components/TopNav';
+import TopNav from '../components/photonq/TopNav';
 import { MenuContext } from '../contexts/menu';
 import { useJaenPageTree } from '@snek-at/jaen';
 import { useLocation } from '@reach/router';

@@ -6,25 +6,20 @@ import {
   LinkProps,
   Image,
   FlexProps,
-  Menu,
-  MenuButton,
-  IconButton,
-  MenuList,
-  MenuItem,
   BoxProps,
   useDisclosure,
   Button
 } from '@chakra-ui/react';
-import { FC, useEffect, useMemo, useState } from 'react';
-import Link from '../../../../components/core/Link';
+import { FC, useEffect, useState } from 'react';
+import Link from '../core/Link';
 
-import GrayedUniWienLogo from '../../../../photonq/assets/icons/uni-wien-logo-gray.svg';
-import ColorizedUniWienLogo from '../../../../photonq/assets/icons/uni-wien-logo-colorized.svg';
-import { useNavOffset } from '../../../../hooks/use-nav-offset';
-import useScrollPosition from '../../../../hooks/use-scroll-position';
-import HamburgerMenuIcon from '../../../../components/core/HamburgerMenuIcon';
-import MobileNavDrawer from '../../../../layout/navigation/MobileNavDrawer';
-import useWindowSize from '../../../../hooks/use-current-window-size';
+import GrayedUniWienLogo from '../../photonq/assets/icons/uni-wien-logo-gray.svg';
+import ColorizedUniWienLogo from '../../photonq/assets/icons/uni-wien-logo-colorized.svg';
+import { useNavOffset } from '../../hooks/use-nav-offset';
+import useScrollPosition from '../../hooks/use-scroll-position';
+import HamburgerMenuIcon from '../core/HamburgerMenuIcon';
+import MobileNavDrawer from '../../layout/navigation/MobileNavDrawer';
+import useWindowSize from '../../hooks/use-current-window-size';
 
 const TopNav: FC = () => {
   const windowSize = useWindowSize();
