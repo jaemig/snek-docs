@@ -5386,9 +5386,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@snek-at/jaen@npm:^0.0.95":
-  version: 0.0.95
-  resolution: "@snek-at/jaen@npm:0.0.95"
+"@snek-at/jaen@npm:^0.0.96":
+  version: 0.0.96
+  resolution: "@snek-at/jaen@npm:0.0.96"
   dependencies:
     "@chakra-ui/icons": ^2.0.18
     "@chakra-ui/pro-theme": ^0.0.64
@@ -5428,6 +5428,7 @@ __metadata:
     react-syntax-highlighter: ^15.5.0
     redux: ^4.2.0
     rehype-highlight: ^6.0.0
+    rehype-mdx-code-props: ^1.0.0
     rehype-mermaidjs: ^1.0.1
     rehype-sanitize: ^5.0.1
     rehype-slug: ^5.1.0
@@ -5452,7 +5453,7 @@ __metadata:
     react-dom: ^18.2.0
   bin:
     jaen: dist/index.cli.mjs
-  checksum: ec2c1c9d94055d808df6da3c1fa0afacd956a8f628956d2a8eb4fd6f98cb0697abef33cc068cb1e8cde20b49e7e0db7247f16fc17305a936d09c38211f769bcb
+  checksum: b4160478d5fde4b0aefe7a5073d6e356f971dd84059d2c02adf289d0d914b8e4e53cf8bac01652340429774e26b06b2bf90199c99f684986dffc683ef94d4846
   languageName: node
   linkType: hard
 
@@ -18003,6 +18004,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rehype-mdx-code-props@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "rehype-mdx-code-props@npm:1.0.0"
+  dependencies:
+    "@types/hast": ^2.0.0
+    acorn: ^8.0.0
+    acorn-jsx: ^5.0.0
+    hast-util-to-estree: ^2.0.0
+    unified: ^10.0.0
+    unist-util-visit-parents: ^5.0.0
+  checksum: 24b2cabf938f2a8cf9e35d4f4775d3b0e195f72d38f8e06bd0c7e9454b0e4d26bf063e3f11f6b74e78e244291c79c66453681fe4ed3b128d8b83ab059109ebd3
+  languageName: node
+  linkType: hard
+
 "rehype-mermaidjs@npm:^1.0.1":
   version: 1.0.1
   resolution: "rehype-mermaidjs@npm:1.0.1"
@@ -18853,7 +18868,7 @@ __metadata:
     "@emotion/react": ^11.10.8
     "@emotion/styled": ^11.10.8
     "@reach/router": ^1.3.4
-    "@snek-at/jaen": ^0.0.95
+    "@snek-at/jaen": ^0.0.96
     "@types/node": ^18.16.2
     "@types/react": ^18.2.0
     "@types/react-dom": ^18.2.1

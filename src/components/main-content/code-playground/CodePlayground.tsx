@@ -3,9 +3,11 @@ import { FC, ReactNode, useEffect, useState } from 'react';
 import CodeSnippet, { ICodeSnippetProps } from '../code-snippet/CodeSnippet';
 import { mainComponentBaseStyle } from '../../../layout/main/mainContent.vars';
 import CodeResultPreview from '../code-result-preview/CodeResultPreview';
+import ReactDOM from 'react-dom/server';
 
 interface ICodePlaygroundProps {
-  codeEditorProps: ICodeSnippetProps;
+  children: string;
+  codeEditorProps: Exclude<ICodeSnippetProps, 'children'>;
   executeCode: (code: string) => Promise<ReactNode>;
 }
 /**
@@ -13,6 +15,7 @@ interface ICodePlaygroundProps {
  * This component uses the CodeSnippet component to display and edit the code.
  */
 const CodePlayground: FC<ICodePlaygroundProps> = ({
+  children,
   codeEditorProps,
   executeCode
 }) => {
@@ -24,12 +27,8 @@ const CodePlayground: FC<ICodePlaygroundProps> = ({
     try {
       setIsExecuting(true);
 
-      // Placeholder for the actual function call. Replace with code below
-      setTimeout(() => {
-        setResult(<h1>How cool is that?</h1>);
-      }, 3000);
       //TODO: Replace the placeholder with this actual function call:
-      // setResult(await executeCode(code));
+      setResult(await executeCode(code));
     } finally {
       setTimeout(() => {
         setIsExecuting(false);
@@ -48,6 +47,7 @@ const CodePlayground: FC<ICodePlaygroundProps> = ({
         overflow="hidden"
       >
         <CodeSnippet
+          children={children}
           {...codeEditorProps}
           containerProps={{
             border: 'none',
@@ -70,8 +70,8 @@ const CodePlayground: FC<ICodePlaygroundProps> = ({
 };
 
 CodePlayground.defaultProps = {
+  children: 'This is a code playground',
   codeEditorProps: {
-    children: '',
     headerText: 'Editable Code',
     startingLineNumber: 1,
     language: 'javascript'

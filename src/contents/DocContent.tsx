@@ -55,18 +55,52 @@ export const DocContent: React.FC<DocContentProps> = () => {
             th: (props: any) => <Th {...props} />,
             td: (props: any) => <Td {...props} />,
             // MISC
-            code: (props: any) => {
-              const lang = props.className?.replace('language-', '');
-              const code = props.children;
+            code: ({
+              className,
+              playground,
+              ...props
+            }: {
+              playground?: boolean;
+              className?: string;
+              children: string;
+            }) => {
+              const lang = className?.replace('language-', '') || 'text';
+
+              if (playground) {
+                return (
+                  <CodePlayground
+                    codeEditorProps={{
+                      language: lang,
+                      ...props
+                    }}
+                    executeCode={async code => {
+                      await new Promise(resolve => setTimeout(resolve, 3000));
+
+                      // Fetch some random data from the internet
+                      const res = await fetch(
+                        'https://jsonplaceholder.typicode.com/todos/1'
+                      );
+                      const data = await res.json();
+
+                      return (
+                        <Box>
+                          <h1>How cool is that?</h1>
+                          <pre>{JSON.stringify(data, null, 2)}</pre>
+                        </Box>
+                      );
+                    }}
+                    {...props}
+                  />
+                );
+              }
+
               return <CodeSnippet language={lang} {...props} />;
             },
             // CUSTOM COMPONENTS
-            CodeSnippet,
             Filesystem,
             ImageCard,
             Callout,
-            IconCard,
-            CodePlayground
+            IconCard
           }}
         />
         <MainBottomNav />
