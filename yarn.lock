@@ -5386,9 +5386,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@snek-at/jaen@npm:^0.0.96":
-  version: 0.0.96
-  resolution: "@snek-at/jaen@npm:0.0.96"
+"@snek-at/jaen@npm:^0.0.97":
+  version: 0.0.97
+  resolution: "@snek-at/jaen@npm:0.0.97"
   dependencies:
     "@chakra-ui/icons": ^2.0.18
     "@chakra-ui/pro-theme": ^0.0.64
@@ -5453,7 +5453,7 @@ __metadata:
     react-dom: ^18.2.0
   bin:
     jaen: dist/index.cli.mjs
-  checksum: b4160478d5fde4b0aefe7a5073d6e356f971dd84059d2c02adf289d0d914b8e4e53cf8bac01652340429774e26b06b2bf90199c99f684986dffc683ef94d4846
+  checksum: 4182546cde697691355fa78d59419786904dbd83e684c432fc13880f13895e603661fb6ea8d764bca10f55899f85dc5ce276a1846b1064cfbc7875ae50f25e82
   languageName: node
   linkType: hard
 
@@ -11165,9 +11165,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gatsby-plugin-jaen@npm:^0.0.26":
-  version: 0.0.26
-  resolution: "gatsby-plugin-jaen@npm:0.0.26"
+"gatsby-plugin-jaen@npm:^0.0.27":
+  version: 0.0.27
+  resolution: "gatsby-plugin-jaen@npm:0.0.27"
   dependencies:
     "@chakra-ui/gatsby-plugin": ^3.1.1
     gatsby-plugin-compile-es6-packages: ^2.1.1
@@ -11181,7 +11181,7 @@ __metadata:
     gatsby-plugin-image: ^3
     gatsby-plugin-sharp: ^5
     gatsby-transformer-sharp: ^5
-  checksum: d5aa7ef35f74d280c4142ef88cc89b7e07486f5cf27fdd2109b50cef0b9560333993fddf0dca659ed7c178b2137d949eda0041377bb9963be7dbfafebd8d5823
+  checksum: e20aea58c498ac4088b33d3b933967620b366838dde57582ea4617795ae761b4743705b6b45b034c022a5d00094db32fbb59cedb274feeb30b7353c7ce706d27
   languageName: node
   linkType: hard
 
@@ -18868,7 +18868,7 @@ __metadata:
     "@emotion/react": ^11.10.8
     "@emotion/styled": ^11.10.8
     "@reach/router": ^1.3.4
-    "@snek-at/jaen": ^0.0.96
+    "@snek-at/jaen": ^0.0.97
     "@types/node": ^18.16.2
     "@types/react": ^18.2.0
     "@types/react-dom": ^18.2.1
@@ -18878,7 +18878,7 @@ __metadata:
     framer-motion: ^10.12.7
     gatsby: ^5.9.0
     gatsby-plugin-image: ^3.9.0
-    gatsby-plugin-jaen: ^0.0.26
+    gatsby-plugin-jaen: ^0.0.27
     gatsby-plugin-react-svg: ^3.3.0
     gatsby-plugin-sharp: ^5.9.0
     gatsby-source-filesystem: ^5.9.0
