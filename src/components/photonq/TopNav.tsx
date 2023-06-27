@@ -34,8 +34,8 @@ const TopNav: FC = () => {
     const heroHeight = document.querySelector<HTMLDivElement>('#hero');
     if (!heroHeight) return;
     const heroHeightPx = heroHeight.getBoundingClientRect().height;
-    setColorMode(scrollPos < heroHeightPx ? 'dark' : 'light');
-  }, [scrollPos]);
+    setColorMode(scrollPos < heroHeightPx && !isOpen ? 'dark' : 'light');
+  }, [scrollPos, isOpen]);
 
   let linkProps: LinkProps = { transition: 'opacity 0.2s ease-in-out' };
   let styleProps: FlexProps = {};
@@ -58,7 +58,7 @@ const TopNav: FC = () => {
     };
   } else {
     styleProps = {
-      bgColor: 'rgba(255, 255, 255, 0.7)',
+      bgColor: isOpen ? 'white' : 'rgba(255, 255, 255, 0.7)',
       color: 'black'
     };
     linkProps = {
@@ -68,10 +68,6 @@ const TopNav: FC = () => {
       }
     };
   }
-
-  const handleHamburgerClick = () => {
-    setHamburgerClass(hamburgerClass === '' ? 'open' : '');
-  };
 
   useEffect(() => {
     if (windowSize.width >= 768 && isOpen) closeDrawer();
@@ -84,6 +80,7 @@ const TopNav: FC = () => {
 
   const closeDrawer = () => {
     setHamburgerClass('');
+
     onClose();
   };
 
@@ -122,7 +119,7 @@ const TopNav: FC = () => {
         <Center
           as={HStack}
           spacing={10}
-          display={{ base: 'none', lg: 'inherit' }}
+          display={{ base: 'none', md: 'inherit' }}
         >
           <Link {...linkProps}>Home</Link>
           <Link {...linkProps}>Documentation</Link>
@@ -137,6 +134,7 @@ const TopNav: FC = () => {
             _hover={{ opacity: 1 }}
             transition="opacity 0.2s ease-in-out"
             onClick={toggleMobileMenu}
+            display={{ base: 'initial', md: 'none' }}
           >
             <HamburgerMenuIcon
               iconProps={{
