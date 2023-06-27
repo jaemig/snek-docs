@@ -9,10 +9,13 @@ const Hero: FC = () => {
 
   return (
     <VStack
-      h={`calc(100vh - ${navOffset} - 250px)`}
+      h={{ base: 'max-content', md: `calc(100vh - ${navOffset} - 250px)` }}
+      minH="max-content"
       bgColor="pq.shared.body"
       spacing={0}
       id="hero"
+      overflowX="hidden"
+      p={{ base: 5, lg: 0 }}
     >
       <Box w="full" flexGrow={1} color="white">
         <Center h="full">
@@ -49,7 +52,7 @@ const Hero: FC = () => {
               <Field.Text name="HeroButtonText" defaultValue="Register Now" />
             </Button>
             <Center>
-              <Box mt={20} w="512px">
+              <Box mt={20} w="50vw" maxW="512px" minW="250px">
                 <Field.Image name="heroImage" />
               </Box>
             </Center>

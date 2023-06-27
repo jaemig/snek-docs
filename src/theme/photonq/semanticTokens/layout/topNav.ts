@@ -1,7 +1,19 @@
 const smtPqTopNav = {
     color: {
-        default: '#A0AEC0',
+        default: 'white',
     },
-}
+    hamburger: {
+        light: {
+            color: {
+                default: 'black',
+            },
+        },
+        dark: {
+            color: {
+                default: 'white',
+            }
+        }
+    },
+};
 
 export default smtPqTopNav;

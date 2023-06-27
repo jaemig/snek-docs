@@ -36,6 +36,15 @@ const themeButtonComponent = {
         boxShadow: '3x 3px 10px rgba(2, 116, 192, 0.5)'
       },
       transition: 'background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
+    },
+    'pq-ghost': {
+      bgColor: 'transparent',
+      color: 'pq.500',
+      px: 5,
+      borderRadius: 'lg',
+      _hover: {
+        transform: 'scale(1.1)',
+      },
     }
   }
 };

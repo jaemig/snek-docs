@@ -5,7 +5,15 @@ import {
   HStack,
   LinkProps,
   Image,
-  FlexProps
+  FlexProps,
+  Menu,
+  MenuButton,
+  IconButton,
+  MenuList,
+  MenuItem,
+  BoxProps,
+  useDisclosure,
+  Button
 } from '@chakra-ui/react';
 import { FC, useEffect, useMemo, useState } from 'react';
 import Link from '../../../../components/core/Link';
@@ -14,30 +22,29 @@ import GrayedUniWienLogo from '../../../../photonq/assets/icons/uni-wien-logo-gr
 import ColorizedUniWienLogo from '../../../../photonq/assets/icons/uni-wien-logo-colorized.svg';
 import { useNavOffset } from '../../../../hooks/use-nav-offset';
 import useScrollPosition from '../../../../hooks/use-scroll-position';
-import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
+import HamburgerMenuIcon from '../../../../components/core/HamburgerMenuIcon';
+import MobileNavDrawer from '../../../../layout/navigation/MobileNavDrawer';
+import useWindowSize from '../../../../hooks/use-current-window-size';
 
 const TopNav: FC = () => {
+  const windowSize = useWindowSize();
   const navOffset = useNavOffset();
   const scrollPos = useScrollPosition();
+  const { isOpen, onOpen, onClose } = useDisclosure(); // Mobile nav menu drawer
 
+  const [hamburgerClass, setHamburgerClass] = useState('');
   const [colorMode, setColorMode] = useState<'light' | 'dark'>('dark');
 
   useEffect(() => {
     const heroHeight = document.querySelector<HTMLDivElement>('#hero');
-    if (heroHeight) {
-      const heroHeightPx = heroHeight.getBoundingClientRect().height;
-      console.log('heroScroll: ', scrollPos, heroHeightPx);
-      if (scrollPos < heroHeightPx) {
-        setColorMode('dark');
-      } else {
-        setColorMode('light');
-      }
-    }
+    if (!heroHeight) return;
+    const heroHeightPx = heroHeight.getBoundingClientRect().height;
+    setColorMode(scrollPos < heroHeightPx ? 'dark' : 'light');
   }, [scrollPos]);
 
-  let linkProps: LinkProps = {};
-
+  let linkProps: LinkProps = { transition: 'opacity 0.2s ease-in-out' };
   let styleProps: FlexProps = {};
+  let menuIconProps: BoxProps = {};
 
   if (colorMode === 'dark') {
     styleProps = {
@@ -45,10 +52,14 @@ const TopNav: FC = () => {
       color: 'pq.layout.topNav.color'
     };
     linkProps = {
-      opacity: 0.7,
+      ...linkProps,
+      opacity: 0.4,
       _hover: {
         opacity: 1
       }
+    };
+    menuIconProps = {
+      color: 'pq.layout.topNav.hamburger.dark.color'
     };
   } else {
     styleProps = {
@@ -56,44 +67,93 @@ const TopNav: FC = () => {
       color: 'black'
     };
     linkProps = {
+      ...linkProps,
       _hover: {
         color: 'pq.500'
       }
     };
   }
 
+  const handleHamburgerClick = () => {
+    setHamburgerClass(hamburgerClass === '' ? 'open' : '');
+  };
+
+  useEffect(() => {
+    if (windowSize.width >= 768 && isOpen) closeDrawer();
+  }, [windowSize.width]);
+
+  const openDrawer = () => {
+    setHamburgerClass('open');
+    onOpen();
+  };
+
+  const closeDrawer = () => {
+    setHamburgerClass('');
+    onClose();
+  };
+
+  const toggleMobileMenu = () => {
+    if (hamburgerClass === 'open') closeDrawer();
+    else openDrawer();
+  };
+
   return (
-    <Flex
-      as="nav"
-      position="sticky"
-      w="full"
-      h="64px"
-      top={navOffset}
-      {...styleProps}
-      backdropFilter="blur(10px)"
-      fontWeight={500}
-      zIndex={1000}
-      transition="background-color 0.2s ease-in-out"
-    >
-      <Center>
-        <Link href="/">
-          <Image
-            h="50px"
-            src={
-              colorMode === 'dark' ? GrayedUniWienLogo : ColorizedUniWienLogo
-            }
-          ></Image>
-        </Link>
-      </Center>
-      <Spacer />
-      <Center as={HStack} spacing={10}>
-        <Link {...linkProps}>Home</Link>
-        <Link {...linkProps}>Documentation</Link>
-        <Link {...linkProps}>Sign In</Link>
-        <Link {...linkProps}>Sign Up</Link>
-      </Center>
-      <Spacer />
-    </Flex>
+    <>
+      <Flex
+        as="nav"
+        position="sticky"
+        w="full"
+        h="64px"
+        top={navOffset}
+        {...styleProps}
+        backdropFilter="blur(10px)"
+        fontWeight={500}
+        zIndex={1000}
+        transition="background-color 0.2s ease-in-out"
+        p={5}
+      >
+        <Center>
+          <Link href="/">
+            <Image
+              w="auto"
+              h="50px"
+              src={
+                colorMode === 'dark' ? GrayedUniWienLogo : ColorizedUniWienLogo
+              }
+            ></Image>
+          </Link>
+        </Center>
+        <Spacer />
+        <Center
+          as={HStack}
+          spacing={10}
+          display={{ base: 'none', lg: 'inherit' }}
+        >
+          <Link {...linkProps}>Home</Link>
+          <Link {...linkProps}>Documentation</Link>
+          <Link {...linkProps}>Sign In</Link>
+          <Link {...linkProps}>Sign Up</Link>
+        </Center>
+        <Spacer />
+        <Center>
+          <Button
+            variant="pq-ghost"
+            opacity={0.4}
+            _hover={{ opacity: 1 }}
+            transition="opacity 0.2s ease-in-out"
+            onClick={toggleMobileMenu}
+          >
+            <HamburgerMenuIcon
+              iconProps={{
+                bgColor: `pq.layout.topNav.hamburger.${colorMode}.color`
+              }}
+              wrapperProps={{ mx: 'auto', className: hamburgerClass }}
+            />
+          </Button>
+        </Center>
+      </Flex>
+      <MobileNavDrawer isOpen={isOpen} onClose={onClose} onOpen={onOpen} />
+    </>
   );
 };
 

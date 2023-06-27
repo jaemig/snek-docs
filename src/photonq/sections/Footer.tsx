@@ -72,7 +72,7 @@ const Footer: FC = () => {
 
   for (const linkGroup of links) {
     linkElmnts.push(
-      <VStack spacing={3} alignItems="start">
+      <VStack spacing={3} alignItems="start" wrap="wrap">
         {linkGroup.map(link => {
           if ('isTitle' in link) {
             return (
@@ -104,7 +104,13 @@ const Footer: FC = () => {
   }
 
   return (
-    <Box pb={20} position="relative">
+    <Box
+      pb={20}
+      position="relative"
+      mt="-25px"
+      px={{ base: 5, lg: 0 }}
+      overflowX="hidden"
+    >
       <Box
         position="absolute"
         top="-122px"
@@ -125,21 +131,29 @@ const Footer: FC = () => {
       />
       <Container maxW="7xl" h="100%">
         <Box mt="20vh" color="white">
-          <Flex maxW="75%">
-            <Box w="fit-content">
+          <Flex
+            maxW={{ base: 'full', lg: '75%' }}
+            wrap={{ base: 'wrap', lg: 'nowrap' }}
+          >
+            <Box
+              w={{ base: 'full', lg: 'fit-content' }}
+              textAlign={{ base: 'center', lg: 'initial' }}
+            >
               <Field.Text
                 name="FooterTitleLine1"
                 defaultValue="Exploring"
                 fontSize="6xl"
                 fontWeight="500"
-                w="fit-content"
+                w={{ base: 'full', lg: 'fit-content' }}
+                display={{ base: 'block', lg: 'initial' }}
               />
               <Field.Text
                 name="FooterTitleLine2"
                 defaultValue="Quantum Frontiers"
                 fontSize="6xl"
                 fontWeight="500"
-                w="fit-content"
+                w={{ base: 'full', lg: 'fit-content' }}
+                display={{ base: 'block', lg: 'initial' }}
               />
             </Box>
             <Spacer />
@@ -149,8 +163,9 @@ const Footer: FC = () => {
               borderRadius="xl"
               bgColor="rgba(2, 116, 192, 0.07)"
               px={5}
-              mt="auto"
+              mt={{ base: 5, lg: 'auto' }}
               mr="auto"
+              ml={{ base: 'auto', lg: 'initial' }}
               mb={3}
             >
               <Field.Text name="FooterButtonText" defaultValue="Register Now" />
@@ -160,14 +175,20 @@ const Footer: FC = () => {
             name="FooterText"
             defaultValue="Join us on our journey to push the boundaries of quantum computing and unlock the potential of this transformative technology, as we strive to make quantum accessible to all and shape the future of computing."
             mt={10}
-            maxW="50%"
+            maxW={{ base: 'full', lg: '50%' }}
             fontSize="xl"
+            textAlign={{ base: 'center', lg: 'initial' }}
           />
         </Box>
-        <Flex mt={20} color="white">
+        <Flex mt={20} color="white" wrap={{ base: 'wrap', sm: 'nowrap' }}>
           <Image h="50px" src={UniWienLogo}></Image>
-          <Spacer minW="25%" />
-          <HStack alignItems="start" spacing={20}>
+          <Spacer minW={{ base: '5rem', lg: '25%' }} />
+          <HStack
+            alignItems="start"
+            spacing={{ base: 5, sm: 20 }}
+            wrap={{ base: 'wrap', md: 'nowrap' }}
+            mt={{ base: 10, md: 0 }}
+          >
             {linkElmnts}
           </HStack>
         </Flex>

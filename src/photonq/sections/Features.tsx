@@ -10,7 +10,6 @@ import {
 import { FC } from 'react';
 import SectionTitle from '../../components/photonq/SectionTitle';
 import { Field } from '@snek-at/jaen';
-import { JaenFieldProps } from '@snek-at/jaen/dist/connectors/connectField';
 import { TextFieldProps } from '@snek-at/jaen/dist/fields/TextField/TextField';
 
 const Features: FC = () => {
@@ -50,7 +49,7 @@ const Features: FC = () => {
         />
         <Box mt={10}>
           <VStack>
-            <HStack gap={10}>
+            <HStack gap={10} wrap={{ base: 'wrap', md: 'nowrap' }}>
               <Box {...cardProps}>
                 <Box w="75%" mx="auto">
                   <Field.Image name="LeftCardImage" />
@@ -104,7 +103,7 @@ const Features: FC = () => {
               </Box>
             </HStack>
             <Box {...cardProps} w="100%" mt={7}>
-              <Box w="30%" minW="300px" m="auto">
+              <Box w="30%" minW={{ base: '100px', md: '300px' }} m="auto">
                 <Field.Image name="BottomCardImage" />
               </Box>
               <Center>
@@ -121,7 +120,7 @@ const Features: FC = () => {
                   defaultValue="Embark on a quantum computing adventure, starting from the basics, and master the foundations of this groundbreaking field through our comprehensive learning resources."
                   color="pq.components.featureCard.color"
                   mt={3}
-                  maxW="50%"
+                  maxW={{ base: 'full', md: '50%' }}
                   textAlign="center"
                 />
               </Center>
