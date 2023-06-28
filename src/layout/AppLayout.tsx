@@ -63,14 +63,6 @@ const AppLayout: FC<AppLayoutProps> = ({
 
   const FooterComp = footer ? footer : Footer;
 
-  if (!brandImage) {
-    brandImage = {
-      props: { h: '40px' },
-      src: ColorizedUniWienLogo,
-      alt: 'Uni Wien Logo'
-    };
-  }
-
   return (
     <ChakraProvider theme={theme}>
       <MenuContext.Provider value={{ menuStructure }}>
