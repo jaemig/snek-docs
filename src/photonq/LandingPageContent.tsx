@@ -134,13 +134,6 @@ export const LandingPageContent: FC<ILandingPageContentProps> = ({ path }) => {
         alt: ''
       }}
     >
-      <Global
-        styles={{
-          body: {
-            backgroundColor: '#0D0E11'
-          }
-        }}
-      />
       <Hero />
       <Features />
       <PhotonQ />

@@ -32,7 +32,7 @@ import HamburgerMenuIcon, {
 const links: TTopNavLinkData[] = [
   {
     name: 'Home',
-    href: '/photonq/',
+    href: '/',
     matchMethod: 'exact'
   },
   {
