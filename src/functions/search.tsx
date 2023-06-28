@@ -76,11 +76,10 @@ export async function searchDocs(
 
       for (let i = 0; i < splittedParagraphs.length; i++) {
         const paragraph = splittedParagraphs[i];
-        const paragraphUrl = `${url}#${i}`;
 
         sectionIndex.add({
-          id: paragraphUrl,
-          url: paragraphUrl,
+          id: `${url}#${i}`,
+          url,
           title,
           pageId: `page_${pageId}`,
           content: paragraph,
