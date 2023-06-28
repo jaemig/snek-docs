@@ -70,13 +70,14 @@ const Footer: FC = () => {
 
   const linkElmnts: ReactNode[] = [];
 
-  for (const linkGroup of links) {
+  for (const [index, linkGroup] of Object.entries(links)) {
     linkElmnts.push(
-      <VStack spacing={3} alignItems="start" wrap="wrap">
-        {linkGroup.map(link => {
+      <VStack key={index} spacing={3} alignItems="start" wrap="wrap">
+        {linkGroup.map((link, index) => {
           if ('isTitle' in link) {
             return (
               <Field.Text
+                key={index}
                 name={'FooterLinkTitle' + link.label}
                 defaultValue={link.label}
                 fontWeight="500"
@@ -85,6 +86,7 @@ const Footer: FC = () => {
           }
           return (
             <Link
+              key={index}
               href={link.href}
               color="white"
               opacity={0.7}
