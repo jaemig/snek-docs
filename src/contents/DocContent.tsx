@@ -1,5 +1,7 @@
 import {
   Box,
+  HStack,
+  Image,
   SimpleGrid,
   Stack,
   Table,
@@ -8,6 +10,7 @@ import {
   Th,
   Thead,
   Tr,
+  VStack,
   Wrap,
   WrapItem
 } from '@chakra-ui/react';
@@ -114,19 +117,41 @@ export const DocContent: React.FC<DocContentProps> = () => {
                       ...props
                     }}
                     executeCode={async code => {
-                      await new Promise(resolve => setTimeout(resolve, 3000));
+                      // Function to shuffle an array in place
+                      function shuffleArray(array: any[]) {
+                        for (let i = array.length - 1; i > 0; i--) {
+                          const j = Math.floor(Math.random() * (i + 1));
+                          [array[i], array[j]] = [array[j], array[i]];
+                        }
+                      }
 
-                      // Fetch some random data from the internet
-                      const res = await fetch(
-                        'https://jsonplaceholder.typicode.com/todos/1'
+                      // Fetch the emojis and shuffle the keys
+                      const emojisObject = await fetch(
+                        'https://api.github.com/emojis'
+                      ).then(res => res.json());
+                      const emojiKeys = Object.keys(emojisObject);
+                      shuffleArray(emojiKeys);
+
+                      // Get random values between 3 and 10 for the amount of emojis
+                      const amountOfEmojis = Math.floor(
+                        Math.random() * (10 - 3 + 1) + 3
                       );
-                      const data = await res.json();
+
+                      // Get a random subset of emoji keys
+                      const emojis = emojiKeys.slice(0, amountOfEmojis);
 
                       return (
-                        <Box>
-                          <h1>How cool is that?</h1>
-                          <pre>{JSON.stringify(data, null, 2)}</pre>
-                        </Box>
+                        <Stack>
+                          <Text>Current Qubit state:</Text>
+
+                          <Wrap>
+                            {emojis.map(emoji => (
+                              <WrapItem key={emoji}>
+                                <Image src={emojisObject[emoji]} />
+                              </WrapItem>
+                            ))}
+                          </Wrap>
+                        </Stack>
                       );
                     }}
                     {...props}
