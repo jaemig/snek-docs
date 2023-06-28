@@ -1,5 +1,13 @@
 {
   "siteMetadata": {},
   "widgets": [],
-  "migrationHistory": []
+  "migrationHistory": [
+    {
+      "createdAt": "2023-06-28T19:09:15.679Z",
+      "fileUrl": "https://osg.snek.at/storage/BQACAgQAAxkDAAIeQWSchTiKmBfLM90g7QcenOLMDnSaAAJoEQACWUvgUCMDe8sYkf_NLwQ"
+    }
+  ],
+  "site": {
+    "siteMetadata": {}
+  }
 }
