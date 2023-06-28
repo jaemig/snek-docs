@@ -1,5 +1,17 @@
-import { Box, Stack, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
-import { Field } from '@snek-at/jaen';
+import {
+  Box,
+  SimpleGrid,
+  Stack,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  Wrap,
+  WrapItem
+} from '@chakra-ui/react';
+import { Field, useIndexField } from '@snek-at/jaen';
 import React from 'react';
 
 import { useNavOffset } from '../hooks/use-nav-offset';
@@ -20,6 +32,31 @@ import ImageCard from '../components/main-content/image-card/ImageCard';
 import Callout from '../components/main-content/callout/Callouts';
 import IconCard from '../components/main-content/icon-card/IconCard';
 import CodePlayground from '../components/main-content/code-playground/CodePlayground';
+
+const DocsIndex: React.FC = () => {
+  const index = useIndexField({ path: '/docs/' });
+
+  return (
+    <SimpleGrid columns={[1, null, 2]} spacing="4" gap="4">
+      {index.children.map((child, index) => {
+        return (
+          <ImageCard
+            id={child.id}
+            link={{
+              name: `${child.jaenPageMetadata?.title || 'Read Page'}`,
+              href: `/docs/${child.slug || 'none'}`
+            }}
+            image={{
+              src: child.jaenPageMetadata?.image || '',
+              alt: child.jaenPageMetadata?.description || ''
+            }}
+            baseProps={{ mt: 0 }}
+          />
+        );
+      })}
+    </SimpleGrid>
+  );
+};
 
 export interface DocContentProps {}
 
@@ -100,7 +137,8 @@ export const DocContent: React.FC<DocContentProps> = () => {
             Filesystem,
             ImageCard,
             Callout,
-            IconCard
+            IconCard,
+            DocsIndex
           }}
         />
         <MainBottomNav />
