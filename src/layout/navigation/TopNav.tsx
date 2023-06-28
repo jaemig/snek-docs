@@ -1,10 +1,14 @@
 import {
   Box,
+  BoxProps,
   Button,
+  ButtonProps,
   Center,
   Flex,
   HStack,
   Image,
+  ImageProps,
+  LinkProps,
   Spacer,
   useDisclosure
 } from '@chakra-ui/react';
@@ -14,28 +18,37 @@ import SnekIcon from '../../assets/icons/brand.svg';
 import Link from '../../components/core/Link';
 import MemoizedLinks from '../../components/core/MemoizedLink';
 import GitHub from '../../components/icons/GitHub';
-import SearchMenu from '../../components/search/SearchMenu';
+import SearchMenu, {
+  TSearchMenuStyleProps
+} from '../../components/search/SearchMenu';
 import useWindowSize from '../../hooks/use-current-window-size';
 import { useNavOffset } from '../../hooks/use-nav-offset';
 import { TTopNavLinkData } from '../../types/navigation';
 import MobileNavDrawer from './MobileNavDrawer';
-import HamburgerMenuIcon from '../../components/core/HamburgerMenuIcon';
+import HamburgerMenuIcon, {
+  THamburgerMenuIconStylerProps
+} from '../../components/core/HamburgerMenuIcon';
 
 const links: TTopNavLinkData[] = [
+  {
+    name: 'Home',
+    href: '/photonq/',
+    matchMethod: 'exact'
+  },
   {
     name: 'Documentation',
     href: '/docs/',
     matchMethod: 'includes'
   },
   {
-    name: 'About',
+    name: 'Sign In',
     matchMethod: 'exact',
-    href: '/about/'
+    href: '/admin/'
   },
   {
-    name: 'Contact',
+    name: 'Sign Up',
     matchMethod: 'exact',
-    href: '/contact/'
+    href: '/admin/'
   }
 ];
 
@@ -49,12 +62,37 @@ const navLinkProps = {
   fontSize: 'sm'
 };
 
+export type TTopNavLinkProps = LinkProps;
+export type TTopNavWrapperProps = BoxProps;
+export type TMobileMenuButtonProps = ButtonProps;
+export type TBrandImage = { props?: ImageProps; src: string; alt: string };
+
+interface ITopNavProps {
+  brandImage?: TBrandImage;
+  wrapperProps?: BoxProps;
+  linkProps?: LinkProps;
+  searchProps?: TSearchMenuStyleProps;
+  mobileMenuButtonProps?: ButtonProps;
+  hamburgerIconProps?: THamburgerMenuIconStylerProps;
+  drawerDisclosure: ReturnType<typeof useDisclosure>;
+  colorMode?: 'light' | 'dark';
+}
+
 /**
  * Top navigation bar.
  */
-const TopNav: FC = () => {
+const TopNav: FC<ITopNavProps> = ({
+  brandImage,
+  wrapperProps,
+  linkProps,
+  searchProps,
+  mobileMenuButtonProps,
+  hamburgerIconProps,
+  drawerDisclosure,
+  colorMode
+}) => {
   const [hamburgerClass, setHamburgerClass] = useState('');
-  const { isOpen, onOpen, onClose } = useDisclosure(); // Mobile menu drawer
+  const { isOpen, onOpen, onClose } = drawerDisclosure;
 
   const navTopOffset = useNavOffset();
   const location = useLocation();
@@ -110,6 +148,7 @@ const TopNav: FC = () => {
         backgroundColor="shared.translucent.bgColor"
         backdropFilter="blur(10px)"
         zIndex={2}
+        {...wrapperProps}
       >
         <Flex w="7xl">
           <Link
@@ -119,14 +158,19 @@ const TopNav: FC = () => {
             }}
             transition="transform 0.2s ease-in-out"
           >
-            <Image h="32px" src={SnekIcon} alt="Snek Logo" />
+            <Image
+              h="32px"
+              {...brandImage?.props}
+              src={brandImage?.src ?? SnekIcon}
+              alt={brandImage?.alt ?? 'Snek Logo'}
+            />
           </Link>
           <Spacer />
           <Center>
             <HStack spacing={4}>
               <MemoizedLinks
                 links={activatedLinks}
-                props={navLinkProps}
+                props={{ ...navLinkProps, ...linkProps }}
                 activeProps={{
                   opacity: 1,
                   fontWeight: 'semibold'
@@ -135,9 +179,13 @@ const TopNav: FC = () => {
               <Box display={{ base: 'none', md: 'initial' }}>
                 <SearchMenu
                   // width base 0 is a hack to prevent the menu from causing a horizontal scrollbar
-                  menuListProps={{
-                    width: { base: 0, md: '500px' },
-                    zIndex: 3
+                  styleProps={{
+                    ...searchProps,
+                    menuList: {
+                      ...searchProps?.menuList,
+                      width: { base: 0, md: '500px' },
+                      zIndex: 3
+                    }
                   }}
                 />
               </Box>
@@ -152,16 +200,26 @@ const TopNav: FC = () => {
                 }}
                 transition="transform 0.2s ease-in-out"
               >
-                <GitHub boxSize="32px" fill="topNav.GitHubFill" />
+                <GitHub
+                  boxSize="32px"
+                  fill={
+                    colorMode
+                      ? `topNav.${colorMode}.GitHubFill`
+                      : 'topNav.GitHubFill'
+                  }
+                  transition="fill 0.2s ease-in-out"
+                />
               </Link>
               <Button
-                variant="ghost"
+                variant="ghost-hover"
                 size="sm"
                 display={{ base: 'initial', md: 'none' }}
+                {...mobileMenuButtonProps}
               >
                 <HamburgerMenuIcon
                   handleClick={toggleMobileMenu}
                   wrapperProps={{ className: hamburgerClass }}
+                  iconProps={hamburgerIconProps}
                 />
               </Button>
             </HStack>

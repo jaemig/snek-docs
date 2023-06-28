@@ -17,7 +17,7 @@ const Hero: FC = () => {
       overflowX="hidden"
       p={{ base: 5, lg: 0 }}
     >
-      <Box w="full" flexGrow={1} color="white">
+      <Box w="full" flexGrow={1} color="white" pt="64px">
         <Center h="full">
           <Box textAlign="center" position="relative">
             <Box

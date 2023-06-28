@@ -2,7 +2,9 @@ import {
   FocusLock,
   Input,
   InputGroup,
+  InputProps,
   InputRightElement,
+  InputRightElementProps,
   Kbd,
   useMenuButton,
   useMenuContext
@@ -19,16 +21,22 @@ import {
 
 import { getPlatform, isTouchDevice } from '../../functions/utils';
 
+export type TSearchInputStyleProps = {
+  parent?: InputProps;
+  kbd?: InputRightElementProps;
+};
+
 interface SearchInputProps {
   setSearchQuery: Dispatch<SetStateAction<string>>;
   openFirstLink: () => void;
+  styleProps?: TSearchInputStyleProps;
 }
 
 /**
  * The search input component for the search menu.
  */
 const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
-  ({ setSearchQuery, openFirstLink }, ref) => {
+  ({ setSearchQuery, openFirstLink, styleProps }, ref) => {
     const menu = useMenuContext();
     const menuButton = useMenuButton(
       {
@@ -108,6 +116,7 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
             }}
             focusBorderColor="theme.500"
             {...menuButton}
+            {...styleProps?.parent}
             onClick={e => {
               const value = e.currentTarget.value;
 
@@ -152,6 +161,7 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
                   background="transparent"
                   borderRadius={4}
                   py={0.5}
+                  {...styleProps?.kbd}
                 >
                   {kbd}
                 </Kbd>

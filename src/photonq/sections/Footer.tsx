@@ -110,12 +110,13 @@ const Footer: FC = () => {
       mt="-25px"
       px={{ base: 5, lg: 0 }}
       overflowX="hidden"
+      bgColor="pq.shared.body"
     >
       <Box
         position="absolute"
         top="-122px"
         left="10%"
-        zIndex={-1}
+        zIndex={0}
         bgColor="pq.500"
         boxSize="290px"
         filter="blur(140px)"
@@ -124,7 +125,7 @@ const Footer: FC = () => {
         position="absolute"
         top="-122px"
         right="10%"
-        zIndex={-1}
+        zIndex={0}
         bgColor="#A71C48"
         boxSize="290px"
         filter="blur(140px)"

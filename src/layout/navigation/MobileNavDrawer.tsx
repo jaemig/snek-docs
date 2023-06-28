@@ -50,7 +50,11 @@ const MobileNavDrawer: FC<MobileNavDrawerProps> = ({
             px={9}
           >
             <SearchMenu
-              menuProps={{ matchWidth: true }}
+              styleProps={{
+                menu: {
+                  matchWidth: true
+                }
+              }}
               onItemClickCapture={onClose}
             />
             <Box mt={5}>

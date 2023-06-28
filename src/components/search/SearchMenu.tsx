@@ -2,6 +2,7 @@ import {
   Box,
   Center,
   Heading,
+  InputProps,
   Menu,
   MenuDivider,
   MenuGroup,
@@ -17,7 +18,7 @@ import { FC, useEffect, useMemo, useRef, useState } from 'react';
 
 import { searchDocs } from '../../functions/search';
 import { TSearchResult, TSearchResultSection } from '../../types/search';
-import SearchInput from './SearchInput';
+import SearchInput, { TSearchInputStyleProps } from './SearchInput';
 import Link from '../core/Link';
 import Highlighter from 'react-highlight-words';
 import { useLocation, navigate } from '@reach/router';
@@ -150,19 +151,23 @@ const SearchResultSection: FC<{
   );
 };
 
+export type TSearchMenuStyleProps = {
+  input?: TSearchInputStyleProps;
+  menu?: Partial<MenuProps>;
+  menuList?: MenuListProps;
+};
+
 interface SearchMenuProps {
-  menuProps?: Partial<MenuProps>;
-  menuListProps?: Partial<MenuListProps>;
   onItemClickCapture?: () => void;
+  styleProps?: TSearchMenuStyleProps;
 }
 
 /**
  * Search menu component - shows a navigatable list of search results
  */
 const SearchMenu: FC<SearchMenuProps> = ({
-  menuProps,
-  menuListProps,
-  onItemClickCapture
+  onItemClickCapture,
+  styleProps
 }) => {
   const r = useRef(null);
 
@@ -215,7 +220,7 @@ const SearchMenu: FC<SearchMenuProps> = ({
   return (
     <Menu
       variant="search-result"
-      {...menuProps}
+      {...styleProps?.menu}
       autoSelect={false}
       onClose={() => {
         setIsAnyItemFocused(false);
@@ -227,6 +232,7 @@ const SearchMenu: FC<SearchMenuProps> = ({
         <SearchInput
           setSearchQuery={setSearchQuery}
           openFirstLink={openFirstLink}
+          styleProps={styleProps?.input}
         />
       </SearchProvider>
 
@@ -258,7 +264,7 @@ const SearchMenu: FC<SearchMenuProps> = ({
             height="auto"
             maxHeight="xs"
             overflowY="scroll"
-            {...menuListProps}
+            {...styleProps?.menuList}
             onFocusCapture={e => {
               // If the user focuses on any result item for the first time, set the isAnyItemFocused state to true
               if (!isAnyItemFocused && e.target instanceof HTMLButtonElement)

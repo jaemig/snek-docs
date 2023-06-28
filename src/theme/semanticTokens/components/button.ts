@@ -3,7 +3,7 @@ const smtButtonComponent = {
     hover: {
       bgColor: {
         default: 'gray.100',
-        _dark: 'whiteAlpha.200'
+        _dark: 'whiteAlpha.700'
       }
     }
   }

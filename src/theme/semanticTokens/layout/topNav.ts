@@ -1,4 +1,14 @@
 const smtTopNav = {
+  light: {
+    GitHubFill: {
+      default: 'black'
+    },
+  },
+  dark: {
+    GitHubFill: {
+      default: 'white'
+    },
+  },
   borderColor: {
     default: 'rgb(229, 231, 235)',
     _dark: 'gray.700'
