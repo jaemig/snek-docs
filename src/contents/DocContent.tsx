@@ -34,13 +34,16 @@ import IconCard from '../components/main-content/icon-card/IconCard';
 import CodePlayground from '../components/main-content/code-playground/CodePlayground';
 
 const DocsIndex: React.FC = () => {
-  const index = useIndexField({ path: '/docs/' });
+  const index = useIndexField({
+    jaenPageId: 'JaenPage /docs/'
+  });
 
   return (
     <SimpleGrid columns={[1, null, 2]} spacing="4" gap="4">
       {index.children.map((child, index) => {
         return (
           <ImageCard
+            key={index}
             id={child.id}
             link={{
               name: `${child.jaenPageMetadata?.title || 'Read Page'}`,

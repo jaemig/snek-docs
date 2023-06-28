@@ -37,7 +37,6 @@ const ImageCard: FC<IImageCardProps> = ({
     <LinkBox>
       <Card
         {...baseProps}
-        w="fit-content"
         maxW={size}
         bgColor="components.imageCard.bgColor"
         border="1px solid"
@@ -53,6 +52,7 @@ const ImageCard: FC<IImageCardProps> = ({
         overflow="hidden"
         transition="border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out"
         h="xs"
+        w="full"
         display="flex"
       >
         <Image

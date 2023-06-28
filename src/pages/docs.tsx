@@ -14,13 +14,10 @@ const DocsPage = connectPage(
 
 export const query = graphql`
   query ($jaenPageId: String!) {
-    ...JaenPageQuery
-    allJaenPage {
-      nodes {
+    jaenPage(id: { eq: $jaenPageId }) {
+      ...JaenPageData
+      children {
         ...JaenPageData
-        children {
-          ...JaenPageData
-        }
       }
     }
   }
