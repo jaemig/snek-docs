@@ -8,7 +8,7 @@ const ContactPage = connectPage(
   },
   {
     label: 'Contact',
-    children: ['ContactPage']
+    children: []
   }
 );
 

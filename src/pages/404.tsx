@@ -61,7 +61,7 @@ const NotFoundPage: React.FC = ({}) => {
 
 export default connectPage(NotFoundPage, {
   label: '404',
-  children: ['NotFoundPage']
+  children: []
 });
 
 export const Head: HeadFC = () => <title>Not found</title>;

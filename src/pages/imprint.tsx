@@ -8,7 +8,7 @@ const ImprintPage = connectPage(
   },
   {
     label: 'Imprint',
-    children: ['ImprintPage']
+    children: []
   }
 );
 

@@ -8,7 +8,7 @@ const AboutPage = connectPage(
   },
   {
     label: 'About',
-    children: ['AboutPage']
+    children: []
   }
 );
 

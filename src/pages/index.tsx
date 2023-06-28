@@ -8,7 +8,7 @@ const PhotonQPage = connectPage(
   },
   {
     label: 'PhotonQ',
-    children: ['PhotonQPage']
+    children: []
   }
 );
 
