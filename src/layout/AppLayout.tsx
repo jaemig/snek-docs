@@ -24,6 +24,7 @@ interface AppLayoutProps {
   isDocs?: boolean;
   path?: string;
   footer?: FC;
+  ignoreNavOffset?: boolean;
   customTopNavDisclosure?: ReturnType<typeof useDisclosure>;
   topNavProps?: {
     wrapper?: TTopNavWrapperProps;
@@ -45,6 +46,7 @@ const AppLayout: FC<AppLayoutProps> = ({
   isDocs,
   path,
   footer,
+  ignoreNavOffset,
   customTopNavDisclosure,
   topNavProps,
   brandImage
@@ -91,7 +93,7 @@ const AppLayout: FC<AppLayoutProps> = ({
             mobileMenuButtonProps={topNavProps?.mobileMenuButtonProps}
             brandImage={brandImage}
           />
-          <Box flex="1" mt={navTopOffset}>
+          <Box flex="1" mt={ignoreNavOffset ? 0 : navTopOffset}>
             {isDocs ? (
               <DocsLayout path={path}>{children}</DocsLayout>
             ) : (
