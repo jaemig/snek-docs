@@ -57,6 +57,7 @@ const CodePlayground: FC<ICodePlaygroundProps> = ({
           isExecutable
           isExecuting={isExecuting}
           executeCode={code => handleExecuteCode(code)}
+          isEditable={true}
         />
       </Box>
       <CodeResultPreview

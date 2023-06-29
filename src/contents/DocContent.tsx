@@ -114,6 +114,7 @@ export const DocContent: React.FC<DocContentProps> = () => {
                   <CodePlayground
                     codeEditorProps={{
                       language: lang,
+                      isEditable: true,
                       ...props
                     }}
                     executeCode={async code => {
@@ -159,7 +160,9 @@ export const DocContent: React.FC<DocContentProps> = () => {
                 );
               }
 
-              return <CodeSnippet language={lang} {...props} />;
+              return (
+                <CodeSnippet language={lang} isEditable={false} {...props} />
+              );
             },
             // CUSTOM COMPONENTS
             Filesystem,

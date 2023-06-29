@@ -19,6 +19,9 @@ import {
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { mainComponentBaseStyle } from '../../../layout/main/mainContent.vars';
 import { IMainContentComponentBaseProps } from '../../../types/mainContent/mainContent';
+// import CodeMirror from '@uiw/react-codemirror';
+// import { javascript } from '@codemirror/lang-javascript';
+// import { githubLight } from '@uiw/codemirror-theme-github';
 
 export interface ICodeSnippetProps extends IMainContentComponentBaseProps {
   children?: string;
@@ -30,6 +33,8 @@ export interface ICodeSnippetProps extends IMainContentComponentBaseProps {
   isExecuting?: boolean;
   executeCode?: (code: string) => void;
   containerProps?: BoxProps;
+  isEditable?: boolean;
+  onChange?: (code: string) => void;
 }
 
 let timeout: NodeJS.Timeout;
@@ -46,7 +51,9 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({
   isExecutable,
   isExecuting,
   executeCode,
-  startingLineNumber = 1
+  startingLineNumber = 1,
+  isEditable,
+  onChange
 }) => {
   const [buttonIcon, setButtonIcon] = React.useState<'copy' | 'check'>('copy');
   const theme = useColorModeValue(oneLight, oneDark);
@@ -63,6 +70,8 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({
 
   let baseProps = {};
   if (isStandalone) baseProps = mainComponentBaseStyle.baseProps;
+
+  console.log('syntax children', children);
 
   return (
     <Box
@@ -83,18 +92,22 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({
         borderRadius="md"
         overflowX="auto"
         __css={{
-          '& pre': {
+          '& .cm-gutters': {
             backgroundColor: 'components.codeSnippet.body.bgColor !important',
-            fontFamily:
-              'ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace',
-            fontWeight: 500,
-            fontSize: '12.96px',
-            padding: 3,
-            pt: 0,
-            pb: 5,
-            my: '0 !important',
-            minH: '100px'
+            border: 'none'
           },
+          // '& pre': {
+          //   backgroundColor: 'components.codeSnippet.body.bgColor !important',
+          //   fontFamily:
+          //     'ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace',
+          //   fontWeight: 500,
+          //   fontSize: '12.96px',
+          //   padding: 3,
+          //   pt: 0,
+          //   pb: 5,
+          //   my: '0 !important',
+          //   minH: '100px'
+          // },
           '& code': {
             bgColor: 'transparent !important',
             w: 'max-content',
@@ -150,12 +163,26 @@ const CodeSnippet: FC<ICodeSnippetProps> = ({
           </Flex>
         )}
         <Box position="relative">
+          {/* <CodeMirror
+            value={children ?? ''}
+            onChange={onChange}
+            readOnly={isEditable}
+            theme={githubLight}
+            extensions={[javascript({ jsx: true })]}
+          /> */}
           <SyntaxHighlighter
             language={language}
             style={theme}
             startingLineNumber={startingLineNumber}
             showLineNumbers
             wrapLongLines
+            PreTag={props => {
+              return (
+                <pre {...props} contentEditable={isEditable}>
+                  {props.children}
+                </pre>
+              );
+            }}
           >
             {children ?? ''}
           </SyntaxHighlighter>
