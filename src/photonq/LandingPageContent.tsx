@@ -133,6 +133,7 @@ export const LandingPageContent: FC<ILandingPageContentProps> = ({ path }) => {
         src: colorMode === 'dark' ? GrayedUniWienLogo : ColorizedUniWienLogo,
         alt: ''
       }}
+      ignoreNavOffset
     >
       <Hero />
       <Features />
