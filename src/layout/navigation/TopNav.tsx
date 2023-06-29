@@ -156,18 +156,6 @@ const TopNav: FC<ITopNavProps> = ({
             <HStack>
               <Center>
                 <Image
-                  h="32px"
-                  {...brandImage?.props}
-                  src={brandImage?.src ?? SnekIcon}
-                  alt={brandImage?.alt ?? 'Snek Logo'}
-                  _hover={{
-                    transform: 'scale(1.1)'
-                  }}
-                  transition="transform 0.2s ease-in-out"
-                />
-              </Center>
-              <Center>
-                <Image
                   {...brandImage?.props}
                   h="32px"
                   src={CDGLogo}
@@ -178,6 +166,18 @@ const TopNav: FC<ITopNavProps> = ({
                   }}
                   transition="transform 0.2s ease-in-out"
                 ></Image>
+              </Center>
+              <Center>
+                <Image
+                  h="32px"
+                  {...brandImage?.props}
+                  src={brandImage?.src ?? SnekIcon}
+                  alt={brandImage?.alt ?? 'Snek Logo'}
+                  _hover={{
+                    transform: 'scale(1.1)'
+                  }}
+                  transition="transform 0.2s ease-in-out"
+                />
               </Center>
             </HStack>
           </Link>
