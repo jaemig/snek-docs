@@ -10,7 +10,7 @@ const Hero: FC = () => {
   return (
     <VStack
       h={{ base: 'max-content', md: `calc(100vh - ${navOffset} - 250px)` }}
-      minH="max-content"
+      minH="660px"
       bgColor="pq.shared.body"
       spacing={0}
       id="hero"
