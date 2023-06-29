@@ -33,12 +33,16 @@ const baseMenuItems: NavMenuSection[] = [
     name: 'More',
     items: [
       {
-        name: 'About Snek',
-        href: '/docs/about-snek'
+        name: 'About PhotonQ',
+        href: '/docs/about-photonq'
       },
       {
-        name: 'Snek CLI',
-        href: 'https://snek.at',
+        name: 'Quantum Compiler',
+        href: '/compiler'
+      },
+      {
+        name: 'PhotonQ Press Release',
+        href: 'https://medienportal.univie.ac.at/media/aktuelle-pressemeldungen/detailansicht/artikel/universitaet-wien-veroeffentlicht-erstmals-online-zugang-zu-photonischer-quantenhardware/',
         isExternal: true
       }
     ]
