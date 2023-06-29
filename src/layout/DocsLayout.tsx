@@ -36,7 +36,7 @@ const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
       templateRows="1fr"
       templateColumns={{
         base: '1fr',
-        md: '0.8fr 2fr',
+        md: '0.8fr 2.5fr',
         xl: 'minmax(auto, 250px) minmax(auto, 4fr)'
       }}
       gap={10}
