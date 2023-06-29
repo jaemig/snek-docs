@@ -18,7 +18,12 @@ interface IMainBradcrumbProps {
  */
 const MainBreadcrumb: FC<IMainBradcrumbProps> = ({ parts }) => {
   return (
-    <Breadcrumb separator={<ChevronRightIcon />} fontSize="sm" mb={5}>
+    <Breadcrumb
+      separator={<ChevronRightIcon />}
+      fontSize="sm"
+      mb={5}
+      spacing={1}
+    >
       {parts.map((item, i) => {
         const props: BreadcrumbLinkProps = {};
 
