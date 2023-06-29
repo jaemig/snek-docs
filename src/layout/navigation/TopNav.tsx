@@ -28,6 +28,7 @@ import MobileNavDrawer from './MobileNavDrawer';
 import HamburgerMenuIcon, {
   THamburgerMenuIconStylerProps
 } from '../../components/core/HamburgerMenuIcon';
+import CDGLogo from '../../photonq/assets/images/cdg-logo.png';
 
 const links: TTopNavLinkData[] = [
   {
@@ -151,19 +152,34 @@ const TopNav: FC<ITopNavProps> = ({
         {...wrapperProps}
       >
         <Flex w="7xl">
-          <Link
-            href="/"
-            _hover={{
-              transform: 'scale(1.1)'
-            }}
-            transition="transform 0.2s ease-in-out"
-          >
-            <Image
-              h="32px"
-              {...brandImage?.props}
-              src={brandImage?.src ?? SnekIcon}
-              alt={brandImage?.alt ?? 'Snek Logo'}
-            />
+          <Link href="/">
+            <HStack>
+              <Center>
+                <Image
+                  h="32px"
+                  {...brandImage?.props}
+                  src={brandImage?.src ?? SnekIcon}
+                  alt={brandImage?.alt ?? 'Snek Logo'}
+                  _hover={{
+                    transform: 'scale(1.1)'
+                  }}
+                  transition="transform 0.2s ease-in-out"
+                />
+              </Center>
+              <Center>
+                <Image
+                  {...brandImage?.props}
+                  h="32px"
+                  src={CDGLogo}
+                  alt="Christian Doppler Forschungsgesellschaft Logo"
+                  ml={5}
+                  _hover={{
+                    transform: 'scale(1.1)'
+                  }}
+                  transition="transform 0.2s ease-in-out"
+                ></Image>
+              </Center>
+            </HStack>
           </Link>
           <Spacer />
           <Center>

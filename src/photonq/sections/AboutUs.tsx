@@ -1,4 +1,4 @@
-import { Button, Box, Container, Center } from '@chakra-ui/react';
+import { Button, Box, Container, Center, HStack } from '@chakra-ui/react';
 import { Field } from '@snek-at/jaen';
 import { FC } from 'react';
 import SectionTitle from '../../components/photonq/SectionTitle';
@@ -27,8 +27,11 @@ const AboutUs: FC = () => {
             textAlign="center"
           />
         </Center>
-        <Center h="10vw" minH="35px" maxH="70px" mt={10}>
-          <Field.Image name="AboutUsImage" objectFit="contain" />
+        <Center h="10vw" mt={10}>
+          <HStack spacing={10} h={{ base: '35px', md: '45px', lg: '70px' }}>
+            <Field.Image name="AboutUsImage" objectFit="contain" />
+            <Field.Image name="AboutUsScndImage" objectFit="contain" />
+          </HStack>
         </Center>
       </Container>
     </Box>

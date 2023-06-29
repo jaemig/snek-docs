@@ -184,7 +184,14 @@ const Footer: FC = () => {
           />
         </Box>
         <Flex mt={20} color="white" wrap={{ base: 'wrap', sm: 'nowrap' }}>
-          <Image h="50px" src={UniWienLogo}></Image>
+          <VStack spacing={5}>
+            <Box h="30px" w="max-content">
+              <Field.Image name="FooterLogo" />
+            </Box>
+            <Box h="30px">
+              <Field.Image name="FooterScndLogo" />
+            </Box>
+          </VStack>
           <Spacer minW={{ base: '5rem', lg: '25%' }} />
           <HStack
             alignItems="start"
