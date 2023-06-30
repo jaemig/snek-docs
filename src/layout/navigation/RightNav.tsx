@@ -11,7 +11,7 @@ const links = [
     href: 'https://snek.at/'
   },
   {
-    name: 'Edit this page on GitHub',
+    name: 'Edit this page on Jaen',
     href: '/admin/#/pages'
   }
 ];
