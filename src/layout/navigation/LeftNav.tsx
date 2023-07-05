@@ -1,25 +1,20 @@
 import { Box, Flex, Spacer } from '@chakra-ui/react';
-import React, { FC, useEffect, useState } from 'react';
+import { FC, ReactNode, useState } from 'react';
 import PageDirectory from './components/PageDirectory';
 import NavbarControls from './components/NavbarControls';
 import { useNavOffset } from '../../hooks/use-nav-offset';
-import { convertPageTreeToMenu } from '../../functions/navigation';
 import { useMenuContext } from '../../contexts/menu';
 
 interface ILeftNavProps {
-  menuData: ReturnType<typeof convertPageTreeToMenu>;
+  isExpanded?: boolean;
+  children: ReactNode;
 }
 
 /**
  * Left navigation bar.
  */
-const LeftNav: FC<ILeftNavProps> = ({ menuData }) => {
-  const [isExpanded, setIsExpanded] = useState(true);
-
+const LeftNav: FC<ILeftNavProps> = ({ isExpanded, children }) => {
   const navTopOffset = useNavOffset();
-
-  const { menuStructure } = useMenuContext();
-
   return (
     <Flex
       position="sticky"
@@ -31,11 +26,7 @@ const LeftNav: FC<ILeftNavProps> = ({ menuData }) => {
       w={isExpanded ? 'auto' : '5rem'}
       color="shared.text.default"
     >
-      <Box w={isExpanded ? 'auto' : 0}>
-        <PageDirectory data={menuStructure} isExpanded={isExpanded} />
-      </Box>
-      <Spacer />
-      <NavbarControls isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
+      {children}
     </Flex>
   );
 };

@@ -1,10 +1,12 @@
-import { Box, Grid } from '@chakra-ui/react';
-import React, { FC, useMemo } from 'react';
+import { Box, Grid, Spacer } from '@chakra-ui/react';
+import React, { FC, useMemo, useState } from 'react';
 import { useMenuContext } from '../contexts/menu';
 import { createBreadCrumbParts } from '../functions/navigation';
 import { MainBreadcrumbPart } from '../types/navigation';
 import LeftNav from './navigation/LeftNav';
 import MainBreadcrumb from './navigation/components/MainBreadcrumb';
+import NavbarControls from './navigation/components/NavbarControls';
+import PageDirectory from './navigation/components/PageDirectory';
 
 interface DocsLayoutProps {
   children?: React.ReactNode;
@@ -13,6 +15,8 @@ interface DocsLayoutProps {
 
 const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
   const { menuStructure } = useMenuContext();
+
+  const [isExpanded, setIsExpanded] = useState(true);
 
   const breadcrumbParts: MainBreadcrumbPart[] = useMemo(() => {
     return [
@@ -43,12 +47,17 @@ const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
       gap={10}
       px={{ base: 7, xl: 0 }}
     >
-      <Box
-        display={{ base: 'none', md: 'block' }}
-        position="sticky"
-        // top={`calc(100px + ${navOffset})`}
-      >
-        <LeftNav menuData={menuStructure} />
+      <Box display={{ base: 'none', md: 'block' }} position="sticky">
+        <LeftNav isExpanded={isExpanded}>
+          <Box w={isExpanded ? 'auto' : 0}>
+            <PageDirectory data={menuStructure} isExpanded={isExpanded} />
+          </Box>
+          <Spacer />
+          <NavbarControls
+            isExpanded={isExpanded}
+            setIsExpanded={setIsExpanded}
+          />
+        </LeftNav>
       </Box>
 
       <Box minW="full">
