@@ -1,4 +1,4 @@
-import { Box, Grid, Spacer } from '@chakra-ui/react';
+import { Box, Spacer } from '@chakra-ui/react';
 import React, { FC, useMemo, useState } from 'react';
 import { useMenuContext } from '../contexts/menu';
 import { createBreadCrumbParts } from '../functions/navigation';
@@ -7,6 +7,7 @@ import LeftNav from './navigation/LeftNav';
 import MainBreadcrumb from './navigation/components/MainBreadcrumb';
 import NavbarControls from './navigation/components/NavbarControls';
 import PageDirectory from './navigation/components/PageDirectory';
+import MainGrid from './components/MainGrid';
 
 interface DocsLayoutProps {
   children?: React.ReactNode;
@@ -32,21 +33,7 @@ const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
   const memoedChildren = useMemo(() => children, [children]);
 
   return (
-    <Grid
-      flex={1}
-      mt={5}
-      maxW="7xl"
-      h="100%"
-      mx="auto"
-      templateRows="1fr"
-      templateColumns={{
-        base: '1fr',
-        md: '0.8fr 2fr',
-        xl: 'minmax(auto, 250px) minmax(auto, 4fr)'
-      }}
-      gap={10}
-      px={{ base: 7, xl: 0 }}
-    >
+    <MainGrid>
       <Box display={{ base: 'none', md: 'block' }} position="sticky">
         <LeftNav isExpanded={isExpanded}>
           <Box w={isExpanded ? 'auto' : 0}>
@@ -66,7 +53,7 @@ const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
         </Box>
         <Box>{memoedChildren}</Box>
       </Box>
-    </Grid>
+    </MainGrid>
   );
 };
 
