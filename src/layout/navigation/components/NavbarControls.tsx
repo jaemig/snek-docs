@@ -38,6 +38,7 @@ const NavbarControls: FC<NavbarControlsProps> = ({
   }
 
   const isLightColorMode = colorMode === 'light';
+  const showExpandToggle = !isMobile && setIsExpanded;
   return (
     <Flex
       w="100%"
@@ -54,7 +55,7 @@ const NavbarControls: FC<NavbarControlsProps> = ({
         id="navbar-color-mode-menu"
         placement="top"
         variant="brand-hover"
-        matchWidth={isMobile}
+        matchWidth={isMobile || !showExpandToggle}
         isLazy
       >
         <MenuButton
@@ -78,7 +79,7 @@ const NavbarControls: FC<NavbarControlsProps> = ({
           />
         </MenuList>
       </Menu>
-      {!isMobile && setIsExpanded && (
+      {showExpandToggle && (
         <IconButton
           icon={
             <HideSidebarIcon

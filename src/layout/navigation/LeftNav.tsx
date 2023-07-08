@@ -1,19 +1,25 @@
-import { Box, Flex, Spacer } from '@chakra-ui/react';
-import { FC, ReactNode, useState } from 'react';
-import PageDirectory from './components/PageDirectory';
-import NavbarControls from './components/NavbarControls';
+import { Flex, Spacer } from '@chakra-ui/react';
+import { Dispatch, FC, ReactNode, SetStateAction } from 'react';
 import { useNavOffset } from '../../hooks/use-nav-offset';
-import { useMenuContext } from '../../contexts/menu';
+import MainBottomNav from './MainBottomNav';
+import NavbarControls from './components/NavbarControls';
 
-interface ILeftNavProps {
+export interface ILeftNavProps {
   isExpanded?: boolean;
+  setIsExpanded?: Dispatch<SetStateAction<boolean>>;
+  hideControls?: boolean;
   children?: ReactNode;
 }
 
 /**
  * Left navigation bar.
  */
-const LeftNav: FC<ILeftNavProps> = ({ isExpanded, children }) => {
+const LeftNav: FC<ILeftNavProps> = ({
+  isExpanded,
+  setIsExpanded,
+  hideControls,
+  children
+}) => {
   const navTopOffset = useNavOffset();
   return (
     <Flex
@@ -27,6 +33,10 @@ const LeftNav: FC<ILeftNavProps> = ({ isExpanded, children }) => {
       color="shared.text.default"
     >
       {children}
+      <Spacer />
+      {!hideControls && (
+        <NavbarControls isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
+      )}
     </Flex>
   );
 };

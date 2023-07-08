@@ -1,11 +1,10 @@
-import { Box, Spacer } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import React, { FC, useMemo, useState } from 'react';
 import { useMenuContext } from '../contexts/menu';
 import { createBreadCrumbParts } from '../functions/navigation';
 import { MainBreadcrumbPart } from '../types/navigation';
 import LeftNav from './navigation/LeftNav';
 import MainBreadcrumb from './navigation/components/MainBreadcrumb';
-import NavbarControls from './navigation/components/NavbarControls';
 import PageDirectory from './navigation/components/PageDirectory';
 import MainGrid from './components/MainGrid';
 
@@ -35,15 +34,10 @@ const DocsLayout: FC<DocsLayoutProps> = ({ children, path }) => {
   return (
     <MainGrid>
       <Box display={{ base: 'none', md: 'block' }} position="sticky">
-        <LeftNav isExpanded={isExpanded}>
+        <LeftNav isExpanded={isExpanded} setIsExpanded={setIsExpanded}>
           <Box w={isExpanded ? 'auto' : 0}>
             <PageDirectory data={menuStructure} isExpanded={isExpanded} />
           </Box>
-          <Spacer />
-          <NavbarControls
-            isExpanded={isExpanded}
-            setIsExpanded={setIsExpanded}
-          />
         </LeftNav>
       </Box>
 
