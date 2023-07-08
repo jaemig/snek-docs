@@ -7,7 +7,7 @@ import { useMenuContext } from '../../contexts/menu';
 
 interface ILeftNavProps {
   isExpanded?: boolean;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 /**
