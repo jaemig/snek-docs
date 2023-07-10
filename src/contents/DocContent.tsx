@@ -103,12 +103,12 @@ export const DocContent: React.FC<DocContentProps> = () => {
             IconCard
           }}
         />
+        <MainBottomNav />
       </Box>
 
       <Box position="sticky" top={`calc(0px + ${navTopOffset})`}>
         <RightNav />
       </Box>
-      <MainBottomNav />
     </Stack>
   );
 };
