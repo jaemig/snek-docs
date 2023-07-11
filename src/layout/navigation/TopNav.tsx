@@ -17,7 +17,7 @@ import { FC, useEffect, useMemo, useState } from 'react';
 import SnekIcon from '../../assets/icons/brand.svg';
 import Link from '../../components/core/Link';
 import MemoizedLinks from '../../components/core/MemoizedLink';
-import GitHub from '../../components/icons/GitHub';
+import GitHub from '../../components/icons/brands/GitHub';
 import SearchMenu, {
   TSearchMenuStyleProps
 } from '../../components/search/SearchMenu';
