@@ -12,6 +12,19 @@ const themeButtonComponent = {
         opacity: 1
       }
     },
+    'outline-hover-filled': {
+      bgColor: 'transparent',
+      border: '1px solid',
+      borderColor: 'components.button.outline.borderColor',
+      color: 'components.button.outline.color',
+      _hover: {
+        bgColor: 'components.button.outline.hover.bgColor',
+        borderColor: 'components.button.outline.hover.borderColor',
+        color: 'components.button.outline.hover.color',
+        boxShadow: '4px 4px 7px -5px rgba(2, 116, 192, 0.5)'
+      },
+      transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
+    },
     'pq-outline': {
       bgColor: 'rgba(2, 116, 192, 0.07)',
       border: '1px solid',
