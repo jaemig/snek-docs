@@ -8,7 +8,7 @@ const smtUserProfilePage = {
                 },
                 hover: {
                     default: 'theme.700',
-                    _dark: 'theme.200',
+                    _dark: 'theme.400',
                 }
             }
         },
@@ -23,7 +23,7 @@ const smtUserProfilePage = {
                 hover: {
                     color: {
                         default: 'theme.700',
-                        _dark: 'theme.200',
+                        _dark: 'theme.400',
                     }
                 }
             }

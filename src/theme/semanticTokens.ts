@@ -20,6 +20,7 @@ import smtPqSectionLabel from "./photonq/semanticTokens/components/sectionLabel"
 import smtPqFeatureCard from "./photonq/semanticTokens/components/featureCard";
 import smtcodeResultPreviewComponent from "./semanticTokens/components/codeResultPreview";
 import smtUserProfilePage from "./semanticTokens/pages/userProfile";
+import smtPostPreview from "./semanticTokens/components/postPreview";
 
 const themeSemanticTokens = {
   colors: {
@@ -35,6 +36,7 @@ const themeSemanticTokens = {
       callout: smtCalloutComponent,
       imageCard: smtImageCardComponent,
       iconCard: smtIconCardComponent,
+      postPreview: smtPostPreview,
     },
     pages: {
       userProfile: smtUserProfilePage,

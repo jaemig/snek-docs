@@ -1,5 +1,3 @@
-import { WindowLocation } from '@reach/router';
-
 /**
  * Get the platform of the user
  * @returns {string} platform  - The platform of the user
@@ -56,4 +54,24 @@ export function isInternalLink(href: string) {
  */
 export function filterWhitespaceItems(items: string[]) {
   return items.filter(item => /\S/.test(item));
+}
+
+/**
+ * Formats a number to a short string with a suffix (e.g. 1.5k)
+ * @param number  - The number to format
+ * @param precision  - The precision of the number
+ * @returns  - The formatted number
+ */
+export function formatNumber(number: number, precision = 2) {
+  const suffixes = ['', 'k', 'm', 'b', 't'];
+  const suffixNum = (number >= 1000) ? Math.floor(('' + number).length / 3) : 0;
+  let shortNumber = parseFloat(
+    (suffixNum !== 0 ? number / Math.pow(1000, suffixNum) : number).toPrecision(
+      precision
+    )
+  );
+  if (shortNumber % 1 !== 0) {
+    shortNumber = parseFloat(shortNumber.toFixed(1));
+  }
+  return shortNumber + suffixes[suffixNum];
 }

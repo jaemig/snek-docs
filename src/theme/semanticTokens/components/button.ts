@@ -10,16 +10,16 @@ const smtButtonComponent = {
   outline: {
     color: {
       default: 'theme.500',
-      _dark: 'theme.200'
+      _dark: 'theme.500'
     },
     borderColor: {
       default: 'theme.500',
-      _dark: 'theme.200'
+      _dark: 'theme.800'
     },
     hover: {
       borderColor: {
         default: 'theme.500',
-        _dark: 'theme.200'
+        _dark: 'theme.800'
       },
       color: {
         default: 'white',
@@ -27,7 +27,7 @@ const smtButtonComponent = {
       },
       bgColor: {
         default: 'theme.500',
-        _dark: 'theme.200'
+        _dark: 'theme.800'
       },
     },
   },

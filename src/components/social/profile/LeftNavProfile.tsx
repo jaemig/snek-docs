@@ -145,6 +145,9 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({
           >
             @{userData.username}
           </Text>
+          {
+            //* Maybe this would be a neat place to put the total amount of favs/likes, etc (some kind of stats)
+          }
           <Divider mt={4} />
           <Text mt={2}>{userData.bio}</Text>
         </VStack>

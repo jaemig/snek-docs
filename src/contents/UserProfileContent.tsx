@@ -53,15 +53,16 @@ const UserProfileContent: FC = () => {
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
       likes: 1423,
+      hasLiked: true,
       url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
+      canManage: false
     },
     {
       publicationDate: '2023-16-15',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
-      likes: 1423,
+      likes: 500,
       url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
       canManage: true
     }
