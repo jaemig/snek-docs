@@ -1,4 +1,4 @@
-import { Box, Container, HStack, Stack } from '@chakra-ui/react';
+import { Box, Container, HStack, Stack, VStack } from '@chakra-ui/react';
 import { FC, useState } from 'react';
 import { mainContentWrapperProps } from '../vars/layout';
 import RightNav from '../layout/navigation/RightNav';
@@ -17,7 +17,7 @@ const UserProfileContent: FC = () => {
       </Box>
       <Stack verticalAlign="top" spacing={{ base: 0, xl: 12 }} direction="row">
         <Box maxW="900px" w="full">
-          User Profile
+          <VStack gap={3}></VStack>
         </Box>
         {
           //TODO: This needs to be improved so it shows a proper toc

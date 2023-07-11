@@ -1,5 +1,8 @@
 import { Icon, IconProps } from '@chakra-ui/react';
 
+/**
+ * Tabler icon: `linked-in`.
+ */
 const TbLinkedIn = (props: IconProps) => {
   return (
     <Icon

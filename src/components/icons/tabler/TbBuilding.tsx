@@ -1,5 +1,8 @@
 import { Icon, IconProps } from '@chakra-ui/react';
 
+/**
+ * Tabler icon: `building`.
+ */
 const TbBuilding = (props: IconProps) => {
   return (
     <Icon

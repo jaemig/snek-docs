@@ -1,5 +1,8 @@
 import { Icon, IconProps } from '@chakra-ui/react';
 
+/**
+ * Tabler icon: `map-pin`.
+ */
 const TbMapPin = (props: IconProps) => {
   return (
     <Icon

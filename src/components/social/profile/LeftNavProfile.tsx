@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { FC, ReactNode, useMemo } from 'react';
 import LeftNav, { ILeftNavProps } from '../../../layout/navigation/LeftNav';
-import FeatherInbox from '../../icons/feather/FeatherMail';
+import FeatherInbox from '../../icons/feather/FeatherInbox';
 import TbBuilding from '../../icons/tabler/TbBuilding';
 import TbLinkedIn from '../../icons/tabler/TbLinkedIn';
 import TbMapPin from '../../icons/tabler/TbMapPin';
