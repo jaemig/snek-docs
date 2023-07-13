@@ -59,7 +59,7 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
       ref
     );
 
-    console.log("menuButton['aria-controls']", menuButton['aria-label']);
+    // console.log("menuButton['aria-controls']", menuButton['aria-label']);
 
     const [kbd, setKbd] = useState<string | null>(null);
 

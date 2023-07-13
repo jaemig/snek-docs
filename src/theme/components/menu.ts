@@ -1,6 +1,6 @@
 const themeMenuComponent = {
   variants: {
-    'brand-hover': {
+    'theme-hover': {
       item: {
         _hover: {
           bgColor: 'leftNav.bottomNav.menu.item.active.bgColor',
@@ -38,6 +38,9 @@ const themeMenuComponent = {
         borderRadius: 'md'
       }
     }
+  },
+  defaultProps: {
+    variant: 'theme-hover'
   }
 };
 

@@ -54,7 +54,6 @@ const NavbarControls: FC<NavbarControlsProps> = ({
       <Menu
         id="navbar-color-mode-menu"
         placement="top"
-        variant="brand-hover"
         matchWidth={isMobile || !showExpandToggle}
         isLazy
       >

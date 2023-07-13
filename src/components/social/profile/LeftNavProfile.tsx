@@ -11,7 +11,7 @@ import {
   Text,
   VStack
 } from '@chakra-ui/react';
-import { FC, ReactNode, useMemo } from 'react';
+import { FC, Fragment, ReactNode, useMemo } from 'react';
 import LeftNav, { ILeftNavProps } from '../../../layout/navigation/LeftNav';
 import FeatherInbox from '../../icons/feather/FeatherInbox';
 import TbBuilding from '../../icons/tabler/TbBuilding';
@@ -70,10 +70,10 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({
   };
 
   const memoizedSocialLink = useMemo(() => {
-    return userData.socialLinks.map(({ type, label, url }) => {
+    return userData.socialLinks.map(({ type, label, url }, idx) => {
       const IconComp = socialLinkIcons[type as TSocialLink];
       return (
-        <>
+        <Fragment key={idx}>
           <GridItem>
             <IconComp
               strokeWidth={2.2}
@@ -97,7 +97,7 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({
               <Text cursor="default">{label}</Text>
             )}
           </GridItem>
-        </>
+        </Fragment>
       );
     });
   }, [userData.socialLinks]);
