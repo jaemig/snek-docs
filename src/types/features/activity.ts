@@ -1,5 +1,4 @@
-import { ReactNode } from "react";
-import { TLinkData, TTopNavLinkData } from "../navigation";
+import { TLinkData } from "../navigation";
 
 export type TActivityType = 'published' | 'commented' | 'rated';
 

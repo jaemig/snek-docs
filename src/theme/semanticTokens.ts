@@ -22,6 +22,7 @@ import smtcodeResultPreviewComponent from "./semanticTokens/components/codeResul
 import smtUserProfilePage from "./semanticTokens/pages/userProfile";
 import smtPostPreviewComponent from "./semanticTokens/components/postPreview";
 import smtUserActivityComponent from "./semanticTokens/components/userActivity";
+import smtStepperComponent from "./semanticTokens/components/stepper";
 
 const themeSemanticTokens = {
   colors: {
@@ -39,6 +40,7 @@ const themeSemanticTokens = {
       iconCard: smtIconCardComponent,
       postPreview: smtPostPreviewComponent,
       userActivity: smtUserActivityComponent,
+      stepper: smtStepperComponent,
     },
     pages: {
       userProfile: smtUserProfilePage,

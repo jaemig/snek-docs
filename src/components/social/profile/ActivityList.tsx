@@ -117,7 +117,10 @@ const ActivityList: FC<IActivityListProps> = () => {
             {showDate && (
               <>
                 <Spacer />
-                <Text fontSize="xs" color="gray.500">
+                <Text
+                  fontSize="xs"
+                  color="components.userActivity.item.title.date.color"
+                >
                   {`${itemDate.toLocaleString('default', {
                     month: 'short'
                   })} ${itemDate.toLocaleDateString('default', {
@@ -132,7 +135,6 @@ const ActivityList: FC<IActivityListProps> = () => {
         return {
           title: activityTitle,
           icon: activityIcons[type]
-          // children: activity.timestamp
         };
       })
     };

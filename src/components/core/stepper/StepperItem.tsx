@@ -20,7 +20,6 @@ const StepperItem: FC<IStepperItemProps> = ({
       w="full"
       h="100%"
       py={3}
-      // pl={10}
       position="relative"
       _before={{
         position: 'absolute',
@@ -29,7 +28,7 @@ const StepperItem: FC<IStepperItemProps> = ({
         content: '""',
         w: '2px',
         h: '100%',
-        bgColor: 'gray.200',
+        bgColor: 'components.stepper.item.vr.bgColor',
         zIndex: -1
       }}
       {...props}
@@ -37,12 +36,12 @@ const StepperItem: FC<IStepperItemProps> = ({
       <Box
         as={Center}
         boxSize="32px"
-        bgColor="gray.200"
+        bgColor="components.stepper.item.icon.wrapper.bgColor"
         borderRadius="full"
         fontSize="16px"
         border="3px solid"
-        borderColor="white"
-        color="gray.500"
+        borderColor="var(--chakra-colors-chakra-body-bg)"
+        color="components.stepper.item.icon.color"
       >
         {icon}
       </Box>

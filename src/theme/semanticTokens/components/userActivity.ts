@@ -1,13 +1,26 @@
 const smtUserActivityComponent = {
+    section: {
+        title: {
+            color: {
+                default: 'gray.500',
+                _dark: 'gray.400',
+            },
+        },
+    },
     item: {
         title: {
-            a: 'b', // Just a filler because chakra doesnt recognize semantic token objects with properties that start with an underscore and are the only property in the object
+            date: {
+                color: {
+                    default: 'gray.500',
+                    _dark: 'gray.400',
+                }
+            },
             _hover: {
                 color: {
                     default: 'theme.500',
                     _dark: 'theme.300'
                 },
-            }
+            },
         },
     },
 }
