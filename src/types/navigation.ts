@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type NavMenuItem = {
   name: string;
   href: string;
@@ -13,13 +15,13 @@ export type NavMenuSection = {
   items: NavMenuItem[];
 };
 
-export type LinkData = {
-  name: string;
+export type TLinkData = {
+  name: ReactNode;
   href: string;
   isActive?: boolean;
 };
 
-export type TTopNavLinkData = LinkData & {
+export type TTopNavLinkData = TLinkData & {
   matchMethod: 'exact' | 'includes';
 }
 
@@ -40,6 +42,6 @@ export type MainBreadcrumbPart = {
  * Stores the data of the previous and next page
  */
 export type TAdjacentPages = {
-  prev?: LinkData;
-  next?: LinkData;
+  prev?: TLinkData;
+  next?: TLinkData;
 }

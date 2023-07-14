@@ -12,6 +12,12 @@ const themeLinkComponent = {
       },
       transition: 'opacity 0.1s ease-in-out'
     },
+    'hover-theme': {
+      _hover: {
+        color: 'theme.500'
+      },
+      transition: 'color 0.1s ease-in-out'
+    },
     'right-bottom-nav': {
       display: 'block',
       width: '100%',

@@ -16,8 +16,8 @@ const Stepper: FC<IStepperProps> = ({ sections }) => {
       {sections.map((section, i) => {
         return (
           <VStack key={i} spacing={0} w="full" h="max-content">
-            <HStack w="full" spacing={4}>
-              <Box>{section.title}</Box>
+            <HStack w="full" mb={3}>
+              <Box {...section.titleProps}>{section.title}</Box>
               <Divider flex={1} h="full" />
             </HStack>
             {section.items.map((item, j) => (

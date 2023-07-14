@@ -1,13 +1,16 @@
+import { ReactNode } from "react";
+import { TLinkData, TTopNavLinkData } from "../navigation";
+
 export type TActivityType = 'published' | 'commented' | 'rated';
 
 export type TActivitySection = {
-    title: string;
+    timestamp: string;
     activities: TActivity[];
 }
 
 export type TActivity = {
     id: string;
-    title: string;
+    title: Omit<TLinkData, 'isActive'>;
     timestamp: string;
     type: TActivityType;
 }
