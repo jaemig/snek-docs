@@ -1,12 +1,10 @@
-import { Grid } from '@chakra-ui/react';
+import { Grid, GridProps } from '@chakra-ui/react';
 import { FC } from 'react';
 import { mainContentWrapperProps } from '../../vars/layout';
 
-interface IMainGridProps {
-  children?: React.ReactNode;
-}
+interface IMainGridProps extends GridProps {}
 
-const MainGrid: FC<IMainGridProps> = ({ children }) => {
+const MainGrid: FC<IMainGridProps> = ({ children, ...props }) => {
   return (
     <Grid
       flex={1}
@@ -22,6 +20,8 @@ const MainGrid: FC<IMainGridProps> = ({ children }) => {
       }}
       gap={10}
       px={{ base: 7, xl: 0 }}
+      color="shared.text.bright"
+      {...props}
     >
       {children}
     </Grid>
