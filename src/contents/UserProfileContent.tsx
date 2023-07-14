@@ -10,6 +10,7 @@ import {
   MenuList,
   SimpleGrid,
   Stack,
+  Text,
   VStack
 } from '@chakra-ui/react';
 import { FC, useMemo, useState } from 'react';
@@ -20,6 +21,7 @@ import PostPreview from '../components/photonq/PostPreview';
 import { TPostPreview } from '../types/features/post';
 import { CheckIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import ActivityList from '../components/social/profile/ActivityList';
+import Link from '../components/core/Link';
 /**
  * Component for displaying a certain user profile.
  */
@@ -142,7 +144,27 @@ const UserProfileContent: FC = () => {
         {
           //TODO: This needs to be improved so it shows a proper toc
         }
-        <RightNav />
+        <RightNav>
+          <Text
+            fontWeight="semibold"
+            w="max-content"
+            color="shared.text.bright"
+          >
+            On This Profile
+          </Text>
+          <VStack mt={4} spacing={3} alignItems="start">
+            <Link variant="hover-theme" href="#">
+              Profile
+            </Link>
+            <Link variant="hover-theme" href="#">
+              Posts
+            </Link>
+            <Divider mt={7} mb={2} />
+            <Link variant="hover-theme" href="https://snek.at" fontSize="xs">
+              Question? Give us feedback
+            </Link>
+          </VStack>
+        </RightNav>
       </Stack>
     </MainGrid>
   );
