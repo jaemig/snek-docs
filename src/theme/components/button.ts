@@ -25,6 +25,17 @@ const themeButtonComponent = {
       },
       transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
     },
+    'ghost-hover-outline': {
+      bgColor: 'transparent',
+      border: '1px solid',
+      borderColor: 'transparent',
+      color: 'components.button.ghostHoverOutline.color',
+      _hover: {
+        borderColor: 'components.button.ghostHoverOutline.hover.borderColor',
+        color: 'components.button.ghostHoverOutline.hover.color',
+      },
+      transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out'
+    },
     'pq-outline': {
       bgColor: 'rgba(2, 116, 192, 0.07)',
       border: '1px solid',
