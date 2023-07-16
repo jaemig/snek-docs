@@ -110,7 +110,7 @@ const Footer: FC = () => {
       mt="-25px"
       px={{ base: 5, lg: 0 }}
       overflowX="hidden"
-      bgColor="pq.shared.body"
+      bgColor="shared.body.bgColor"
     >
       <Box
         position="absolute"

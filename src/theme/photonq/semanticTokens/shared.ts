@@ -1,6 +1,8 @@
 const smtPqShared = {
     body: {
-        default: 'rgb(13, 14, 17)',
+        bgColor: {
+            default: 'rgb(13, 14, 17)',
+        }
     },
     section: {
         bgColor: {

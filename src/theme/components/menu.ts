@@ -23,7 +23,7 @@ const themeMenuComponent = {
         paddingLeft: 5,
         paddingRight: 5,
         // bgColor: 'shared.translucent.bgColor',
-        bgColor: 'shared.body',
+        bgColor: 'shared.body.bgColor',
         backdropFilter: 'blur(10px)'
       },
       item: {

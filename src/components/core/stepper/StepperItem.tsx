@@ -40,7 +40,7 @@ const StepperItem: FC<IStepperItemProps> = ({
         borderRadius="full"
         fontSize="16px"
         border="3px solid"
-        borderColor="var(--chakra-colors-chakra-body-bg)"
+        borderColor="body.bg"
         color="components.stepper.item.icon.color"
       >
         {icon}

@@ -11,7 +11,7 @@ const Hero: FC = () => {
     <VStack
       h={{ base: 'max-content', md: `calc(100vh - ${navOffset} - 250px)` }}
       minH="max-content"
-      bgColor="pq.shared.body"
+      bgColor="pq.shared.body.bgColor"
       spacing={0}
       id="hero"
       overflowX="hidden"

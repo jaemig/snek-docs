@@ -16,8 +16,10 @@ const smtShared = {
         }
     },
     body: {
-        default: 'white',
-        _dark: 'gray.800'
+        bgColor: {
+            default: 'white',
+            _dark: 'gray.800'
+        },
     },
     scrollbar: {
         thumb: {

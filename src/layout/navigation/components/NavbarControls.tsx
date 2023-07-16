@@ -34,7 +34,7 @@ const NavbarControls: FC<NavbarControlsProps> = ({
   const conditional_props: FlexProps = {};
   if (isMobile) {
     isExpanded = true;
-    conditional_props.bgColor = 'shared.body';
+    conditional_props.bgColor = 'shared.body.bgColor';
   }
 
   const isLightColorMode = colorMode === 'light';

@@ -45,7 +45,7 @@ const MobileNavDrawer: FC<MobileNavDrawerProps> = ({
             direction="column"
             w="100vw"
             h={`calc(100vh - ${navOffset} - 64px)`}
-            bg="shared.body"
+            bg="shared.body.bgColor"
             pt={9}
             px={9}
           >
