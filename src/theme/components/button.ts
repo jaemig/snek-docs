@@ -34,6 +34,13 @@ const themeButtonComponent = {
         borderColor: 'components.button.ghostHoverOutline.hover.borderColor',
         color: 'components.button.ghostHoverOutline.hover.color',
       },
+      _disabled: {
+        opacity: 0.5,
+        _hover: {
+          borderColor: 'transparent',
+          color: 'components.button.ghostHoverOutline.color',
+        }
+      },
       transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out'
     },
     'pq-outline': {
