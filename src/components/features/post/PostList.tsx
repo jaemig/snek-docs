@@ -1,8 +1,7 @@
-import { FC, FormEvent, useMemo, useState } from 'react';
+import { ChangeEvent, FC, useMemo, useState } from 'react';
 import { TPostPreview } from '../../../types/features/post';
 import {
   Button,
-  Center,
   HStack,
   Input,
   Menu,
@@ -239,6 +238,14 @@ const PostList: FC = () => {
     console.log('toggle like for post ', id);
   };
 
+  /**
+   * Search for posts with the given query (filtering)
+   */
+  const searchPosts = (e: ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    console.log('searching for posts with query ', query);
+  };
+
   const memoizedPostPreviews = useMemo(() => {
     const offset = (pagination.currentPage - 1) * pagination.itemsPerPage;
     return postPreviews
@@ -256,7 +263,12 @@ const PostList: FC = () => {
   return (
     <VStack w="full" gap={5}>
       <HStack spacing={3} w="full">
-        <Input placeholder="Find a post..." size="sm" borderRadius="lg" />
+        <Input
+          placeholder="Find a post..."
+          size="sm"
+          borderRadius="lg"
+          onChange={searchPosts}
+        />
         <Menu>
           <MenuButton
             as={Button}
