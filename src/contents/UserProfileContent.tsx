@@ -1,5 +1,5 @@
 import { Box, Divider, Stack, Text, VStack } from '@chakra-ui/react';
-import { FC, ReactNode, useMemo, useState } from 'react';
+import { FC, ReactNode, useEffect, useMemo, useState } from 'react';
 import RightNav from '../layout/navigation/RightNav';
 import MainGrid from '../layout/components/MainGrid';
 import LeftNavProfile from '../components/social/profile/LeftNavProfile';
@@ -14,9 +14,8 @@ import { useLocation } from '@reach/router';
 const UserProfileContent: FC = () => {
   const { hash } = useLocation();
   const [isExpanded, setIsExpanded] = useState(true);
-  const [activeTab, setActiveTab] = useState<
-    (typeof tabNavItems)[number]['value']
-  >(hash === '#posts' ? 'posts' : 'overview');
+  const [activeTab, setActiveTab] =
+    useState<(typeof tabNavItems)[number]['value']>('posts');
 
   const tabNavItems = [
     {
@@ -57,6 +56,10 @@ const UserProfileContent: FC = () => {
   } else {
     mainContent = <PostList />;
   }
+
+  useEffect(() => {
+    setActiveTab(hash === '#posts' ? 'posts' : 'overview');
+  }, []);
 
   return (
     <MainGrid>
