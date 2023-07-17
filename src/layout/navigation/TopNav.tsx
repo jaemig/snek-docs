@@ -10,6 +10,8 @@ import {
   ImageProps,
   LinkProps,
   Spacer,
+  StackProps,
+  VStack,
   useDisclosure
 } from '@chakra-ui/react';
 import { useLocation } from '@reach/router';
@@ -69,13 +71,14 @@ export type TBrandImage = { props?: ImageProps; src: string; alt: string };
 
 interface ITopNavProps {
   brandImage?: TBrandImage;
-  wrapperProps?: BoxProps;
+  wrapperProps?: StackProps;
   linkProps?: LinkProps;
   searchProps?: TSearchMenuStyleProps;
   mobileMenuButtonProps?: ButtonProps;
   hamburgerIconProps?: THamburgerMenuIconStylerProps;
   drawerDisclosure: ReturnType<typeof useDisclosure>;
   colorMode?: 'light' | 'dark';
+  children?: React.ReactNode;
 }
 
 /**
@@ -89,7 +92,8 @@ const TopNav: FC<ITopNavProps> = ({
   mobileMenuButtonProps,
   hamburgerIconProps,
   drawerDisclosure,
-  colorMode
+  colorMode,
+  children
 }) => {
   const [hamburgerClass, setHamburgerClass] = useState('');
   const { isOpen, onOpen, onClose } = drawerDisclosure;
@@ -137,7 +141,7 @@ const TopNav: FC<ITopNavProps> = ({
 
   return (
     <>
-      <Center
+      <VStack
         as="nav"
         position="sticky"
         top={navTopOffset}
@@ -225,7 +229,8 @@ const TopNav: FC<ITopNavProps> = ({
             </HStack>
           </Center>
         </Flex>
-      </Center>
+        {children}
+      </VStack>
       <MobileNavDrawer isOpen={isOpen} onOpen={onOpen} onClose={closeDrawer} />
     </>
   );

@@ -14,7 +14,6 @@ import { useNavOffset } from '../hooks/use-nav-offset';
 import { useLocation } from '@reach/router';
 import { convertPageTreeToMenu } from '../functions/navigation';
 import { MenuContext } from '../contexts/menu';
-
 import ColorizedUniWienLogo from '../photonq/assets/icons/uni-wien-logo-colorized.svg';
 import { THamburgerMenuIconStylerProps } from '../components/core/HamburgerMenuIcon';
 import { TSearchMenuStyleProps } from '../components/search/SearchMenu';
@@ -26,6 +25,7 @@ interface AppLayoutProps {
   footer?: FC;
   customTopNavDisclosure?: ReturnType<typeof useDisclosure>;
   topNavProps?: {
+    isVisible?: boolean;
     wrapper?: TTopNavWrapperProps;
     link?: TTopNavLinkProps;
     colorMode?: 'light' | 'dark';
@@ -73,16 +73,18 @@ const AppLayout: FC<AppLayoutProps> = ({
           direction="column"
           pb={5}
         >
-          <TopNav
-            drawerDisclosure={customTopNavDisclosure ?? topNavDisclosure}
-            linkProps={topNavProps?.link}
-            wrapperProps={topNavProps?.wrapper}
-            colorMode={topNavProps?.colorMode}
-            hamburgerIconProps={topNavProps?.hamburger}
-            searchProps={topNavProps?.searchProps}
-            mobileMenuButtonProps={topNavProps?.mobileMenuButtonProps}
-            brandImage={brandImage}
-          />
+          {topNavProps?.isVisible && (
+            <TopNav
+              drawerDisclosure={customTopNavDisclosure ?? topNavDisclosure}
+              linkProps={topNavProps?.link}
+              wrapperProps={topNavProps?.wrapper}
+              colorMode={topNavProps?.colorMode}
+              hamburgerIconProps={topNavProps?.hamburger}
+              searchProps={topNavProps?.searchProps}
+              mobileMenuButtonProps={topNavProps?.mobileMenuButtonProps}
+              brandImage={brandImage}
+            />
+          )}
           <Box flex="1" mt={navTopOffset}>
             {isDocs ? (
               <DocsLayout path={path}>{children}</DocsLayout>
