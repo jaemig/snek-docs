@@ -24,11 +24,21 @@ const smtUserProfilePage = {
                     color: {
                         default: 'theme.700',
                         _dark: 'theme.400',
-                    }
-                }
-            }
-        }
-    }
-}
+                    },
+                },
+            },
+        },
+    },
+    rightNav: {
+        tabs: {
+            active: {
+                color: {
+                    default: 'theme.700',
+                    _dark: 'theme.400',
+                },
+            },
+        },
+    },
+};
 
 export default smtUserProfilePage

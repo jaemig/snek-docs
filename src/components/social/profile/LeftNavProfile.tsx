@@ -1,17 +1,14 @@
 import {
   Avatar,
-  Box,
-  Center,
   Divider,
   Grid,
   GridItem,
   Heading,
   IconProps,
-  Image,
   Text,
   VStack
 } from '@chakra-ui/react';
-import { FC, Fragment, ReactNode, useMemo } from 'react';
+import { FC, Fragment, useMemo } from 'react';
 import LeftNav, { ILeftNavProps } from '../../../layout/navigation/LeftNav';
 import FeatherInbox from '../../icons/feather/FeatherInbox';
 import TbBuilding from '../../icons/tabler/TbBuilding';

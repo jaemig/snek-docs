@@ -1,46 +1,57 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Flex,
-  HStack,
-  Input,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  SimpleGrid,
-  Stack,
-  Text,
-  VStack
-} from '@chakra-ui/react';
+import { Box, Divider, Stack, Text, VStack } from '@chakra-ui/react';
 import { FC, ReactNode, useMemo, useState } from 'react';
 import RightNav from '../layout/navigation/RightNav';
 import MainGrid from '../layout/components/MainGrid';
 import LeftNavProfile from '../components/social/profile/LeftNavProfile';
-import PostPreview from '../components/photonq/PostPreview';
-import { TPostPreview } from '../types/features/post';
-import { CheckIcon, ChevronDownIcon } from '@chakra-ui/icons';
-import ActivityList from '../components/social/profile/ActivityList';
 import Link from '../components/core/Link';
 import PostList from '../components/features/post/PostList';
 import ProfileOverview from '../components/social/profile/ProfileOverview';
+
+export type TActiveTab = 'top-posts' | 'posts';
 /**
  * Component for displaying a certain user profile.
  */
 const UserProfileContent: FC = () => {
   const [isExpanded, setIsExpanded] = useState(true);
-  const [activeTab, setActiveTab] = useState<'top-posts' | 'posts'>('posts');
+  const [activeTab, setActiveTab] =
+    useState<(typeof tabNavItems)[number]['value']>('posts');
+
+  const tabNavItems = [
+    {
+      label: 'Top Posts',
+      value: 'top-posts'
+    },
+    {
+      label: 'Posts',
+      value: 'posts'
+    }
+  ] as const;
+
+  const tabNavElmnts = useMemo(
+    () =>
+      tabNavItems.map(item => {
+        return (
+          <Link
+            key={item.value}
+            href="#"
+            variant="hover-theme"
+            onClick={() => setActiveTab(item.value)}
+            {...(item.value === activeTab && {
+              color: 'pages.userProfile.rightNav.tabs.active.color',
+              fontWeight: 'semibold'
+            })}
+          >
+            {item.label}
+          </Link>
+        );
+      }),
+    [tabNavItems]
+  );
 
   let mainContent: ReactNode;
 
   if (activeTab === 'top-posts') {
-    mainContent = (
-      <ProfileOverview />
-      // <SimpleGrid spacing={5} columns={2}>
-      //   {memoizedPostPreviews}
-      // </SimpleGrid>
-    );
+    mainContent = <ProfileOverview />;
   } else {
     mainContent = <PostList />;
   }
@@ -66,12 +77,7 @@ const UserProfileContent: FC = () => {
             On This Page
           </Text>
           <VStack mt={4} spacing={2} alignItems="start">
-            <Link variant="hover-theme" href="#">
-              Profile
-            </Link>
-            <Link variant="hover-theme" href="#">
-              Posts
-            </Link>
+            {tabNavElmnts}
             <Divider mt={7} />
             <Link
               variant="hover-theme"
