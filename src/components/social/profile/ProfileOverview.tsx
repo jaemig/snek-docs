@@ -83,7 +83,7 @@ const ProfileOverview: FC = () => {
         {memoizedPostPreviews}
       </SimpleGrid>
       <Divider />
-      <ActivityList />
+      <ActivityList mb={10} />
     </VStack>
   );
 };

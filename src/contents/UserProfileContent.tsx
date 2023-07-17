@@ -6,20 +6,22 @@ import LeftNavProfile from '../components/social/profile/LeftNavProfile';
 import Link from '../components/core/Link';
 import PostList from '../components/features/post/PostList';
 import ProfileOverview from '../components/social/profile/ProfileOverview';
+import { useLocation } from '@reach/router';
 
-export type TActiveTab = 'top-posts' | 'posts';
 /**
  * Component for displaying a certain user profile.
  */
 const UserProfileContent: FC = () => {
+  const { hash } = useLocation();
   const [isExpanded, setIsExpanded] = useState(true);
-  const [activeTab, setActiveTab] =
-    useState<(typeof tabNavItems)[number]['value']>('posts');
+  const [activeTab, setActiveTab] = useState<
+    (typeof tabNavItems)[number]['value']
+  >(hash === '#posts' ? 'posts' : 'overview');
 
   const tabNavItems = [
     {
       label: 'Top Posts',
-      value: 'top-posts'
+      value: 'overview'
     },
     {
       label: 'Posts',
@@ -33,7 +35,7 @@ const UserProfileContent: FC = () => {
         return (
           <Link
             key={item.value}
-            href="#"
+            href={'#' + item.value}
             variant="hover-theme"
             onClick={() => setActiveTab(item.value)}
             {...(item.value === activeTab && {
@@ -50,7 +52,7 @@ const UserProfileContent: FC = () => {
 
   let mainContent: ReactNode;
 
-  if (activeTab === 'top-posts') {
+  if (activeTab === 'overview') {
     mainContent = <ProfileOverview />;
   } else {
     mainContent = <PostList />;

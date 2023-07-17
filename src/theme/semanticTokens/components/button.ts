@@ -39,7 +39,7 @@ const smtButtonComponent = {
   },
   ghostHoverOutline: {
     color: {
-      default: 'gray.600',
+      default: 'gray.500',
       _dark: 'gray.600'
     },
     hover: {

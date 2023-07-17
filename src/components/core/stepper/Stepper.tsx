@@ -1,18 +1,18 @@
-import { Box, Divider, HStack, VStack } from '@chakra-ui/react';
+import { Box, Divider, HStack, StackProps, VStack } from '@chakra-ui/react';
 import { FC } from 'react';
 import { TStepperSection } from '../../../types/core/stepper';
 import StepperItem from './StepperItem';
 
-interface IStepperProps {
+interface IStepperProps extends StackProps {
   sections: TStepperSection[];
 }
 
 /**
  * Component for displaying a stepper.
  */
-const Stepper: FC<IStepperProps> = ({ sections }) => {
+const Stepper: FC<IStepperProps> = ({ sections, ...props }) => {
   return (
-    <VStack w="full" spacing={0}>
+    <VStack w="full" spacing={0} {...props}>
       {sections.map((section, i) => {
         return (
           <VStack key={i} spacing={0} w="full" h="max-content">
