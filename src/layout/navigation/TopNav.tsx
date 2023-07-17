@@ -141,7 +141,7 @@ const TopNav: FC<ITopNavProps> = ({
 
   return (
     <>
-      <VStack
+      <Center
         as="nav"
         position="sticky"
         top={navTopOffset}
@@ -154,83 +154,85 @@ const TopNav: FC<ITopNavProps> = ({
         zIndex={2}
         {...wrapperProps}
       >
-        <Flex w="7xl">
-          <Link
-            href="/"
-            _hover={{
-              transform: 'scale(1.1)'
-            }}
-            transition="transform 0.2s ease-in-out"
-          >
-            <Image
-              h="32px"
-              {...brandImage?.props}
-              src={brandImage?.src ?? SnekIcon}
-              alt={brandImage?.alt ?? 'Snek Logo'}
-            />
-          </Link>
-          <Spacer />
-          <Center>
-            <HStack spacing={4}>
-              <MemoizedLinks
-                links={activatedLinks}
-                props={{ ...navLinkProps, ...linkProps }}
-                activeProps={{
-                  opacity: 1,
-                  fontWeight: 'semibold'
-                }}
+        <VStack as="nav">
+          <Flex w="7xl">
+            <Link
+              href="/"
+              _hover={{
+                transform: 'scale(1.1)'
+              }}
+              transition="transform 0.2s ease-in-out"
+            >
+              <Image
+                h="32px"
+                {...brandImage?.props}
+                src={brandImage?.src ?? SnekIcon}
+                alt={brandImage?.alt ?? 'Snek Logo'}
               />
-              <Box display={{ base: 'none', md: 'initial' }}>
-                <SearchMenu
-                  // width base 0 is a hack to prevent the menu from causing a horizontal scrollbar
-                  styleProps={{
-                    ...searchProps,
-                    menuList: {
-                      ...searchProps?.menuList,
-                      width: { base: 0, md: '500px' },
-                      zIndex: 3
-                    }
+            </Link>
+            <Spacer />
+            <Center>
+              <HStack spacing={4}>
+                <MemoizedLinks
+                  links={activatedLinks}
+                  props={{ ...navLinkProps, ...linkProps }}
+                  activeProps={{
+                    opacity: 1,
+                    fontWeight: 'semibold'
                   }}
                 />
-              </Box>
-              <Link
-                display="inline-block"
-                href="https://github.com/Jan-Emig/snek-docs"
-                // This doesnt work for some reason (min-width solves it temporarily)
-                boxSize="32px"
-                minW="32px"
-                _hover={{
-                  transform: 'scale(1.2)'
-                }}
-                transition="transform 0.2s ease-in-out"
-              >
-                <GitHub
+                <Box display={{ base: 'none', md: 'initial' }}>
+                  <SearchMenu
+                    // width base 0 is a hack to prevent the menu from causing a horizontal scrollbar
+                    styleProps={{
+                      ...searchProps,
+                      menuList: {
+                        ...searchProps?.menuList,
+                        width: { base: 0, md: '500px' },
+                        zIndex: 3
+                      }
+                    }}
+                  />
+                </Box>
+                <Link
+                  display="inline-block"
+                  href="https://github.com/Jan-Emig/snek-docs"
+                  // This doesnt work for some reason (min-width solves it temporarily)
                   boxSize="32px"
-                  fill={
-                    colorMode
-                      ? `topNav.${colorMode}.GitHubFill`
-                      : 'topNav.GitHubFill'
-                  }
-                  transition="fill 0.2s ease-in-out"
-                />
-              </Link>
-              <Button
-                variant="ghost-hover"
-                size="sm"
-                display={{ base: 'initial', md: 'none' }}
-                {...mobileMenuButtonProps}
-              >
-                <HamburgerMenuIcon
-                  handleClick={toggleMobileMenu}
-                  wrapperProps={{ className: hamburgerClass }}
-                  iconProps={hamburgerIconProps}
-                />
-              </Button>
-            </HStack>
-          </Center>
-        </Flex>
-        {children}
-      </VStack>
+                  minW="32px"
+                  _hover={{
+                    transform: 'scale(1.2)'
+                  }}
+                  transition="transform 0.2s ease-in-out"
+                >
+                  <GitHub
+                    boxSize="32px"
+                    fill={
+                      colorMode
+                        ? `topNav.${colorMode}.GitHubFill`
+                        : 'topNav.GitHubFill'
+                    }
+                    transition="fill 0.2s ease-in-out"
+                  />
+                </Link>
+                <Button
+                  variant="ghost-hover"
+                  size="sm"
+                  display={{ base: 'initial', md: 'none' }}
+                  {...mobileMenuButtonProps}
+                >
+                  <HamburgerMenuIcon
+                    handleClick={toggleMobileMenu}
+                    wrapperProps={{ className: hamburgerClass }}
+                    iconProps={hamburgerIconProps}
+                  />
+                </Button>
+              </HStack>
+            </Center>
+          </Flex>
+          {children}
+        </VStack>
+      </Center>
       <MobileNavDrawer isOpen={isOpen} onOpen={onOpen} onClose={closeDrawer} />
     </>
   );

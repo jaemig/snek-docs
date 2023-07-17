@@ -12,6 +12,14 @@ const themeButtonComponent = {
         opacity: 1
       }
     },
+    'ghost-hover-opacity': {
+      bgColor: 'transparent',
+      opacity: 0.5,
+      _hover: {
+        color: 'components.button.ghostHoverOpacity.active.color',
+        opacity: 1
+      },
+    },
     'outline-hover-filled': {
       bgColor: 'transparent',
       border: '1px solid',
@@ -39,7 +47,7 @@ const themeButtonComponent = {
         _hover: {
           borderColor: 'transparent',
           color: 'components.button.ghostHoverOutline.color',
-        }
+        },
       },
       transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out'
     },

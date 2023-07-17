@@ -41,7 +41,7 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({
     location: 'San Francisco, CA',
     company: 'Snek',
     avatarUrl:
-      'https://unsplash.com/photos/O3ymvT7Wf9U/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjg4ODIyMTE1fA&force=true&w=320',
+      'https://onedrive.live.com/embed?resid=AE2DDC816CEF3E1E%21220972&authkey=%21AIUh8CadUcYw3cg&width=999999&height=1024',
     bio: "Adventurous spirit with a knack for words and a passion for knowledge. Exploring the world of academia, one document at a time. Forever curious, forever learning. Let's dive into the realm of information together uncover the wonders of education.",
     socialLinks: [
       {
@@ -111,7 +111,8 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({
           '& img': {
             // We need this to force the image to be a square
             h: 'auto',
-            aspectRatio: '1 / 1'
+            aspectRatio: '1 / 1',
+            objectPosition: 'top' //? Maybe we can make this configurable
           }
         }}
       >
@@ -119,7 +120,7 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({
           width="full"
           h="max-content"
           name="Emily Brooks"
-          src="https://unsplash.com/photos/O3ymvT7Wf9U/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjg4ODIyMTE1fA&force=true&w=320"
+          src="https://onedrive.live.com/embed?resid=AE2DDC816CEF3E1E%21220972&authkey=%21AIUh8CadUcYw3cg&width=999999&height=1024"
           aspectRatio={1}
           _hover={{
             boxShadow: 'rgba(0, 0, 0, 0.2) 6px 12px 28px -5px',

@@ -10,8 +10,16 @@ const smtButtonComponent = {
       bgColor: {
         default: 'gray.100',
         _dark: 'whiteAlpha.700'
-      }
-    }
+      },
+    },
+  },
+  ghostHoverOpacity: {
+    active: {
+      color: {
+        default: 'theme.500',
+        _dark: 'theme.500'
+      },
+    },
   },
   outline: {
     color: {

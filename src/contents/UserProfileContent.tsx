@@ -34,33 +34,37 @@ const UserProfileContent: FC = () => {
   const tabNavItems = [
     {
       label: 'Top Posts',
-      value: 'overview'
+      value: 'overview',
+      icon: <TbUser />
     },
     {
       label: 'Posts',
-      value: 'posts'
+      value: 'posts',
+      icon: <TbBooks />
     }
   ] as const;
 
-  const tabNavElmnts = useMemo(
+  const tabNavButtons = useMemo(
     () =>
       tabNavItems.map(item => {
+        const isActive = item.value === activeTab;
         return (
-          <Link
-            key={item.value}
-            href={'#' + item.value}
-            variant="hover-theme"
-            onClick={() => setActiveTab(item.value)}
-            {...(item.value === activeTab && {
-              color: 'pages.userProfile.rightNav.tabs.active.color',
-              fontWeight: 'semibold'
+          <Button
+            variant="ghost-hover-opacity"
+            size="sm"
+            borderRadius="lg"
+            leftIcon={item.icon}
+            {...(isActive && {
+              opacity: 1,
+              color: 'topNav.tabs.active.color'
             })}
+            onClick={!isActive ? () => setActiveTab(item.value) : undefined}
           >
             {item.label}
-          </Link>
+          </Button>
         );
       }),
-    [tabNavItems]
+    [tabNavItems, activeTab]
   );
 
   let mainContent: ReactNode;
@@ -79,26 +83,9 @@ const UserProfileContent: FC = () => {
     <>
       <TopNav
         drawerDisclosure={topNavDisclosure}
-        wrapperProps={{ h: 'max-content', spacing: 5, pb: 1 }}
+        wrapperProps={{ h: 'max-content', spacing: 5, pb: 1, pt: 3 }}
       >
-        <HStack>
-          <Button
-            variant="ghost"
-            size="sm"
-            borderRadius="lg"
-            leftIcon={<TbUser opacity={0.8} />}
-          >
-            Overview
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            borderRadius="lg"
-            leftIcon={<TbBooks opacity={0.8} />}
-          >
-            Posts
-          </Button>
-        </HStack>
+        <HStack>{tabNavButtons}</HStack>
       </TopNav>
       <MainGrid>
         <Box>
@@ -109,13 +96,11 @@ const UserProfileContent: FC = () => {
           spacing={{ base: 0, xl: 12 }}
           direction="row"
         >
-          <Box maxW="900px" w="full">
-            {mainContent}
-          </Box>
+          <Box w="full">{mainContent}</Box>
           {
             //TODO: This needs to be improved so it shows a proper toc
           }
-          <RightNav>
+          {/* <RightNav>
             <Text
               fontWeight="semibold"
               w="max-content"
@@ -124,7 +109,6 @@ const UserProfileContent: FC = () => {
               On This Page
             </Text>
             <VStack mt={4} spacing={2} alignItems="start">
-              {tabNavElmnts}
               <Divider mt={7} />
               <Link
                 variant="hover-theme"
@@ -135,7 +119,7 @@ const UserProfileContent: FC = () => {
                 Question? Give us feedback
               </Link>
             </VStack>
-          </RightNav>
+          </RightNav> */}
         </Stack>
       </MainGrid>
     </>

@@ -43,6 +43,14 @@ const smtTopNav = {
         _dark: 'gray.600'
       }
     }
+  },
+  tabs: {
+    active: {
+      color: {
+        default: 'theme.500',
+        _dark: 'theme.500'
+      }
+    }
   }
 };
 

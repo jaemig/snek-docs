@@ -16,7 +16,7 @@ export const wrapPageElement: GatsbySSR['wrapPageElement'] = ({
     <AppLayout
       isDocs={path.startsWith('/docs')}
       path={path}
-      topNavProps={{ isVisible: path.startsWith('/profile') }}
+      topNavProps={{ isVisible: !path.startsWith('/profile') }}
     >
       {element}
     </AppLayout>
