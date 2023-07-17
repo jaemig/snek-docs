@@ -52,11 +52,15 @@ const UserProfileContent: FC = () => {
           <Button
             variant="ghost-hover-opacity"
             size="sm"
-            borderRadius="lg"
+            borderRadius="none"
+            borderBottom="2px solid"
+            borderColor="transparent"
             leftIcon={item.icon}
             {...(isActive && {
               opacity: 1,
-              color: 'topNav.tabs.active.color'
+              color: 'topNav.tabs.active.color',
+              borderBottom: '2px solid',
+              borderBottomColor: 'theme.500'
             })}
             onClick={!isActive ? () => setActiveTab(item.value) : undefined}
           >
@@ -83,7 +87,7 @@ const UserProfileContent: FC = () => {
     <>
       <TopNav
         drawerDisclosure={topNavDisclosure}
-        wrapperProps={{ h: 'max-content', spacing: 5, pb: 1, pt: 3 }}
+        wrapperProps={{ h: 'max-content', spacing: 5, pb: 0, pt: 3 }}
       >
         <HStack>{tabNavButtons}</HStack>
       </TopNav>
