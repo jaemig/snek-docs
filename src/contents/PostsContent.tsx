@@ -1,24 +1,22 @@
-import { Box, Button, HStack, Stack, useDisclosure } from '@chakra-ui/react';
-import { FC, ReactNode, useEffect, useMemo, useState } from 'react';
+import { Box, Heading, VStack } from '@chakra-ui/react';
+import { ChangeEvent, FC, useMemo, useState } from 'react';
 import MainGrid from '../layout/components/MainGrid';
-import LeftNavProfile from '../components/social/profile/LeftNavProfile';
+import LeftNav from '../layout/navigation/LeftNav';
+import { createBreadCrumbParts } from '../functions/navigation';
+import PageDirectory from '../layout/navigation/components/PageDirectory';
+import { MainBreadcrumbPart } from '../types/navigation';
+import { useMenuContext } from '../contexts/menu';
 import PostList from '../components/features/post/PostList';
-import ProfileOverview from '../components/social/profile/ProfileOverview';
-import { useLocation } from '@reach/router';
-import TopNav from '../layout/navigation/TopNav';
-import TbUser from '../components/icons/tabler/TbUser';
-import TbBooks from '../components/icons/tabler/TbBooks';
 import { TPostPreview } from '../types/features/post';
+import PostListControls from '../components/features/post/PostListControls';
 
 /**
- * Component for displaying a certain user profile.
+ * Content for the posts page.
+ * This is the main page for discovering and searching posts.
  */
-const UserProfileContent: FC = () => {
-  const { hash } = useLocation();
-  const topNavDisclosure = useDisclosure();
+const PostsContent: FC = () => {
   const [isExpanded, setIsExpanded] = useState(true);
-  const [activeTab, setActiveTab] =
-    useState<(typeof tabNavItems)[number]['value']>('posts');
+  const { menuStructure } = useMenuContext();
 
   //TODO: This would come from an API
   const posts: TPostPreview[] = [
@@ -38,8 +36,7 @@ const UserProfileContent: FC = () => {
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
       likes: 1423,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
+      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/'
     },
     {
       id: '3',
@@ -48,8 +45,7 @@ const UserProfileContent: FC = () => {
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
       likes: 1423,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
+      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/'
     },
     {
       id: '4',
@@ -59,8 +55,7 @@ const UserProfileContent: FC = () => {
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
       likes: 1423,
       hasLiked: true,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: false
+      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/'
     },
     {
       id: '5',
@@ -69,8 +64,7 @@ const UserProfileContent: FC = () => {
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
       likes: 500,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
+      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/'
     },
     //....
     {
@@ -89,8 +83,7 @@ const UserProfileContent: FC = () => {
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
       likes: 1423,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
+      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/'
     },
     {
       id: '3',
@@ -99,8 +92,7 @@ const UserProfileContent: FC = () => {
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
       likes: 1423,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
+      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/'
     },
     {
       id: '4',
@@ -110,8 +102,7 @@ const UserProfileContent: FC = () => {
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
       likes: 1423,
       hasLiked: true,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: false
+      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/'
     },
     {
       id: '5',
@@ -120,8 +111,7 @@ const UserProfileContent: FC = () => {
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
       likes: 500,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
+      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/'
     },
     {
       id: '1',
@@ -139,8 +129,7 @@ const UserProfileContent: FC = () => {
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
       likes: 1423,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
+      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/'
     },
     {
       id: '3',
@@ -149,8 +138,7 @@ const UserProfileContent: FC = () => {
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
       likes: 1423,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
+      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/'
     },
     {
       id: '4',
@@ -160,8 +148,7 @@ const UserProfileContent: FC = () => {
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
       likes: 1423,
       hasLiked: true,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: false
+      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/'
     },
     {
       id: '5',
@@ -170,86 +157,63 @@ const UserProfileContent: FC = () => {
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
       likes: 500,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
+      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/'
     }
   ];
 
-  const tabNavItems = [
-    {
-      label: 'Top Posts',
-      value: 'overview',
-      icon: <TbUser />
-    },
-    {
-      label: 'Posts',
-      value: 'posts',
-      icon: <TbBooks />
-    }
-  ] as const;
-
-  const tabNavButtons = useMemo(
-    () =>
-      tabNavItems.map(item => {
-        const isActive = item.value === activeTab;
-        return (
-          <Button
-            key={item.value}
-            variant="ghost-hover-opacity"
-            size="sm"
-            borderRadius="none"
-            borderBottom="2px solid"
-            borderColor="transparent"
-            leftIcon={item.icon}
-            {...(isActive && {
-              opacity: 1,
-              color: 'topNav.tabs.active.color',
-              borderBottom: '2px solid',
-              borderBottomColor: 'theme.500'
-            })}
-            onClick={!isActive ? () => setActiveTab(item.value) : undefined}
-          >
-            {item.label}
-          </Button>
-        );
-      }),
-    [tabNavItems, activeTab]
-  );
-
-  let mainContent: ReactNode;
-
-  if (activeTab === 'overview') {
-    mainContent = <ProfileOverview />;
-  } else {
-    mainContent = <PostList posts={posts} showControls />;
-  }
-
-  useEffect(() => {
-    setActiveTab(hash === '#posts' ? 'posts' : 'overview');
-  }, []);
+  const searchPosts = (e: ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    console.log(query);
+  };
 
   return (
-    <>
-      <TopNav
-        drawerDisclosure={topNavDisclosure}
-        wrapperProps={{ h: 'max-content', spacing: 5, pb: 0, pt: 3 }}
-      >
-        <HStack>{tabNavButtons}</HStack>
-      </TopNav>
-      <MainGrid>
-        <Box>
-          <LeftNavProfile isExpanded={isExpanded} />
-        </Box>
-        <Stack
-          verticalAlign="top"
-          spacing={{ base: 0, xl: 12 }}
-          direction="row"
+    <MainGrid>
+      <Box display={{ base: 'none', md: 'block' }} position="sticky">
+        <LeftNav isExpanded={isExpanded} setIsExpanded={setIsExpanded}>
+          <Box w={isExpanded ? 'auto' : 0}>
+            <PageDirectory data={menuStructure} isExpanded={isExpanded} />
+          </Box>
+        </LeftNav>
+      </Box>
+      <VStack>
+        <PostListControls
+          search={searchPosts}
+          w={{ base: 'full', md: '75%' }}
+        />
+        {/* px={4} pb={4} */}
+        <Box
+          borderRadius="xl"
+          mt={10}
+          p={1}
+          bgGradient="linear(to-br, #1FA2FF, #12D8FA, #90EECD)"
         >
-          <Box w="full">{mainContent}</Box>
-        </Stack>
-      </MainGrid>
-    </>
+          <Box bgColor="shared.body.bgColor" borderRadius="xl">
+            <Box
+              position="absolute"
+              transform="translateY(-50%)"
+              bgColor="shared.body.bgColor"
+              w="fit-content"
+              px={3}
+              ml={5}
+              borderRadius="full"
+            >
+              <Heading as="h1" size="lg" color="#1FA2FF">
+                Featured Posts
+              </Heading>
+            </Box>
+            <PostList posts={posts.slice(0, 4)} py={10} px={3} />
+          </Box>
+        </Box>
+        <Box py={10} px={3}>
+          <Heading as="h2" size="md">
+            Latest Posts
+          </Heading>
+          <PostList posts={posts.slice(4, 12)} pt={5} />
+        </Box>
+      </VStack>
+    </MainGrid>
   );
 };
 
-export default UserProfileContent;
+export default PostsContent;
+1;
