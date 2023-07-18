@@ -79,7 +79,7 @@ const ProfileOverview: FC = () => {
 
   return (
     <VStack gap={12}>
-      <SimpleGrid spacing={5} columns={2}>
+      <SimpleGrid spacing={5} columns={{ base: 1, sm: 2 }}>
         {memoizedPostPreviews}
       </SimpleGrid>
       <Divider />

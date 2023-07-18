@@ -1,19 +1,7 @@
-import {
-  Box,
-  Button,
-  Divider,
-  HStack,
-  Spacer,
-  Stack,
-  Text,
-  VStack,
-  useDisclosure
-} from '@chakra-ui/react';
+import { Box, Button, HStack, Stack, useDisclosure } from '@chakra-ui/react';
 import { FC, ReactNode, useEffect, useMemo, useState } from 'react';
-import RightNav from '../layout/navigation/RightNav';
 import MainGrid from '../layout/components/MainGrid';
 import LeftNavProfile from '../components/social/profile/LeftNavProfile';
-import Link from '../components/core/Link';
 import PostList from '../components/features/post/PostList';
 import ProfileOverview from '../components/social/profile/ProfileOverview';
 import { useLocation } from '@reach/router';
@@ -50,6 +38,7 @@ const UserProfileContent: FC = () => {
         const isActive = item.value === activeTab;
         return (
           <Button
+            key={item.value}
             variant="ghost-hover-opacity"
             size="sm"
             borderRadius="none"
@@ -101,29 +90,6 @@ const UserProfileContent: FC = () => {
           direction="row"
         >
           <Box w="full">{mainContent}</Box>
-          {
-            //TODO: This needs to be improved so it shows a proper toc
-          }
-          {/* <RightNav>
-            <Text
-              fontWeight="semibold"
-              w="max-content"
-              color="shared.text.bright"
-            >
-              On This Page
-            </Text>
-            <VStack mt={4} spacing={2} alignItems="start">
-              <Divider mt={7} />
-              <Link
-                variant="hover-theme"
-                href="https://snek.at"
-                fontSize="xs"
-                pt={7}
-              >
-                Question? Give us feedback
-              </Link>
-            </VStack>
-          </RightNav> */}
         </Stack>
       </MainGrid>
     </>

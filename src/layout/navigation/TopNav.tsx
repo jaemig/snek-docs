@@ -154,8 +154,8 @@ const TopNav: FC<ITopNavProps> = ({
         zIndex={2}
         {...wrapperProps}
       >
-        <VStack as="nav">
-          <Flex w="7xl">
+        <VStack w="full" maxW="7xl">
+          <Flex w="full">
             <Link
               href="/"
               _hover={{

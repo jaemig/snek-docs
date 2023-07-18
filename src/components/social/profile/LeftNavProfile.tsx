@@ -1,12 +1,15 @@
 import {
   Avatar,
   Divider,
+  Flex,
   Grid,
   GridItem,
+  HStack,
   Heading,
   IconProps,
   Text,
-  VStack
+  VStack,
+  useBreakpointValue
 } from '@chakra-ui/react';
 import { FC, Fragment, useMemo } from 'react';
 import LeftNav, { ILeftNavProps } from '../../../layout/navigation/LeftNav';
@@ -15,6 +18,7 @@ import TbBuilding from '../../icons/tabler/TbBuilding';
 import TbLinkedIn from '../../icons/tabler/TbLinkedIn';
 import TbMapPin from '../../icons/tabler/TbMapPin';
 import Link from '../../core/Link';
+import { useNavOffset } from '../../../hooks/use-nav-offset';
 
 export type TSocialLink = 'email' | 'linkedin' | 'location' | 'company';
 
@@ -66,19 +70,27 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({
     ]
   };
 
+  const navTopOffset = useNavOffset();
+
+  const hideControlsFallback = useBreakpointValue({ base: true, md: false });
+
   const memoizedSocialLink = useMemo(() => {
     return userData.socialLinks.map(({ type, label, url }, idx) => {
       const IconComp = socialLinkIcons[type as TSocialLink];
       return (
         <Fragment key={idx}>
-          <GridItem>
+          <GridItem
+            as={HStack}
+            verticalAlign="middle"
+            gap={{ base: 0.5, md: 2 }}
+            // We currently only display the email link on mobile.
+            display={{ base: type !== 'email' ? 'none' : 'flex', md: 'flex' }}
+          >
             <IconComp
               strokeWidth={2.2}
-              boxSize="16px"
+              h="full"
               color="pages.userProfile.leftNav.socialLinks.icon.color"
             />
-          </GridItem>
-          <GridItem>
             {url ? (
               <Link
                 href={'url'}
@@ -101,12 +113,19 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({
 
   return (
     <LeftNav
-      hideControls={hideControls}
+      hideControls={hideControls ?? hideControlsFallback}
       isExpanded={isExpanded}
       setIsExpanded={setIsExpanded}
+      h={{
+        base: 'max-content',
+        md: `calc(100vh - 100px - ${navTopOffset})`
+      }}
+      minH="fit-content"
+      mb={{ base: 10, md: 0 }}
     >
       <VStack
-        alignItems="start"
+        alignItems={{ base: 'center', md: 'start' }}
+        textAlign={{ base: 'center', md: 'left' }}
         __css={{
           '& img': {
             // We need this to force the image to be a square
@@ -117,7 +136,10 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({
         }}
       >
         <Avatar
-          width="full"
+          width={{
+            base: '150px',
+            md: 'full'
+          }}
           h="max-content"
           name="Emily Brooks"
           src="https://onedrive.live.com/embed?resid=AE2DDC816CEF3E1E%21220972&authkey=%21AIUh8CadUcYw3cg&width=999999&height=1024"
@@ -128,7 +150,7 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({
           }}
           transition="box-shadow 0.2s cubic-bezier(.17,.67,.83,.67), transform 0.2s cubic-bezier(.17,.67,.83,.67)"
         />
-        <VStack alignItems="Start" spacing={0}>
+        <VStack alignItems={{ base: 'center', md: 'start' }} spacing={0}>
           <Heading as="h6" fontSize="24px" mt={2}>
             {userData.name}
           </Heading>
@@ -150,7 +172,11 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({
           <Text mt={2}>{userData.bio}</Text>
         </VStack>
         <Divider mt={2} />
-        <Grid templateColumns="22px 1fr" gap={1} mt={5}>
+        <Grid
+          templateColumns={{ base: 'repeat(4, auto)', md: '1fr' }}
+          gap={{ base: 4, md: 1 }}
+          my={{ base: 2, md: 5 }}
+        >
           {memoizedSocialLink}
         </Grid>
       </VStack>

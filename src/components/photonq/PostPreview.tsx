@@ -4,16 +4,16 @@ import {
   CardProps,
   HStack,
   Heading,
-  IconProps,
   LinkBox,
   LinkOverlay,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
-  Portal,
-  StackProps,
-  Text
+  Spacer,
+  Stack,
+  Text,
+  VStack
 } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 import TbStar from '../icons/tabler/TbStar';
@@ -107,9 +107,20 @@ const PostPreview: FC<IPostPreviewProps> = ({
       transition="all 0.2s cubic-bezier(.17,.67,.83,.67)"
       {...wrapperProps}
     >
-      <HStack alignItems="flex-start">
-        <Heading as="h5" size="sm" transition="color 0.2s ease-in-out" flex={1}>
-          <LinkOverlay href="#">{title}</LinkOverlay>
+      <Stack
+        direction={{ base: 'column', md: 'row' }}
+        alignItems="flex-start"
+        flexWrap="wrap"
+      >
+        <Heading
+          as="h5"
+          size="sm"
+          transition="color 0.2s ease-in-out"
+          flex={1}
+          w={{ base: 'full', md: 'auto' }}
+          order={{ base: 2, md: 0 }}
+        >
+          <LinkOverlay href={url}>{title}</LinkOverlay>
         </Heading>
         {canManage ? (
           <Menu>
@@ -128,7 +139,7 @@ const PostPreview: FC<IPostPreviewProps> = ({
         ) : (
           ratingComp
         )}
-      </HStack>
+      </Stack>
       <Text
         mt={2}
         flexGrow={1}

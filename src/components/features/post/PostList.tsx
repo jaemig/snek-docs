@@ -276,14 +276,16 @@ const PostList: FC = () => {
             borderRadius="lg"
             variant="outline"
             fontWeight="semibold"
-            rightIcon={<ChevronDownIcon />}
+            rightIcon={
+              <ChevronDownIcon display={{ base: 'none', sm: 'initial' }} />
+            }
           >
             Sort
           </MenuButton>
           <MenuList>{sortMenuItems}</MenuList>
         </Menu>
       </HStack>
-      <SimpleGrid spacing={5} columns={2}>
+      <SimpleGrid spacing={5} columns={{ base: 1, sm: 2 }}>
         {memoizedPostPreviews}
       </SimpleGrid>
       <HStack alignContent="space-around">

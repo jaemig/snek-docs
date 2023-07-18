@@ -237,6 +237,7 @@ const ActivityList: FC<IActivityListProps> = ({ ...props }) => {
               <>
                 <Spacer />
                 <Text
+                  display={{ base: 'none', md: 'initial' }}
                   fontSize="xs"
                   color="components.userActivity.item.title.date.color"
                 >
