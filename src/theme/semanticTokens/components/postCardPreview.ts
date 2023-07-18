@@ -1,4 +1,4 @@
-const smtPostPreviewComponent = {
+const smtPostCardPreviewComponent = {
     date: {
         color: {
             default: 'gray.400',
@@ -32,4 +32,4 @@ const smtPostPreviewComponent = {
     },
 };
 
-export default smtPostPreviewComponent
+export default smtPostCardPreviewComponent;

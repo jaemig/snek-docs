@@ -221,7 +221,7 @@ const UserProfileContent: FC = () => {
   if (activeTab === 'overview') {
     mainContent = <ProfileOverview />;
   } else {
-    mainContent = <PostList posts={posts} showControls />;
+    mainContent = <PostList posts={posts} previewType="card" showControls />;
   }
 
   useEffect(() => {

@@ -201,14 +201,19 @@ const PostsContent: FC = () => {
                 Featured Posts
               </Heading>
             </Box>
-            <PostList posts={posts.slice(0, 4)} py={10} px={3} />
+            <PostList
+              posts={posts.slice(0, 4)}
+              py={10}
+              px={3}
+              previewType="card"
+            />
           </Box>
         </Box>
-        <Box py={10} px={3}>
+        <Box py={10} px={3} w="full">
           <Heading as="h2" size="md">
             Latest Posts
           </Heading>
-          <PostList posts={posts.slice(4, 12)} pt={5} />
+          <PostList posts={posts.slice(4, 12)} pt={5} previewType="list" />
         </Box>
       </VStack>
     </MainGrid>

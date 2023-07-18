@@ -1,7 +1,7 @@
 import { VStack, SimpleGrid, Divider } from '@chakra-ui/react';
 import { FC, useMemo } from 'react';
 import { TPostPreview } from '../../../types/features/post';
-import PostPreview from '../../photonq/PostPreview';
+import PostPreview from '../../features/post/preview/PostCardPreview';
 import ActivityList from './ActivityList';
 
 /**
