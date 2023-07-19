@@ -30,15 +30,18 @@ const PostPreviewRating: FC<IPostPreviewRatingProps> = ({
         display="flex"
         variant="unstyled"
         size="sm"
-        color={`components.postPreview.rating${
-          hasLiked ? '.active' : ''
+        color={`components.postPreview.rating.${
+          hasLiked ? 'active' : 'unrated'
         }.color`}
         _hover={{
           color: `components.postPreview.rating._hover.color`,
-          bgColor: useHighContrast ? 'gray.100' : 'gray.50'
+          bgColor: `components.postPreview.rating._hover${
+            useHighContrast ? '.highContrast' : ''
+          }.bgColor`
         }}
         onClick={() => toggleLike(id)}
         px={2}
+        zIndex={1} // prevents the button to to be placed underneath the link overlay
         transition="color 0.2s ease-in-out, background-color 0.2s ease-in-out"
       >
         <TbStar

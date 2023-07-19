@@ -23,6 +23,8 @@ import smtUserProfilePage from "./semanticTokens/pages/userProfile";
 import smtUserActivityComponent from "./semanticTokens/components/userActivity";
 import smtStepperComponent from "./semanticTokens/components/stepper";
 import smtPostPreviewComponent from "./semanticTokens/components/postPreview";
+import smtPostsPage from "./semanticTokens/pages/posts";
+import smtInputComponent from "./semanticTokens/components/input";
 
 const themeSemanticTokens = {
   colors: {
@@ -41,9 +43,11 @@ const themeSemanticTokens = {
       postPreview: smtPostPreviewComponent,
       userActivity: smtUserActivityComponent,
       stepper: smtStepperComponent,
+      input: smtInputComponent,
     },
     pages: {
       userProfile: smtUserProfilePage,
+      posts: smtPostsPage,
     },
     shared: smtShared,
     topNav: smtTopNav,

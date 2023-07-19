@@ -23,11 +23,14 @@ const smtTopNav = {
         default: 'white',
         _dark: 'gray.900'
       },
-      //? This doesnt work with focusBorderColor for some reason
       borderColor: {
-        default: 'red.500',
-        _dark: 'red.500'
+        default: 'theme.500',
+        _dark: 'theme.600'
       }
+    },
+    borderColor: {
+      default: 'transparent',
+      _dark: 'gray.700'
     }
   },
   mobile: {

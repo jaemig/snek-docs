@@ -1,24 +1,19 @@
 import {
-  Button,
   Card,
   HStack,
   Heading,
   LinkBox,
   LinkBoxProps,
   LinkOverlay,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
+  Spacer,
   Stack,
   Text
 } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
-import TbStar from '../../../icons/tabler/TbStar';
-import { formatNumber } from '../../../../functions/utils';
 import { IPostPreviewProps } from '../../../../types/features/post';
 import PostPreviewRating from './PostPreviewRating';
-import PostPreviwManageMenu from './PostPreviewManageMenu';
+import PostPreviewManageMenu from './PostPreviewManageMenu';
+import Link from '../../../core/Link';
 
 /**
  * Component for displaying a post preview.
@@ -26,6 +21,8 @@ import PostPreviwManageMenu from './PostPreviewManageMenu';
 const PostCardPreview: FC<IPostPreviewProps<LinkBoxProps>> = ({
   id,
   publicationDate,
+  author,
+  hideAuthor,
   title,
   summary,
   hasLiked,
@@ -69,23 +66,29 @@ const PostCardPreview: FC<IPostPreviewProps<LinkBoxProps>> = ({
       transition="all 0.2s cubic-bezier(.17,.67,.83,.67)"
       {...wrapperProps}
     >
-      <Stack
-        direction={{ base: 'column', md: 'row' }}
-        alignItems="flex-start"
-        flexWrap="wrap"
-      >
-        <Heading
-          as="h5"
-          size="sm"
-          transition="color 0.2s ease-in-out"
-          flex={1}
-          w={{ base: 'full', md: 'auto' }}
-          order={{ base: 2, md: 0 }}
+      <HStack w="full">
+        <Link
+          variant="hover-theme"
+          fontSize="sm"
+          color="components.postPreview.author.color"
+          href={`/profile/${author}`}
         >
-          <LinkOverlay href={url}>{title}</LinkOverlay>
-        </Heading>
-        {canManage ? <PostPreviwManageMenu /> : ratingComp}
-      </Stack>
+          @{author}
+        </Link>
+        <Spacer />
+        {canManage ? <PostPreviewManageMenu /> : ratingComp}
+      </HStack>
+
+      <Heading
+        as="h5"
+        size="sm"
+        transition="color 0.2s ease-in-out"
+        flex={1}
+        w={{ base: 'full', md: 'auto' }}
+        // order={{ base: 2, md: 0 }}
+      >
+        <LinkOverlay href={url}>{title}</LinkOverlay>
+      </Heading>
       <Text
         mt={2}
         flexGrow={1}
@@ -98,7 +101,7 @@ const PostCardPreview: FC<IPostPreviewProps<LinkBoxProps>> = ({
       <HStack mt={4}>
         <Text
           fontSize={12}
-          color="components.postCardPreview.date.color"
+          color="components.postPreview.date.color"
           opacity={0.8}
         >
           {publicationDate}

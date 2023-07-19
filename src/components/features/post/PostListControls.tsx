@@ -73,6 +73,7 @@ const PostListControls: FC<IPostListControlsProps> = ({ search, ...props }) => {
         size="sm"
         borderRadius="lg"
         onChange={search}
+        focusBorderColor="components.input._focus.borderColor"
       />
       <Menu>
         <MenuButton
@@ -87,7 +88,7 @@ const PostListControls: FC<IPostListControlsProps> = ({ search, ...props }) => {
         >
           Sort
         </MenuButton>
-        <MenuList>{sortMenuItems}</MenuList>
+        <MenuList zIndex={99}>{sortMenuItems}</MenuList>
       </Menu>
     </HStack>
   );

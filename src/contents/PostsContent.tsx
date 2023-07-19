@@ -207,7 +207,7 @@ const PostsContent: FC = () => {
           borderRadius="xl"
           mt={10}
           p={1}
-          background="linear-gradient(120deg, rgb(31, 162, 255), rgb(18, 216, 250), rgb(144, 238, 205)) 0% 0% / 300% 300%"
+          background="pages.posts.featured.bg"
           background-size="600% 600%"
           animation={`5s ease 0s infinite normal none running ${gradientAnimation}`}
         >
@@ -221,7 +221,11 @@ const PostsContent: FC = () => {
               ml={5}
               borderRadius="full"
             >
-              <Heading as="h1" size="lg" color="#1FA2FF">
+              <Heading
+                as="h1"
+                size="lg"
+                color="pages.posts.featured.title.color"
+              >
                 Featured Posts
               </Heading>
             </Box>

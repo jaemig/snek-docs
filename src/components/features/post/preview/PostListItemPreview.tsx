@@ -56,6 +56,7 @@ const PostListItemPreview: FC<IPostPreviewProps<StackProps>> = ({
       <VStack spacing={3} alignItems="flex-start">
         <HStack spacing={4} w="full">
           <Image
+            display={{ base: 'none', md: 'initial' }}
             boxSize="75px"
             objectFit="cover"
             src={previewImage ?? 'https://picsum.photos/500'}
@@ -87,7 +88,9 @@ const PostListItemPreview: FC<IPostPreviewProps<StackProps>> = ({
             </Text>
           </VStack>
           <Spacer />
-          {canManage && <PostPreviewManageMenu alignSelf="flex-start" />}
+          {canManage && (
+            <PostPreviewManageMenu alignSelf="flex-start" minW="fit-content" />
+          )}
         </HStack>
         <Text
           maxW="75%"

@@ -110,12 +110,12 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
             placeholder="Search documentation"
             borderRadius="md"
             backgroundColor="blackAlpha.50"
-            borderColor="transparent"
+            borderColor="topNav.input.borderColor"
             pr="45px"
             _focus={{
               backgroundColor: 'topNav.input.focus.bgColor'
             }}
-            focusBorderColor="theme.500"
+            focusBorderColor="components.input._focus.borderColor"
             {...menuButton}
             {...styleProps?.parent}
             onClick={e => {

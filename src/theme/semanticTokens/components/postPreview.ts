@@ -8,6 +8,12 @@ const smtPostPreviewComponent = {
         },
     },
     rating: {
+        unrated: {
+            color: {
+                default: 'gray.400',
+                _dark: 'gray.500',
+            }
+        },
         // active means the user has rated (favorized) the post
         active: {
             color: {
@@ -21,30 +27,42 @@ const smtPostPreviewComponent = {
                 _dark: 'gray.400',
             },
         },
-        color: {
-            default: 'gray.400',
-            _dark: 'gray.500',
-        },
         _hover: {
             color: {
                 default: 'flat.sunflower',
                 _dark: 'yellow.500',
             },
+            bgColor: {
+                default: 'gray.50',
+                _dark: 'gray.700',
+            },
+            highContrast: {
+                bgColor: {
+                    default: 'gray.100',
+                    _dark: 'gray.700',
+                }
+            },
+        },
+    },
+    author: {
+        color: {
+            default: 'gray.400',
+            _dark: 'gray.400',
         },
     },
     // CARD PREVIEW
-    // ...
+    //...
     // LIST ITEM PREVIEW
     listItem: {
         // Originally wanted to name this default, but seems to be a reserved keyword
         initial: {
             bgColor: {
                 default: 'gray.50',
-                _dark: 'gray.700',
+                _dark: 'gray.800',
             },
             borderColor: {
                 default: 'gray.100',
-                _dark: 'gray.600',
+                _dark: 'gray.700',
             },
             title: {
                 color: 'shared.text.default',
