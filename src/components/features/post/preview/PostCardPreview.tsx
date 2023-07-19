@@ -98,7 +98,11 @@ const PostCardPreview: FC<IPostPreviewProps<LinkBoxProps>> = ({
       >
         {summary}
       </Text>
-      <HStack mt={4}>
+      <HStack
+        mt={4}
+        // Prevents the date from being placed on top of the link overlay
+        pointerEvents="none"
+      >
         <Text
           fontSize={12}
           color="components.postPreview.date.color"
