@@ -110,6 +110,7 @@ const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
             placeholder="Search documentation"
             borderRadius="md"
             backgroundColor="blackAlpha.50"
+            borderColor="transparent"
             pr="45px"
             _focus={{
               backgroundColor: 'topNav.input.focus.bgColor'
