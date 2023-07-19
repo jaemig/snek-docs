@@ -8,7 +8,9 @@ import { CardProps } from "@chakra-ui/react";
 export type TPost = {
     id: string;
     publicationDate: string;
+    author: string;
     title: string;
+    previewImage?: string;
     content: ReactNode[];
     summary: string;
     likes: number;

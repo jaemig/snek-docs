@@ -14,6 +14,12 @@ const themeColors = {
   },
   pq: {
     500: '#0580D2',
+  },
+  flat: {
+    // https://flatuicolors.com/palette/se
+    vibrantYellow: '#ffd32a',
+    // https://flatuicolors.com/palette/nl
+    sunflower: '#FFC312'
   }
 };
 

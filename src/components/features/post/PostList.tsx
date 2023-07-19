@@ -83,7 +83,11 @@ const PostList: FC<IPostListProps> = ({
     );
   } else {
     // Shows the posts in a list
-    postPreviews = <VStack w="full">{memoizedPostPreviews}</VStack>;
+    postPreviews = (
+      <VStack w="full" spacing={5}>
+        {memoizedPostPreviews}
+      </VStack>
+    );
   }
 
   return (

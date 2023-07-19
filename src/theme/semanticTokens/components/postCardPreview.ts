@@ -9,7 +9,7 @@ const smtPostCardPreviewComponent = {
         // active means the user has rated (favorized) the post
         active: {
             color: {
-                default: 'yellow.500',
+                default: 'flat.sunflower',
                 _dark: 'yellow.600',
             },
         },
@@ -25,7 +25,7 @@ const smtPostCardPreviewComponent = {
         },
         _hover: {
             color: {
-                default: 'yellow.400',
+                default: 'flat.sunflower',
                 _dark: 'yellow.500',
             },
         },

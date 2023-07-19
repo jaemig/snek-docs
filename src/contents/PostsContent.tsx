@@ -1,4 +1,4 @@
-import { Box, Heading, VStack } from '@chakra-ui/react';
+import { Box, Heading, VStack, keyframes } from '@chakra-ui/react';
 import { ChangeEvent, FC, useMemo, useState } from 'react';
 import MainGrid from '../layout/components/MainGrid';
 import LeftNav from '../layout/navigation/LeftNav';
@@ -9,6 +9,12 @@ import { useMenuContext } from '../contexts/menu';
 import PostList from '../components/features/post/PostList';
 import { TPostPreview } from '../types/features/post';
 import PostListControls from '../components/features/post/PostListControls';
+
+const gradientAnimation = keyframes`
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+`;
 
 /**
  * Content for the posts page.
@@ -23,6 +29,7 @@ const PostsContent: FC = () => {
     {
       id: '1',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -32,6 +39,7 @@ const PostsContent: FC = () => {
     {
       id: '2',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -41,6 +49,7 @@ const PostsContent: FC = () => {
     {
       id: '3',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -50,6 +59,7 @@ const PostsContent: FC = () => {
     {
       id: '4',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -60,6 +70,7 @@ const PostsContent: FC = () => {
     {
       id: '5',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -70,6 +81,7 @@ const PostsContent: FC = () => {
     {
       id: '1',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -79,6 +91,7 @@ const PostsContent: FC = () => {
     {
       id: '2',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -88,6 +101,7 @@ const PostsContent: FC = () => {
     {
       id: '3',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -97,6 +111,7 @@ const PostsContent: FC = () => {
     {
       id: '4',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -107,6 +122,7 @@ const PostsContent: FC = () => {
     {
       id: '5',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -116,6 +132,7 @@ const PostsContent: FC = () => {
     {
       id: '1',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -125,6 +142,7 @@ const PostsContent: FC = () => {
     {
       id: '2',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -134,6 +152,7 @@ const PostsContent: FC = () => {
     {
       id: '3',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -143,6 +162,7 @@ const PostsContent: FC = () => {
     {
       id: '4',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -153,6 +173,7 @@ const PostsContent: FC = () => {
     {
       id: '5',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -185,7 +206,9 @@ const PostsContent: FC = () => {
           borderRadius="xl"
           mt={10}
           p={1}
-          bgGradient="linear(to-br, #1FA2FF, #12D8FA, #90EECD)"
+          background="linear-gradient(270deg, rgb(31, 162, 255), rgb(18, 216, 250), rgb(144, 238, 205)) 0% 0% / 300% 300%"
+          background-size="600% 600%"
+          animation={`5s ease 0s infinite normal none running ${gradientAnimation}`}
         >
           <Box bgColor="shared.body.bgColor" borderRadius="xl">
             <Box

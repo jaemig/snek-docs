@@ -10,6 +10,7 @@ interface IPostPreviewRatingProps {
   hasLiked?: boolean;
   toggleLike: (id: TPostPreview['id']) => void;
   isPostManagable?: boolean;
+  useHighContrast?: boolean;
 }
 
 /**
@@ -20,7 +21,8 @@ const PostPreviewRating: FC<IPostPreviewRatingProps> = ({
   likes,
   hasLiked,
   toggleLike,
-  isPostManagable
+  isPostManagable,
+  useHighContrast
 }) => {
   if (!isPostManagable) {
     return (
@@ -32,9 +34,12 @@ const PostPreviewRating: FC<IPostPreviewRatingProps> = ({
           hasLiked ? '.active' : ''
         }.color`}
         _hover={{
-          color: `components.postCardPreview.rating._hover.color`
+          color: `components.postCardPreview.rating._hover.color`,
+          bgColor: useHighContrast ? 'gray.100' : 'gray.50'
         }}
         onClick={() => toggleLike(id)}
+        px={2}
+        transition="color 0.2s ease-in-out, background-color 0.2s ease-in-out"
       >
         <TbStar
           boxSize={3}

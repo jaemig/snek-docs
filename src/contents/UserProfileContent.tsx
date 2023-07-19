@@ -25,6 +25,7 @@ const UserProfileContent: FC = () => {
     {
       id: '1',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -34,6 +35,7 @@ const UserProfileContent: FC = () => {
     {
       id: '2',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -44,6 +46,7 @@ const UserProfileContent: FC = () => {
     {
       id: '3',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -54,6 +57,7 @@ const UserProfileContent: FC = () => {
     {
       id: '4',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -65,6 +69,7 @@ const UserProfileContent: FC = () => {
     {
       id: '5',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -76,6 +81,7 @@ const UserProfileContent: FC = () => {
     {
       id: '1',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -85,6 +91,7 @@ const UserProfileContent: FC = () => {
     {
       id: '2',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -95,6 +102,7 @@ const UserProfileContent: FC = () => {
     {
       id: '3',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -105,6 +113,7 @@ const UserProfileContent: FC = () => {
     {
       id: '4',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -116,6 +125,7 @@ const UserProfileContent: FC = () => {
     {
       id: '5',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -126,6 +136,7 @@ const UserProfileContent: FC = () => {
     {
       id: '1',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -135,6 +146,7 @@ const UserProfileContent: FC = () => {
     {
       id: '2',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -145,6 +157,7 @@ const UserProfileContent: FC = () => {
     {
       id: '3',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -155,6 +168,7 @@ const UserProfileContent: FC = () => {
     {
       id: '4',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -166,6 +180,7 @@ const UserProfileContent: FC = () => {
     {
       id: '5',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -221,7 +236,7 @@ const UserProfileContent: FC = () => {
   if (activeTab === 'overview') {
     mainContent = <ProfileOverview />;
   } else {
-    mainContent = <PostList posts={posts} previewType="card" showControls />;
+    mainContent = <PostList posts={posts} previewType="list" showControls />;
   }
 
   useEffect(() => {
