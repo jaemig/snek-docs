@@ -6,7 +6,6 @@ import {
   LinkBoxProps,
   LinkOverlay,
   Spacer,
-  Stack,
   Text
 } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';

@@ -1,5 +1,5 @@
 import { Box, Heading, VStack, keyframes } from '@chakra-ui/react';
-import { ChangeEvent, FC, useMemo, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
 import MainGrid from '../layout/components/MainGrid';
 import LeftNav from '../layout/navigation/LeftNav';
 import { createBreadCrumbParts } from '../functions/navigation';
@@ -7,8 +7,10 @@ import PageDirectory from '../layout/navigation/components/PageDirectory';
 import { MainBreadcrumbPart } from '../types/navigation';
 import { useMenuContext } from '../contexts/menu';
 import PostList from '../components/features/post/PostList';
-import { TPostPreview } from '../types/features/post';
+import { TPostListData, TPostPreview } from '../types/features/post';
 import PostListControls from '../components/features/post/PostListControls';
+import PostCardPreviewSkeleton from '../components/features/post/preview/PostCardPreviewSkeleton';
+import PostListItemPreviewSkeleton from '../components/features/post/preview/PostListItemPreviewSkeleton';
 
 const gradientAnimation = keyframes`
   0%{background-position:0% 50%}
@@ -23,6 +25,14 @@ const gradientAnimation = keyframes`
 const PostsContent: FC = () => {
   const [isExpanded, setIsExpanded] = useState(true);
   const { menuStructure } = useMenuContext();
+  const [featuredPosts, setFeaturedPosts] = useState<TPostListData>({
+    state: 'loading',
+    posts: []
+  });
+  const [latestPosts, setLatestPosts] = useState<TPostListData>({
+    state: 'loading',
+    posts: []
+  });
 
   //TODO: This would come from an API
   const posts: TPostPreview[] = [
@@ -188,6 +198,14 @@ const PostsContent: FC = () => {
     console.log(query);
   };
 
+  useEffect(() => {
+    // Simulate loading posts from an API
+    setTimeout(() => {
+      setFeaturedPosts({ posts: posts.slice(0, 4), state: 'success' });
+      setLatestPosts({ posts: posts.slice(4), state: 'success' });
+    }, 3000);
+  }, []);
+
   return (
     <MainGrid>
       <Box display={{ base: 'none', md: 'block' }} position="sticky">
@@ -210,6 +228,7 @@ const PostsContent: FC = () => {
           background="pages.posts.featured.bg"
           background-size="600% 600%"
           animation={`5s ease 0s infinite normal none running ${gradientAnimation}`}
+          w="full"
         >
           <Box bgColor="shared.body.bgColor" borderRadius="xl">
             <Box
@@ -230,10 +249,15 @@ const PostsContent: FC = () => {
               </Heading>
             </Box>
             <PostList
-              posts={posts.slice(0, 4)}
+              postData={featuredPosts}
               py={10}
               px={3}
               previewType="card"
+              itemsPerPage={4}
+              w="full"
+              skeletonProps={{
+                minW: '100%'
+              }}
             />
           </Box>
         </Box>
@@ -241,7 +265,15 @@ const PostsContent: FC = () => {
           <Heading as="h2" size="md">
             Latest Posts
           </Heading>
-          <PostList posts={posts.slice(4, 12)} pt={5} previewType="list" />
+          <PostList
+            postData={latestPosts}
+            pt={5}
+            previewType="list"
+            itemsPerPage={10}
+            skeletonProps={{
+              w: 'full'
+            }}
+          />
         </Box>
       </VStack>
     </MainGrid>

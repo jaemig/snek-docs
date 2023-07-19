@@ -24,6 +24,11 @@ export type TPost = {
  */
 export type TPostPreview = Omit<Optional<TPost, "hasLiked" | "canManage">, "content">;
 
+export type TPostListData = {
+    posts: TPostPreview[];
+    state: "loading" | "error" | "success";
+}
+
 /**
  * Props for a single post preview components (for all variants)
  */

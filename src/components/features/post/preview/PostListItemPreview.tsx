@@ -1,8 +1,6 @@
 import { FC } from 'react';
 import { IPostPreviewProps } from '../../../../types/features/post';
 import {
-  Box,
-  Center,
   HStack,
   Heading,
   Image,
@@ -16,6 +14,34 @@ import {
 import Link from '../../../core/Link';
 import PostPreviewManageMenu from './PostPreviewManageMenu';
 import PostPreviewRating from './PostPreviewRating';
+
+const postListItemPreviewStyling = {
+  wrapper: {
+    w: 'full',
+    h: 'max-content',
+    p: 5,
+    py: 7,
+    borderRadius: 'lg',
+    border: '1px solid',
+    borderColor: 'components.postPreview.listItem.initial.borderColor'
+  },
+  outerVStack: {
+    spacing: 3,
+    alignItems: 'flex-start'
+  },
+  topHStack: {
+    spacing: 4,
+    w: 'full'
+  },
+  image: {
+    display: { base: 'none', md: 'initial' },
+    boxSize: '75px',
+    borderRadius: 'md'
+  },
+  bottomHStack: {
+    spacing: 5
+  }
+};
 
 /**
  * Component for displaying a preview of a post in form of a list item.
@@ -38,13 +64,8 @@ const PostListItemPreview: FC<IPostPreviewProps<StackProps>> = ({
   return (
     <LinkBox
       key={id}
-      w="full"
-      h="max-content"
+      {...postListItemPreviewStyling.wrapper}
       bgColor="components.postPreview.listItem.initial.bgColor"
-      p={5}
-      py={7}
-      borderRadius="lg"
-      border="1px solid"
       borderColor="components.postPreview.listItem.initial.borderColor"
       _hover={{
         borderColor: 'components.postPreview.listItem._hover.borderColor',
@@ -98,7 +119,7 @@ const PostListItemPreview: FC<IPostPreviewProps<StackProps>> = ({
         >
           {summary}
         </Text>
-        <HStack spacing={5}>
+        <HStack {...postListItemPreviewStyling.bottomHStack}>
           {!hideAuthor && (
             <Link
               href={`/profile/${author}`}
@@ -119,9 +140,9 @@ const PostListItemPreview: FC<IPostPreviewProps<StackProps>> = ({
           />
         </HStack>
       </VStack>
-      <Spacer />
     </LinkBox>
   );
 };
 
 export default PostListItemPreview;
+export { postListItemPreviewStyling };

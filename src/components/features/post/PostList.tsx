@@ -1,8 +1,14 @@
 import { ChangeEvent, FC, ReactNode, useMemo } from 'react';
-import { IPostPreviewProps, TPostPreview } from '../../../types/features/post';
+import {
+  IPostPreviewProps,
+  TPostListData,
+  TPostPreview
+} from '../../../types/features/post';
 import {
   Button,
+  CardProps,
   HStack,
+  LinkBoxProps,
   SimpleGrid,
   StackProps,
   VStack
@@ -12,27 +18,34 @@ import PostCardPreview from './preview/PostCardPreview';
 import usePagination from '../../../hooks/use-pagination';
 import PostListControls from './PostListControls';
 import PostListItemPreview from './preview/PostListItemPreview';
+import PostCardPreviewSkeleton from './preview/PostCardPreviewSkeleton';
+import PostListItemPreviewSkeleton from './preview/PostListItemPreviewSkeleton';
 
 interface IPostListProps extends StackProps {
-  posts: TPostPreview[];
+  postData: TPostListData;
+  itemsPerPage?: number;
   showControls?: boolean;
   hidePostAuthor?: boolean;
   previewType?: 'card' | 'list';
+  skeletonProps?: CardProps & LinkBoxProps;
 }
 
 /**
  * Component for displaying a sort- and filterable list of posts.
  */
 const PostList: FC<IPostListProps> = ({
-  posts,
+  postData,
+  itemsPerPage = 10,
   showControls,
   hidePostAuthor,
   previewType = 'list',
+  skeletonProps,
   ...props
 }) => {
   const pagination = usePagination({
-    itemsPerPage: 10,
-    totalItems: posts.length
+    itemsPerPage: itemsPerPage,
+    totalItems:
+      postData.state != 'success' ? itemsPerPage / 2 : postData.posts.length
   });
 
   const toggleLike = (id: TPostPreview['id']) => {
@@ -50,19 +63,31 @@ const PostList: FC<IPostListProps> = ({
   const memoizedPostPreviews = useMemo(() => {
     const offset = (pagination.currentPage - 1) * pagination.itemsPerPage;
     let PreviewComp: typeof PostCardPreview | typeof PostListItemPreview;
+    let PreviewSkeletonComp:
+      | typeof PostCardPreviewSkeleton
+      | typeof PostListItemPreviewSkeleton;
     type ExtractProps<T> = T extends FC<IPostPreviewProps<infer P>> ? P : never;
     let previewCompProps:
       | ExtractProps<typeof PostCardPreview>
       | ExtractProps<typeof PostListItemPreview> = {};
-    //TODO: Add props for both variants
+
     if (previewType === 'card') {
       PreviewComp = PostCardPreview;
+      PreviewSkeletonComp = PostCardPreviewSkeleton;
     } else {
       PreviewComp = PostListItemPreview;
+      PreviewSkeletonComp = PostListItemPreviewSkeleton;
     }
-    // const PreviewComp =
-    //   previewType === 'card' ? PostCardPreview : PostListItemPreview;
-    return posts
+    if (postData.state === 'loading') {
+      return Array.from({ length: pagination.itemsPerPage }).map((_, i) => (
+        <PreviewSkeletonComp
+          key={i}
+          {...skeletonProps}
+          hideAuthor={hidePostAuthor}
+        />
+      ));
+    }
+    return postData.posts
       .slice(offset, offset + pagination.itemsPerPage)
       .map(postPreview => (
         <PreviewComp
@@ -74,13 +99,13 @@ const PostList: FC<IPostListProps> = ({
           wrapperProps={{ minW: '33%' }}
         />
       ));
-  }, [posts, pagination]);
+  }, [postData, pagination]);
 
   let postPreviews: ReactNode;
   if (previewType === 'card') {
     // Shows the posts in a grid of cards
     postPreviews = (
-      <SimpleGrid spacing={5} columns={{ base: 1, sm: 2 }}>
+      <SimpleGrid w="full" spacing={5} columns={{ base: 1, sm: 2 }}>
         {memoizedPostPreviews}
       </SimpleGrid>
     );
