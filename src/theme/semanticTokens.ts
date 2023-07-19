@@ -20,10 +20,9 @@ import smtPqSectionLabel from "./photonq/semanticTokens/components/sectionLabel"
 import smtPqFeatureCard from "./photonq/semanticTokens/components/featureCard";
 import smtcodeResultPreviewComponent from "./semanticTokens/components/codeResultPreview";
 import smtUserProfilePage from "./semanticTokens/pages/userProfile";
-import smtPostCardPreviewComponent from "./semanticTokens/components/postCardPreview";
 import smtUserActivityComponent from "./semanticTokens/components/userActivity";
 import smtStepperComponent from "./semanticTokens/components/stepper";
-import smtPostLitItemPreviewComponent from "./semanticTokens/components/postListItemPreview";
+import smtPostPreviewComponent from "./semanticTokens/components/postPreview";
 
 const themeSemanticTokens = {
   colors: {
@@ -39,8 +38,7 @@ const themeSemanticTokens = {
       callout: smtCalloutComponent,
       imageCard: smtImageCardComponent,
       iconCard: smtIconCardComponent,
-      postCardPreview: smtPostCardPreviewComponent,
-      postListItemPreview: smtPostLitItemPreviewComponent,
+      postPreview: smtPostPreviewComponent,
       userActivity: smtUserActivityComponent,
       stepper: smtStepperComponent,
     },

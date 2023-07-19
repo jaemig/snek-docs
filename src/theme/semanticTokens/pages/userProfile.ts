@@ -29,6 +29,14 @@ const smtUserProfilePage = {
             },
         },
     },
+    topNav: {
+        tabs: {
+            borderColor: {
+                default: 'theme.500',
+                _dark: 'theme.500',
+            },
+        },
+    },
     rightNav: {
         tabs: {
             active: {

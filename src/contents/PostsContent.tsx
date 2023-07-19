@@ -86,7 +86,8 @@ const PostsContent: FC = () => {
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
       likes: 1423,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/'
+      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
+      canManage: true
     },
     {
       id: '2',
@@ -206,7 +207,7 @@ const PostsContent: FC = () => {
           borderRadius="xl"
           mt={10}
           p={1}
-          background="linear-gradient(270deg, rgb(31, 162, 255), rgb(18, 216, 250), rgb(144, 238, 205)) 0% 0% / 300% 300%"
+          background="linear-gradient(120deg, rgb(31, 162, 255), rgb(18, 216, 250), rgb(144, 238, 205)) 0% 0% / 300% 300%"
           background-size="600% 600%"
           animation={`5s ease 0s infinite normal none running ${gradientAnimation}`}
         >

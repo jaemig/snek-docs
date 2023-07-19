@@ -31,4 +31,5 @@ export interface IPostPreviewProps<T> extends TPostPreview {
     toggleLike: (id: TPostPreview['id']) => void;
     canManage?: boolean;
     wrapperProps?: T;
+    hideAuthor?: boolean;
 }

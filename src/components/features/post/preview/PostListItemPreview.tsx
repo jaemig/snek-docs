@@ -24,6 +24,7 @@ const PostListItemPreview: FC<IPostPreviewProps<StackProps>> = ({
   id,
   publicationDate,
   author,
+  hideAuthor,
   title,
   previewImage,
   summary,
@@ -36,28 +37,28 @@ const PostListItemPreview: FC<IPostPreviewProps<StackProps>> = ({
 }) => {
   return (
     <LinkBox
-      as={HStack}
       key={id}
       w="full"
       h="max-content"
-      bgColor="gray.50"
+      bgColor="components.postPreview.listItem.initial.bgColor"
       p={5}
       py={7}
       borderRadius="lg"
       border="1px solid"
-      borderColor="gray.100"
+      borderColor="components.postPreview.listItem.initial.borderColor"
       _hover={{
-        borderColor: 'theme.500',
+        borderColor: 'components.postPreview.listItem._hover.borderColor',
         boxShadow: 'md'
       }}
       transition="border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out"
+      {...wrapperProps}
     >
       <VStack spacing={3} alignItems="flex-start">
-        <HStack spacing={4}>
+        <HStack spacing={4} w="full">
           <Image
             boxSize="75px"
             objectFit="cover"
-            src={previewImage ?? 'https://picsum.photos/75'}
+            src={previewImage ?? 'https://picsum.photos/500'}
             borderRadius="md"
           />
           <VStack alignItems="flex-start">
@@ -65,48 +66,54 @@ const PostListItemPreview: FC<IPostPreviewProps<StackProps>> = ({
               href={url}
               _hover={{
                 h5: {
-                  color: 'theme.500'
+                  color: 'components.postPreview.listItem._hover.title.color'
                 }
               }}
             >
               <Heading
                 as="h5"
                 size="sm"
-                color="shared.text.default"
+                color="components.postPreview.listItem.initial.title.color"
                 transition="color 0.2s ease-in-out"
               >
                 {title}
               </Heading>
             </LinkOverlay>
-            <Text color="gray.500" fontSize="sm">
+            <Text
+              color="components.postPreview.listItem.initial.date.color"
+              fontSize="sm"
+            >
               {publicationDate}
             </Text>
           </VStack>
+          <Spacer />
+          {canManage && <PostPreviewManageMenu alignSelf="flex-start" />}
         </HStack>
-        <Text maxW="75%" color="gray.600">
+        <Text
+          maxW="75%"
+          color="components.postPreview.listItem.initial.summary.color"
+        >
           {summary}
         </Text>
         <HStack spacing={5}>
-          <Link
-            href={`/profile/${author}`}
-            color="gray.400"
-            fontSize="sm"
-            variant="hover-theme"
-          >
-            @{author}
-          </Link>
-          {canManage ? (
-            <PostPreviewManageMenu />
-          ) : (
-            <PostPreviewRating
-              id={id}
-              likes={likes}
-              toggleLike={toggleLike}
-              hasLiked={hasLiked}
-              isPostManagable={canManage}
-              useHighContrast
-            />
+          {!hideAuthor && (
+            <Link
+              href={`/profile/${author}`}
+              color="components.postPreview.listItem.initial.author.color"
+              fontSize="sm"
+              variant="hover-theme"
+            >
+              @{author}
+            </Link>
           )}
+          <PostPreviewRating
+            id={id}
+            likes={likes}
+            toggleLike={toggleLike}
+            hasLiked={hasLiked}
+            isPostManagable={canManage}
+            useHighContrast
+          />
         </HStack>
       </VStack>
       <Spacer />

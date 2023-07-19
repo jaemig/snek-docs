@@ -30,11 +30,11 @@ const PostPreviewRating: FC<IPostPreviewRatingProps> = ({
         display="flex"
         variant="unstyled"
         size="sm"
-        color={`components.postCardPreview.rating${
+        color={`components.postPreview.rating${
           hasLiked ? '.active' : ''
         }.color`}
         _hover={{
-          color: `components.postCardPreview.rating._hover.color`,
+          color: `components.postPreview.rating._hover.color`,
           bgColor: useHighContrast ? 'gray.100' : 'gray.50'
         }}
         onClick={() => toggleLike(id)}
@@ -55,9 +55,9 @@ const PostPreviewRating: FC<IPostPreviewRatingProps> = ({
   return (
     <HStack
       spacing={1}
-      color="components.postCardPreview.rating.disabled.color"
+      color="components.postPreview.rating.disabled.color"
       _hover={{
-        color: 'components.postCardPreview.rating._hover.disabled.color'
+        color: 'components.postPreview.rating._hover.disabled.color'
       }}
       transition="color 0.2s ease-in-out"
     >

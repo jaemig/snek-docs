@@ -1,15 +1,29 @@
-import { Menu, MenuButton, Button, MenuList, MenuItem } from '@chakra-ui/react';
+import {
+  Menu,
+  MenuButton,
+  Button,
+  MenuList,
+  MenuItem,
+  ButtonProps
+} from '@chakra-ui/react';
 import { FC } from 'react';
 
-interface IPostPreviewManageMenuProps {}
+interface IPostPreviewManageMenuProps extends ButtonProps {}
 
 /**
  * Component for displaying a menu with actions for managing a post.
  */
-const PostPreviewManageMenu: FC<IPostPreviewManageMenuProps> = ({}) => {
+const PostPreviewManageMenu: FC<IPostPreviewManageMenuProps> = ({
+  ...props
+}) => {
   return (
     <Menu>
-      <MenuButton as={Button} size="sm" variant="outline-hover-filled">
+      <MenuButton
+        as={Button}
+        size="sm"
+        variant="outline-hover-filled"
+        {...props}
+      >
         Manage
       </MenuButton>
       <MenuList zIndex={999}>

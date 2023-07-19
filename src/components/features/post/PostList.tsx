@@ -16,6 +16,7 @@ import PostListItemPreview from './preview/PostListItemPreview';
 interface IPostListProps extends StackProps {
   posts: TPostPreview[];
   showControls?: boolean;
+  hidePostAuthor?: boolean;
   previewType?: 'card' | 'list';
 }
 
@@ -25,6 +26,7 @@ interface IPostListProps extends StackProps {
 const PostList: FC<IPostListProps> = ({
   posts,
   showControls,
+  hidePostAuthor,
   previewType = 'list',
   ...props
 }) => {
@@ -68,6 +70,7 @@ const PostList: FC<IPostListProps> = ({
           toggleLike={toggleLike}
           {...postPreview}
           {...previewCompProps}
+          hideAuthor={hidePostAuthor}
           wrapperProps={{ minW: '33%' }}
         />
       ));

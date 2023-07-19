@@ -220,7 +220,7 @@ const UserProfileContent: FC = () => {
               opacity: 1,
               color: 'topNav.tabs.active.color',
               borderBottom: '2px solid',
-              borderBottomColor: 'theme.500'
+              borderBottomColor: 'pages.userProfile.topNav.tabs.borderColor'
             })}
             onClick={!isActive ? () => setActiveTab(item.value) : undefined}
           >
@@ -236,7 +236,9 @@ const UserProfileContent: FC = () => {
   if (activeTab === 'overview') {
     mainContent = <ProfileOverview />;
   } else {
-    mainContent = <PostList posts={posts} previewType="list" showControls />;
+    mainContent = (
+      <PostList posts={posts} previewType="list" hidePostAuthor showControls />
+    );
   }
 
   useEffect(() => {
