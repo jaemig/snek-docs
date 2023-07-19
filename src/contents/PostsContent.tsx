@@ -1,16 +1,12 @@
 import { Box, Heading, VStack, keyframes } from '@chakra-ui/react';
-import { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import MainGrid from '../layout/components/MainGrid';
 import LeftNav from '../layout/navigation/LeftNav';
-import { createBreadCrumbParts } from '../functions/navigation';
 import PageDirectory from '../layout/navigation/components/PageDirectory';
-import { MainBreadcrumbPart } from '../types/navigation';
 import { useMenuContext } from '../contexts/menu';
 import PostList from '../components/features/post/PostList';
 import { TPostListData, TPostPreview } from '../types/features/post';
 import PostListControls from '../components/features/post/PostListControls';
-import PostCardPreviewSkeleton from '../components/features/post/preview/PostCardPreviewSkeleton';
-import PostListItemPreviewSkeleton from '../components/features/post/preview/PostListItemPreviewSkeleton';
 
 const gradientAnimation = keyframes`
   0%{background-position:0% 50%}

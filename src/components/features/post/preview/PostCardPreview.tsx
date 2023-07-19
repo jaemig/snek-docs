@@ -14,6 +14,23 @@ import PostPreviewRating from './PostPreviewRating';
 import PostPreviewManageMenu from './PostPreviewManageMenu';
 import Link from '../../../core/Link';
 
+const postCardPreviewStyling = {
+  wrapper: {
+    variant: 'outline',
+    p: 5,
+    borderRadius: 'xl'
+  },
+  topHStack: {
+    w: 'full'
+  },
+  summary: {
+    mt: 2
+  },
+  bottomHStack: {
+    mt: 4
+  }
+};
+
 /**
  * Component for displaying a post preview.
  */
@@ -45,10 +62,8 @@ const PostCardPreview: FC<IPostPreviewProps<LinkBoxProps>> = ({
     // 1) Use overflow="hidden" and textOverflow="ellipsis" on the Card component
     // 2) Cut off the text on the server side (easier way)
     <LinkBox
+      {...postCardPreviewStyling.wrapper}
       as={Card}
-      variant="outline"
-      p={5}
-      borderRadius="xl"
       _hover={{
         //! transforming the card causes the menu to be cut off by the sibling card
         // transform: 'scale(1.01)',
@@ -65,7 +80,7 @@ const PostCardPreview: FC<IPostPreviewProps<LinkBoxProps>> = ({
       transition="all 0.2s cubic-bezier(.17,.67,.83,.67)"
       {...wrapperProps}
     >
-      <HStack w="full">
+      <HStack {...postCardPreviewStyling.topHStack}>
         <Link
           variant="hover-theme"
           fontSize="sm"
@@ -84,12 +99,11 @@ const PostCardPreview: FC<IPostPreviewProps<LinkBoxProps>> = ({
         transition="color 0.2s ease-in-out"
         flex={1}
         w={{ base: 'full', md: 'auto' }}
-        // order={{ base: 2, md: 0 }}
       >
         <LinkOverlay href={url}>{title}</LinkOverlay>
       </Heading>
       <Text
-        mt={2}
+        {...postCardPreviewStyling.summary}
         flexGrow={1}
         opacity={0.75}
         className="sd-pp-summary"
@@ -98,7 +112,7 @@ const PostCardPreview: FC<IPostPreviewProps<LinkBoxProps>> = ({
         {summary}
       </Text>
       <HStack
-        mt={4}
+        {...postCardPreviewStyling.bottomHStack}
         // Prevents the date from being placed on top of the link overlay
         pointerEvents="none"
       >
@@ -116,3 +130,5 @@ const PostCardPreview: FC<IPostPreviewProps<LinkBoxProps>> = ({
 };
 
 export default PostCardPreview;
+
+export { postCardPreviewStyling };
