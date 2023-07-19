@@ -47,7 +47,7 @@ const smtPostPreviewComponent = {
     author: {
         color: {
             default: 'gray.400',
-            _dark: 'gray.400',
+            _dark: 'gray.500',
         },
     },
     // CARD PREVIEW
@@ -76,12 +76,6 @@ const smtPostPreviewComponent = {
             summary: {
                 color: {
                     default: 'gray.600',
-                    _dark: 'gray.400',
-                },
-            },
-            author: {
-                color: {
-                    default: 'gray.400',
                     _dark: 'gray.400',
                 },
             },

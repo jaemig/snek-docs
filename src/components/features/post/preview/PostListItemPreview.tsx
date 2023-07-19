@@ -102,7 +102,7 @@ const PostListItemPreview: FC<IPostPreviewProps<StackProps>> = ({
           {!hideAuthor && (
             <Link
               href={`/profile/${author}`}
-              color="components.postPreview.listItem.initial.author.color"
+              color="components.postPreview.author.color"
               fontSize="sm"
               variant="hover-theme"
             >
