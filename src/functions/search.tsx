@@ -168,7 +168,6 @@ export async function searchDocs(
       results: searchResultItems
     });
   }
-  //TODO: Return this directly after testing.
   const res = searchResults.sort((a, b) => {
     if (a._page_matches !== b._page_matches) {
       return b._page_matches - a._page_matches;
@@ -178,4 +177,22 @@ export async function searchDocs(
       : b._section_matches - a._section_matches;
   });
   return res;
+}
+
+/**
+ * Debounces the given callback function.
+ * @param callback  The callback function to debounce
+ * @param timeout  The timeout object to use
+ * @param debounceTime  The debounce time in milliseconds
+ * @returns The debounced callback function
+ */
+export function debounce(
+  callback: (...args: any) => void,
+  timeout: { current?: NodeJS.Timeout },
+  debounceTime = 300
+) {
+  return (...args: any) => {
+    clearTimeout(timeout.current);
+    timeout.current = setTimeout(() => callback(args), debounceTime);
+  };
 }
