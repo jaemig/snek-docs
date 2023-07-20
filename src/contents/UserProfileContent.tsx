@@ -8,7 +8,7 @@ import { useLocation } from '@reach/router';
 import TopNav from '../layout/navigation/TopNav';
 import TbUser from '../components/icons/tabler/TbUser';
 import TbBook from '../components/icons/tabler/TbBook';
-import { TPostListData, TPostPreview } from '../types/features/post';
+import { TPostListData } from '../types/features/post';
 
 /**
  * Component for displaying a certain user profile.
@@ -23,185 +23,6 @@ const UserProfileContent: FC = () => {
   });
   const [activeTab, setActiveTab] =
     useState<(typeof tabNavItems)[number]['value']>('posts');
-
-  useEffect(() => {
-    setTimeout(() => {
-      setPosts({
-        state: 'success',
-        posts: postData
-      });
-    }, 3000);
-  }, []);
-
-  //TODO: This would come from an API
-  const postData: TPostPreview[] = [
-    {
-      id: '1',
-      publicationDate: '2023-16-15',
-      author: 'Emily Brooks',
-      title: 'Unlocking the Power of Quantum Computing',
-      summary:
-        'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
-      likes: 1423,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/'
-    },
-    {
-      id: '2',
-      publicationDate: '2023-16-15',
-      author: 'Emily Brooks',
-      title: 'Unlocking the Power of Quantum Computing',
-      summary:
-        'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
-      likes: 1423,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
-    },
-    {
-      id: '3',
-      publicationDate: '2023-16-15',
-      author: 'Emily Brooks',
-      title: 'Unlocking the Power of Quantum Computing',
-      summary:
-        'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
-      likes: 1423,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
-    },
-    {
-      id: '4',
-      publicationDate: '2023-16-15',
-      author: 'Emily Brooks',
-      title: 'Unlocking the Power of Quantum Computing',
-      summary:
-        'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
-      likes: 1423,
-      hasLiked: true,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: false
-    },
-    {
-      id: '5',
-      publicationDate: '2023-16-15',
-      author: 'Emily Brooks',
-      title: 'Unlocking the Power of Quantum Computing',
-      summary:
-        'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
-      likes: 500,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
-    },
-    //....
-    {
-      id: '1',
-      publicationDate: '2023-16-15',
-      author: 'Emily Brooks',
-      title: 'Unlocking the Power of Quantum Computing',
-      summary:
-        'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
-      likes: 1423,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/'
-    },
-    {
-      id: '2',
-      publicationDate: '2023-16-15',
-      author: 'Emily Brooks',
-      title: 'Unlocking the Power of Quantum Computing',
-      summary:
-        'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
-      likes: 1423,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
-    },
-    {
-      id: '3',
-      publicationDate: '2023-16-15',
-      author: 'Emily Brooks',
-      title: 'Unlocking the Power of Quantum Computing',
-      summary:
-        'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
-      likes: 1423,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
-    },
-    {
-      id: '4',
-      publicationDate: '2023-16-15',
-      author: 'Emily Brooks',
-      title: 'Unlocking the Power of Quantum Computing',
-      summary:
-        'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
-      likes: 1423,
-      hasLiked: true,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: false
-    },
-    {
-      id: '5',
-      publicationDate: '2023-16-15',
-      author: 'Emily Brooks',
-      title: 'Unlocking the Power of Quantum Computing',
-      summary:
-        'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
-      likes: 500,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
-    },
-    {
-      id: '1',
-      publicationDate: '2023-16-15',
-      author: 'Emily Brooks',
-      title: 'Unlocking the Power of Quantum Computing',
-      summary:
-        'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
-      likes: 1423,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/'
-    },
-    {
-      id: '2',
-      publicationDate: '2023-16-15',
-      author: 'Emily Brooks',
-      title: 'Unlocking the Power of Quantum Computing',
-      summary:
-        'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
-      likes: 1423,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
-    },
-    {
-      id: '3',
-      publicationDate: '2023-16-15',
-      author: 'Emily Brooks',
-      title: 'Unlocking the Power of Quantum Computing',
-      summary:
-        'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
-      likes: 1423,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
-    },
-    {
-      id: '4',
-      publicationDate: '2023-16-15',
-      author: 'Emily Brooks',
-      title: 'Unlocking the Power of Quantum Computing',
-      summary:
-        'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
-      likes: 1423,
-      hasLiked: true,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: false
-    },
-    {
-      id: '5',
-      publicationDate: '2023-16-15',
-      author: 'Emily Brooks',
-      title: 'Unlocking the Power of Quantum Computing',
-      summary:
-        'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
-      likes: 500,
-      url: 'https://snek-docs-git-photonq-jem-at.vercel.app/docs/how-to-photonq/',
-      canManage: true
-    }
-  ];
 
   const tabNavItems = [
     {
@@ -251,6 +72,7 @@ const UserProfileContent: FC = () => {
   } else {
     mainContent = (
       <PostList
+        setPosts={setPosts}
         postData={posts}
         previewType="list"
         hidePostAuthor

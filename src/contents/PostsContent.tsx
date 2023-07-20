@@ -7,7 +7,6 @@ import { useMenuContext } from '../contexts/menu';
 import PostList from '../components/features/post/PostList';
 import { TPostListData, TPostPreview } from '../types/features/post';
 import PostListControls from '../components/features/post/PostListControls';
-import { TDebounceData } from '../types/comm';
 import { searchPosts } from '../functions/features/post';
 
 const gradientAnimation = keyframes`
@@ -38,7 +37,7 @@ const PostsContent: FC = () => {
 
   // This is used to cancel the search if the user types too fast
   // (can't be as a hook because the function requires the latest data during the same render cycle)
-  let searchDebounceData: TDebounceData = { state: 'inactive' };
+  // let searchDebounceData: TDebounceData = { state: 'inactive' };
 
   //TODO: This would come from an API
   const posts: TPostPreview[] = [
@@ -220,7 +219,8 @@ const PostsContent: FC = () => {
       </Box>
       <VStack>
         <PostListControls
-          search={e => searchPosts(e, searchDebounceData, setPostResults)}
+          // search={e => searchPosts(e, searchDebounceData, setPostResults)}
+          setPosts={setPostResults}
           w={{ base: 'full', md: '75%' }}
         />
         {postResults.state === 'inactive' ? (

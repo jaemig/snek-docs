@@ -9,15 +9,34 @@ import {
   MenuItem,
   StackProps
 } from '@chakra-ui/react';
-import { ChangeEventHandler, FC, useMemo, useState } from 'react';
+import {
+  ChangeEventHandler,
+  Dispatch,
+  FC,
+  SetStateAction,
+  useMemo,
+  useState
+} from 'react';
+import { TDebounceData } from '../../../types/comm';
+import { searchPosts } from '../../../functions/features/post';
+import { TPostListData } from '../../../types/features/post';
 
 interface IPostListControlsProps extends StackProps {
-  search: ChangeEventHandler<HTMLInputElement>;
+  // search: ChangeEventHandler<HTMLInputElement>;
+  setPosts: Dispatch<SetStateAction<TPostListData>>;
 }
 
-const PostListControls: FC<IPostListControlsProps> = ({ search, ...props }) => {
+const PostListControls: FC<IPostListControlsProps> = ({
+  // search,
+  setPosts,
+  ...props
+}) => {
   const [activeSortOption, setActiveSortOption] =
     useState<(typeof sortOptions)[number]['value']>('recent');
+
+  // This is used to cancel the search if the user types too fast
+  // (can't be as a hook because the function requires the latest data during the same render cycle)
+  let searchDebounceData: TDebounceData = { state: 'inactive' };
 
   const sortOptions = [
     {
@@ -72,7 +91,7 @@ const PostListControls: FC<IPostListControlsProps> = ({ search, ...props }) => {
         placeholder="Find a post..."
         size="sm"
         borderRadius="lg"
-        onChange={search}
+        onChange={e => searchPosts(e, searchDebounceData, setPosts)}
         focusBorderColor="components.input._focus.borderColor"
       />
       <Menu>

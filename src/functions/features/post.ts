@@ -162,6 +162,7 @@ const posts: TPostPreview[] = [
     }
 ];
 
+//TODO: Extend this function so that the results can be filtered, sorted, etc.
 /**
  * Search posts with a debounce
  * @param e  The event object

@@ -1,4 +1,11 @@
-import { ChangeEvent, FC, ReactNode, useMemo } from 'react';
+import {
+  ChangeEvent,
+  Dispatch,
+  FC,
+  ReactNode,
+  SetStateAction,
+  useMemo
+} from 'react';
 import {
   IPostPreviewProps,
   TPostListData,
@@ -22,8 +29,8 @@ import PostCardPreviewSkeleton from './preview/PostCardPreviewSkeleton';
 import PostListItemPreviewSkeleton from './preview/PostListItemPreviewSkeleton';
 
 interface IPostListProps extends StackProps {
+  setPosts?: Dispatch<SetStateAction<TPostListData>>;
   postData: TPostListData;
-  getPosts?: (query?: string) => Promise<TPostPreview[]>;
   itemsPerPage?: number;
   showControls?: boolean;
   hidePostAuthor?: boolean;
@@ -35,8 +42,8 @@ interface IPostListProps extends StackProps {
  * Component for displaying a sort- and filterable list of posts.
  */
 const PostList: FC<IPostListProps> = ({
+  setPosts,
   postData,
-  getPosts,
   itemsPerPage = 10,
   showControls,
   hidePostAuthor,
@@ -57,11 +64,10 @@ const PostList: FC<IPostListProps> = ({
   /**
    * Search for posts with the given query (filtering)
    */
-  const searchPosts = (e: ChangeEvent<HTMLInputElement>) => {
-    const query = e.target.value;
-    console.log('searching for posts with query ', query);
-    if (getPosts) getPosts(query);
-  };
+  // const searchPosts = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const query = e.target.value;
+  //   console.log('searching for posts with query ', query);
+  // };
 
   const memoizedPostPreviews = useMemo(() => {
     const offset = (pagination.currentPage - 1) * pagination.itemsPerPage;
@@ -123,7 +129,7 @@ const PostList: FC<IPostListProps> = ({
 
   return (
     <VStack w="full" gap={5} {...props}>
-      {showControls && <PostListControls search={searchPosts} />}
+      {showControls && setPosts && <PostListControls setPosts={setPosts} />}
       {postPreviews}
       <HStack
         alignContent="space-around"
