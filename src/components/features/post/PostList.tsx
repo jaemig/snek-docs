@@ -23,6 +23,7 @@ import PostListItemPreviewSkeleton from './preview/PostListItemPreviewSkeleton';
 
 interface IPostListProps extends StackProps {
   postData: TPostListData;
+  getPosts?: (query?: string) => Promise<TPostPreview[]>;
   itemsPerPage?: number;
   showControls?: boolean;
   hidePostAuthor?: boolean;
@@ -35,6 +36,7 @@ interface IPostListProps extends StackProps {
  */
 const PostList: FC<IPostListProps> = ({
   postData,
+  getPosts,
   itemsPerPage = 10,
   showControls,
   hidePostAuthor,
@@ -58,6 +60,7 @@ const PostList: FC<IPostListProps> = ({
   const searchPosts = (e: ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
     console.log('searching for posts with query ', query);
+    if (getPosts) getPosts(query);
   };
 
   const memoizedPostPreviews = useMemo(() => {

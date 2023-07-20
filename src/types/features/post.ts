@@ -26,7 +26,7 @@ export type TPostPreview = Omit<Optional<TPost, "hasLiked" | "canManage">, "cont
 
 export type TPostListData = {
     posts: TPostPreview[];
-    state: "loading" | "error" | "success";
+    state: "inactive" | "loading" | "error" | "success";
 }
 
 /**

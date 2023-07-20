@@ -29,6 +29,12 @@ const PostsContent: FC = () => {
     state: 'loading',
     posts: []
   });
+  const [postResults, setPostResults] = useState<TPostListData>({
+    state: 'inactive',
+    posts: []
+  });
+
+  let searchTimeout: NodeJS.Timeout | undefined; // Used to debounce search
 
   //TODO: This would come from an API
   const posts: TPostPreview[] = [
@@ -190,8 +196,23 @@ const PostsContent: FC = () => {
   ];
 
   const searchPosts = (e: ChangeEvent<HTMLInputElement>) => {
-    const query = e.target.value;
-    console.log(query);
+    const query = e.target.value.trim();
+    // Debounce search
+    if (searchTimeout) clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+      if (!query.length) {
+        setPostResults({ state: 'inactive', posts: [] });
+      } else {
+        setPostResults({ state: 'loading', posts: [] });
+        // Simulate loading posts from an API
+        setTimeout(() => {
+          setPostResults({
+            state: 'success',
+            posts: posts
+          });
+        }, 3000);
+      }
+    }, 300);
   };
 
   useEffect(() => {
@@ -201,6 +222,8 @@ const PostsContent: FC = () => {
       setLatestPosts({ posts: posts.slice(4), state: 'success' });
     }, 3000);
   }, []);
+
+  console.log('post state: ', postResults.state);
 
   return (
     <MainGrid>
@@ -216,61 +239,66 @@ const PostsContent: FC = () => {
           search={searchPosts}
           w={{ base: 'full', md: '75%' }}
         />
-        {/* px={4} pb={4} */}
-        <Box
-          borderRadius="xl"
-          mt={10}
-          p={1}
-          background="pages.posts.featured.bg"
-          background-size="600% 600%"
-          animation={`5s ease 0s infinite normal none running ${gradientAnimation}`}
-          w="full"
-        >
-          <Box bgColor="shared.body.bgColor" borderRadius="xl">
+        {postResults.state === 'inactive' ? (
+          <>
             <Box
-              position="absolute"
-              transform="translateY(-50%)"
-              bgColor="shared.body.bgColor"
-              w="fit-content"
-              px={3}
-              ml={5}
-              borderRadius="full"
-            >
-              <Heading
-                as="h1"
-                size="lg"
-                color="pages.posts.featured.title.color"
-              >
-                Featured Posts
-              </Heading>
-            </Box>
-            <PostList
-              postData={featuredPosts}
-              py={10}
-              px={3}
-              previewType="card"
-              itemsPerPage={4}
+              borderRadius="xl"
+              mt={10}
+              p={1}
+              background="pages.posts.featured.bg"
+              background-size="600% 600%"
+              animation={`5s ease 0s infinite normal none running ${gradientAnimation}`}
               w="full"
-              skeletonProps={{
-                minW: '100%'
-              }}
-            />
-          </Box>
-        </Box>
-        <Box py={10} px={3} w="full">
-          <Heading as="h2" size="md">
-            Latest Posts
-          </Heading>
-          <PostList
-            postData={latestPosts}
-            pt={5}
-            previewType="list"
-            itemsPerPage={10}
-            skeletonProps={{
-              w: 'full'
-            }}
-          />
-        </Box>
+            >
+              <Box bgColor="shared.body.bgColor" borderRadius="xl">
+                <Box
+                  position="absolute"
+                  transform="translateY(-50%)"
+                  bgColor="shared.body.bgColor"
+                  w="fit-content"
+                  px={3}
+                  ml={5}
+                  borderRadius="full"
+                >
+                  <Heading
+                    as="h1"
+                    size="lg"
+                    color="pages.posts.featured.title.color"
+                  >
+                    Featured Posts
+                  </Heading>
+                </Box>
+                <PostList
+                  postData={featuredPosts}
+                  py={10}
+                  px={3}
+                  previewType="card"
+                  itemsPerPage={4}
+                  w="full"
+                  skeletonProps={{
+                    minW: '100%'
+                  }}
+                />
+              </Box>
+            </Box>
+            <Box py={10} px={3} w="full">
+              <Heading as="h2" size="md">
+                Latest Posts
+              </Heading>
+              <PostList
+                postData={latestPosts}
+                pt={5}
+                previewType="list"
+                itemsPerPage={10}
+                skeletonProps={{
+                  w: 'full'
+                }}
+              />
+            </Box>
+          </>
+        ) : (
+          <PostList mt={10} postData={postResults} />
+        )}
       </VStack>
     </MainGrid>
   );
