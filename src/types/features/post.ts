@@ -24,6 +24,9 @@ export type TPost = {
  */
 export type TPostPreview = Omit<Optional<TPost, "hasLiked" | "canManage">, "content">;
 
+/**TSearchMetaData
+ * Metadata for fetching posts
+ */
 export type TPostListData = {
     posts: TPostPreview[];
     state: "inactive" | "loading" | "error" | "success";

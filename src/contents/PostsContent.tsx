@@ -1,5 +1,5 @@
 import { Box, Heading, VStack, keyframes } from '@chakra-ui/react';
-import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import MainGrid from '../layout/components/MainGrid';
 import LeftNav from '../layout/navigation/LeftNav';
 import PageDirectory from '../layout/navigation/components/PageDirectory';
@@ -7,7 +7,8 @@ import { useMenuContext } from '../contexts/menu';
 import PostList from '../components/features/post/PostList';
 import { TPostListData, TPostPreview } from '../types/features/post';
 import PostListControls from '../components/features/post/PostListControls';
-import { debounce } from '../functions/search';
+import { TDebounceData } from '../types/comm';
+import { searchPosts } from '../functions/features/post';
 
 const gradientAnimation = keyframes`
   0%{background-position:0% 50%}
@@ -37,10 +38,7 @@ const PostsContent: FC = () => {
 
   // This is used to cancel the search if the user types too fast
   // (can't be as a hook because the function requires the latest data during the same render cycle)
-  let searchTimeout: {
-    current?: NodeJS.Timeout;
-    state: (typeof postResults)['state'];
-  } = { state: 'inactive' };
+  let searchDebounceData: TDebounceData = { state: 'inactive' };
 
   //TODO: This would come from an API
   const posts: TPostPreview[] = [
@@ -201,28 +199,6 @@ const PostsContent: FC = () => {
     }
   ];
 
-  const searchPosts = (e: ChangeEvent<HTMLInputElement>) => {
-    const query = e.target.value.trim();
-
-    debounce(() => {
-      if (!query.length) {
-        setPostResults({ state: 'inactive', posts: [] });
-        searchTimeout = { state: 'inactive' };
-      } else {
-        setPostResults({ state: 'loading', posts: [] });
-        searchTimeout = { state: 'loading' };
-        // Simulate loading posts from an API
-        setTimeout(() => {
-          if (searchTimeout.state === 'inactive') return;
-          setPostResults({
-            state: 'success',
-            posts: posts
-          });
-        }, 3000);
-      }
-    }, searchTimeout)();
-  };
-
   useEffect(() => {
     // Simulate loading posts from an API
     setTimeout(() => {
@@ -244,7 +220,7 @@ const PostsContent: FC = () => {
       </Box>
       <VStack>
         <PostListControls
-          search={searchPosts}
+          search={e => searchPosts(e, searchDebounceData, setPostResults)}
           w={{ base: 'full', md: '75%' }}
         />
         {postResults.state === 'inactive' ? (

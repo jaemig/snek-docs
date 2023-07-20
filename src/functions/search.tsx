@@ -1,13 +1,12 @@
 const FlexSearch = require('flexsearch');
 import { useSearch } from '@snek-at/jaen';
-import { Fragment } from 'react';
 import {
-  TSearchIndexData,
   TSearchMetadata,
   TSearchResult,
   TSearchResultSection
 } from '../types/search';
 import { filterWhitespaceItems } from './utils';
+import { TDebounceData } from '../types/comm';
 
 /**
  * Searches the docs for the given query.
@@ -188,11 +187,11 @@ export async function searchDocs(
  */
 export function debounce(
   callback: (...args: any) => void,
-  timeout: { current?: NodeJS.Timeout },
+  meta: TDebounceData, // This is a whole object because we need to remember the identical timeout object between calls.
   debounceTime = 300
 ) {
   return (...args: any) => {
-    clearTimeout(timeout.current);
-    timeout.current = setTimeout(() => callback(args), debounceTime);
+    clearTimeout(meta.timeout);
+    meta.timeout = setTimeout(() => callback(args), debounceTime);
   };
 }
