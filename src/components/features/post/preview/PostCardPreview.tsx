@@ -1,4 +1,5 @@
 import {
+  Box,
   Card,
   HStack,
   Heading,
@@ -81,16 +82,17 @@ const PostCardPreview: FC<IPostPreviewProps<LinkBoxProps>> = ({
       {...wrapperProps}
     >
       <HStack {...postCardPreviewStyling.topHStack}>
-        <Link
-          variant="hover-theme"
-          fontSize="sm"
-          color="components.postPreview.author.color"
-          href={`/profile/${author}`}
-        >
-          @{author}
-        </Link>
+        {!hideAuthor && (
+          <Link
+            variant="hover-theme"
+            fontSize="sm"
+            color="components.postPreview.author.color"
+            href={`/profile/${author}`}
+          >
+            @{author}
+          </Link>
+        )}
         <Spacer />
-        {canManage ? <PostPreviewManageMenu /> : ratingComp}
       </HStack>
 
       <Heading
@@ -112,6 +114,7 @@ const PostCardPreview: FC<IPostPreviewProps<LinkBoxProps>> = ({
         {summary}
       </Text>
       <HStack
+        zIndex={2}
         {...postCardPreviewStyling.bottomHStack}
         // Prevents the date from being placed on top of the link overlay
         pointerEvents="none"
@@ -123,7 +126,9 @@ const PostCardPreview: FC<IPostPreviewProps<LinkBoxProps>> = ({
         >
           {publicationDate}
         </Text>
-        {canManage && ratingComp}
+        <Box pointerEvents="all">
+          {canManage ? <PostPreviewManageMenu /> : ratingComp}
+        </Box>
       </HStack>
     </LinkBox>
   );

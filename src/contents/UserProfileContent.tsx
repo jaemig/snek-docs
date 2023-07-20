@@ -7,8 +7,8 @@ import ProfileOverview from '../components/social/profile/ProfileOverview';
 import { useLocation } from '@reach/router';
 import TopNav from '../layout/navigation/TopNav';
 import TbUser from '../components/icons/tabler/TbUser';
-import TbBooks from '../components/icons/tabler/TbBooks';
-import { TPostPreview } from '../types/features/post';
+import TbBook from '../components/icons/tabler/TbBook';
+import { TPostListData, TPostPreview } from '../types/features/post';
 
 /**
  * Component for displaying a certain user profile.
@@ -17,11 +17,24 @@ const UserProfileContent: FC = () => {
   const { hash } = useLocation();
   const topNavDisclosure = useDisclosure();
   const [isExpanded, setIsExpanded] = useState(true);
+  const [posts, setPosts] = useState<TPostListData>({
+    state: 'loading',
+    posts: []
+  });
   const [activeTab, setActiveTab] =
     useState<(typeof tabNavItems)[number]['value']>('posts');
 
+  useEffect(() => {
+    setTimeout(() => {
+      setPosts({
+        state: 'success',
+        posts: postData
+      });
+    }, 3000);
+  }, []);
+
   //TODO: This would come from an API
-  const posts: TPostPreview[] = [
+  const postData: TPostPreview[] = [
     {
       id: '1',
       publicationDate: '2023-16-15',
@@ -192,14 +205,14 @@ const UserProfileContent: FC = () => {
 
   const tabNavItems = [
     {
-      label: 'Top Posts',
+      label: 'Overview',
       value: 'overview',
       icon: <TbUser />
     },
     {
       label: 'Posts',
       value: 'posts',
-      icon: <TbBooks />
+      icon: <TbBook />
     }
   ] as const;
 
@@ -237,7 +250,12 @@ const UserProfileContent: FC = () => {
     mainContent = <ProfileOverview />;
   } else {
     mainContent = (
-      <PostList posts={posts} previewType="list" hidePostAuthor showControls />
+      <PostList
+        postData={posts}
+        previewType="list"
+        hidePostAuthor
+        showControls
+      />
     );
   }
 

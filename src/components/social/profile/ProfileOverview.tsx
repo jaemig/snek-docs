@@ -1,8 +1,9 @@
 import { VStack, SimpleGrid, Divider } from '@chakra-ui/react';
-import { FC, useMemo } from 'react';
-import { TPostPreview } from '../../../types/features/post';
+import { FC, useEffect, useMemo, useState } from 'react';
+import { TPostListData, TPostPreview } from '../../../types/features/post';
 import PostPreview from '../../features/post/preview/PostCardPreview';
 import ActivityList from './ActivityList';
+import PostList from '../../features/post/PostList';
 
 /**
  * Component for displaying a user's profile overview.
@@ -12,11 +13,16 @@ const ProfileOverview: FC = () => {
   const toggleLike = (id: TPostPreview['id']) => {
     console.log('toggle like for post ', id);
   };
+  const [posts, setPosts] = useState<TPostListData>({
+    state: 'loading',
+    posts: []
+  });
 
   const postPreviews: TPostPreview[] = [
     {
       id: '1',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -26,6 +32,7 @@ const ProfileOverview: FC = () => {
     {
       id: '2',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -36,6 +43,7 @@ const ProfileOverview: FC = () => {
     {
       id: '3',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -46,6 +54,7 @@ const ProfileOverview: FC = () => {
     {
       id: '4',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -57,6 +66,7 @@ const ProfileOverview: FC = () => {
     {
       id: '5',
       publicationDate: '2023-16-15',
+      author: 'Emily Brooks',
       title: 'Unlocking the Power of Quantum Computing',
       summary:
         'Quantum computing is a rapidly developing field that has the potential to revolutionize the way we solve complex problems.',
@@ -66,22 +76,24 @@ const ProfileOverview: FC = () => {
     }
   ];
 
-  const memoizedPostPreviews = useMemo(() => {
-    return postPreviews.map(postPreview => (
-      <PostPreview
-        key={postPreview.id}
-        toggleLike={toggleLike}
-        {...postPreview}
-        wrapperProps={{ minW: '33%' }}
-      />
-    ));
-  }, [postPreviews]);
+  useEffect(() => {
+    // This temporarily simulates a loading state
+    setTimeout(() => {
+      setPosts({
+        state: 'success',
+        posts: postPreviews
+      });
+    }, 3000);
+  }, []);
 
   return (
     <VStack gap={12}>
-      <SimpleGrid spacing={5} columns={{ base: 1, sm: 2 }}>
-        {memoizedPostPreviews}
-      </SimpleGrid>
+      <PostList
+        postData={posts}
+        previewType="card"
+        hidePostAuthor
+        itemsPerPage={6}
+      />
       <Divider />
       <ActivityList mb={10} />
     </VStack>
