@@ -18,7 +18,7 @@ const UserProfileContent: FC = () => {
   const topNavDisclosure = useDisclosure();
   const [isExpanded, setIsExpanded] = useState(true);
   const [posts, setPosts] = useState<TPostListData>({
-    state: 'loading',
+    state: 'inactive',
     posts: []
   });
   const [activeTab, setActiveTab] =
@@ -56,7 +56,14 @@ const UserProfileContent: FC = () => {
               borderBottom: '2px solid',
               borderBottomColor: 'pages.userProfile.topNav.tabs.borderColor'
             })}
-            onClick={!isActive ? () => setActiveTab(item.value) : undefined}
+            onClick={
+              !isActive
+                ? () => {
+                    //TODO: Add a way to change the URL hash without reloading the page
+                    setActiveTab(item.value);
+                  }
+                : undefined
+            }
           >
             {item.label}
           </Button>
