@@ -17,6 +17,7 @@ import {
   HStack,
   LinkBoxProps,
   SimpleGrid,
+  Spacer,
   StackProps,
   VStack
 } from '@chakra-ui/react';
@@ -27,6 +28,7 @@ import PostListControls from './PostListControls';
 import PostListItemPreview from './preview/PostListItemPreview';
 import PostCardPreviewSkeleton from './preview/PostCardPreviewSkeleton';
 import PostListItemPreviewSkeleton from './preview/PostListItemPreviewSkeleton';
+import PostListNoResults from './preview/PostListNoResults';
 
 interface IPostListProps extends StackProps {
   setPosts?: Dispatch<SetStateAction<TPostListData>>;
@@ -111,51 +113,57 @@ const PostList: FC<IPostListProps> = ({
   }, [postData, pagination]);
 
   let postPreviews: ReactNode;
-  if (previewType === 'card') {
-    // Shows the posts in a grid of cards
-    postPreviews = (
-      <SimpleGrid w="full" spacing={5} columns={{ base: 1, sm: 2 }}>
-        {memoizedPostPreviews}
-      </SimpleGrid>
-    );
-  } else {
-    // Shows the posts in a list
-    postPreviews = (
-      <VStack w="full" spacing={5}>
-        {memoizedPostPreviews}
-      </VStack>
-    );
+  if (memoizedPostPreviews.length > 0) {
+    if (previewType === 'card') {
+      // Shows the posts in a grid of cards
+      postPreviews = (
+        <SimpleGrid w="full" spacing={5} columns={{ base: 1, sm: 2 }}>
+          {memoizedPostPreviews}
+        </SimpleGrid>
+      );
+    } else {
+      // Shows the posts in a list
+      postPreviews = (
+        <VStack w="full" spacing={5}>
+          {memoizedPostPreviews}
+        </VStack>
+      );
+    }
   }
 
+  console.log(pagination.totalPages);
   return (
     <VStack w="full" gap={5} {...props}>
       {showControls && setPosts && <PostListControls setPosts={setPosts} />}
-      {postPreviews}
-      <HStack
-        alignContent="space-around"
-        display={pagination.totalPages === 1 ? 'none' : 'initial'}
-      >
-        <Button
-          variant="ghost-hover-outline"
-          size="sm"
-          borderRadius="lg"
-          leftIcon={<ChevronLeftIcon />}
-          isDisabled={pagination.currentPage === 1}
-          onClick={pagination.previousPage}
+      {postData.state !== 'inactive' &&
+        (postPreviews ? postPreviews : <PostListNoResults mt={10} />)}
+      {pagination.totalPages > 1 && (
+        <HStack
+          alignContent="space-around"
+          // display={pagination.totalPages > 1 ? 'initial' : 'none'}
         >
-          Previous
-        </Button>
-        <Button
-          variant="ghost-hover-outline"
-          size="sm"
-          borderRadius="lg"
-          rightIcon={<ChevronRightIcon />}
-          isDisabled={pagination.currentPage === pagination.totalPages}
-          onClick={pagination.nextPage}
-        >
-          Next
-        </Button>
-      </HStack>
+          <Button
+            variant="ghost-hover-outline"
+            size="sm"
+            borderRadius="lg"
+            leftIcon={<ChevronLeftIcon />}
+            isDisabled={pagination.currentPage === 1}
+            onClick={pagination.previousPage}
+          >
+            Previous
+          </Button>
+          <Button
+            variant="ghost-hover-outline"
+            size="sm"
+            borderRadius="lg"
+            rightIcon={<ChevronRightIcon />}
+            isDisabled={pagination.currentPage === pagination.totalPages}
+            onClick={pagination.nextPage}
+          >
+            Next
+          </Button>
+        </HStack>
+      )}
     </VStack>
   );
 };
