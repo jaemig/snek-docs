@@ -27,11 +27,15 @@ import { wait } from '../../../functions/utils';
 interface IPostListControlsProps extends StackProps {
   setPosts: (data: TPostListData) => void;
   enableAdvancedSearch?: boolean;
+  defaultQuery?: string;
+  setQuery?: (query: string) => void;
 }
 
 const PostListControls: FC<IPostListControlsProps> = ({
   setPosts,
   enableAdvancedSearch = true,
+  defaultQuery,
+  setQuery,
   ...props
 }) => {
   const [activeSortOption, setActiveSortOption] =
@@ -89,6 +93,7 @@ const PostListControls: FC<IPostListControlsProps> = ({
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value.trim();
+    if (setQuery) setQuery(query);
 
     clearTimeout(stateRef.current.timeout);
     stateRef.current.timeout = setTimeout(async () => {
@@ -122,6 +127,7 @@ const PostListControls: FC<IPostListControlsProps> = ({
           placeholder="Find a post..."
           size="sm"
           borderRadius="lg"
+          defaultValue={defaultQuery}
           onChange={handleInputChange}
           focusBorderColor="components.input._focus.borderColor"
         />

@@ -21,6 +21,11 @@ const UserProfileContent: FC = () => {
     state: 'inactive',
     posts: []
   });
+  const [postFilterQuery, setPostFilterQuery] = useState<string>();
+  const [overviewPosts, setOverviewPosts] = useState<TPostListData>({
+  state: 'loading',
+    posts: []
+  });
   const [activeTab, setActiveTab] =
     useState<(typeof tabNavItems)[number]['value']>('posts');
 
@@ -75,13 +80,15 @@ const UserProfileContent: FC = () => {
   let mainContent: ReactNode;
 
   if (activeTab === 'overview') {
-    mainContent = <ProfileOverview />;
+    mainContent = <ProfileOverview posts={overviewPosts} setPosts={setOverviewPosts} />;
   } else {
     mainContent = (
       <PostList
         setPosts={setPosts}
         postData={posts}
         previewType="list"
+        defaultFilterQuery={postFilterQuery}
+        setFilterQuery={setPostFilterQuery}
         hidePostAuthor
         showControls
       />

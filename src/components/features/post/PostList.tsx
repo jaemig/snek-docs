@@ -38,6 +38,8 @@ interface IPostListProps extends StackProps {
   hidePostAuthor?: boolean;
   previewType?: 'card' | 'list';
   skeletonProps?: CardProps & LinkBoxProps;
+  defaultFilterQuery?: string;
+  setFilterQuery?: (query: string) => void;
 }
 
 /**
@@ -51,6 +53,8 @@ const PostList: FC<IPostListProps> = ({
   hidePostAuthor,
   previewType = 'list',
   skeletonProps,
+  defaultFilterQuery,
+  setFilterQuery,
   ...props
 }) => {
   const pagination = usePagination({
@@ -62,14 +66,6 @@ const PostList: FC<IPostListProps> = ({
   const toggleLike = (id: TPostPreview['id']) => {
     console.log('toggle like for post ', id);
   };
-
-  /**
-   * Search for posts with the given query (filtering)
-   */
-  // const searchPosts = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const query = e.target.value;
-  //   console.log('searching for posts with query ', query);
-  // };
 
   const memoizedPostPreviews = useMemo(() => {
     const offset = (pagination.currentPage - 1) * pagination.itemsPerPage;
@@ -133,13 +129,12 @@ const PostList: FC<IPostListProps> = ({
 
   return (
     <VStack w="full" gap={5} {...props}>
-      {showControls && setPosts && <PostListControls setPosts={setPosts} />}
+      {showControls && setPosts && <PostListControls setPosts={setPosts} defaultQuery={defaultFilterQuery} setQuery={setFilterQuery} />}
       {postData.state !== 'inactive' &&
         (postPreviews ? postPreviews : <PostListNoResults mt={10} />)}
       {pagination.totalPages > 1 && (
         <HStack
           alignContent="space-around"
-          // display={pagination.totalPages > 1 ? 'initial' : 'none'}
         >
           <Button
             variant="ghost-hover-outline"

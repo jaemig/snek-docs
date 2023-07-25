@@ -5,18 +5,20 @@ import PostPreview from '../../features/post/preview/PostCardPreview';
 import ActivityList from './ActivityList';
 import PostList from '../../features/post/PostList';
 
+interface IProfileOverviewProps {
+  posts: TPostListData;
+  setPosts: (data: TPostListData) => void;
+}
+
 /**
  * Component for displaying a user's profile overview.
  */
-const ProfileOverview: FC = () => {
+const ProfileOverview: FC<IProfileOverviewProps> = ({ posts, setPosts }) => {
   //TODO: implement toggleLike with API call
   const toggleLike = (id: TPostPreview['id']) => {
     console.log('toggle like for post ', id);
   };
-  const [posts, setPosts] = useState<TPostListData>({
-    state: 'loading',
-    posts: []
-  });
+  
 
   const postPreviews: TPostPreview[] = [
     {
