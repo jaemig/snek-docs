@@ -17,9 +17,25 @@ const themeColors = {
   },
   flat: {
     // https://flatuicolors.com/palette/se
-    vibrantYellow: '#ffd32a',
+    se: {
+      vibrantYellow: '#ffd32a',
+      green: {
+        50: '#E7EF3',
+        100: '#BBFCDE',
+        200: '#8FFAC8',
+        300: '#63F8B2',
+        400: '#37F69D',
+        500: '#0CF387',
+        600: '#09C36C',
+        700: '#079251',
+        800: '#056136',
+        900: '#02311B',
+      },
+    },
     // https://flatuicolors.com/palette/nl
-    sunflower: '#FFC312'
+    nl: {
+      sunflower: '#FFC312',
+    }
   }
 };
 

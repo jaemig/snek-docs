@@ -1,13 +1,13 @@
 import { Box, Button, HStack, Stack, useDisclosure } from '@chakra-ui/react';
 import { FC, ReactNode, useEffect, useMemo, useState } from 'react';
 import MainGrid from '../layout/components/MainGrid';
-import LeftNavProfile from '../components/social/profile/LeftNavProfile';
-import PostList from '../components/features/post/PostList';
-import ProfileOverview from '../components/social/profile/ProfileOverview';
+import LeftNavProfile from '../features/social/profile/LeftNavProfile';
+import PostList from '../features/post/PostList';
+import ProfileOverview from '../features/social/profile/ProfileOverview';
 import { useLocation } from '@reach/router';
 import TopNav from '../layout/navigation/TopNav';
-import TbUser from '../components/icons/tabler/TbUser';
-import TbBook from '../components/icons/tabler/TbBook';
+import TbUser from '../shared/components/icons/tabler/TbUser';
+import TbBook from '../shared/components/icons/tabler/TbBook';
 import { TPostListData } from '../types/features/post';
 
 /**

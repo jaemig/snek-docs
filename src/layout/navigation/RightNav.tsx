@@ -1,8 +1,8 @@
 import React, { FC, ReactNode, memo } from 'react';
 import { Box, Flex, Text, VStack } from '@chakra-ui/react';
-import MemoizedLinks from '../../components/core/MemoizedLink';
+import MemoizedLinks from '../../shared/components/MemoizedLink';
 import TableOfContent from './components/TableOfContent';
-import { useNavOffset } from '../../hooks/use-nav-offset';
+import { useNavOffset } from '../../shared/hooks/use-nav-offset';
 
 interface IRightNavProps {
   children?: ReactNode;

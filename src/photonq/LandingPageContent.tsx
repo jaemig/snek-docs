@@ -6,7 +6,7 @@ import PhotonQ from './sections/PhotonQ';
 import AboutUs from './sections/AboutUs';
 import Footer from './sections/Footer';
 import AppLayout from '../layout/AppLayout';
-import useScrollPosition from '../hooks/use-scroll-position';
+import useScrollPosition from '../shared/hooks/use-scroll-position';
 import { useDisclosure } from '@chakra-ui/react';
 import {
   TTopNavLinkProps,

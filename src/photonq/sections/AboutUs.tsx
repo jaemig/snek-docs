@@ -1,7 +1,7 @@
 import { Button, Box, Container, Center } from '@chakra-ui/react';
 import { Field } from '@snek-at/jaen';
 import { FC } from 'react';
-import SectionTitle from '../../components/photonq/SectionTitle';
+import SectionTitle from '../../features/photonq/SectionTitle';
 
 const AboutUs: FC = () => {
   return (

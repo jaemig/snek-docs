@@ -12,7 +12,7 @@ import {
 import React, { FC } from 'react';
 import JaenLogoLight from '../assets/icons/jaen_light.svg';
 import JaenLogoDark from '../assets/icons/jaen_dark.svg';
-import Link from '../components/core/Link';
+import Link from '../shared/components/Link';
 
 const year = new Date().getFullYear();
 

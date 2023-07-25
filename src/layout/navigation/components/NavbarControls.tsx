@@ -13,7 +13,7 @@ import {
   FlexProps
 } from '@chakra-ui/react';
 import { Dispatch, FC, SetStateAction } from 'react';
-import HideSidebarIcon from '../../../components/icons/HideSidebar';
+import HideSidebarIcon from '../../../shared/components/icons/HideSidebar';
 import React from 'react';
 
 interface NavbarControlsProps {

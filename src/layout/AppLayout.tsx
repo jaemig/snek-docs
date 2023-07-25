@@ -10,13 +10,13 @@ import theme from '../theme/theme';
 import Footer from './Footer';
 import { PageManagerProvider, useJaenPageTree } from '@snek-at/jaen';
 import DocsLayout from './DocsLayout';
-import { useNavOffset } from '../hooks/use-nav-offset';
+import { useNavOffset } from '../shared/hooks/use-nav-offset';
 import { useLocation } from '@reach/router';
-import { convertPageTreeToMenu } from '../functions/navigation';
-import { MenuContext } from '../contexts/menu';
+import { convertPageTreeToMenu } from '../shared/utils/navigation';
+import { MenuContext } from '../shared/contexts/menu';
 import ColorizedUniWienLogo from '../photonq/assets/icons/uni-wien-logo-colorized.svg';
-import { THamburgerMenuIconStylerProps } from '../components/core/HamburgerMenuIcon';
-import { TSearchMenuStyleProps } from '../components/search/SearchMenu';
+import { THamburgerMenuIconStylerProps } from '../shared/components/HamburgerMenuIcon';
+import { TSearchMenuStyleProps } from '../features/search/SearchMenu';
 
 interface AppLayoutProps {
   children?: React.ReactNode;

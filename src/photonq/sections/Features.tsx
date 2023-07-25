@@ -8,7 +8,7 @@ import {
   VStack
 } from '@chakra-ui/react';
 import { FC } from 'react';
-import SectionTitle from '../../components/photonq/SectionTitle';
+import SectionTitle from '../../features/photonq/SectionTitle';
 import { Field } from '@snek-at/jaen';
 import { TextFieldProps } from '@snek-at/jaen/dist/fields/TextField/TextField';
 

@@ -10,11 +10,11 @@ import {
   VStack
 } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
-import { useNavOffset } from '../../hooks/use-nav-offset';
+import { useNavOffset } from '../../shared/hooks/use-nav-offset';
 import { Field } from '@snek-at/jaen';
 
 import UniWienLogo from '../assets/icons/uni-wien-logo-gray.svg';
-import Link from '../../components/core/Link';
+import Link from '../../shared/components/Link';
 
 const Footer: FC = () => {
   const navOffset = useNavOffset();

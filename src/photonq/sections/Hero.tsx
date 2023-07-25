@@ -1,6 +1,6 @@
 import { Box, Button, Center, VStack } from '@chakra-ui/react';
 import { FC } from 'react';
-import { useNavOffset } from '../../hooks/use-nav-offset';
+import { useNavOffset } from '../../shared/hooks/use-nav-offset';
 
 import { Field } from '@snek-at/jaen';
 

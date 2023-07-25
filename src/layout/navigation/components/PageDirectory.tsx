@@ -21,12 +21,12 @@ import {
   useMemo,
   useState
 } from 'react';
-import Link from '../../../components/core/Link';
+import Link from '../../../shared/components/Link';
 import { NavMenuItem, NavMenuSection } from '../../../types/navigation';
 import {
   convertPageTreeToMenu,
   getExpandedMenuItemIndices
-} from '../../../functions/navigation';
+} from '../../../shared/utils/navigation';
 
 const baseMenuItems: NavMenuSection[] = [
   {

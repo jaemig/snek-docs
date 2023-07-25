@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import React, { FC, useMemo, useState } from 'react';
-import { useMenuContext } from '../contexts/menu';
-import { createBreadCrumbParts } from '../functions/navigation';
+import { useMenuContext } from '../shared/contexts/menu';
+import { createBreadCrumbParts } from '../shared/utils/navigation';
 import { MainBreadcrumbPart } from '../types/navigation';
 import LeftNav from './navigation/LeftNav';
 import MainBreadcrumb from './navigation/components/MainBreadcrumb';

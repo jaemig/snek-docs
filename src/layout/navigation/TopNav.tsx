@@ -17,19 +17,19 @@ import {
 import { useLocation } from '@reach/router';
 import { FC, useEffect, useMemo, useState } from 'react';
 import SnekIcon from '../../assets/icons/brand.svg';
-import Link from '../../components/core/Link';
-import MemoizedLinks from '../../components/core/MemoizedLink';
-import GitHub from '../../components/icons/brands/GitHub';
+import Link from '../../shared/components/Link';
+import MemoizedLinks from '../../shared/components/MemoizedLink';
+import GitHub from '../../shared/components/icons/brands/GitHub';
 import SearchMenu, {
   TSearchMenuStyleProps
-} from '../../components/search/SearchMenu';
-import useWindowSize from '../../hooks/use-current-window-size';
-import { useNavOffset } from '../../hooks/use-nav-offset';
+} from '../../features/search/components/SearchMenu';
+import useWindowSize from '../../shared/hooks/use-current-window-size';
+import { useNavOffset } from '../../shared/hooks/use-nav-offset';
 import { TTopNavLinkData } from '../../types/navigation';
 import MobileNavDrawer from './MobileNavDrawer';
 import HamburgerMenuIcon, {
   THamburgerMenuIconStylerProps
-} from '../../components/core/HamburgerMenuIcon';
+} from '../../shared/components/HamburgerMenuIcon';
 
 const links: TTopNavLinkData[] = [
   {

@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import React, { FC } from 'react';
 import { MainBreadcrumbPart } from '../../../types/navigation';
-import Link from '../../../components/core/Link';
+import Link from '../../../shared/components/Link';
 
 interface IMainBradcrumbProps {
   parts: MainBreadcrumbPart[];

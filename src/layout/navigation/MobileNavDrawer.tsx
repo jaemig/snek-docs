@@ -2,10 +2,10 @@ import { Box, Collapse, Flex, Spacer } from '@chakra-ui/react';
 import React, { FC } from 'react';
 import PageDirectory from './components/PageDirectory';
 import NavbarControls from './components/NavbarControls';
-import SearchMenu from '../../components/search/SearchMenu';
-import { useMenuContext } from '../../contexts/menu';
+import SearchMenu from '../../features/search/components/SearchMenu';
+import { useMenuContext } from '../../shared/contexts/menu';
 import { Global } from '@emotion/react';
-import { useNavOffset } from '../../hooks/use-nav-offset';
+import { useNavOffset } from '../../shared/hooks/use-nav-offset';
 
 interface MobileNavDrawerProps {
   isOpen: boolean;

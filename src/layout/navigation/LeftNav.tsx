@@ -1,6 +1,6 @@
 import { Flex, FlexProps, Spacer } from '@chakra-ui/react';
 import { Dispatch, FC, ReactNode, SetStateAction } from 'react';
-import { useNavOffset } from '../../hooks/use-nav-offset';
+import { useNavOffset } from '../../shared/hooks/use-nav-offset';
 import MainBottomNav from './MainBottomNav';
 import NavbarControls from './components/NavbarControls';
 

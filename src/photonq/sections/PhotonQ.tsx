@@ -1,6 +1,6 @@
 import { Box, Button, Container, Flex, Spacer } from '@chakra-ui/react';
 import { FC } from 'react';
-import SectionTitle from '../../components/photonq/SectionTitle';
+import SectionTitle from '../../features/photonq/SectionTitle';
 import { Field } from '@snek-at/jaen';
 
 const PhotonQ: FC = () => {

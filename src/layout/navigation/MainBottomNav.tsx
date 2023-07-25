@@ -7,8 +7,8 @@ import {
   buildActiveMenuItemIndexArray,
   convertPageTreeToMenu,
   getAdjacentPages
-} from '../../functions/navigation';
-import Link from '../../components/core/Link';
+} from '../../shared/utils/navigation';
+import Link from '../../shared/components/Link';
 import { useLocation } from '@reach/router';
 
 interface MainBottomNavProps {

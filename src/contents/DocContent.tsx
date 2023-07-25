@@ -9,30 +9,32 @@ import {
   Thead,
   Tr,
   VStack,
-  Text as ChText
+  Text as ChText,
+  Button,
+  HStack
 } from '@chakra-ui/react';
 import { Field } from '@snek-at/jaen';
 import React, { memo } from 'react';
 
-import { useNavOffset } from '../hooks/use-nav-offset';
+import { useNavOffset } from '../shared/hooks/use-nav-offset';
 import RightNav from '../layout/navigation/RightNav';
 import MainBottomNav from '../layout/navigation/MainBottomNav';
 
 // Default custom components (replaces HTML tags)
-import Text from '../components/main-content/text/Text';
-import Heading from '../components/main-content/heading/Heading';
-import List from '../components/main-content/list/List';
-import ListItem from '../components/main-content/list/ListItem';
-import CodeSnippet from '../components/main-content/code-snippet/CodeSnippet';
-import Link from '../components/core/Link';
+import Text from '../features/main-content/text/Text';
+import Heading from '../features/main-content/heading/Heading';
+import List from '../features/main-content/list/List';
+import ListItem from '../features/main-content/list/ListItem';
+import CodeSnippet from '../features/main-content/code-snippet/CodeSnippet';
+import Link from '../shared/components/Link';
 
 // Insertable custom components (via Jaen)
-import Filesystem from '../components/main-content/filesystem/Filesystem';
-import ImageCard from '../components/main-content/image-card/ImageCard';
-import Callout from '../components/main-content/callout/Callouts';
-import IconCard from '../components/main-content/icon-card/IconCard';
-import CodePlayground from '../components/main-content/code-playground/CodePlayground';
-import MemoizedLinks from '../components/core/MemoizedLink';
+import Filesystem from '../features/main-content/filesystem/Filesystem';
+import ImageCard from '../features/main-content/image-card/ImageCard';
+import Callout from '../features/main-content/callout/Callouts';
+import IconCard from '../features/main-content/icon-card/IconCard';
+import CodePlayground from '../features/main-content/code-playground/CodePlayground';
+import MemoizedLinks from '../shared/components/MemoizedLink';
 import TableOfContent from '../layout/navigation/components/TableOfContent';
 
 // Example links - these would probably be fetched from a CMS or other data source
@@ -58,6 +60,14 @@ export const DocContent: React.FC<DocContentProps> = () => {
   return (
     <Stack spacing={{ base: 0, xl: 12 }} direction="row">
       <Box maxW="900px" w="full">
+        <HStack w="full" mb={5} spacing={3} justifyContent="end">
+          <Button size="sm" bgColor="flat.se.green.500">
+            Publish
+          </Button>
+          <Button size="sm" colorScheme="gray">
+            Save Draft
+          </Button>
+        </HStack>
         <Field.Mdx
           name="documentation"
           components={{

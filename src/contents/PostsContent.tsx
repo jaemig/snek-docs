@@ -3,10 +3,10 @@ import { FC, useEffect, useState } from 'react';
 import MainGrid from '../layout/components/MainGrid';
 import LeftNav from '../layout/navigation/LeftNav';
 import PageDirectory from '../layout/navigation/components/PageDirectory';
-import { useMenuContext } from '../contexts/menu';
-import PostList from '../components/features/post/PostList';
+import { useMenuContext } from '../shared/contexts/menu';
+import PostList from '../features/post/PostList';
 import { TPostListData, TPostPreview } from '../types/features/post';
-import PostListControls from '../components/features/post/PostListControls';
+import PostListControls from '../features/post/PostListControls';
 
 const gradientAnimation = keyframes`
   0%{background-position:0% 50%}
