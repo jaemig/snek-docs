@@ -100,7 +100,7 @@ const UserProfileContent: FC = () => {
       >
         <HStack>{tabNavButtons}</HStack>
       </TopNav>
-      <MainGrid>
+      <MainGrid mt={10}>
         <Box>
           <LeftNavProfile isExpanded={isExpanded} />
         </Box>
