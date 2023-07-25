@@ -13,7 +13,7 @@ const themeColors = {
     900: '#013d68'
   },
   pq: {
-    500: '#0580D2',
+    500: '#0580D2'
   },
   flat: {
     // https://flatuicolors.com/palette/se

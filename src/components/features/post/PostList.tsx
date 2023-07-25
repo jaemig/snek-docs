@@ -1,11 +1,4 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  FC,
-  ReactNode,
-  SetStateAction,
-  useMemo
-} from 'react';
+import { Dispatch, FC, ReactNode, SetStateAction, useMemo } from 'react';
 import {
   IPostPreviewProps,
   TPostListData,
@@ -129,13 +122,17 @@ const PostList: FC<IPostListProps> = ({
 
   return (
     <VStack w="full" gap={5} {...props}>
-      {showControls && setPosts && <PostListControls setPosts={setPosts} defaultQuery={defaultFilterQuery} setQuery={setFilterQuery} />}
+      {showControls && setPosts && (
+        <PostListControls
+          setPosts={setPosts}
+          defaultQuery={defaultFilterQuery}
+          setQuery={setFilterQuery}
+        />
+      )}
       {postData.state !== 'inactive' &&
         (postPreviews ? postPreviews : <PostListNoResults mt={10} />)}
       {pagination.totalPages > 1 && (
-        <HStack
-          alignContent="space-around"
-        >
+        <HStack alignContent="space-around">
           <Button
             variant="ghost-hover-outline"
             size="sm"

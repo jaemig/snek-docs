@@ -18,7 +18,6 @@ const ProfileOverview: FC<IProfileOverviewProps> = ({ posts, setPosts }) => {
   const toggleLike = (id: TPostPreview['id']) => {
     console.log('toggle like for post ', id);
   };
-  
 
   const postPreviews: TPostPreview[] = [
     {

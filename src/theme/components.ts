@@ -13,7 +13,7 @@ const themeComponents = {
   Menu: themeMenuComponent,
   Alert: themeAlertComponent,
   Checkbox: themeCheckboxComponent,
-  Avatar: themeAvatarComponent,
+  Avatar: themeAvatarComponent
 };
 
 export default themeComponents;

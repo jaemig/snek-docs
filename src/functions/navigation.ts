@@ -13,7 +13,10 @@ import { TMenuStructure } from '../types/menu';
  * @param currentPath  The current path of the page
  * @returns  The converted menu data structure and an array of indices of expanded items
  */
-export function convertPageTreeToMenu(pageTree: IJaenPage[], currentPath: string) {
+export function convertPageTreeToMenu(
+  pageTree: IJaenPage[],
+  currentPath: string
+) {
   let expandedItemIdx = 0; // The next index of an possibly expanded item
   const result: TMenuStructure = {
     menu: [],
@@ -141,7 +144,8 @@ export function createBreadCrumbParts(
 
   if (data.activeIdx.length < data.activeIdx[0]) return parts;
   const activeSection = data.menu[data.activeIdx[0]];
-  if (!activeSection || activeSection.items.length < data.activeIdx[1]) return parts;
+  if (!activeSection || activeSection.items.length < data.activeIdx[1])
+    return parts;
   const activeItem = activeSection.items[data.activeIdx[1]];
   // Add the first breadcrumb part
   // This is necessary because the first breadcrumb part is not added to the result array by the function above
@@ -161,7 +165,10 @@ export function createBreadCrumbParts(
  * @param menu  The menu data structure
  * @returns  The data of the pages adjacent to the current page
  */
-export function getAdjacentPages(idxArray: number[], menu: NavMenuSection[]): TAdjacentPages {
+export function getAdjacentPages(
+  idxArray: number[],
+  menu: NavMenuSection[]
+): TAdjacentPages {
   const result: TAdjacentPages = {};
 
   /**
@@ -170,7 +177,11 @@ export function getAdjacentPages(idxArray: number[], menu: NavMenuSection[]): TA
    * @param idx  The current index in the index array
    * @param parentMenuItem  The parent menu item
    */
-  const getAdjacentPage = (menuItem: NavMenuItem, idx: number, parentMenuItem: NavMenuItem) => {
+  const getAdjacentPage = (
+    menuItem: NavMenuItem,
+    idx: number,
+    parentMenuItem: NavMenuItem
+  ) => {
     //* posIdx is undefined for the last recursive call
     const posIdx = idxArray[idx];
     const activeChild = menuItem.children?.[posIdx];
@@ -182,11 +193,21 @@ export function getAdjacentPages(idxArray: number[], menu: NavMenuSection[]): TA
         prev = menuItem.children?.[posIdx - 1];
       } else {
         // If the current item is already the most outer item, get the previous item via the section
-        if (posIdx === undefined && parentMenuItem.children && idxArray[idxArray.length - 1] > 0) {
+        if (
+          posIdx === undefined &&
+          parentMenuItem.children &&
+          idxArray[idxArray.length - 1] > 0
+        ) {
           // If there's a previous sibling of the item, get the most inner child of that sibling
-          const prevSibling = parentMenuItem.children[idxArray[idxArray.length - 1] - 1];
-          let lastChild = prevSibling.children?.[prevSibling.children.length - 1];
-          while (lastChild && lastChild.children && lastChild.children.length > 0) {
+          const prevSibling =
+            parentMenuItem.children[idxArray[idxArray.length - 1] - 1];
+          let lastChild =
+            prevSibling.children?.[prevSibling.children.length - 1];
+          while (
+            lastChild &&
+            lastChild.children &&
+            lastChild.children.length > 0
+          ) {
             lastChild = lastChild.children?.[lastChild.children.length - 1];
           }
           prev = lastChild;
@@ -204,7 +225,11 @@ export function getAdjacentPages(idxArray: number[], menu: NavMenuSection[]): TA
       }
     }
     if (!result.next) {
-      if (posIdx === undefined && menuItem.children && menuItem.children.length > 0) {
+      if (
+        posIdx === undefined &&
+        menuItem.children &&
+        menuItem.children.length > 0
+      ) {
         // If the current item has children, get the first child (most inner item only)
         const firstChild = menuItem.children[0];
         result.next = {
@@ -225,7 +250,7 @@ export function getAdjacentPages(idxArray: number[], menu: NavMenuSection[]): TA
         }
       }
     }
-  }
+  };
 
   if (menu.length >= idxArray[0]) {
     // We box the section in an MenuItem object so we can feed the recursive function with it
@@ -233,7 +258,7 @@ export function getAdjacentPages(idxArray: number[], menu: NavMenuSection[]): TA
       href: '',
       name: menu[idxArray[0]].name ?? '',
       children: menu[idxArray[0]].items
-    }
+    };
 
     getAdjacentPage(menu[idxArray[0]].items[idxArray[1]], 2, boxedSection);
   }
@@ -256,7 +281,10 @@ export function getExpandedMenuItemIndices(menu: NavMenuSection[]): number[] {
    */
   const getExpandedMenuItem = (menuItem: NavMenuItem): boolean => {
     const isActive = menuItem.isActive;
-    if (menuItem.hasActiveChild || (isActive && menuItem.children && menuItem.children.length > 0)) {
+    if (
+      menuItem.hasActiveChild ||
+      (isActive && menuItem.children && menuItem.children.length > 0)
+    ) {
       // We only push the index if the item is active or has an active child since chakra indices ignore non-expandalbe items
       // debugger;s
       expandedIdx.push(idx);
@@ -269,8 +297,7 @@ export function getExpandedMenuItemIndices(menu: NavMenuSection[]): number[] {
       if (getExpandedMenuItem(child)) return true;
     }
     return false;
-  }
-
+  };
 
   for (let i = 0; i < menu.length; i++) {
     // We box the section in an MenuItem object so we can feed the recursive function with it
@@ -278,8 +305,8 @@ export function getExpandedMenuItemIndices(menu: NavMenuSection[]): number[] {
       href: '',
       name: menu[i].name ?? '',
       children: menu[i].items,
-      hasActiveChild: menu[i].items.some(item => item.hasActiveChild),
-    }
+      hasActiveChild: menu[i].items.some(item => item.hasActiveChild)
+    };
     const isActiveItemFound = getExpandedMenuItem(boxedSection);
     if (isActiveItemFound) break; // We stop the loop if the active item is found
   }

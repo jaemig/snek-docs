@@ -18,7 +18,7 @@ const themeButtonComponent = {
       _hover: {
         color: 'components.button.ghostHoverOpacity.active.color',
         opacity: 1
-      },
+      }
     },
     'outline-hover-filled': {
       bgColor: 'transparent',
@@ -31,7 +31,8 @@ const themeButtonComponent = {
         color: 'components.button.outline.hover.color',
         boxShadow: '4px 4px 7px -5px rgba(2, 116, 192, 0.5)'
       },
-      transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
+      transition:
+        'background-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
     },
     'ghost-hover-outline': {
       bgColor: 'transparent',
@@ -40,16 +41,17 @@ const themeButtonComponent = {
       color: 'components.button.ghostHoverOutline.color',
       _hover: {
         borderColor: 'components.button.ghostHoverOutline.hover.borderColor',
-        color: 'components.button.ghostHoverOutline.hover.color',
+        color: 'components.button.ghostHoverOutline.hover.color'
       },
       _disabled: {
         opacity: 0.5,
         _hover: {
           borderColor: 'transparent',
-          color: 'components.button.ghostHoverOutline.color',
-        },
+          color: 'components.button.ghostHoverOutline.color'
+        }
       },
-      transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out'
+      transition:
+        'background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out'
     },
     'pq-outline': {
       bgColor: 'rgba(2, 116, 192, 0.07)',
@@ -63,7 +65,8 @@ const themeButtonComponent = {
         color: 'white',
         transform: 'scale(1.05)'
       },
-      transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.2s ease-in-out'
+      transition:
+        'background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.2s ease-in-out'
     },
     'pq-solid': {
       bgColor: 'pq.500',
@@ -74,7 +77,8 @@ const themeButtonComponent = {
         transform: 'scale(1.05)',
         boxShadow: '3x 3px 10px rgba(2, 116, 192, 0.5)'
       },
-      transition: 'background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
+      transition:
+        'background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
     },
     'pq-ghost': {
       bgColor: 'transparent',
@@ -82,8 +86,8 @@ const themeButtonComponent = {
       px: 5,
       borderRadius: 'lg',
       _hover: {
-        transform: 'scale(1.1)',
-      },
+        transform: 'scale(1.1)'
+      }
     }
   }
 };

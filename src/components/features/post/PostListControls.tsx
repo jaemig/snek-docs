@@ -42,7 +42,10 @@ const PostListControls: FC<IPostListControlsProps> = ({
     useState<(typeof sortOptions)[number]['value']>('recent');
 
   const [isAdvancedSearchOpen, setIsAdvancedSearchOpen] = useState(false);
-  const stateRef = useRef<TDebounceData>({ state: 'inactive', timeout: undefined }); // Keep track of the current state of the search
+  const stateRef = useRef<TDebounceData>({
+    state: 'inactive',
+    timeout: undefined
+  }); // Keep track of the current state of the search
 
   const sortOptions = [
     {
@@ -102,7 +105,7 @@ const PostListControls: FC<IPostListControlsProps> = ({
         setPosts({ state: 'inactive', posts: [] });
         return;
       }
-      
+
       stateRef.current.state = 'loading';
       setPosts({
         state: 'loading',
@@ -115,10 +118,9 @@ const PostListControls: FC<IPostListControlsProps> = ({
       setPosts({
         state: 'success',
         posts: posts
-      })
-    }, 300)
-
-  }
+      });
+    }, 300);
+  };
 
   return (
     <VStack w="full">
@@ -177,6 +179,5 @@ const PostListControls: FC<IPostListControlsProps> = ({
     </VStack>
   );
 };
-
 
 export default PostListControls;

@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 export type NavMenuItem = {
   name: string;
@@ -23,7 +23,7 @@ export type TLinkData = {
 
 export type TTopNavLinkData = TLinkData & {
   matchMethod: 'exact' | 'includes';
-}
+};
 
 export type TableOfContentItem = {
   id: string;
@@ -44,4 +44,4 @@ export type MainBreadcrumbPart = {
 export type TAdjacentPages = {
   prev?: TLinkData;
   next?: TLinkData;
-}
+};

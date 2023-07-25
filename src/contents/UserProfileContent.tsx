@@ -23,7 +23,7 @@ const UserProfileContent: FC = () => {
   });
   const [postFilterQuery, setPostFilterQuery] = useState<string>();
   const [overviewPosts, setOverviewPosts] = useState<TPostListData>({
-  state: 'loading',
+    state: 'loading',
     posts: []
   });
   const [activeTab, setActiveTab] =
@@ -80,7 +80,9 @@ const UserProfileContent: FC = () => {
   let mainContent: ReactNode;
 
   if (activeTab === 'overview') {
-    mainContent = <ProfileOverview posts={overviewPosts} setPosts={setOverviewPosts} />;
+    mainContent = (
+      <ProfileOverview posts={overviewPosts} setPosts={setOverviewPosts} />
+    );
   } else {
     mainContent = (
       <PostList

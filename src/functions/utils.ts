@@ -64,7 +64,7 @@ export function filterWhitespaceItems(items: string[]) {
  */
 export function formatNumber(number: number, precision = 2) {
   const suffixes = ['', 'k', 'm', 'b', 't'];
-  const suffixNum = (number >= 1000) ? Math.floor(('' + number).length / 3) : 0;
+  const suffixNum = number >= 1000 ? Math.floor(('' + number).length / 3) : 0;
   let shortNumber = parseFloat(
     (suffixNum !== 0 ? number / Math.pow(1000, suffixNum) : number).toPrecision(
       precision

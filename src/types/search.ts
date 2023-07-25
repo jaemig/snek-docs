@@ -1,7 +1,7 @@
 export type TSearchMetadata = {
   _page_matches: number;
   _section_matches: number;
-}
+};
 /**
  * A single search result section.
  */

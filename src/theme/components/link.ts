@@ -34,7 +34,7 @@ const themeLinkComponent = {
         opacity: 1
       },
       transition: 'opacity 0.2s ease-in-out'
-    },
+    }
   }
 };
 

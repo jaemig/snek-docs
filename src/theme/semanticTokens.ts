@@ -1,30 +1,30 @@
-import smtButtonComponent from "./semanticTokens/components/button";
-import smtCalloutComponent from "./semanticTokens/components/callout";
-import smtCodeSnippetComponent from "./semanticTokens/components/codeSnippet";
-import smtDrawerComponent from "./semanticTokens/components/drawer";
-import smtFilesystemComponent from "./semanticTokens/components/filesystem";
-import smtHeadingComponent from "./semanticTokens/components/heading";
-import smtIconCardComponent from "./semanticTokens/components/iconCard";
-import smtImageCardComponent from "./semanticTokens/components/imageCard";
-import smtMenuComponent from "./semanticTokens/components/menu";
-import smtpSeparatorComponent from "./semanticTokens/components/separator";
-import smtFooter from "./semanticTokens/layout/footer";
-import smtLeftNav from "./semanticTokens/layout/leftNav";
-import smtMain from "./semanticTokens/layout/main";
-import smtRightNav from "./semanticTokens/layout/rightNav";
-import smtTopNav from "./semanticTokens/layout/topNav";
-import smtPqTopNav from "./photonq/semanticTokens/layout/topNav";
-import smtPqShared from "./photonq/semanticTokens/shared";
-import smtShared from "./semanticTokens/shared";
-import smtPqSectionLabel from "./photonq/semanticTokens/components/sectionLabel";
-import smtPqFeatureCard from "./photonq/semanticTokens/components/featureCard";
-import smtcodeResultPreviewComponent from "./semanticTokens/components/codeResultPreview";
-import smtUserProfilePage from "./semanticTokens/pages/userProfile";
-import smtUserActivityComponent from "./semanticTokens/components/userActivity";
-import smtStepperComponent from "./semanticTokens/components/stepper";
-import smtPostPreviewComponent from "./semanticTokens/components/postPreview";
-import smtPostsPage from "./semanticTokens/pages/posts";
-import smtInputComponent from "./semanticTokens/components/input";
+import smtButtonComponent from './semanticTokens/components/button';
+import smtCalloutComponent from './semanticTokens/components/callout';
+import smtCodeSnippetComponent from './semanticTokens/components/codeSnippet';
+import smtDrawerComponent from './semanticTokens/components/drawer';
+import smtFilesystemComponent from './semanticTokens/components/filesystem';
+import smtHeadingComponent from './semanticTokens/components/heading';
+import smtIconCardComponent from './semanticTokens/components/iconCard';
+import smtImageCardComponent from './semanticTokens/components/imageCard';
+import smtMenuComponent from './semanticTokens/components/menu';
+import smtpSeparatorComponent from './semanticTokens/components/separator';
+import smtFooter from './semanticTokens/layout/footer';
+import smtLeftNav from './semanticTokens/layout/leftNav';
+import smtMain from './semanticTokens/layout/main';
+import smtRightNav from './semanticTokens/layout/rightNav';
+import smtTopNav from './semanticTokens/layout/topNav';
+import smtPqTopNav from './photonq/semanticTokens/layout/topNav';
+import smtPqShared from './photonq/semanticTokens/shared';
+import smtShared from './semanticTokens/shared';
+import smtPqSectionLabel from './photonq/semanticTokens/components/sectionLabel';
+import smtPqFeatureCard from './photonq/semanticTokens/components/featureCard';
+import smtcodeResultPreviewComponent from './semanticTokens/components/codeResultPreview';
+import smtUserProfilePage from './semanticTokens/pages/userProfile';
+import smtUserActivityComponent from './semanticTokens/components/userActivity';
+import smtStepperComponent from './semanticTokens/components/stepper';
+import smtPostPreviewComponent from './semanticTokens/components/postPreview';
+import smtPostsPage from './semanticTokens/pages/posts';
+import smtInputComponent from './semanticTokens/components/input';
 
 const themeSemanticTokens = {
   colors: {
@@ -43,11 +43,11 @@ const themeSemanticTokens = {
       postPreview: smtPostPreviewComponent,
       userActivity: smtUserActivityComponent,
       stepper: smtStepperComponent,
-      input: smtInputComponent,
+      input: smtInputComponent
     },
     pages: {
       userProfile: smtUserProfilePage,
-      posts: smtPostsPage,
+      posts: smtPostsPage
     },
     shared: smtShared,
     topNav: smtTopNav,
@@ -62,11 +62,11 @@ const themeSemanticTokens = {
     pq: {
       shared: smtPqShared,
       layout: {
-        topNav: smtPqTopNav,
+        topNav: smtPqTopNav
       },
       components: {
         sectionLabel: smtPqSectionLabel,
-        featureCard: smtPqFeatureCard,
+        featureCard: smtPqFeatureCard
       }
     }
   }
