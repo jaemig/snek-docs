@@ -16,21 +16,20 @@ import {
   Select,
   Collapse
 } from '@chakra-ui/react';
-import { Dispatch, FC, SetStateAction, useMemo, useState } from 'react';
+import { ChangeEvent, FC, useMemo, useRef, useState } from 'react';
 import { TDebounceData } from '../../../types/comm';
-import { searchPosts } from '../../../functions/features/post';
+import { posts } from '../../../functions/features/post';
 import { TPostListData } from '../../../types/features/post';
 import TbFilterDown from '../../icons/tabler/TbFilterDown';
 import TbFilterUp from '../../icons/tabler/TbFilterUp';
+import { wait } from '../../../functions/utils';
 
 interface IPostListControlsProps extends StackProps {
-  // search: ChangeEventHandler<HTMLInputElement>;
-  setPosts: Dispatch<SetStateAction<TPostListData>>;
+  setPosts: (data: TPostListData) => void;
   enableAdvancedSearch?: boolean;
 }
 
 const PostListControls: FC<IPostListControlsProps> = ({
-  // search,
   setPosts,
   enableAdvancedSearch = true,
   ...props
@@ -39,10 +38,7 @@ const PostListControls: FC<IPostListControlsProps> = ({
     useState<(typeof sortOptions)[number]['value']>('recent');
 
   const [isAdvancedSearchOpen, setIsAdvancedSearchOpen] = useState(false);
-
-  // This is used to cancel the search if the user types too fast
-  // (can't be as a hook because the function requires the latest data during the same render cycle)
-  let searchDebounceData: TDebounceData = { state: 'inactive' };
+  const stateRef = useRef<TDebounceData>({ state: 'inactive', timeout: undefined }); // Keep track of the current state of the search
 
   const sortOptions = [
     {
@@ -91,6 +87,34 @@ const PostListControls: FC<IPostListControlsProps> = ({
     });
   }, [sortOptions, activeSortOption]);
 
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value.trim();
+
+    clearTimeout(stateRef.current.timeout);
+    stateRef.current.timeout = setTimeout(async () => {
+      if (!query.length) {
+        stateRef.current.state = 'inactive';
+        setPosts({ state: 'inactive', posts: [] });
+        return;
+      }
+      
+      stateRef.current.state = 'loading';
+      setPosts({
+        state: 'loading',
+        posts: []
+      });
+      await wait(3000);
+      //@ts-expect-error - The state might be changed by another call
+      if (stateRef.current.state === 'inactive') return;
+      stateRef.current.state = 'success';
+      setPosts({
+        state: 'success',
+        posts: posts
+      })
+    }, 300)
+
+  }
+
   return (
     <VStack w="full">
       <HStack spacing={3} w="75%" {...props}>
@@ -98,7 +122,7 @@ const PostListControls: FC<IPostListControlsProps> = ({
           placeholder="Find a post..."
           size="sm"
           borderRadius="lg"
-          onChange={e => searchPosts(e, searchDebounceData, setPosts)}
+          onChange={handleInputChange}
           focusBorderColor="components.input._focus.borderColor"
         />
         <Menu>
@@ -147,5 +171,6 @@ const PostListControls: FC<IPostListControlsProps> = ({
     </VStack>
   );
 };
+
 
 export default PostListControls;

@@ -7,7 +7,6 @@ import { useMenuContext } from '../contexts/menu';
 import PostList from '../components/features/post/PostList';
 import { TPostListData, TPostPreview } from '../types/features/post';
 import PostListControls from '../components/features/post/PostListControls';
-import { searchPosts } from '../functions/features/post';
 
 const gradientAnimation = keyframes`
   0%{background-position:0% 50%}
@@ -34,10 +33,6 @@ const PostsContent: FC = () => {
     state: 'inactive',
     posts: []
   });
-
-  // This is used to cancel the search if the user types too fast
-  // (can't be as a hook because the function requires the latest data during the same render cycle)
-  // let searchDebounceData: TDebounceData = { state: 'inactive' };
 
   //TODO: This would come from an API
   const posts: TPostPreview[] = [
@@ -206,8 +201,6 @@ const PostsContent: FC = () => {
     }, 3000);
   }, []);
 
-  console.log('post state: ', postResults.state);
-
   return (
     <MainGrid>
       <Box display={{ base: 'none', md: 'block' }} position="sticky">
@@ -219,7 +212,6 @@ const PostsContent: FC = () => {
       </Box>
       <VStack>
         <PostListControls
-          // search={e => searchPosts(e, searchDebounceData, setPostResults)}
           setPosts={setPostResults}
           w={{ base: 'full', md: '75%' }}
         />

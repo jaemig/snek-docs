@@ -2,6 +2,7 @@ import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { TPostListData, TPostPreview } from "../../types/features/post";
 import { debounce } from "../search";
 import { TDebounceData } from "../../types/comm";
+import { wait } from "../utils";
 
 //TODO: This would come from an API
 const posts: TPostPreview[] = [
@@ -162,31 +163,4 @@ const posts: TPostPreview[] = [
     }
 ];
 
-//TODO: Extend this function so that the results can be filtered, sorted, etc.
-/**
- * Search posts with a debounce
- * @param e  The event object
- * @param data  The debounce data
- * @param setPosts  The state setter for posts
- */
-export function searchPosts(e: ChangeEvent<HTMLInputElement>, data: TDebounceData, setPosts: Dispatch<SetStateAction<TPostListData>>): void {
-    const query = e.target.value.trim();
-
-    debounce(() => {
-        if (!query.length) {
-            setPosts({ state: 'inactive', posts: [] });
-            data = { state: 'inactive' };
-        } else {
-            setPosts({ state: 'loading', posts: [] });
-            data = { state: 'loading' };
-            // Simulate loading posts from an API
-            setTimeout(() => {
-                if (data.state === 'inactive') return;
-                setPosts({
-                    state: 'success',
-                    posts: posts,
-                });
-            }, 3000);
-        }
-    }, data)();
-}
+export { posts };

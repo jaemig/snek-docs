@@ -75,3 +75,12 @@ export function formatNumber(number: number, precision = 2) {
   }
   return shortNumber + suffixes[suffixNum];
 }
+
+/**
+ * Waits for a specified amount of time
+ * @param ms  - The amount of time to wait in milliseconds
+ * @returns - A promise that resolves after the specified amount of time
+ */
+export async function wait(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

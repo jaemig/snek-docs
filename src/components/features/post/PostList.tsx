@@ -131,7 +131,6 @@ const PostList: FC<IPostListProps> = ({
     }
   }
 
-  console.log(pagination.totalPages);
   return (
     <VStack w="full" gap={5} {...props}>
       {showControls && setPosts && <PostListControls setPosts={setPosts} />}

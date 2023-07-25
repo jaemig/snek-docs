@@ -6,7 +6,6 @@ import {
   TSearchResultSection
 } from '../types/search';
 import { filterWhitespaceItems } from './utils';
-import { TDebounceData } from '../types/comm';
 
 /**
  * Searches the docs for the given query.
@@ -176,22 +175,4 @@ export async function searchDocs(
       : b._section_matches - a._section_matches;
   });
   return res;
-}
-
-/**
- * Debounces the given callback function.
- * @param callback  The callback function to debounce
- * @param timeout  The timeout object to use
- * @param debounceTime  The debounce time in milliseconds
- * @returns The debounced callback function
- */
-export function debounce(
-  callback: (...args: any) => void,
-  meta: TDebounceData, // This is a whole object because we need to remember the identical timeout object between calls.
-  debounceTime = 300
-) {
-  return (...args: any) => {
-    clearTimeout(meta.timeout);
-    meta.timeout = setTimeout(() => callback(args), debounceTime);
-  };
 }
