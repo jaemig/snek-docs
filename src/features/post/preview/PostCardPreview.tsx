@@ -10,7 +10,7 @@ import {
   Text
 } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
-import { IPostPreviewProps } from '../../../types/features/post';
+import { IPostPreviewProps } from '../types/post';
 import PostPreviewRating from './PostPreviewRating';
 import PostPreviewManageMenu from './PostPreviewManageMenu';
 import Link from '../../../shared/components/Link';

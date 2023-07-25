@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
-import { TPostListData, TPostPreview } from '../../../types/features/post';
+import { TPostListData, TPostPreview } from '../../../features/post/types/post';
 import { debounce } from '../search';
-import { TDebounceData } from '../../../types/comm';
+import { TDebounceData } from '../../types/comm';
 import { wait } from '../utils';
 
 //TODO: This would come from an API

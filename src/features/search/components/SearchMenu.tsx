@@ -16,7 +16,10 @@ import {
 } from '@chakra-ui/react';
 import { FC, useEffect, useMemo, useRef, useState } from 'react';
 
-import { TSearchResult, TSearchResultSection } from '../../../types/search';
+import {
+  TSearchResult,
+  TSearchResultSection
+} from '../../../shared/types/search';
 import SearchInput, { TSearchInputStyleProps } from './SearchInput';
 import Link from '../../../shared/components/Link';
 import Highlighter from 'react-highlight-words';

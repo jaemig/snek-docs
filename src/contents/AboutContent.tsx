@@ -1,6 +1,6 @@
 import { Box, Heading, SimpleGrid, Text } from '@chakra-ui/react';
 import { FC } from 'react';
-import BaseContentLayout from '../layout/BaseContentLayout';
+import BaseContentLayout from '../shared/containers/BaseContentLayout';
 
 /**
  * Content for the contact page.

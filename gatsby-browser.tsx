@@ -1,6 +1,5 @@
 import type { GatsbyBrowser } from 'gatsby';
-
-import AppLayout from './src/layout/AppLayout';
+import AppLayout from './src/shared/containers/AppLayout';
 
 export const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({
   element,

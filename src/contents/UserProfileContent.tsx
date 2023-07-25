@@ -1,14 +1,14 @@
 import { Box, Button, HStack, Stack, useDisclosure } from '@chakra-ui/react';
 import { FC, ReactNode, useEffect, useMemo, useState } from 'react';
-import MainGrid from '../layout/components/MainGrid';
+import MainGrid from '../shared/containers/components/MainGrid';
 import LeftNavProfile from '../features/social/profile/LeftNavProfile';
 import PostList from '../features/post/PostList';
 import ProfileOverview from '../features/social/profile/ProfileOverview';
 import { useLocation } from '@reach/router';
-import TopNav from '../layout/navigation/TopNav';
 import TbUser from '../shared/components/icons/tabler/TbUser';
 import TbBook from '../shared/components/icons/tabler/TbBook';
-import { TPostListData } from '../types/features/post';
+import { TPostListData } from '../features/post/types/post';
+import TopNav from '../shared/containers/navigation/TopNav';
 
 /**
  * Component for displaying a certain user profile.
@@ -111,7 +111,7 @@ const UserProfileContent: FC = () => {
       </TopNav>
       <MainGrid mt={10}>
         <Box>
-          <LeftNavProfile isExpanded={isExpanded} />
+          <LeftNavProfile />
         </Box>
         <Stack
           verticalAlign="top"

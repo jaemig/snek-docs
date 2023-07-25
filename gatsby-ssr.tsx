@@ -1,6 +1,5 @@
 import type { GatsbySSR } from 'gatsby';
-
-import AppLayout from './src/layout/AppLayout';
+import AppLayout from './src/shared/containers/AppLayout';
 
 export const wrapPageElement: GatsbySSR['wrapPageElement'] = ({
   element,

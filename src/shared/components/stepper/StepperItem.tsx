@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { TStepperItem } from '../../../types/core/stepper';
+import { TStepperItem } from './types/stepper';
 import { Box, Center, HStack, StackProps } from '@chakra-ui/react';
 
 interface IStepperItemProps extends TStepperItem {

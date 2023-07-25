@@ -5,16 +5,16 @@ import { Global } from '@emotion/react';
 import PhotonQ from './sections/PhotonQ';
 import AboutUs from './sections/AboutUs';
 import Footer from './sections/Footer';
-import AppLayout from '../layout/AppLayout';
 import useScrollPosition from '../shared/hooks/use-scroll-position';
 import { useDisclosure } from '@chakra-ui/react';
-import {
-  TTopNavLinkProps,
-  TTopNavWrapperProps
-} from '../layout/navigation/TopNav';
 
 import GrayedUniWienLogo from '../photonq/assets/icons/uni-wien-logo-gray.svg';
 import ColorizedUniWienLogo from '../photonq/assets/icons/uni-wien-logo-colorized.svg';
+import AppLayout from '../shared/containers/AppLayout';
+import {
+  TTopNavLinkProps,
+  TTopNavWrapperProps
+} from '../shared/containers/navigation/TopNav';
 
 interface ILandingPageContentProps {
   path?: string;

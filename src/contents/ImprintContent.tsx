@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import BaseContentLayout from '../layout/BaseContentLayout';
 import { Editor } from '@snek-at/jaen';
+import BaseContentLayout from '../shared/containers/BaseContentLayout';
 
 /**
  * Content for the contact page.

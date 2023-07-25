@@ -12,8 +12,8 @@ import {
   VStack
 } from '@chakra-ui/react';
 import { FC } from 'react';
-import BaseContentLayout from '../layout/BaseContentLayout';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import BaseContentLayout from '../shared/containers/BaseContentLayout';
 
 type FormValues = {
   name: string;

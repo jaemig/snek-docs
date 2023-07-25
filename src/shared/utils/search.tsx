@@ -4,7 +4,7 @@ import {
   TSearchMetadata,
   TSearchResult,
   TSearchResultSection
-} from '../../types/search';
+} from '../types/search';
 import { filterWhitespaceItems } from './utils';
 
 /**

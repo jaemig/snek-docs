@@ -12,13 +12,15 @@ import {
   useBreakpointValue
 } from '@chakra-ui/react';
 import { FC, Fragment, useMemo } from 'react';
-import LeftNav, { ILeftNavProps } from '../../../layout/navigation/LeftNav';
 import FeatherInbox from '../../../shared/components/icons/feather/FeatherInbox';
 import TbBuilding from '../../../shared/components/icons/tabler/TbBuilding';
 import TbLinkedIn from '../../../shared/components/icons/tabler/TbLinkedIn';
 import TbMapPin from '../../../shared/components/icons/tabler/TbMapPin';
 import Link from '../../../shared/components/Link';
 import { useNavOffset } from '../../../shared/hooks/use-nav-offset';
+import LeftNav, {
+  ILeftNavProps
+} from '../../../shared/containers/navigation/LeftNav';
 
 export type TSocialLink = 'email' | 'linkedin' | 'location' | 'company';
 
@@ -121,6 +123,7 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({
         md: `calc(100vh - 100px - ${navTopOffset})`
       }}
       minH="fit-content"
+      w="full"
       mb={{ base: 10, md: 0 }}
     >
       <VStack

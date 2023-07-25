@@ -4,8 +4,8 @@ import {
   NavMenuItem,
   MainBreadcrumbPart,
   TAdjacentPages
-} from '../../types/navigation';
-import { TMenuStructure } from '../../types/menu';
+} from '../types/navigation';
+import { TMenuStructure } from '../types/menu';
 
 /**
  * Converts a page tree to a usable menu data structure.

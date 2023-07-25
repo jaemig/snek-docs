@@ -17,9 +17,9 @@ import {
   Collapse
 } from '@chakra-ui/react';
 import { ChangeEvent, FC, useMemo, useRef, useState } from 'react';
-import { TDebounceData } from '../../types/comm';
+import { TDebounceData } from '../../shared/types/comm';
 import { posts } from '../../shared/utils/features/post';
-import { TPostListData } from '../../types/features/post';
+import { TPostListData } from './types/post';
 import TbFilterDown from '../../shared/components/icons/tabler/TbFilterDown';
 import TbFilterUp from '../../shared/components/icons/tabler/TbFilterUp';
 import { wait } from '../../shared/utils/utils';

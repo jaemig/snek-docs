@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { TMenuStructure } from '../../types/menu';
+import { TMenuStructure } from '../types/menu';
 
 export type TMenuContext = {
   menuStructure: TMenuStructure;

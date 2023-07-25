@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { TPostPreview } from '../../../types/features/post';
+import { TPostPreview } from '../types/post';
 import { Button, HStack, Text } from '@chakra-ui/react';
 import { formatNumber } from '../../../shared/utils/utils';
 import TbStar from '../../../shared/components/icons/tabler/TbStar';

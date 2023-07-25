@@ -1,6 +1,6 @@
 import { Box, Divider, HStack, StackProps, VStack } from '@chakra-ui/react';
 import { FC } from 'react';
-import { TStepperSection } from '../../../types/core/stepper';
+import { TStepperSection } from './types/stepper';
 import StepperItem from './StepperItem';
 
 interface IStepperProps extends StackProps {

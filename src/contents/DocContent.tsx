@@ -17,25 +17,25 @@ import { Field } from '@snek-at/jaen';
 import React, { memo } from 'react';
 
 import { useNavOffset } from '../shared/hooks/use-nav-offset';
-import RightNav from '../layout/navigation/RightNav';
-import MainBottomNav from '../layout/navigation/MainBottomNav';
 
 // Default custom components (replaces HTML tags)
-import Text from '../features/main-content/text/Text';
-import Heading from '../features/main-content/heading/Heading';
-import List from '../features/main-content/list/List';
-import ListItem from '../features/main-content/list/ListItem';
-import CodeSnippet from '../features/main-content/code-snippet/CodeSnippet';
+import Text from '../features/main-content/text/components/Text';
+import Heading from '../features/main-content/heading/components/Heading';
+import List from '../features/main-content/list/components/List';
+import CodeSnippet from '../features/main-content/code-snippet/components/CodeSnippet';
 import Link from '../shared/components/Link';
 
 // Insertable custom components (via Jaen)
-import Filesystem from '../features/main-content/filesystem/Filesystem';
-import ImageCard from '../features/main-content/image-card/ImageCard';
-import Callout from '../features/main-content/callout/Callouts';
-import IconCard from '../features/main-content/icon-card/IconCard';
-import CodePlayground from '../features/main-content/code-playground/CodePlayground';
+import Filesystem from '../features/main-content/filesystem/components/Filesystem';
+import ImageCard from '../features/main-content/image-card/components/ImageCard';
+import Callout from '../features/main-content/callout/components/Callouts';
+import IconCard from '../features/main-content/icon-card/components/IconCard';
 import MemoizedLinks from '../shared/components/MemoizedLink';
-import TableOfContent from '../layout/navigation/components/TableOfContent';
+import ListItem from '../features/main-content/list/components/ListItem';
+import TableOfContent from '../shared/containers/navigation/components/TableOfContent';
+import MainBottomNav from '../shared/containers/navigation/MainBottomNav';
+import RightNav from '../shared/containers/navigation/RightNav';
+import CodePlayground from '../features/main-content/code-playground/components/CodePlayground';
 
 // Example links - these would probably be fetched from a CMS or other data source
 const links = [
@@ -94,6 +94,7 @@ export const DocContent: React.FC<DocContentProps> = () => {
             th: (props: any) => <Th {...props} />,
             td: (props: any) => <Td {...props} />,
             // MISC
+            //@ts-expect-error
             code: ({
               className,
               playground,
@@ -136,9 +137,13 @@ export const DocContent: React.FC<DocContentProps> = () => {
               return <CodeSnippet language={lang} {...props} />;
             },
             // CUSTOM COMPONENTS
+            //@ts-expect-error
             Filesystem,
+            //@ts-expect-error
             ImageCard,
+            //@ts-expect-error
             Callout,
+            //@ts-expect-error
             IconCard
           }}
         />

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { IPostPreviewProps } from '../../../types/features/post';
+import { IPostPreviewProps } from '../types/post';
 import {
   HStack,
   Heading,

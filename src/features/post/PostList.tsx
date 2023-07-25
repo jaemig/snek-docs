@@ -1,9 +1,5 @@
 import { Dispatch, FC, ReactNode, SetStateAction, useMemo } from 'react';
-import {
-  IPostPreviewProps,
-  TPostListData,
-  TPostPreview
-} from '../../types/features/post';
+import { IPostPreviewProps, TPostListData, TPostPreview } from './types/post';
 import {
   Button,
   CardProps,

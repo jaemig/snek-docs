@@ -1,8 +1,8 @@
 import { VStack, SimpleGrid, Divider } from '@chakra-ui/react';
 import { FC, useEffect, useMemo, useState } from 'react';
-import { TPostListData, TPostPreview } from '../../../types/features/post';
+import { TPostListData, TPostPreview } from '../../post/types/post';
 import PostPreview from '../../post/preview/PostCardPreview';
-import ActivityList from './ActivityList';
+import ActivityList from '../activity/components/ActivityList';
 import PostList from '../../post/PostList';
 
 interface IProfileOverviewProps {
