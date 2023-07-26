@@ -1,9 +1,9 @@
 import { Box, Button, HStack, Stack, useDisclosure } from '@chakra-ui/react';
 import { FC, ReactNode, useEffect, useMemo, useState } from 'react';
 import MainGrid from '../shared/containers/components/MainGrid';
-import LeftNavProfile from '../features/social/profile/LeftNavProfile';
+import LeftNavProfile from '../features/social/profile/components/LeftNavProfile';
 import PostList from '../features/post/PostList';
-import ProfileOverview from '../features/social/profile/ProfileOverview';
+import ProfileOverview from '../features/social/profile/components/ProfileOverview';
 import { useLocation } from '@reach/router';
 import TbUser from '../shared/components/icons/tabler/TbUser';
 import TbBook from '../shared/components/icons/tabler/TbBook';

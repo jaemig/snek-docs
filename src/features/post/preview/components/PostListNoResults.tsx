@@ -1,6 +1,6 @@
 import { BoxProps, Center, Heading, Text, VStack } from '@chakra-ui/react';
 import { FC } from 'react';
-import TbSearch from '../../../shared/components/icons/tabler/TbSearch';
+import TbSearch from '../../../../shared/components/icons/tabler/TbSearch';
 
 interface IPostLIstNoResultsProps extends BoxProps {}
 

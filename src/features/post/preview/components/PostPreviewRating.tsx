@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { TPostPreview } from '../types/post';
 import { Button, HStack, Text } from '@chakra-ui/react';
-import { formatNumber } from '../../../shared/utils/utils';
-import TbStar from '../../../shared/components/icons/tabler/TbStar';
+import TbStar from '../../../../shared/components/icons/tabler/TbStar';
+import { formatNumber } from '../../../../shared/utils/utils';
+import { TPostPreview } from '../../types/post';
 
 interface IPostPreviewRatingProps {
   id: TPostPreview['id'];

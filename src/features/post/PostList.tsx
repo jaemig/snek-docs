@@ -11,13 +11,13 @@ import {
   VStack
 } from '@chakra-ui/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
-import PostCardPreview from './preview/PostCardPreview';
+import PostCardPreview from './preview/components/PostCardPreview';
 import usePagination from '../../shared/hooks/use-pagination';
 import PostListControls from './PostListControls';
-import PostListItemPreview from './preview/PostListItemPreview';
-import PostCardPreviewSkeleton from './preview/PostCardPreviewSkeleton';
-import PostListItemPreviewSkeleton from './preview/PostListItemPreviewSkeleton';
-import PostListNoResults from './preview/PostListNoResults';
+import PostCardPreviewSkeleton from './preview/components/PostCardPreviewSkeleton';
+import PostListItemPreview from './preview/components/PostListItemPreview';
+import PostListItemPreviewSkeleton from './preview/components/PostListItemPreviewSkeleton';
+import PostListNoResults from './preview/components/PostListNoResults';
 
 interface IPostListProps extends StackProps {
   setPosts?: Dispatch<SetStateAction<TPostListData>>;

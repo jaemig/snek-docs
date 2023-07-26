@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { IPostPreviewProps } from '../types/post';
 import {
   HStack,
   Heading,
@@ -11,9 +10,10 @@ import {
   Text,
   VStack
 } from '@chakra-ui/react';
-import Link from '../../../shared/components/Link';
 import PostPreviewManageMenu from './PostPreviewManageMenu';
 import PostPreviewRating from './PostPreviewRating';
+import Link from '../../../../shared/components/Link';
+import { IPostPreviewProps } from '../../types/post';
 
 const postListItemPreviewStyling = {
   wrapper: {

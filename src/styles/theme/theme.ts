@@ -5,7 +5,7 @@ import {
 } from '@chakra-ui/react';
 import themeComponents from './components';
 import themeColors from './colors';
-import themeSemanticTokens from './semanticTokens';
+import themeSemanticTokens from './semanticTokens/semanticTokens';
 import themeFonts from './fonts';
 
 const theme: ThemeConfig = extendTheme({
