@@ -26,6 +26,7 @@ const themeColors = {
         300: '#63F8B2',
         400: '#37F69D',
         500: '#0CF387',
+        550: '#0BDF7D', // middle between 500 & 600 (used for button hover)
         600: '#09C36C',
         700: '#079251',
         800: '#056136',

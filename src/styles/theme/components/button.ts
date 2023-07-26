@@ -87,9 +87,26 @@ const themeButtonComponent = {
       borderRadius: 'lg',
       _hover: {
         transform: 'scale(1.1)'
+      },
+    },
+    // COLOR VARIANTS
+    //TODO: Find a better way to do this (we need the colorScheme to use other color values than f.e. 500 & 600 by default)
+    'filledGreen': {
+      color: 'components.button.filledGreen.color',
+      bgColor: 'components.button.filledGreen.bgColor',
+      _hover: {
+        bgColor: 'components.button.filledGreen.hover.bgColor'
+      },
+      _loading: {
+        color: 'white',
+        opacity: 1,
+        bgColor: 'components.button.filledGreen.loading.bgColor',
+        _hover: {
+          bgColor: 'components.button.filledGreen.loading.bgColor'
+        }
       }
-    }
-  }
+    },
+  },
 };
 
 export default themeButtonComponent;

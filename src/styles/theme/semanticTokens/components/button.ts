@@ -58,9 +58,32 @@ const smtButtonComponent = {
       color: {
         default: 'theme.500',
         _dark: 'theme.500'
-      }
+      },
+    },
+  },
+  // COLOR VARIANTS
+  filledGreen: {
+    color: {
+      default: 'gray.800',
+      _dark: 'gray.200'
+    },
+    bgColor: {
+      default: 'flat.se.green.500',
+      _dark: 'flat.se.green.600'
+    },
+    hover: {
+      bgColor: {
+        default: 'flat.se.green.550',
+        _dark: 'flat.se.green.700'
+      },
+    },
+    loading: {
+      bgColor: {
+        default: 'flat.se.green.300',
+        _dark: 'flat.se.green.400'
+      },
     }
-  }
+  },
 };
 
 export default smtButtonComponent;
