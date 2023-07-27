@@ -4,10 +4,7 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
-  Grid,
-  GridItem,
   HStack,
-  IconButton,
   Input,
   Modal,
   ModalBody,
@@ -17,7 +14,6 @@ import {
   ModalOverlay,
   Radio,
   RadioGroup,
-  Switch,
   Text,
   Textarea,
   Tooltip,
@@ -27,7 +23,6 @@ import {
 import { FC, useMemo } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { wait } from '../../../shared/utils/utils';
-import TbInfoCircle from '../../../shared/components/icons/tabler/TbInfoCircle';
 import TbBook from '../../../shared/components/icons/tabler/TbBook';
 import TbBookOff from '../../../shared/components/icons/tabler/TbBookOff';
 

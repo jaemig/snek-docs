@@ -14,7 +14,8 @@ import {
   InputLeftAddon,
   InputRightAddon,
   Select,
-  Collapse
+  Collapse,
+  Tooltip
 } from '@chakra-ui/react';
 import { ChangeEvent, FC, useMemo, useRef, useState } from 'react';
 import { TDebounceData } from '../../shared/types/comm';
@@ -23,10 +24,12 @@ import { TPostListData } from './types/post';
 import TbFilterDown from '../../shared/components/icons/tabler/TbFilterDown';
 import TbFilterUp from '../../shared/components/icons/tabler/TbFilterUp';
 import { wait } from '../../shared/utils/utils';
+import TbPlus from '../../shared/components/icons/tabler/TbPlus';
 
 interface IPostListControlsProps extends StackProps {
   setPosts: (data: TPostListData) => void;
   enableAdvancedSearch?: boolean;
+  showCreatePostButton?: boolean;
   defaultQuery?: string;
   setQuery?: (query: string) => void;
 }
@@ -34,6 +37,7 @@ interface IPostListControlsProps extends StackProps {
 const PostListControls: FC<IPostListControlsProps> = ({
   setPosts,
   enableAdvancedSearch = true,
+  showCreatePostButton,
   defaultQuery,
   setQuery,
   ...props
@@ -140,9 +144,15 @@ const PostListControls: FC<IPostListControlsProps> = ({
             borderRadius="lg"
             variant="outline"
             fontWeight="semibold"
+            minW="unset"
             rightIcon={
               <ChevronDownIcon display={{ base: 'none', sm: 'initial' }} />
             }
+            sx={{
+              '& .chakra-button__icon': {
+                marginInlineStart: 0
+              }
+            }}
           >
             Sort
           </MenuButton>
@@ -156,6 +166,16 @@ const PostListControls: FC<IPostListControlsProps> = ({
             aria-label={'Toggle advanced search filter visibility'}
             onClick={() => setIsAdvancedSearchOpen(!isAdvancedSearchOpen)}
           />
+        )}
+        {showCreatePostButton && (
+          <Tooltip openDelay={500} label="Create a new post">
+            <IconButton
+              size="sm"
+              variant="outline"
+              icon={<TbPlus />}
+              aria-label="Create new post"
+            />
+          </Tooltip>
         )}
       </HStack>
       <Collapse
