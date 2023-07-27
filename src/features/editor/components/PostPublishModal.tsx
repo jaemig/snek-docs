@@ -147,7 +147,6 @@ const PostPublishModal: FC<IPostPublishModalProps> = ({ disclosure }) => {
           <ModalFooter>
             <Tooltip
               label="This will request a review. Once it's verified, it will be published."
-              borderRadius="md"
               openDelay={1000}
             >
               <Button
