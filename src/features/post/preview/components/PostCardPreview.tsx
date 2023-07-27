@@ -21,14 +21,12 @@ const postCardPreviewStyling = {
     p: 5,
     borderRadius: 'xl'
   },
-  topHStack: {
-    w: 'full'
-  },
   summary: {
     mt: 2
   },
   bottomHStack: {
-    mt: 4
+    mt: 4,
+    justifyContent: 'space-between'
   }
 };
 
@@ -81,19 +79,16 @@ const PostCardPreview: FC<IPostPreviewProps<LinkBoxProps>> = ({
       transition="all 0.2s cubic-bezier(.17,.67,.83,.67)"
       {...wrapperProps}
     >
-      <HStack {...postCardPreviewStyling.topHStack}>
-        {!hideAuthor && (
-          <Link
-            variant="hover-theme"
-            fontSize="sm"
-            color="components.postPreview.author.color"
-            href={`/profile/${author}`}
-          >
-            @{author}
-          </Link>
-        )}
-        <Spacer />
-      </HStack>
+      {!hideAuthor && (
+        <Link
+          variant="hover-theme"
+          fontSize="sm"
+          color="components.postPreview.author.color"
+          href={`/profile/${author}`}
+        >
+          @{author}
+        </Link>
+      )}
 
       <Heading
         as="h5"

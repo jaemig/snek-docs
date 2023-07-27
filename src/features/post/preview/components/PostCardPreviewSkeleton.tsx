@@ -15,14 +15,13 @@ const PostCardPreviewSkeleton: FC<IPostCardPreviewSkeletonProps> = ({
 }) => {
   return (
     <Card {...postCardPreviewStyling.wrapper} {...props}>
-      <HStack {...postCardPreviewStyling.topHStack}>
-        {!hideAuthor && <Skeleton w="25%" h="0.875rem" />}
-        <Spacer />
-        <Skeleton w="15%" h="0.875rem" />
-      </HStack>
+      {!hideAuthor && <Skeleton w="25%" h="0.875rem" />}
       <Skeleton w="80%" h="1rem" mt={2} />
       <Skeleton w="100%" h="5rem" {...postCardPreviewStyling.summary} />
-      <Skeleton w="20%" h="0.875rem" {...postCardPreviewStyling.bottomHStack} />
+      <HStack {...postCardPreviewStyling.bottomHStack}>
+        <Skeleton w="20%" h="0.875rem" />
+        <Skeleton w="10%" h="0.875rem" />
+      </HStack>
     </Card>
   );
 };
