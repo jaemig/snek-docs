@@ -11,7 +11,7 @@ import {
   VStack,
   useBreakpointValue
 } from '@chakra-ui/react';
-import { FC, Fragment, useMemo } from 'react';
+import { FC, Fragment, ReactNode, useMemo } from 'react';
 import FeatherInbox from '../../../../shared/components/icons/feather/FeatherInbox';
 import TbBuilding from '../../../../shared/components/icons/tabler/TbBuilding';
 import TbLinkedIn from '../../../../shared/components/icons/tabler/TbLinkedIn';
@@ -24,16 +24,12 @@ import LeftNav, {
 
 export type TSocialLink = 'email' | 'linkedin' | 'location' | 'company';
 
-interface ILeftNavProfileProps extends ILeftNavProps {}
+interface ILeftNavProfileProps {}
 
 /**
  * Sub-component of the profile page that displays the key information about the user.
  */
-const LeftNavProfile: FC<ILeftNavProfileProps> = ({
-  hideControls,
-  isExpanded,
-  setIsExpanded
-}) => {
+const LeftNavProfile: FC<ILeftNavProfileProps> = ({}) => {
   const socialLinkIcons: { [key in TSocialLink]: FC<IconProps> } = {
     email: FeatherInbox,
     linkedin: TbLinkedIn,
@@ -85,7 +81,7 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({
             as={HStack}
             verticalAlign="middle"
             gap={{ base: 0.5, md: 2 }}
-            // We currently only display the email link on mobile.
+            // We currently display only the email link on mobile.
             display={{ base: type !== 'email' ? 'none' : 'flex', md: 'flex' }}
           >
             <IconComp
@@ -115,13 +111,13 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({
 
   return (
     <LeftNav
-      hideControls={hideControls ?? hideControlsFallback}
-      isExpanded={isExpanded}
-      setIsExpanded={setIsExpanded}
+      hideControls={hideControlsFallback}
+      isExpanded={true}
       h={{
         base: 'max-content',
-        md: `calc(100vh - 100px - ${navTopOffset})`
+        md: `calc(100vh - 110px - ${navTopOffset})`
       }}
+      top={`calc(102px + ${navTopOffset})`}
       minH="fit-content"
       w="full"
       mb={{ base: 10, md: 0 }}
