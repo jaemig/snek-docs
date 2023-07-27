@@ -1,8 +1,12 @@
 import {
+  Box,
   Button,
   FormControl,
   FormErrorMessage,
   FormLabel,
+  Grid,
+  GridItem,
+  HStack,
   IconButton,
   Input,
   Modal,
@@ -11,21 +15,26 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Radio,
+  RadioGroup,
   Switch,
+  Text,
   Textarea,
   Tooltip,
   VStack,
   useDisclosure
 } from '@chakra-ui/react';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { wait } from '../../../shared/utils/utils';
 import TbInfoCircle from '../../../shared/components/icons/tabler/TbInfoCircle';
+import TbBook from '../../../shared/components/icons/tabler/TbBook';
+import TbBookOff from '../../../shared/components/icons/tabler/TbBookOff';
 
 type TPublishFormValues = {
   title: string;
   summary: string;
-  isPrivate: boolean;
+  visibility: boolean;
 };
 
 interface IPostPublishModalProps {
@@ -42,7 +51,7 @@ const PostPublishModal: FC<IPostPublishModalProps> = ({ disclosure }) => {
 
   const onSubmit: SubmitHandler<TPublishFormValues> = async data => {
     console.log('submitted form with values: ', data);
-    await wait(50000);
+    await wait(5000);
     return;
     //TODO: Implement connection with Jaen
   };
@@ -51,6 +60,44 @@ const PostPublishModal: FC<IPostPublishModalProps> = ({ disclosure }) => {
     disclosure.onClose();
     reset();
   };
+
+  const visibilityOptions = [
+    {
+      label: 'Public',
+      description: 'Anyone can see this post.',
+      value: 'public',
+      icon: TbBook
+    },
+    {
+      label: 'Private',
+      description: 'Only you can see this post.',
+      value: 'private',
+      icon: TbBookOff
+    }
+  ];
+
+  const memoizedVisibilityOptions = useMemo(() => {
+    return visibilityOptions.map(option => {
+      const Icon = option.icon;
+      return (
+        <Radio
+          key={option.value}
+          value={option.value}
+          {...register('visibility')}
+        >
+          <HStack gap={2} ml={2}>
+            <Icon boxSize="24px" />
+            <Box>
+              <Text fontWeight="semibold">{option.label}</Text>
+              <Text fontSize="sm" color="gray.600">
+                {option.description}
+              </Text>
+            </Box>
+          </HStack>
+        </Radio>
+      );
+    });
+  }, [visibilityOptions]);
 
   return (
     <Modal
@@ -61,10 +108,10 @@ const PostPublishModal: FC<IPostPublishModalProps> = ({ disclosure }) => {
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Publish Post</ModalHeader>
+        <ModalHeader>Publish this post</ModalHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <ModalBody>
-            <VStack spacing={4}>
+            <VStack spacing={4} alignItems="start">
               <FormControl isInvalid={!!errors.title}>
                 <FormLabel>Title</FormLabel>
                 <Input
@@ -86,27 +133,15 @@ const PostPublishModal: FC<IPostPublishModalProps> = ({ disclosure }) => {
                   This field is required
                 </FormErrorMessage>
               </FormControl>
-              <FormControl>
-                <FormLabel>
-                  Make Private
-                  <Tooltip
-                    placement="right"
-                    label="This will make the post private. Only you will be able to see it."
-                    borderRadius="md"
-                    openDelay={200}
-                  >
-                    <IconButton
-                      icon={<TbInfoCircle />}
-                      aria-label="Info"
-                      size="sm"
-                      variant="ghost-hover-opacity"
-                      p={0}
-                      boxSize="24px"
-                    />
-                  </Tooltip>
-                </FormLabel>
-                <Switch colorScheme="theme" {...register('isPrivate')} />
-              </FormControl>
+              <RadioGroup
+                as={VStack}
+                defaultValue={visibilityOptions[0].value}
+                spacing={4}
+                alignItems="flex-start"
+                colorScheme="theme"
+              >
+                {memoizedVisibilityOptions}
+              </RadioGroup>
             </VStack>
           </ModalBody>
           <ModalFooter>
