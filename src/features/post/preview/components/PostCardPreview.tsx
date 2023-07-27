@@ -118,6 +118,7 @@ const PostCardPreview: FC<IPostPreviewProps<LinkBoxProps>> = ({
         {...postCardPreviewStyling.bottomHStack}
         // Prevents the date from being placed on top of the link overlay
         pointerEvents="none"
+        justifyContent="space-between"
       >
         <Text
           fontSize={12}
