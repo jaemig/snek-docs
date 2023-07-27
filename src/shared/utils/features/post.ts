@@ -1,8 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
-import { TPostListData, TPostPreview } from '../../../features/post/types/post';
-import { debounce } from '../search';
-import { TDebounceData } from '../../types/comm';
-import { wait } from '../utils';
+import { TPostPreview } from '../../../features/post/types/post';
 
 //TODO: This would come from an API
 const posts: TPostPreview[] = [
