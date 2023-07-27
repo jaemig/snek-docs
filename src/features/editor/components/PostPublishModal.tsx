@@ -102,7 +102,7 @@ const PostPublishModal: FC<IPostPublishModalProps> = ({ disclosure }) => {
       size="xl"
     >
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent bgColor="shared.body.bgColor">
         <ModalHeader>Publish this post</ModalHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <ModalBody>

@@ -1,4 +1,4 @@
-const smtcodeResultPreviewComponent = {
+const smtCodeResultPreviewComponent = {
   header: {
     bgColor: {
       default: 'gray.100',
@@ -31,4 +31,4 @@ const smtcodeResultPreviewComponent = {
   }
 };
 
-export default smtcodeResultPreviewComponent;
+export default smtCodeResultPreviewComponent;

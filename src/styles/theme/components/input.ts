@@ -1,10 +1,11 @@
+import { ComponentStyleConfig } from "@chakra-ui/react";
+
 //TODO: Get this to work
-const themeInputComponent = {
-    defaultProps: {
-        bgColor: 'red.500',
-        _focus: {
-            boxShadow: 'none',
-        },
+const themeInputComponent: ComponentStyleConfig = {
+    baseStyle: {
+        field: {
+            // borderColor: 'gray.500',
+        }
     },
 };
 

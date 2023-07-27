@@ -69,12 +69,12 @@ const smtButtonComponent = {
     },
     bgColor: {
       default: 'flat.se.green.500',
-      _dark: 'flat.se.green.600'
+      _dark: 'flat.se.green.700'
     },
     hover: {
       bgColor: {
         default: 'flat.se.green.550',
-        _dark: 'flat.se.green.700'
+        _dark: 'flat.se.green.600'
       },
     },
     loading: {
