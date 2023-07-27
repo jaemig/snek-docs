@@ -151,7 +151,7 @@ const TopNav: FC<ITopNavProps> = ({
         borderBottomColor="topNav.borderColor"
         backgroundColor="shared.translucent.bgColor"
         backdropFilter="blur(10px)"
-        zIndex={2}
+        zIndex={3}
         {...wrapperProps}
       >
         <VStack w="full" maxW="7xl">
