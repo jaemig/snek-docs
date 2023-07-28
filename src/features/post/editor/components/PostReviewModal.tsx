@@ -1,6 +1,7 @@
 import {
   Accordion,
   AccordionButton,
+  AccordionIcon,
   AccordionItem,
   Avatar,
   AvatarGroup,
@@ -104,7 +105,7 @@ const PostReviewModal: FC<IPostReviewModalProps> = ({ disclosure }) => {
       reviews.map(({ title, status, reviewers }) => (
         <AccordionItem>
           <AccordionButton>
-            <HStack>
+            <HStack w="full" textAlign="left">
               <Text flex={1}>{title}</Text>
               <AvatarGroup size="sm" max={3}>
                 {reviewers.map(({ avatarUrl, username }) => (
@@ -116,6 +117,7 @@ const PostReviewModal: FC<IPostReviewModalProps> = ({ disclosure }) => {
                   />
                 ))}
               </AvatarGroup>
+              <AccordionIcon />
             </HStack>
           </AccordionButton>
         </AccordionItem>

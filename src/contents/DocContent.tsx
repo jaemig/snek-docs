@@ -37,8 +37,6 @@ import TableOfContent from '../shared/containers/navigation/components/TableOfCo
 import MainBottomNav from '../shared/containers/navigation/MainBottomNav';
 import RightNav from '../shared/containers/navigation/RightNav';
 import CodePlayground from '../features/main-content/code-playground/components/CodePlayground';
-import PostPublishModal from '../features/post/editor/components/PostPublishModal';
-import PostReviewModal from '../features/post/editor/components/PostReviewModal';
 
 // Example links - these would probably be fetched from a CMS or other data source
 const links = [
@@ -66,18 +64,6 @@ export const DocContent: React.FC<DocContentProps> = () => {
     <>
       <Stack spacing={{ base: 0, xl: 12 }} direction="row">
         <Box maxW="900px" w="full">
-          <HStack w="full" mb={5} spacing={3} justifyContent="end">
-            <Button
-              size="sm"
-              variant="filledGreen"
-              onClick={publishDisclosure.onOpen}
-            >
-              Publish
-            </Button>
-            <Button size="sm" colorScheme="gray">
-              Save Draft
-            </Button>
-          </HStack>
           <Field.Mdx
             name="documentation"
             components={{
@@ -185,8 +171,6 @@ export const DocContent: React.FC<DocContentProps> = () => {
           </RightNav>
         </Box>
       </Stack>
-      {/* <PostPublishModal disclosure={publishDisclosure} /> */}
-      <PostReviewModal disclosure={publishDisclosure} />
     </>
   );
 };
