@@ -191,8 +191,8 @@ const PostListControls: FC<IPostListControlsProps> = ({
             <Input type="date" sx={{ borderRightRadius: 'lg' }} />
           </InputGroup>
           <Select placeholder="Language" size="sm" borderRadius="lg">
-            <option value="english">English</option>
-            <option value="german">German</option>
+            <option value="english">English 🇺🇸</option>
+            <option value="german">German 🇦🇹</option>
           </Select>
         </HStack>
       </Collapse>
