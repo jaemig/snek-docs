@@ -41,6 +41,8 @@ import PostPublishModal from '../features/post/editor/components/PostPublishModa
 import PostReviewModal from '../features/post/editor/components/PostReviewModal';
 import LeftNav from '../shared/containers/navigation/LeftNav';
 import MainGrid from '../shared/containers/components/MainGrid';
+import UserAvatar from '../features/user/avatar/components/UserAvatar';
+import { TUser } from '../features/user/types/user';
 
 // Example links - these would probably be fetched from a CMS or other data source
 const links = [
@@ -53,6 +55,14 @@ const links = [
     href: '/admin/#/pages'
   }
 ];
+
+// Placeholder data
+const user: TUser = {
+  username: 'emilybrooks',
+  displayName: 'Emily Brooks',
+  bio: '',
+  socials: []
+};
 
 export interface IBlogPostContentProps {}
 
@@ -81,7 +91,9 @@ const BlogPostContent: FC<IBlogPostContentProps> = () => {
               Save Draft
             </Button>
           </HStack>
-          <Box></Box>
+          <Box>
+            <UserAvatar user={user} showTooltip />
+          </Box>
         </Box>
         <Box position="sticky" top={`calc(0px + ${navTopOffset})`}>
           <RightNav>
