@@ -37,7 +37,7 @@ import TableOfContent from '../shared/containers/navigation/components/TableOfCo
 import MainBottomNav from '../shared/containers/navigation/MainBottomNav';
 import RightNav from '../shared/containers/navigation/RightNav';
 import CodePlayground from '../features/main-content/code-playground/components/CodePlayground';
-import PostPublishModal from '../features/editor/components/PostPublishModal';
+import PostPublishModal from '../features/post/editor/components/PostPublishModal';
 
 // Example links - these would probably be fetched from a CMS or other data source
 const links = [

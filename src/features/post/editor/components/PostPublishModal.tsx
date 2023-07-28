@@ -22,9 +22,9 @@ import {
 } from '@chakra-ui/react';
 import { FC, useMemo } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { wait } from '../../../shared/utils/utils';
-import TbBook from '../../../shared/components/icons/tabler/TbBook';
-import TbBookOff from '../../../shared/components/icons/tabler/TbBookOff';
+import { wait } from '../../../../shared/utils/utils';
+import TbBook from '../../../../shared/components/icons/tabler/TbBook';
+import TbBookOff from '../../../../shared/components/icons/tabler/TbBookOff';
 
 type TPublishFormValues = {
   title: string;
