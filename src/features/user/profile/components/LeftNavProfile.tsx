@@ -21,6 +21,7 @@ import { useNavOffset } from '../../../../shared/hooks/use-nav-offset';
 import LeftNav, {
   ILeftNavProps
 } from '../../../../shared/containers/navigation/LeftNav';
+import { TUser } from '../../types/user';
 
 export type TSocialLink = 'email' | 'linkedin' | 'location' | 'company';
 
@@ -37,15 +38,15 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({}) => {
     company: TbBuilding
   };
   //* This would be the data that comes from Jaen.
-  const userData = {
-    name: 'Emily Brooks',
+  const userData: TUser = {
+    displayName: 'Emily Brooks',
     username: 'emilybrooks',
     location: 'San Francisco, CA',
-    company: 'Snek',
+    // company: 'Snek',
     avatarUrl:
       'https://onedrive.live.com/embed?resid=AE2DDC816CEF3E1E%21220972&authkey=%21AIUh8CadUcYw3cg&width=999999&height=1024',
     bio: "Adventurous spirit with a knack for words and a passion for knowledge. Exploring the world of academia, one document at a time. Forever curious, forever learning. Let's dive into the realm of information together uncover the wonders of education.",
-    socialLinks: [
+    socials: [
       {
         type: 'company',
         label: 'Snek',
@@ -73,7 +74,8 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({}) => {
   const hideControlsFallback = useBreakpointValue({ base: true, md: false });
 
   const memoizedSocialLink = useMemo(() => {
-    return userData.socialLinks.map(({ type, label, url }, idx) => {
+    return userData.socials.map((data, idx) => {
+      const { type, label } = data;
       const IconComp = socialLinkIcons[type as TSocialLink];
       return (
         <Fragment key={idx}>
@@ -89,9 +91,9 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({}) => {
               h="full"
               color="pages.userProfile.leftNav.socialLinks.icon.color"
             />
-            {url ? (
+            {'url' in data ? (
               <Link
-                href={'url'}
+                href={data.url}
                 _hover={{
                   color:
                     'pages.userProfile.leftNav.socialLinks.text.hover.color'
@@ -107,7 +109,7 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({}) => {
         </Fragment>
       );
     });
-  }, [userData.socialLinks]);
+  }, [userData.socials]);
 
   return (
     <LeftNav
@@ -151,7 +153,7 @@ const LeftNavProfile: FC<ILeftNavProfileProps> = ({}) => {
         />
         <VStack alignItems={{ base: 'center', md: 'start' }} spacing={0}>
           <Heading as="h6" fontSize="24px" mt={2}>
-            {userData.name}
+            {userData.displayName}
           </Heading>
           <Text
             fontSize="14px"

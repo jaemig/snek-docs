@@ -38,6 +38,7 @@ import MainBottomNav from '../shared/containers/navigation/MainBottomNav';
 import RightNav from '../shared/containers/navigation/RightNav';
 import CodePlayground from '../features/main-content/code-playground/components/CodePlayground';
 import PostPublishModal from '../features/post/editor/components/PostPublishModal';
+import PostReviewModal from '../features/post/editor/components/PostReviewModal';
 
 // Example links - these would probably be fetched from a CMS or other data source
 const links = [
@@ -184,7 +185,8 @@ export const DocContent: React.FC<DocContentProps> = () => {
           </RightNav>
         </Box>
       </Stack>
-      <PostPublishModal disclosure={publishDisclosure} />
+      {/* <PostPublishModal disclosure={publishDisclosure} /> */}
+      <PostReviewModal disclosure={publishDisclosure} />
     </>
   );
 };

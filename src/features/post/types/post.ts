@@ -44,3 +44,11 @@ export interface IPostPreviewProps<T> extends TPostPreview {
   wrapperProps?: T;
   hideAuthor?: boolean;
 }
+
+//TODO: Create a user type
+export type TPostReview = {
+  id: string;
+  post: TPost;
+  title: string;
+  author: TUser;
+}
