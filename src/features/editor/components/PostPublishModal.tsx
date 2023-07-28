@@ -84,7 +84,10 @@ const PostPublishModal: FC<IPostPublishModalProps> = ({ disclosure }) => {
             <Icon boxSize="24px" />
             <Box>
               <Text fontWeight="semibold">{option.label}</Text>
-              <Text fontSize="sm" color="gray.600">
+              <Text
+                fontSize="sm"
+                color="modals.postPublish.form.visibility.description.color"
+              >
                 {option.description}
               </Text>
             </Box>
