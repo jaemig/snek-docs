@@ -13,17 +13,18 @@ export type TUser = {
 /**
  * This contains all the variants of social links that a user can have.
  */
-export type TUserSocialType = 'email' | 'linkedin' | 'location' | 'company';
+//TODO: Maybe there is a better way to do this?
+export type TUserSocialType = 'email' | 'linkedin' | 'company';
+export type TUserLinklessSocialType = 'location';
 
 /**
  * This represents a single social link of a user.
  */
-//TODO: Improve this so url is not required if its a special type like location
 export type TUserSocials = {
     type: TUserSocialType;
     label: string;
     url: string;
 } | {
-    type: 'location';
+    type: TUserLinklessSocialType;
     label: string;
 }

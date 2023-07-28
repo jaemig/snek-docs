@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { Optional } from '../../../shared/types/utilityTypes';
-import { CardProps } from '@chakra-ui/react';
+import { TUser } from '../../user/types/user';
 
 /**
  * A single post
@@ -11,7 +11,7 @@ export type TPost = {
   author: string;
   title: string;
   previewImage?: string;
-  content: ReactNode[];
+  content: ReactNode;
   summary: string;
   likes: number;
   hasLiked: boolean;
@@ -45,10 +45,26 @@ export interface IPostPreviewProps<T> extends TPostPreview {
   hideAuthor?: boolean;
 }
 
-//TODO: Create a user type
+export type TPostReviewStatus = 'pending' | 'approved' | 'rejected';
+
+/**
+ * Represents a review of a post
+ */
 export type TPostReview = {
-  id: string;
   post: TPost;
+  datetime: string;
   title: string;
+  reviewers: TUser[];
+  status: TPostReviewStatus;
+  comments: TPostReviewComment[];
+}
+
+/**
+ * Represents a comment on a post review by a reviewer
+ */
+export type TPostReviewComment = {
   author: TUser;
+  datetime: string;
+  comment: string;
+  textReference?: string; // This is the commented text
 }
