@@ -12,7 +12,8 @@ import {
   Text as ChText,
   Button,
   HStack,
-  useDisclosure
+  useDisclosure,
+  Grid
 } from '@chakra-ui/react';
 import { Field } from '@snek-at/jaen';
 import React, { FC, memo } from 'react';
@@ -76,21 +77,23 @@ const BlogPostContent: FC<IBlogPostContentProps> = () => {
 
   return (
     <MainGrid>
-      <LeftNav>hi!</LeftNav>
+      <LeftNav w="full">
+        <VStack w="50%" minW="100px" alignSelf="center">
+          <Button
+            size="sm"
+            variant="filledGreen"
+            onClick={publishDisclosure.onOpen}
+            w="full"
+          >
+            Publish
+          </Button>
+          <Button size="sm" colorScheme="gray" w="full">
+            Save Draft
+          </Button>
+        </VStack>
+      </LeftNav>
       <Stack spacing={{ base: 0, xl: 12 }} direction="row">
         <Box maxW="900px" w="full">
-          <HStack w="full" mb={5} spacing={3} justifyContent="center">
-            <Button
-              size="sm"
-              variant="filledGreen"
-              onClick={publishDisclosure.onOpen}
-            >
-              Publish
-            </Button>
-            <Button size="sm" colorScheme="gray">
-              Save Draft
-            </Button>
-          </HStack>
           <Box>
             <UserAvatar user={user} showTooltip />
           </Box>
