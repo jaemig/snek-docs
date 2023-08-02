@@ -9,6 +9,8 @@ import {
 import React, { FC } from 'react';
 import { MainBreadcrumbPart } from '../../../types/navigation';
 import Link from '../../../components/Link';
+import UserPreview from '../../../../features/user/avatar/components/UserPreview';
+import UserAvatar from '../../../../features/user/avatar/components/UserAvatar';
 
 interface IMainBradcrumbProps {
   parts: MainBreadcrumbPart[];
@@ -49,7 +51,19 @@ const MainBreadcrumb: FC<IMainBradcrumbProps> = ({ parts }) => {
               transition="color 0.2s ease-in-out"
               {...props}
             >
-              {item.name}
+              {item.isUser ? (
+                <UserPreview
+                  user={{
+                    bio: '',
+                    displayName: 'Emily Brooks',
+                    username: 'emilybrooks',
+                    socials: []
+                  }}
+                  showAvatar
+                />
+              ) : (
+                item.name
+              )}
             </BreadcrumbLink>
           </BreadcrumbItem>
         );

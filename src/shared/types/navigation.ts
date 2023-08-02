@@ -36,7 +36,14 @@ export type MainBreadcrumbPart = {
   href: string;
   isDisabled?: boolean;
   isActive?: boolean;
-};
+} & (
+    {
+      isUser: true;
+      showUserImage?: boolean;
+    } | {
+      isUser?: false;
+    }
+  );
 
 /**
  * Stores the data of the previous and next page

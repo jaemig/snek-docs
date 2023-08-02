@@ -42,6 +42,8 @@ import LeftNav from '../shared/containers/navigation/LeftNav';
 import MainGrid from '../shared/containers/components/MainGrid';
 import UserAvatar from '../features/user/avatar/components/UserAvatar';
 import { TUser } from '../features/user/types/user';
+import MainBreadcrumb from '../shared/containers/navigation/components/MainBreadcrumb';
+import { MainBreadcrumbPart } from '../shared/types/navigation';
 
 // Example links - these would probably be fetched from a CMS or other data source
 const links = [
@@ -73,6 +75,23 @@ const BlogPostContent: FC<IBlogPostContentProps> = () => {
   // This can be memoized since it doesn't change and switching pages re-renders most of the app anyway.
   const MemoizedToc = memo(TableOfContent, () => false);
 
+  const breadcrumbParts: MainBreadcrumbPart[] = [
+    {
+      name: '@emilybrooks',
+      href: '/profile',
+      isUser: true,
+      showUserImage: true
+    },
+    {
+      name: 'posts',
+      href: '/profile#posts'
+    },
+    {
+      name: 'Unlocking the Power of Quantum Computing',
+      href: '#'
+    }
+  ];
+
   return (
     <MainGrid>
       <LeftNav w="full">
@@ -92,9 +111,10 @@ const BlogPostContent: FC<IBlogPostContentProps> = () => {
       </LeftNav>
       <Stack spacing={{ base: 0, xl: 12 }} direction="row">
         <Box maxW="900px" w="full">
-          <Box>
+          <MainBreadcrumb parts={breadcrumbParts} />
+          {/* <Box>
             <UserAvatar user={user} showTooltip />
-          </Box>
+          </Box> */}
         </Box>
         <Box position="sticky" top={`calc(0px + ${navTopOffset})`}>
           <RightNav>
