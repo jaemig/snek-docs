@@ -38,8 +38,6 @@ import TableOfContent from '../shared/containers/navigation/components/TableOfCo
 import MainBottomNav from '../shared/containers/navigation/MainBottomNav';
 import RightNav from '../shared/containers/navigation/RightNav';
 import CodePlayground from '../features/main-content/code-playground/components/CodePlayground';
-import PostPublishModal from '../features/post/editor/components/PostPublishModal';
-import PostReviewModal from '../features/post/editor/components/PostReviewModal';
 import LeftNav from '../shared/containers/navigation/LeftNav';
 import MainGrid from '../shared/containers/components/MainGrid';
 import UserAvatar from '../features/user/avatar/components/UserAvatar';
@@ -127,8 +125,6 @@ const BlogPostContent: FC<IBlogPostContentProps> = () => {
           </RightNav>
         </Box>
       </Stack>
-      {/* <PostPublishModal disclosure={publishDisclosure} /> */}
-      <PostReviewModal disclosure={publishDisclosure} />
     </MainGrid>
   );
 };

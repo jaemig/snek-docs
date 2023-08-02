@@ -25,7 +25,6 @@ import smtStepperComponent from './components/stepper';
 import smtPostPreviewComponent from '../../../features/post/preview/styles/postPreview';
 import smtPostsPage from '../../../features/post/styles/posts';
 import smtInputComponent from './components/input';
-import smtPostPublishModal from '../../../features/post/editor/styles/postPublishModal';
 
 const themeSemanticTokens = {
   colors: {
@@ -47,7 +46,7 @@ const themeSemanticTokens = {
       input: smtInputComponent,
     },
     modals: {
-      postPublish: smtPostPublishModal,
+      // Add styles for modals here
     },
     pages: {
       userProfile: smtUserProfilePage,
