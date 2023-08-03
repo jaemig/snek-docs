@@ -66,7 +66,7 @@ const PostReaderView: FC = () => {
   return (
     <>
       <LeftNavPostReader />
-      <Stack spacing={{ base: 0, xl: 12 }} direction="row">
+      <Stack spacing={{ base: 0, xl: 12 }} direction="row" mb={10}>
         <Box maxW="900px" w="full">
           <MainBreadcrumb parts={breadcrumbParts} />
           <Heading variant="h1">
@@ -76,8 +76,9 @@ const PostReaderView: FC = () => {
               aria-label="Rate post"
               variant="ghost-hover-opacity"
               _hover={{
+                opacity: 1,
                 transform: 'scale(1.3)',
-                color: 'flat.se.vibrantYellow'
+                color: 'features.rating._hover.color'
               }}
             />
           </Heading>

@@ -8,10 +8,6 @@ const smtPostReaderView = {
             }
         }
     },
-    rate: {
-        a: 'b',
-
-    }
 }
 
 export default smtPostReaderView;
