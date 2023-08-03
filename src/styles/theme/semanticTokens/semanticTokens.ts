@@ -25,6 +25,8 @@ import smtStepperComponent from './components/stepper';
 import smtPostPreviewComponent from '../../../features/post/preview/styles/postPreview';
 import smtPostsPage from '../../../features/post/styles/posts';
 import smtInputComponent from './components/input';
+import smtPostReaderView from '../../../features/post/reader/styles/postReaderView';
+import smtRatingFeature from './features/rating';
 
 const themeSemanticTokens = {
   colors: {
@@ -51,6 +53,12 @@ const themeSemanticTokens = {
     pages: {
       userProfile: smtUserProfilePage,
       posts: smtPostsPage
+    },
+    views: {
+      postReaderView: smtPostReaderView,
+    },
+    features: {
+      rating: smtRatingFeature,
     },
     shared: smtShared,
     topNav: smtTopNav,

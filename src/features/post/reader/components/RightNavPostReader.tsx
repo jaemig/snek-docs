@@ -19,6 +19,8 @@ const links = [
 
 interface IRightNavPostReaderProps {}
 
+//! This causes an hydration error (TableOfContent is the polluter)
+//! probably goes away when we connect it's central hook it with the backend
 /**
  * Right navigation for reading a post.
  */

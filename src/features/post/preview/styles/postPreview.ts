@@ -4,44 +4,7 @@ const smtPostPreviewComponent = {
   date: {
     color: {
       default: 'gray.400',
-      _dark: 'gray.400'
-    }
-  },
-  rating: {
-    unrated: {
-      color: {
-        default: 'gray.400',
-        _dark: 'gray.500'
-      }
-    },
-    // active means the user has rated (favorized) the post
-    active: {
-      color: {
-        default: 'flat.nl.sunflower',
-        _dark: 'yellow.600'
-      }
-    },
-    disabled: {
-      color: {
-        default: 'gray.400',
-        _dark: 'gray.400'
-      }
-    },
-    _hover: {
-      color: {
-        default: 'flat.nl.sunflower',
-        _dark: 'yellow.500'
-      },
-      bgColor: {
-        default: 'gray.50',
-        _dark: 'gray.700'
-      },
-      highContrast: {
-        bgColor: {
-          default: 'gray.100',
-          _dark: 'gray.700'
-        }
-      }
+      _dark: 'gray.500'
     }
   },
   author: {
@@ -70,7 +33,7 @@ const smtPostPreviewComponent = {
       date: {
         color: {
           default: 'gray.500',
-          _dark: 'gray.400'
+          _dark: 'gray.500'
         }
       },
       summary: {

@@ -30,12 +30,10 @@ const PostPreviewRating: FC<IPostPreviewRatingProps> = ({
         display="flex"
         variant="unstyled"
         size="sm"
-        color={`components.postPreview.rating.${
-          hasLiked ? 'active' : 'unrated'
-        }.color`}
+        color={`features.rating.${hasLiked ? 'rated' : 'unrated'}.color`}
         _hover={{
-          color: `components.postPreview.rating._hover.color`,
-          bgColor: `components.postPreview.rating._hover${
+          color: `features.rating._hover.color`,
+          bgColor: `features.rating._hover${
             useHighContrast ? '.highContrast' : ''
           }.bgColor`
         }}
@@ -58,9 +56,9 @@ const PostPreviewRating: FC<IPostPreviewRatingProps> = ({
   return (
     <HStack
       spacing={1}
-      color="components.postPreview.rating.disabled.color"
+      color="features.rating.disabled.color"
       _hover={{
-        color: 'components.postPreview.rating._hover.disabled.color'
+        color: 'features.rating._hover.disabled.color'
       }}
       transition="color 0.2s ease-in-out"
     >

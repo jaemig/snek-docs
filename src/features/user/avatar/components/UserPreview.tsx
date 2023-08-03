@@ -9,10 +9,12 @@ import {
   Tooltip,
   TooltipProps
 } from '@chakra-ui/react';
-import UserAvatar, { IUserAvatarProps } from './UserAvatar';
+import UserAvatar from './UserAvatar';
+import Link from '../../../../shared/components/Link';
 
 interface IUserPreviewProps extends TextProps {
   user: TUser;
+  showTooltip?: boolean;
   showAvatar?: boolean;
   avatarOnly?: boolean;
   tooltipProps?: TooltipProps;
@@ -25,6 +27,7 @@ interface IUserPreviewProps extends TextProps {
  */
 const UserPreview: FC<IUserPreviewProps> = ({
   user,
+  showTooltip = true,
   showAvatar,
   avatarOnly,
   avatarProps,
@@ -93,13 +96,27 @@ const UserPreview: FC<IUserPreviewProps> = ({
   //   </HStack>
   // );
 
+  const Wrapper = showTooltip ? Tooltip : Fragment;
+  let wrapperProps: TooltipProps | {} = {};
+
+  if (showTooltip) {
+    wrapperProps = {
+      label: preview,
+      ariaLabel: user.displayName,
+      bgColor: 'shared.body.bgColor',
+      boxShadow: 'lg',
+      ...tooltipProps
+    };
+  }
+
   return (
-    <Tooltip
-      label={preview}
-      aria-label={user.displayName}
-      bgColor="shared.body.bgColor"
-      boxShadow="lg"
-      {...tooltipProps}
+    <Wrapper
+      {...wrapperProps}
+      // label={preview}
+      // aria-label={user.displayName}
+      // bgColor="shared.body.bgColor"
+      // boxShadow="lg"
+      // {...tooltipProps}
     >
       <Text size="sm" color="gray.500" {...props}>
         {showAvatar && (
@@ -114,7 +131,7 @@ const UserPreview: FC<IUserPreviewProps> = ({
         )}
         {showDisplayName ? user.displayName : `@${user.username}`}
       </Text>
-    </Tooltip>
+    </Wrapper>
   );
 
   return preview;

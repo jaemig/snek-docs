@@ -1,12 +1,14 @@
 import { FC } from 'react';
 import { MainBreadcrumbPart } from '../../../../shared/types/navigation';
 import LeftNavPostReader from './LeftNavPostReader';
-import { Box, HStack, Stack, Text, VStack } from '@chakra-ui/react';
+import { Box, HStack, IconButton, Stack, Text, VStack } from '@chakra-ui/react';
 import Heading from '../../../main-content/heading/components/Heading';
 import RightNavPostReader from './RightNavPostReader';
 import MainBreadcrumb from '../../../../shared/containers/navigation/components/MainBreadcrumb';
 import UserPreview from '../../../user/avatar/components/UserPreview';
 import { TUser } from '../../../user/types/user';
+import Link from '../../../../shared/components/Link';
+import TbStar from '../../../../shared/components/icons/tabler/TbStar';
 
 //* This would be the data that comes from Jaen.
 const userData: TUser = {
@@ -69,18 +71,34 @@ const PostReaderView: FC = () => {
           <MainBreadcrumb parts={breadcrumbParts} />
           <Heading variant="h1">
             Unlocking the Power of Quantum Computing
+            <IconButton
+              icon={<TbStar />}
+              aria-label="Rate post"
+              variant="ghost-hover-opacity"
+              _hover={{
+                transform: 'scale(1.3)',
+                color: 'flat.se.vibrantYellow'
+              }}
+            />
           </Heading>
           <HStack spacing={1} mb={10}>
             <Text as="span">by</Text>
-            <UserPreview
-              user={userData}
-              showDisplayName
-              showAvatar
-              avatarProps={{
-                verticalAlign: 'middle',
-                boxSize: '18px'
-              }}
-            />
+            <Link href="/profile">
+              <UserPreview
+                user={userData}
+                showTooltip={false}
+                showDisplayName
+                showAvatar
+                avatarProps={{
+                  verticalAlign: 'middle',
+                  boxSize: '18px'
+                }}
+                transition="color 0.2s ease-in-out"
+                _hover={{
+                  color: 'views.postReaderView.userPreview._hover.color'
+                }}
+              />
+            </Link>
           </HStack>
           <VStack spacing={3} alignItems="start">
             <Text>

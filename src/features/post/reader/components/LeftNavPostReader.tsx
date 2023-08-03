@@ -7,7 +7,7 @@ interface ILeftNavPostReaderProps {}
  * Left navigation for reading a post.
  */
 const LeftNavPostReader: FC<ILeftNavPostReaderProps> = ({}) => {
-  return <LeftNav w="full"></LeftNav>;
+  return <LeftNav w="full" isExpanded></LeftNav>;
 };
 
 export default LeftNavPostReader;
