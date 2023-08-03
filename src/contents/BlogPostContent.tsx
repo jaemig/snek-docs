@@ -1,39 +1,16 @@
-import {
-  Box,
-  Flex,
-  Stack,
-  VStack,
-  Text as ChText,
-  Button,
-  useDisclosure
-} from '@chakra-ui/react';
-import { FC, memo } from 'react';
+import { Box, Stack, useDisclosure } from '@chakra-ui/react';
+import { FC, useState } from 'react';
 
 import { useNavOffset } from '../shared/hooks/use-nav-offset';
 
-// Default custom components (replaces HTML tags)
-
 // Insertable custom components (via Jaen)
-import MemoizedLinks from '../shared/components/MemoizedLink';
-import TableOfContent from '../shared/containers/navigation/components/TableOfContent';
-import RightNav from '../shared/containers/navigation/RightNav';
-import LeftNav from '../shared/containers/navigation/LeftNav';
 import MainGrid from '../shared/containers/components/MainGrid';
 import { TUser } from '../features/user/types/user';
 import MainBreadcrumb from '../shared/containers/navigation/components/MainBreadcrumb';
 import { MainBreadcrumbPart } from '../shared/types/navigation';
-
-// Example links - these would probably be fetched from a CMS or other data source
-const links = [
-  {
-    name: 'Question? Give us feedback',
-    href: 'https://snek.at/'
-  },
-  {
-    name: 'Edit this page on Jaen',
-    href: '/admin/#/pages'
-  }
-];
+import MdxEditor from '../shared/components/MdxEditor';
+import LeftNavPostEditor from '../features/post/editor/components/LeftNavPostEditor';
+import RightNavPostReader from '../features/post/reader/components/RightNavPostReader';
 
 // Placeholder data
 const user: TUser = {
@@ -46,12 +23,7 @@ const user: TUser = {
 export interface IBlogPostContentProps {}
 
 const BlogPostContent: FC<IBlogPostContentProps> = () => {
-  const navTopOffset = useNavOffset();
-
-  const publishDisclosure = useDisclosure();
-
-  // This can be memoized since it doesn't change and switching pages re-renders most of the app anyway.
-  const MemoizedToc = memo(TableOfContent, () => false);
+  const [viewMode, setViewMode] = useState<'read' | 'edit'>('edit');
 
   const breadcrumbParts: MainBreadcrumbPart[] = [
     {
@@ -70,58 +42,16 @@ const BlogPostContent: FC<IBlogPostContentProps> = () => {
     }
   ];
 
+  const isReading = viewMode === 'read';
   return (
     <MainGrid>
-      <LeftNav w="full">
-        <VStack w="50%" minW="100px" alignSelf="center">
-          <Button
-            size="sm"
-            variant="filledGreen"
-            onClick={publishDisclosure.onOpen}
-            w="full"
-          >
-            Publish
-          </Button>
-          <Button size="sm" colorScheme="gray" w="full">
-            Save Draft
-          </Button>
-        </VStack>
-      </LeftNav>
+      <LeftNavPostEditor />
       <Stack spacing={{ base: 0, xl: 12 }} direction="row">
-        <Box maxW="900px" w="full">
+        <Box maxW={isReading ? '900px' : 'initial'} w="full">
           <MainBreadcrumb parts={breadcrumbParts} />
-          {/* <Box>
-            <UserAvatar user={user} showTooltip />
-          </Box> */}
+          <MdxEditor />
         </Box>
-        <Box position="sticky" top={`calc(0px + ${navTopOffset})`}>
-          <RightNav>
-            <ChText color="rightNav.titleTop.color" fontWeight="semibold">
-              On This Page
-            </ChText>
-            <Flex as="nav" direction="column" mt={5}>
-              <MemoizedToc />
-            </Flex>
-            <Box
-              mt={7}
-              pt={7}
-              borderTop="1px solid"
-              borderTopColor="components.separator.borderColor"
-              fontSize="xs"
-            >
-              <VStack rowGap={1} textAlign="left">
-                <MemoizedLinks
-                  links={links}
-                  props={{
-                    variant: 'right-bottom-nav',
-                    w: '100%',
-                    display: 'block'
-                  }}
-                />
-              </VStack>
-            </Box>
-          </RightNav>
-        </Box>
+        {isReading && <RightNavPostReader />}
       </Stack>
     </MainGrid>
   );
