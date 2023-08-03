@@ -11,7 +11,7 @@ import { IMainContentComponentBaseProps } from '../../types/mainContent';
 import { mainComponentBaseStyle } from '../../../../shared/containers/main/mainContent.vars';
 
 // Font sizes for the different heading variants
-const variantFontSizes = {
+export const variantFontSizes = {
   h1: '36',
   h2: '30',
   h3: '24',
