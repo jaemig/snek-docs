@@ -2,45 +2,23 @@ import {
   Box,
   Flex,
   Stack,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
   VStack,
   Text as ChText,
   Button,
-  HStack,
-  useDisclosure,
-  Grid
+  useDisclosure
 } from '@chakra-ui/react';
-import { Field } from '@snek-at/jaen';
-import React, { FC, memo } from 'react';
+import { FC, memo } from 'react';
 
 import { useNavOffset } from '../shared/hooks/use-nav-offset';
 
 // Default custom components (replaces HTML tags)
-import Text from '../features/main-content/text/components/Text';
-import Heading from '../features/main-content/heading/components/Heading';
-import List from '../features/main-content/list/components/List';
-import CodeSnippet from '../features/main-content/code-snippet/components/CodeSnippet';
-import Link from '../shared/components/Link';
 
 // Insertable custom components (via Jaen)
-import Filesystem from '../features/main-content/filesystem/components/Filesystem';
-import ImageCard from '../features/main-content/image-card/components/ImageCard';
-import Callout from '../features/main-content/callout/components/Callouts';
-import IconCard from '../features/main-content/icon-card/components/IconCard';
 import MemoizedLinks from '../shared/components/MemoizedLink';
-import ListItem from '../features/main-content/list/components/ListItem';
 import TableOfContent from '../shared/containers/navigation/components/TableOfContent';
-import MainBottomNav from '../shared/containers/navigation/MainBottomNav';
 import RightNav from '../shared/containers/navigation/RightNav';
-import CodePlayground from '../features/main-content/code-playground/components/CodePlayground';
 import LeftNav from '../shared/containers/navigation/LeftNav';
 import MainGrid from '../shared/containers/components/MainGrid';
-import UserAvatar from '../features/user/avatar/components/UserAvatar';
 import { TUser } from '../features/user/types/user';
 import MainBreadcrumb from '../shared/containers/navigation/components/MainBreadcrumb';
 import { MainBreadcrumbPart } from '../shared/types/navigation';
