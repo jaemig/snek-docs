@@ -1,12 +1,20 @@
 import { FC, Fragment, useState } from 'react';
 import { TUser } from '../../types/user';
-import { Box, HStack, Text, TextProps, Tooltip } from '@chakra-ui/react';
+import {
+  Box,
+  HStack,
+  Text,
+  TextProps,
+  Tooltip,
+  TooltipProps
+} from '@chakra-ui/react';
 import UserAvatar from './UserAvatar';
 
 interface IUserPreviewProps extends TextProps {
   user: TUser;
   showAvatar?: boolean;
   avatarOnly?: boolean;
+  tooltipProps?: TooltipProps;
 }
 
 /**
@@ -16,6 +24,7 @@ const UserPreview: FC<IUserPreviewProps> = ({
   user,
   showAvatar,
   avatarOnly,
+  tooltipProps,
   ...props
 }) => {
   // const [viewState, setViewState] = useState<'minimized' | 'extended'>(
@@ -83,8 +92,9 @@ const UserPreview: FC<IUserPreviewProps> = ({
     <Tooltip
       label={preview}
       aria-label={user.displayName}
-      bgColor="transparent"
+      bgColor="shared.body.bgColor"
       boxShadow="lg"
+      {...tooltipProps}
     >
       <Text size="sm" color="gray.500" {...props}>
         @{user.username}
