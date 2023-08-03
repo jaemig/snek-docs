@@ -54,7 +54,6 @@ const MainBreadcrumb: FC<IMainBradcrumbProps> = ({ parts }) => {
                     username: 'emilybrooks',
                     socials: []
                   }}
-                  showAvatar
                   {...props}
                 />
               ) : (

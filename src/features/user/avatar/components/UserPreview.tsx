@@ -1,6 +1,7 @@
 import { FC, Fragment, useState } from 'react';
 import { TUser } from '../../types/user';
 import {
+  AvatarProps,
   Box,
   HStack,
   Text,
@@ -8,13 +9,15 @@ import {
   Tooltip,
   TooltipProps
 } from '@chakra-ui/react';
-import UserAvatar from './UserAvatar';
+import UserAvatar, { IUserAvatarProps } from './UserAvatar';
 
 interface IUserPreviewProps extends TextProps {
   user: TUser;
   showAvatar?: boolean;
   avatarOnly?: boolean;
   tooltipProps?: TooltipProps;
+  showDisplayName?: boolean;
+  avatarProps?: AvatarProps;
 }
 
 /**
@@ -24,7 +27,9 @@ const UserPreview: FC<IUserPreviewProps> = ({
   user,
   showAvatar,
   avatarOnly,
+  avatarProps,
   tooltipProps,
+  showDisplayName,
   ...props
 }) => {
   // const [viewState, setViewState] = useState<'minimized' | 'extended'>(
@@ -37,7 +42,7 @@ const UserPreview: FC<IUserPreviewProps> = ({
       color="shared.text.default"
       gap={2}
     >
-      {<UserAvatar user={user} borderRadius="md" />}
+      {<UserAvatar user={user} borderRadius="md" {...avatarProps} />}
 
       <Box>
         <Text fontSize="md" color="theme.500">
@@ -97,7 +102,17 @@ const UserPreview: FC<IUserPreviewProps> = ({
       {...tooltipProps}
     >
       <Text size="sm" color="gray.500" {...props}>
-        @{user.username}
+        {showAvatar && (
+          <UserAvatar
+            user={user}
+            borderRadius="full"
+            boxSize="16px"
+            verticalAlign="middle"
+            mr={1}
+            {...avatarProps}
+          />
+        )}
+        {showDisplayName ? user.displayName : `@${user.username}`}
       </Text>
     </Tooltip>
   );

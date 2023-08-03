@@ -3,7 +3,7 @@ import { TUser } from '../../types/user';
 import { Avatar, AvatarProps, Tooltip } from '@chakra-ui/react';
 import UserPreview from './UserPreview';
 
-interface IUserAvatarProps extends AvatarProps {
+export interface IUserAvatarProps extends AvatarProps {
   user: TUser;
   showTooltip?: boolean;
 }

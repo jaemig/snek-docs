@@ -1,6 +1,7 @@
 import {
   Heading as ChakraHeading,
   HeadingProps as ChakraHeadingProps,
+  HeadingProps,
   ResponsiveValue,
   ThemeTypings
 } from '@chakra-ui/react';
@@ -29,7 +30,9 @@ const variantLinkFontSizes = {
   h6: '12'
 };
 
-export interface IHeadingProps extends IMainContentComponentBaseProps {
+export interface IHeadingProps
+  extends IMainContentComponentBaseProps,
+    HeadingProps {
   variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   id?: string;
   noAnchor?: boolean;
@@ -52,7 +55,8 @@ const Heading: FC<IHeadingProps> = ({
   noSpacing,
   activeLink,
   setActiveLink,
-  children
+  children,
+  ...compProps
 }) => {
   let props: ChakraHeadingProps = {};
   if (variant === 'h2') {
@@ -76,6 +80,7 @@ const Heading: FC<IHeadingProps> = ({
     <ChakraHeading
       {...baseProps}
       {...props}
+      {...compProps}
       as={variant}
       id={id}
       fontSize={variantFontSizes[variant]}
