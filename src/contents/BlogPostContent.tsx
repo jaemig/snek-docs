@@ -83,7 +83,7 @@ const BlogPostContent: FC<IBlogPostContentProps> = () => {
       showUserImage: true
     },
     {
-      name: 'posts',
+      name: 'Posts',
       href: '/profile#posts'
     },
     {

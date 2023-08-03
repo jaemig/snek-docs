@@ -4,13 +4,12 @@ import {
   BreadcrumbLinkProps,
   BreadcrumbItem,
   BreadcrumbLink,
-  Text
+  TextProps
 } from '@chakra-ui/react';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { MainBreadcrumbPart } from '../../../types/navigation';
 import Link from '../../../components/Link';
 import UserPreview from '../../../../features/user/avatar/components/UserPreview';
-import UserAvatar from '../../../../features/user/avatar/components/UserAvatar';
 
 interface IMainBradcrumbProps {
   parts: MainBreadcrumbPart[];
@@ -22,7 +21,9 @@ const MainBreadcrumb: FC<IMainBradcrumbProps> = ({ parts }) => {
   return (
     <Breadcrumb separator={<ChevronRightIcon />} fontSize="sm" mb={5}>
       {parts.map((item, i) => {
-        const props: BreadcrumbLinkProps = {};
+        const props: BreadcrumbLinkProps & TextProps = {
+          transition: 'color 0.2s ease-in-out'
+        };
 
         if (item.isActive) {
           props.color = 'main.breadcrumb.active.color';
@@ -44,13 +45,7 @@ const MainBreadcrumb: FC<IMainBradcrumbProps> = ({ parts }) => {
             isCurrentPage={item.isActive || item.isDisabled}
             isTruncated
           >
-            <BreadcrumbLink
-              as={Link}
-              href={item.href}
-              isTruncated
-              transition="color 0.2s ease-in-out"
-              {...props}
-            >
+            <BreadcrumbLink as={Link} href={item.href} isTruncated {...props}>
               {item.isUser ? (
                 <UserPreview
                   user={{
@@ -60,6 +55,7 @@ const MainBreadcrumb: FC<IMainBradcrumbProps> = ({ parts }) => {
                     socials: []
                   }}
                   showAvatar
+                  {...props}
                 />
               ) : (
                 item.name
