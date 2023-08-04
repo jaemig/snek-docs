@@ -4,16 +4,18 @@ import { TPost } from '../../types/post';
 import {
   Avatar,
   Box,
-  Center,
   Divider,
   HStack,
   Heading,
+  LinkBox,
+  LinkOverlay,
   Text,
   VStack
 } from '@chakra-ui/react';
 import { TUser } from '../../../user/types/user';
 import TbStar from '../../../../shared/components/icons/tabler/TbStar';
 import { formatNumber } from '../../../../shared/utils/utils';
+import Link from '../../../../shared/components/Link';
 
 interface ILeftNavPostReaderProps {
   post: TPost;
@@ -25,7 +27,7 @@ interface ILeftNavPostReaderProps {
  */
 const LeftNavPostReader: FC<ILeftNavPostReaderProps> = ({ post, user }) => {
   return (
-    <LeftNav w="full" isExpanded>
+    <LeftNav w="full" isExpanded textAlign="center">
       <VStack
         spacing={2}
         mb={8}
@@ -38,7 +40,8 @@ const LeftNavPostReader: FC<ILeftNavPostReaderProps> = ({ post, user }) => {
           }
         }}
       >
-        <Avatar
+        <LinkBox
+          as={Avatar}
           width={{
             base: '50%',
             md: 'full'
@@ -53,18 +56,22 @@ const LeftNavPostReader: FC<ILeftNavPostReaderProps> = ({ post, user }) => {
             transform: 'scale(1.02)'
           }}
           transition="box-shadow 0.2s cubic-bezier(.17,.67,.83,.67), transform 0.2s cubic-bezier(.17,.67,.83,.67)"
-        />
+        >
+          <LinkOverlay href="/profile" />
+        </LinkBox>
         <Box textAlign="center">
-          <Heading as="h6" fontSize="lg" color="gray.800">
-            {user.displayName}
-          </Heading>
+          <Link href="/profile">
+            <Heading as="h6" fontSize="lg" color="gray.800">
+              {user.displayName}
+            </Heading>
+          </Link>
           <Text fontSize="xs" color="gray.500">
             Author
           </Text>
         </Box>
       </VStack>
       <Divider />
-      <HStack spacing={1} my={3}>
+      <HStack spacing={1} my={3} justifyContent="center">
         <TbStar
           fontSize="xs"
           stroke="features.rating.rated.color"
