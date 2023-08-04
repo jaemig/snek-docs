@@ -1,7 +1,7 @@
 import { Icon, IconProps } from '@chakra-ui/react';
 
 /**
- * Tabler icon: `book.-off`.
+ * Tabler icon: `book-off`.
  */
 const TbBookOff = (props: IconProps) => {
   return (
