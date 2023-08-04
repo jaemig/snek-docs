@@ -1,8 +1,18 @@
-import { Stack, Input, Box } from '@chakra-ui/react';
+import {
+  Stack,
+  Input,
+  Box,
+  Button,
+  IconButton,
+  Tooltip,
+  HStack
+} from '@chakra-ui/react';
 import { FC, useState } from 'react';
 import MdxEditor from '../../../../shared/components/MdxEditor';
 import { variantFontSizes } from '../../../main-content/heading/components/Heading';
 import LeftNavPostEditor from './LeftNavPostEditor';
+import TbBookUpload from '../../../../shared/components/icons/tabler/TbBookUpload';
+import TbDeviceFloppy from '../../../../shared/components/icons/tabler/TbDeviceFloppy';
 /**
  * Component for editing a post.
  */
@@ -12,7 +22,7 @@ const PostEditorView: FC = () => {
   return (
     <>
       <LeftNavPostEditor />
-      <Stack spacing={{ base: 0, xl: 12 }} direction="row">
+      <Stack spacing={{ base: 0, xl: 12 }} direction="row" position="relative">
         <Box w="full">
           <Box
             position="relative"
@@ -46,6 +56,59 @@ const PostEditorView: FC = () => {
             />
           </Box>
           <MdxEditor />
+          <HStack
+            position="fixed"
+            zIndex={10}
+            bottom={10}
+            left="50%"
+            transform="translateX(-50%)"
+            bgColor="gray.800"
+            border="1px solid"
+            borderColor="gray.600"
+            px={10}
+            py={2}
+            borderRadius="full"
+            spacing={3}
+          >
+            <Tooltip
+              label="Save this post"
+              bgColor="gray.700"
+              color="white"
+              placement="top"
+            >
+              <IconButton
+                icon={<TbDeviceFloppy fontSize="xl" />}
+                size="md"
+                aria-label="Save this post"
+                variant="ghost"
+                borderRadius="full"
+                color="gray.400"
+                _hover={{
+                  bgColor: 'gray.700',
+                  color: '#ffa801'
+                }}
+              />
+            </Tooltip>
+            <Tooltip
+              label="Publish this post"
+              bgColor="gray.700"
+              color="white"
+              placement="top"
+            >
+              <IconButton
+                icon={<TbBookUpload fontSize="xl" />}
+                size="md"
+                aria-label="Publish this post"
+                variant="ghost"
+                borderRadius="full"
+                color="gray.400"
+                _hover={{
+                  bgColor: 'gray.700',
+                  color: 'flat.se.green.600'
+                }}
+              />
+            </Tooltip>
+          </HStack>
         </Box>
       </Stack>
     </>

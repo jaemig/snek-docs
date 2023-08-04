@@ -7,7 +7,7 @@ import { VStack, Button } from '@chakra-ui/react';
  */
 const LeftNavPostEditor: FC = ({}) => {
   return (
-    <LeftNav w="full">
+    <LeftNav w="full" isExpanded={true}>
       <VStack w="50%" minW="100px" alignSelf="center">
         <Button size="sm" variant="filledGreen" w="full">
           Publish

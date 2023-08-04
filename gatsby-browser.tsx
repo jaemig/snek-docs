@@ -6,6 +6,7 @@ export const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({
   props
 }) => {
   const path = props.location.pathname;
+  const hiddenTopNavPaths = ['/profile', '/blog-post'];
 
   if (path.startsWith('/admin') || path === '/photonq/') {
     return element;
@@ -15,7 +16,11 @@ export const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({
     <AppLayout
       isDocs={path.startsWith('/docs')}
       path={path}
-      topNavProps={{ isVisible: !path.startsWith('/profile') }}
+      topNavProps={{
+        isVisible: !hiddenTopNavPaths.some(hiddenPath =>
+          path.startsWith(hiddenPath)
+        )
+      }}
     >
       {element}
     </AppLayout>

@@ -11,10 +11,10 @@ const smtPostReaderView = {
                 color: {
                     default: 'gray.500',
                     _dark: 'gray.600',
-                }
-            }
-        }
-    }
-}
+                },
+            },
+        },
+    },
+};
 
 export default smtPostReaderView;
