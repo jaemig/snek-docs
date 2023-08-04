@@ -77,15 +77,6 @@ const PostReaderView: FC = () => {
             <Text fontSize="sm" color="gray.500">
               {post.publicationDate}
             </Text>
-            {/* <Text fontSize="sm" color="gray.500" ml={5}>
-              {formatNumber(post.likes)}
-            </Text>
-            <TbStar
-              ml={1}
-              fontSize="sm"
-              stroke="features.rating.rated.color"
-              fill="features.rating.rated.color"
-            /> */}
           </HStack>
           <Heading variant="h1" mt={0}>
             Unlocking the Power of Quantum Computing
@@ -100,25 +91,7 @@ const PostReaderView: FC = () => {
               }}
             />
           </Heading>
-          <HStack spacing={1} mb={10}>
-            {/* <Text as="span">by</Text>
-            <Link href="/profile">
-              <UserPreview
-                user={userData}
-                showTooltip={false}
-                showDisplayName
-                showAvatar
-                avatarProps={{
-                  verticalAlign: 'middle',
-                  boxSize: '18px'
-                }}
-                transition="color 0.2s ease-in-out"
-                _hover={{
-                  color: 'views.postReaderView.userPreview._hover.color'
-                }}
-              />
-            </Link> */}
-          </HStack>
+          <HStack spacing={1} mb={10}></HStack>
           <VStack spacing={3} alignItems="start">
             <Text>
               Quantum computing is a cutting-edge technology that has the
