@@ -80,7 +80,6 @@ const Heading: FC<IHeadingProps> = ({
     <ChakraHeading
       {...baseProps}
       {...props}
-      {...compProps}
       as={variant}
       id={id}
       fontSize={variantFontSizes[variant]}
@@ -90,6 +89,7 @@ const Heading: FC<IHeadingProps> = ({
           opacity: 1
         }
       }}
+      {...compProps}
     >
       {children}
       {!noAnchor && id && (
