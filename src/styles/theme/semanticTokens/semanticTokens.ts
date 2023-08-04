@@ -55,7 +55,7 @@ const themeSemanticTokens = {
       posts: smtPostsPage
     },
     views: {
-      postReaderView: smtPostReaderView,
+      postReader: smtPostReaderView,
     },
     features: {
       rating: smtRatingFeature,

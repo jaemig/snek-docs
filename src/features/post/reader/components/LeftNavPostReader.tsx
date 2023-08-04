@@ -61,11 +61,18 @@ const LeftNavPostReader: FC<ILeftNavPostReaderProps> = ({ post, user }) => {
         </LinkBox>
         <Box textAlign="center">
           <Link href="/profile">
-            <Heading as="h6" fontSize="lg" color="gray.800">
+            <Heading
+              as="h6"
+              fontSize="lg"
+              color="views.postReader.leftNav.author.displayName.color"
+            >
               {user.displayName}
             </Heading>
           </Link>
-          <Text fontSize="xs" color="gray.500">
+          <Text
+            fontSize="xs"
+            color="views.postReader.leftNav.author.label.color"
+          >
             Author
           </Text>
         </Box>
