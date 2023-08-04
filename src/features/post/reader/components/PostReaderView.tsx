@@ -9,6 +9,8 @@ import UserPreview from '../../../user/avatar/components/UserPreview';
 import { TUser } from '../../../user/types/user';
 import Link from '../../../../shared/components/Link';
 import TbStar from '../../../../shared/components/icons/tabler/TbStar';
+import { posts } from '../../../../shared/utils/features/post';
+import { formatNumber } from '../../../../shared/utils/utils';
 
 //* This would be the data that comes from Jaen.
 const userData: TUser = {
@@ -42,6 +44,8 @@ const userData: TUser = {
   ]
 };
 
+const post = posts[0];
+
 /**
  * Component for reading a post.
  */
@@ -65,11 +69,25 @@ const PostReaderView: FC = () => {
 
   return (
     <>
-      <LeftNavPostReader />
+      <LeftNavPostReader post={post as any} user={userData} />
       <Stack spacing={{ base: 0, xl: 12 }} direction="row" mb={10}>
         <Box maxW="900px" w="full">
           <MainBreadcrumb parts={breadcrumbParts} />
-          <Heading variant="h1">
+          <HStack opacity={0.75} spacing={0}>
+            <Text fontSize="sm" color="gray.500">
+              {post.publicationDate}
+            </Text>
+            {/* <Text fontSize="sm" color="gray.500" ml={5}>
+              {formatNumber(post.likes)}
+            </Text>
+            <TbStar
+              ml={1}
+              fontSize="sm"
+              stroke="features.rating.rated.color"
+              fill="features.rating.rated.color"
+            /> */}
+          </HStack>
+          <Heading variant="h1" mt={0}>
             Unlocking the Power of Quantum Computing
             <IconButton
               icon={<TbStar />}
@@ -83,7 +101,7 @@ const PostReaderView: FC = () => {
             />
           </Heading>
           <HStack spacing={1} mb={10}>
-            <Text as="span">by</Text>
+            {/* <Text as="span">by</Text>
             <Link href="/profile">
               <UserPreview
                 user={userData}
@@ -99,7 +117,7 @@ const PostReaderView: FC = () => {
                   color: 'views.postReaderView.userPreview._hover.color'
                 }}
               />
-            </Link>
+            </Link> */}
           </HStack>
           <VStack spacing={3} alignItems="start">
             <Text>
