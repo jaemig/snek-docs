@@ -27,36 +27,6 @@ const BlogPostContent: FC<IBlogPostContentProps> = () => {
   const isEditViewMode = viewMode === 'edit';
   return (
     <>
-      <TopNav
-        drawerDisclosure={topNavDisclosure}
-        wrapperProps={{ h: 'max-content', spacing: 5, pt: 3, pb: 2 }}
-      >
-        {isEditViewMode && (
-          <HStack>
-            <Button
-              size="sm"
-              colorScheme="gray"
-              w="full"
-              variant="outline-hover-filled"
-              borderColor="gray.600"
-              color="gray.300"
-              _hover={{
-                bgColor: 'gray.700'
-              }}
-            >
-              Save Draft
-            </Button>
-            <Tooltip label="Publish this post" bgColor="gray.700" color="white">
-              <IconButton
-                icon={<TbBookUpload color="flat.se.green.600" />}
-                size="sm"
-                aria-label="Publish this post"
-                variant="outline"
-              />
-            </Tooltip>
-          </HStack>
-        )}
-      </TopNav>
       <MainGrid>
         {isEditViewMode ? <PostEditorView /> : <PostReaderView />}
       </MainGrid>

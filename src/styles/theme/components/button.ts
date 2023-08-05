@@ -32,7 +32,7 @@ const themeButtonComponent = {
         boxShadow: '4px 4px 7px -5px rgba(2, 116, 192, 0.5)'
       },
       transition:
-        'background-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
+        'background-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out'
     },
     'ghost-hover-outline': {
       bgColor: 'transparent',

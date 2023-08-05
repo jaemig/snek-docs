@@ -13,6 +13,8 @@ import { variantFontSizes } from '../../../main-content/heading/components/Headi
 import LeftNavPostEditor from './LeftNavPostEditor';
 import TbBookUpload from '../../../../shared/components/icons/tabler/TbBookUpload';
 import TbDeviceFloppy from '../../../../shared/components/icons/tabler/TbDeviceFloppy';
+import { MainBreadcrumbPart } from '../../../../shared/types/navigation';
+
 /**
  * Component for editing a post.
  */
@@ -70,6 +72,37 @@ const PostEditorView: FC = () => {
             borderRadius="full"
             spacing={3}
           >
+            {/* <Button
+              size="md"
+              variant="ghost"
+              borderRadius="full"
+              color="gray.400"
+              _hover={{
+                bgColor: 'gray.700',
+                color: '#ffa801'
+              }}
+            >
+              Save Draft
+            </Button>
+            <Tooltip
+              label="Publish this post"
+              bgColor="gray.700"
+              color="white"
+              placement="top"
+            >
+              <IconButton
+                icon={<TbBookUpload fontSize="xl" />}
+                size="md"
+                aria-label="Publish this post"
+                variant="ghost"
+                borderRadius="full"
+                color="gray.400"
+                _hover={{
+                  bgColor: 'gray.700',
+                  color: 'flat.se.green.600'
+                }}
+              />
+            </Tooltip> */}
             <Tooltip
               label="Save this post"
               bgColor="gray.700"
