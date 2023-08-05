@@ -13,10 +13,14 @@ import {
 import TbBookUpload from '../../../../shared/components/icons/tabler/TbBookUpload';
 import TbDeviceFloppy from '../../../../shared/components/icons/tabler/TbDeviceFloppy';
 
+interface ILeftNavPostEditorProps {
+  handlePublish: () => void;
+}
+
 /**
  * Left navigation for editing a post.
  */
-const LeftNavPostEditor: FC = ({}) => {
+const LeftNavPostEditor: FC<ILeftNavPostEditorProps> = ({ handlePublish }) => {
   return (
     <LeftNav w="full" isExpanded={true}>
       <VStack w="full" minW="100px" alignSelf="center">
@@ -62,6 +66,7 @@ const LeftNavPostEditor: FC = ({}) => {
                 borderColor: 'flat.se.green.600',
                 color: 'gray.200'
               }}
+              onClick={handlePublish}
             />
           </Tooltip>
         </HStack>

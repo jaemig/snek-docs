@@ -5,7 +5,8 @@ import {
   Button,
   IconButton,
   Tooltip,
-  HStack
+  HStack,
+  useToast
 } from '@chakra-ui/react';
 import { FC, useState } from 'react';
 import MdxEditor from '../../../../shared/components/MdxEditor';
@@ -14,18 +15,45 @@ import LeftNavPostEditor from './LeftNavPostEditor';
 import TbBookUpload from '../../../../shared/components/icons/tabler/TbBookUpload';
 import TbDeviceFloppy from '../../../../shared/components/icons/tabler/TbDeviceFloppy';
 import { MainBreadcrumbPart } from '../../../../shared/types/navigation';
+import { wait } from '../../../../shared/utils/utils';
+import Toast from '../../../../shared/components/toast/Toast';
 
 /**
  * Component for editing a post.
  */
 const PostEditorView: FC = () => {
+  const publishToast = useToast();
   const [isInputFocused, setIsInputFocused] = useState(false);
+
+  const handlePublish = async () => {
+    //TODO: Connect to Jaen
+
+    await wait(1000); // Simulate publishing
+
+    publishToast({
+      title: 'Post published.',
+      description: 'Your post has been published.',
+      status: 'error',
+      duration: 5000,
+      isClosable: true,
+      position: 'top-right',
+      icon: <TbBookUpload />
+      // render: () => <Toast>Hi!</Toast>
+    });
+  };
 
   return (
     <>
-      <LeftNavPostEditor />
+      <LeftNavPostEditor handlePublish={handlePublish} />
       <Stack spacing={{ base: 0, xl: 12 }} direction="row" position="relative">
         <Box w="full">
+          <Toast
+            title="Post published"
+            description="Your post has been published"
+            w="fit-content"
+          >
+            Hi!
+          </Toast>
           <Box
             position="relative"
             _after={{
