@@ -6,14 +6,15 @@ import LeftNavPostEditor from './LeftNavPostEditor';
 import TbBookUpload from '../../../../shared/components/icons/tabler/TbBookUpload';
 import TbDeviceFloppy from '../../../../shared/components/icons/tabler/TbDeviceFloppy';
 import { wait } from '../../../../shared/utils/utils';
-import Toast from '../../../../shared/components/toast/Toast';
+import Toast from '../../../../shared/components/toast/createCustomToast';
 import ActionToolbar from '../../../../shared/components/action-toolbar/ActionToolbar';
+import createCustomToast from '../../../../shared/components/toast/createCustomToast';
 
 /**
  * Component for editing a post.
  */
 const PostEditorView: FC = () => {
-  const publishToast = useToast();
+  const { displayToast } = createCustomToast();
   const [isInputFocused, setIsInputFocused] = useState(false);
 
   const handlePublish = async () => {
@@ -21,14 +22,10 @@ const PostEditorView: FC = () => {
 
     await wait(1000); // Simulate publishing
 
-    publishToast({
+    displayToast({
       title: 'Post published.',
       description: 'Your post has been published.',
-      status: 'error',
-      duration: 5000,
-      isClosable: true,
-      position: 'top-right',
-      icon: <TbBookUpload />
+      status: 'info'
     });
   };
 

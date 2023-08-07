@@ -36,7 +36,7 @@ const smtToastComponent = {
                 _dark: 'blue.400',
             },
             bgColor: {
-                default: 'linear-gradient(90deg, rgba(93, 97, 208, 1) 0%, rgba(255,255,255,0) 25%)',
+                default: 'linear-gradient(90deg, rgba(93, 97, 208, 0.5) 0%, rgba(255,255,255,0) 25%)',
                 _dark: 'linear-gradient(90deg, rgba(58, 62, 197, 0.8) 0%, rgba(255,255,255,0) 40%)',
             },
         },
