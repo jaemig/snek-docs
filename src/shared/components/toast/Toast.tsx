@@ -1,21 +1,16 @@
-import { CheckCircleIcon } from '@chakra-ui/icons';
-import {
-  AlertStatus,
-  Box,
-  HStack,
-  Heading,
-  Icon,
-  StackProps,
-  Text
-} from '@chakra-ui/react';
+import { Box, HStack, Heading, Icon, StackProps, Text } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 import { TToastStatus } from './types/toast';
+import TbAlertCircleFilled from '../icons/tabler/TbAlertCircleFilled';
+import TbCheckCircleFilled from '../icons/tabler/TbCheckCircleFilled';
+import TbXCircleFilled from '../icons/tabler/TbXCircleFilled';
+import TbInfoCircleFilled from '../icons/tabler/TbInfoCircleFilled';
 
 const statusIcons: { [key in TToastStatus]: typeof Icon } = {
-  success: CheckCircleIcon,
-  error: CheckCircleIcon,
-  warning: CheckCircleIcon,
-  info: CheckCircleIcon
+  success: TbCheckCircleFilled,
+  error: TbXCircleFilled,
+  warning: TbAlertCircleFilled,
+  info: TbInfoCircleFilled
 };
 
 export interface IToastProps extends StackProps {
@@ -33,7 +28,7 @@ const Toast: FC<IToastProps> = ({
   children,
   title,
   description,
-  status = 'success',
+  status = 'info',
   icon,
   ...props
 }) => {
@@ -56,7 +51,8 @@ const Toast: FC<IToastProps> = ({
         h: 'full',
         borderRadius: 'lg',
         opacity: 0.2,
-        bg: `components.toast.status.${status}.bgColor`
+        bg: `components.toast.status.${status}.bgColor`,
+        zIndex: 0
       }}
       {...props}
     >
@@ -77,7 +73,9 @@ const Toast: FC<IToastProps> = ({
             {title}
           </Heading>
         )}
-        {description && <Text>{description}</Text>}
+        {description && (
+          <Text color="components.toast.description.color">{description}</Text>
+        )}
       </Box>
     </HStack>
   );
