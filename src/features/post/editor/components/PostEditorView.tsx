@@ -17,6 +17,7 @@ import TbDeviceFloppy from '../../../../shared/components/icons/tabler/TbDeviceF
 import { MainBreadcrumbPart } from '../../../../shared/types/navigation';
 import { wait } from '../../../../shared/utils/utils';
 import Toast from '../../../../shared/components/toast/Toast';
+import ActionToolbar from '../../../../shared/components/action-toolbar/ActionToolbar';
 
 /**
  * Component for editing a post.
@@ -105,90 +106,24 @@ const PostEditorView: FC = () => {
             />
           </Box>
           <MdxEditor />
-          <HStack
-            position="fixed"
-            zIndex={10}
-            bottom={10}
-            left="50%"
-            transform="translateX(-50%)"
-            bgColor="gray.800"
-            border="1px solid"
-            borderColor="gray.600"
-            px={10}
-            py={2}
-            borderRadius="full"
-            spacing={3}
-          >
-            {/* <Button
-              size="md"
-              variant="ghost"
-              borderRadius="full"
-              color="gray.400"
-              _hover={{
-                bgColor: 'gray.700',
-                color: '#ffa801'
-              }}
-            >
-              Save Draft
-            </Button>
-            <Tooltip
-              label="Publish this post"
-              bgColor="gray.700"
-              color="white"
-              placement="top"
-            >
-              <IconButton
-                icon={<TbBookUpload fontSize="xl" />}
-                size="md"
-                aria-label="Publish this post"
-                variant="ghost"
-                borderRadius="full"
-                color="gray.400"
-                _hover={{
-                  bgColor: 'gray.700',
-                  color: 'flat.se.green.600'
-                }}
-              />
-            </Tooltip> */}
-            <Tooltip
-              label="Save this post"
-              bgColor="gray.700"
-              color="white"
-              placement="top"
-            >
-              <IconButton
-                icon={<TbDeviceFloppy fontSize="xl" />}
-                size="md"
-                aria-label="Save this post"
-                variant="ghost"
-                borderRadius="full"
-                color="gray.400"
-                _hover={{
-                  bgColor: 'gray.700',
-                  color: '#ffa801'
-                }}
-              />
-            </Tooltip>
-            <Tooltip
-              label="Publish this post"
-              bgColor="gray.700"
-              color="white"
-              placement="top"
-            >
-              <IconButton
-                icon={<TbBookUpload fontSize="xl" />}
-                size="md"
-                aria-label="Publish this post"
-                variant="ghost"
-                borderRadius="full"
-                color="gray.400"
-                _hover={{
-                  bgColor: 'gray.700',
-                  color: 'flat.se.green.600'
-                }}
-              />
-            </Tooltip>
-          </HStack>
+          <ActionToolbar
+            actions={[
+              {
+                icon: <TbDeviceFloppy fontSize="xl" />,
+                ariaLabel: 'Save this post',
+                tooltip: 'Save this post',
+                onClick: () => console.log('Save'),
+                hoverColor: '#ffa801'
+              },
+              {
+                icon: <TbBookUpload fontSize="xl" />,
+                ariaLabel: 'Publish this post',
+                tooltip: 'Publish this post',
+                onClick: handlePublish,
+                hoverColor: 'flat.se.green.600'
+              }
+            ]}
+          />
         </Box>
       </Stack>
     </>
