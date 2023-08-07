@@ -48,32 +48,6 @@ const PostEditorView: FC = () => {
       <LeftNavPostEditor handlePublish={handlePublish} />
       <Stack spacing={{ base: 0, xl: 12 }} direction="row" position="relative">
         <Box w="full">
-          <Toast
-            title="Post published"
-            description="Your post has been published"
-            w="fit-content"
-            mb={3}
-          />
-          <Toast
-            title="Post published"
-            description="Your post has been published"
-            w="fit-content"
-            status="error"
-            mb={3}
-          />
-          <Toast
-            title="Post published"
-            description="Your post has been published"
-            w="fit-content"
-            status="warning"
-            mb={3}
-          />
-          <Toast
-            title="Post published"
-            description="Your post has been published"
-            w="fit-content"
-            status="info"
-          />
           <Box
             position="relative"
             _after={{
