@@ -1,8 +1,6 @@
-import { FC, useMemo } from 'react';
-import { TActionToolbarItem } from './styles/actionToolbar';
+import { FC } from 'react';
+import { TActionToolbarItem } from './types/actionToolbar';
 import { HStack, Tooltip, IconButton } from '@chakra-ui/react';
-import TbBookUpload from '../icons/tabler/TbBookUpload';
-import TbDeviceFloppy from '../icons/tabler/TbDeviceFloppy';
 
 interface IActionTOolbarProps {
   actions: TActionToolbarItem[];
@@ -13,9 +11,10 @@ const ActionToolbar: FC<IActionTOolbarProps> = ({ actions }) => {
     <Tooltip
       key={index}
       label={action.tooltip}
-      bgColor="gray.700"
-      color="white"
+      bgColor="components.actionToolbar.tooltip.bgColor"
+      color="shared.text.default"
       placement="top"
+      marginBottom={1}
     >
       <IconButton
         icon={action.icon}
@@ -23,11 +22,12 @@ const ActionToolbar: FC<IActionTOolbarProps> = ({ actions }) => {
         aria-label={action.ariaLabel}
         variant="ghost"
         borderRadius="full"
-        color="gray.400"
+        color="components.actionToolbar.button.color"
         {...action.buttonProps}
         _hover={{
-          bgColor: 'gray.700',
-          color: action.hoverColor ?? 'theme.500',
+          bgColor: 'components.actionToolbar.button._hover.bgColor',
+          color:
+            action.hoverColor ?? 'components.actionToolbar.button._hover.color',
           ...action.buttonProps?._hover
         }}
         transition="background-color 0.2s ease-in-out, color 0.2s ease-in-out"
@@ -42,9 +42,9 @@ const ActionToolbar: FC<IActionTOolbarProps> = ({ actions }) => {
       bottom={10}
       left="50%"
       transform="translateX(-50%)"
-      bgColor="gray.800"
+      bgColor="components.actionToolbar.container.bgColor"
       border="1px solid"
-      borderColor="gray.600"
+      borderColor="components.actionToolbar.container.borderColor"
       px={10}
       py={2}
       borderRadius="full"

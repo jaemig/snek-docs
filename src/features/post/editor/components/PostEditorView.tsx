@@ -1,20 +1,10 @@
-import {
-  Stack,
-  Input,
-  Box,
-  Button,
-  IconButton,
-  Tooltip,
-  HStack,
-  useToast
-} from '@chakra-ui/react';
+import { Stack, Input, Box, useToast } from '@chakra-ui/react';
 import { FC, useState } from 'react';
 import MdxEditor from '../../../../shared/components/MdxEditor';
 import { variantFontSizes } from '../../../main-content/heading/components/Heading';
 import LeftNavPostEditor from './LeftNavPostEditor';
 import TbBookUpload from '../../../../shared/components/icons/tabler/TbBookUpload';
 import TbDeviceFloppy from '../../../../shared/components/icons/tabler/TbDeviceFloppy';
-import { MainBreadcrumbPart } from '../../../../shared/types/navigation';
 import { wait } from '../../../../shared/utils/utils';
 import Toast from '../../../../shared/components/toast/Toast';
 import ActionToolbar from '../../../../shared/components/action-toolbar/ActionToolbar';
@@ -39,7 +29,6 @@ const PostEditorView: FC = () => {
       isClosable: true,
       position: 'top-right',
       icon: <TbBookUpload />
-      // render: () => <Toast>Hi!</Toast>
     });
   };
 
