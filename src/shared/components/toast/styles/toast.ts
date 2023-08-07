@@ -2,11 +2,11 @@ const smtToastComponent = {
     status: {
         success: {
             color: {
-                default: 'flat.se.green.500',
+                default: 'flat.se.green.600',
                 _dark: 'flat.se.green.500',
             },
             bgColor: {
-                default: 'linear-gradient(90deg, rgba(9,195,108,1) 0%, rgba(255,255,255,0) 25%)',
+                default: 'linear-gradient(90deg, rgb(12, 243, 135) 0%, rgba(255,255,255,0) 25%)',
                 _dark: 'linear-gradient(90deg, rgba(9,195,108, 0.8) 0%, rgba(255,255,255,0) 40%)',
             },
         },
@@ -16,7 +16,7 @@ const smtToastComponent = {
                 _dark: 'red.500',
             },
             bgColor: {
-                default: 'linear-gradient(90deg, rgba(255, 14, 0,1) 0%, rgba(255,255,255,0) 25%)',
+                default: 'linear-gradient(90deg, rgba(255, 14, 0, 1) 0%, rgba(255,255,255,0) 25%)',
                 _dark: 'linear-gradient(90deg, rgba(255, 14, 0, 0.8) 0%, rgba(255,255,255,0) 40%)',
             },
         },
@@ -36,7 +36,7 @@ const smtToastComponent = {
                 _dark: 'blue.400',
             },
             bgColor: {
-                default: 'linear-gradient(90deg, rgba(58, 62, 197, 1) 0%, rgba(255,255,255,0) 25%)',
+                default: 'linear-gradient(90deg, rgba(93, 97, 208, 1) 0%, rgba(255,255,255,0) 25%)',
                 _dark: 'linear-gradient(90deg, rgba(58, 62, 197, 0.8) 0%, rgba(255,255,255,0) 40%)',
             },
         },
@@ -47,6 +47,12 @@ const smtToastComponent = {
             _dark: 'gray.400',
         },
     },
+    container: {
+        bgColor: {
+            default: 'gray.50',
+            _dark: 'gray.750',
+        }
+    }
 };
 
 export default smtToastComponent;

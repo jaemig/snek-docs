@@ -18,17 +18,15 @@ export interface IToastProps extends StackProps {
   description?: string;
   status?: TToastStatus;
   icon?: ReactNode;
-  children?: ReactNode;
 }
 
 /**
  * Component for displaying a toast.
  */
 const Toast: FC<IToastProps> = ({
-  children,
   title,
   description,
-  status = 'info',
+  status = 'success',
   icon,
   ...props
 }) => {
@@ -37,7 +35,7 @@ const Toast: FC<IToastProps> = ({
   return (
     <HStack
       position="relative"
-      bgColor="gray.750"
+      bgColor="components.toast.container.bgColor"
       borderRadius="lg"
       px={9}
       py={6}
@@ -54,6 +52,7 @@ const Toast: FC<IToastProps> = ({
         bg: `components.toast.status.${status}.bgColor`,
         zIndex: 0
       }}
+      fontWeight="semibold"
       {...props}
     >
       {icon ?? (

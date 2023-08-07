@@ -51,9 +51,28 @@ const PostEditorView: FC = () => {
             title="Post published"
             description="Your post has been published"
             w="fit-content"
-          >
-            Hi!
-          </Toast>
+            mb={3}
+          />
+          <Toast
+            title="Post published"
+            description="Your post has been published"
+            w="fit-content"
+            status="error"
+            mb={3}
+          />
+          <Toast
+            title="Post published"
+            description="Your post has been published"
+            w="fit-content"
+            status="warning"
+            mb={3}
+          />
+          <Toast
+            title="Post published"
+            description="Your post has been published"
+            w="fit-content"
+            status="info"
+          />
           <Box
             position="relative"
             _after={{
