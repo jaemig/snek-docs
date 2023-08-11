@@ -1,4 +1,4 @@
-import { Stack, Input, Box, useToast } from '@chakra-ui/react';
+import { Stack, Input, Box, useToast, useDisclosure } from '@chakra-ui/react';
 import { FC, useState } from 'react';
 import MdxEditor from '../../../../shared/components/MdxEditor';
 import { variantFontSizes } from '../../../main-content/heading/components/Heading';
@@ -8,33 +8,38 @@ import TbDeviceFloppy from '../../../../shared/components/icons/tabler/TbDeviceF
 import { wait } from '../../../../shared/utils/utils';
 import Toast from '../../../../shared/components/toast/Toast';
 import ActionToolbar from '../../../../shared/components/action-toolbar/ActionToolbar';
+import PublishAlert from './PublishAlert';
 
 /**
  * Component for editing a post.
  */
 const PostEditorView: FC = () => {
   // const { displayToast } = createCustomToast();
+  const publishAlertDisclosure = useDisclosure({
+    onClose: () => console.log('closed')
+  });
   const toast = useToast();
   const [isInputFocused, setIsInputFocused] = useState(false);
 
   const handlePublish = async () => {
     //TODO: Connect to Jaen
-
+    console.log('publishing...');
     await wait(1000); // Simulate publishing
-
+    publishAlertDisclosure.onClose();
+    return;
     // displayToast({
     //   title: 'Post published.',
     //   description: 'Your post has been published.',
     //   status: 'info'
     // });
-    toast({
-      title: ''
-    });
+    // toast({
+    //   title: ''
+    // });
   };
 
   return (
     <>
-      <LeftNavPostEditor handlePublish={handlePublish} />
+      <LeftNavPostEditor handlePublish={publishAlertDisclosure.onOpen} />
       <Stack spacing={{ base: 0, xl: 12 }} direction="row" position="relative">
         <Box w="full">
           <Box
@@ -89,6 +94,10 @@ const PostEditorView: FC = () => {
           />
         </Box>
       </Stack>
+      <PublishAlert
+        disclosure={publishAlertDisclosure}
+        publish={handlePublish}
+      />
     </>
   );
 };
