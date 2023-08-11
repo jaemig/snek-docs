@@ -17,6 +17,7 @@ import { MenuContext } from '../contexts/menu';
 import { useNavOffset } from '../hooks/use-nav-offset';
 import { convertPageTreeToMenu } from '../utils/navigation';
 import theme from '../../styles/theme/theme';
+import Toast from '../components/toast/Toast';
 
 interface AppLayoutProps {
   children?: React.ReactNode;
@@ -64,7 +65,12 @@ const AppLayout: FC<AppLayoutProps> = ({
   const FooterComp = footer ? footer : Footer;
 
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider
+      theme={theme}
+      // toastOptions={{
+      //   component: Toast
+      // }}
+    >
       <MenuContext.Provider value={{ menuStructure }}>
         <Flex
           minW="210px"

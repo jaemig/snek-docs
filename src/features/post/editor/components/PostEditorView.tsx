@@ -6,15 +6,15 @@ import LeftNavPostEditor from './LeftNavPostEditor';
 import TbBookUpload from '../../../../shared/components/icons/tabler/TbBookUpload';
 import TbDeviceFloppy from '../../../../shared/components/icons/tabler/TbDeviceFloppy';
 import { wait } from '../../../../shared/utils/utils';
-import Toast from '../../../../shared/components/toast/createCustomToast';
+import Toast from '../../../../shared/components/toast/Toast';
 import ActionToolbar from '../../../../shared/components/action-toolbar/ActionToolbar';
-import createCustomToast from '../../../../shared/components/toast/createCustomToast';
 
 /**
  * Component for editing a post.
  */
 const PostEditorView: FC = () => {
-  const { displayToast } = createCustomToast();
+  // const { displayToast } = createCustomToast();
+  const toast = useToast();
   const [isInputFocused, setIsInputFocused] = useState(false);
 
   const handlePublish = async () => {
@@ -22,10 +22,13 @@ const PostEditorView: FC = () => {
 
     await wait(1000); // Simulate publishing
 
-    displayToast({
-      title: 'Post published.',
-      description: 'Your post has been published.',
-      status: 'info'
+    // displayToast({
+    //   title: 'Post published.',
+    //   description: 'Your post has been published.',
+    //   status: 'info'
+    // });
+    toast({
+      title: ''
     });
   };
 
