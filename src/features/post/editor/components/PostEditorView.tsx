@@ -8,7 +8,7 @@ import TbDeviceFloppy from '../../../../shared/components/icons/tabler/TbDeviceF
 import { wait } from '../../../../shared/utils/utils';
 import Toast from '../../../../shared/components/toast/Toast';
 import ActionToolbar from '../../../../shared/components/action-toolbar/ActionToolbar';
-import PublishAlert from './PublishAlert';
+import Alert from '../../../../shared/components/alert/Alert';
 
 /**
  * Component for editing a post.
@@ -94,9 +94,12 @@ const PostEditorView: FC = () => {
           />
         </Box>
       </Stack>
-      <PublishAlert
+      <Alert
         disclosure={publishAlertDisclosure}
-        publish={handlePublish}
+        confirmationAction={handlePublish}
+        confirmationLabel="Publish"
+        body="Are you sure you want to publish this post? This post will be visible to everyone."
+        header="Publish this post?"
       />
     </>
   );
