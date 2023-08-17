@@ -25,12 +25,6 @@ const smtActionToolbarComponent = {
             },
         },
     },
-    tooltip: {
-        bgColor: {
-            default: 'gray.50',
-            _dark: 'gray.700',
-        },
-    },
 };
 
 export default smtActionToolbarComponent;

@@ -11,8 +11,6 @@ const ActionToolbar: FC<IActionTOolbarProps> = ({ actions }) => {
     <Tooltip
       key={index}
       label={action.tooltip}
-      bgColor="components.actionToolbar.tooltip.bgColor"
-      color="shared.text.default"
       placement="top"
       marginBottom={1}
     >

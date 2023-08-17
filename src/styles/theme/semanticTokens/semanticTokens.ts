@@ -29,6 +29,7 @@ import smtPostReaderView from '../../../features/post/reader/styles/postReaderVi
 import smtRatingFeature from './features/rating';
 import smtToastComponent from '../../../shared/components/toast/styles/toast';
 import smtActionToolbarComponent from '../../../shared/components/action-toolbar/styles/actionToolbar';
+import smtTooltipComponent from './components/tooltip';
 
 const themeSemanticTokens = {
   colors: {
@@ -50,6 +51,7 @@ const themeSemanticTokens = {
       input: smtInputComponent,
       toast: smtToastComponent,
       actionToolbar: smtActionToolbarComponent,
+      tooltip: smtTooltipComponent,
     },
     modals: {
       // Add styles for modals here
