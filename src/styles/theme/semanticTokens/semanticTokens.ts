@@ -30,6 +30,7 @@ import smtRatingFeature from './features/rating';
 import smtToastComponent from '../../../shared/components/toast/styles/toast';
 import smtActionToolbarComponent from '../../../shared/components/action-toolbar/styles/actionToolbar';
 import smtTooltipComponent from './components/tooltip';
+import smtPostEditorComponent from '../../../features/post/editor/styles/postEditor';
 
 const themeSemanticTokens = {
   colors: {
@@ -46,6 +47,7 @@ const themeSemanticTokens = {
       imageCard: smtImageCardComponent,
       iconCard: smtIconCardComponent,
       postPreview: smtPostPreviewComponent,
+      postEditor: smtPostEditorComponent,
       userActivity: smtUserActivityComponent,
       stepper: smtStepperComponent,
       input: smtInputComponent,

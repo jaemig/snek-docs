@@ -12,9 +12,9 @@ import { FC } from 'react';
 import TopNav from '../../../../shared/containers/navigation/TopNav';
 import { TPost } from '../../types/post';
 import TbStar from '../../../../shared/components/icons/tabler/TbStar';
-import TbCloudUpload from '../../../../shared/components/icons/tabler/TbCloudUpload';
 import TbBookUpload from '../../../../shared/components/icons/tabler/TbBookUpload';
 import TbBookDownload from '../../../../shared/components/icons/tabler/TbBookDownload';
+import TbPhoto from '../../../../shared/components/icons/tabler/TbPhoto';
 
 interface IPostEditorTopNavProps {
   post: Partial<TPost>;
@@ -58,7 +58,7 @@ const PostEditorTopNav: FC<IPostEditorTopNavProps> = ({
           <Button size="sm" leftIcon={<TbStar />}>
             {post.likes || 0}
           </Button>
-          <Button size="sm" leftIcon={<TbCloudUpload />}>
+          <Button size="sm" leftIcon={<TbPhoto />}>
             Image
           </Button>
           {post.publicationDate === undefined ? (

@@ -5,7 +5,8 @@ import {
   useToast,
   useDisclosure,
   Divider,
-  Textarea
+  Textarea,
+  useBreakpointValue
 } from '@chakra-ui/react';
 import { FC, useState } from 'react';
 import MdxEditor from '../../../../shared/components/MdxEditor';
@@ -20,6 +21,9 @@ import Alert from '../../../../shared/components/alert/Alert';
 import MainGrid from '../../../../shared/containers/components/MainGrid';
 import PostEditorTopNav from './PostEditorTopNav';
 import { TPost } from '../../types/post';
+import { TActionToolbarItem } from '../../../../shared/components/action-toolbar/types/actionToolbar';
+import TbCloudUpload from '../../../../shared/components/icons/tabler/TbCloudUpload';
+import TbPhoto from '../../../../shared/components/icons/tabler/TbPhoto';
 
 const alertText = {
   publish: {
@@ -44,14 +48,26 @@ const PostEditorView: FC = () => {
   const visibilityAlertDisclosure = useDisclosure({
     onClose: () => console.log('closed')
   });
-  const toast = useToast();
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [isTextareaFocused, setIsTextareaFocused] = useState(false);
-
   const [post, setPost] = useState<Partial<TPost>>({ title: 'My Post' });
   const [alertContent, setAlertContent] = useState(
     post.publicationDate === undefined ? alertText.publish : alertText.unpublish
   );
+
+  const toast = useToast();
+  const actionToolbarItems =
+    useBreakpointValue<TActionToolbarItem[]>({
+      base: [
+        {
+          icon: <TbPhoto fontSize="xl" />,
+          onClick: () => console.log('Upload new image'),
+          tooltip: 'Upload new image',
+          ariaLabel: 'Upload new image'
+        }
+      ],
+      md: []
+    }) ?? [];
 
   const handlePublish = async () => {
     //TODO: Connect to Jaen
@@ -166,19 +182,20 @@ const PostEditorView: FC = () => {
             <MdxEditor hideHeadingHash />
             <ActionToolbar
               actions={[
+                ...actionToolbarItems,
                 {
                   icon: <TbDeviceFloppy fontSize="xl" />,
                   ariaLabel: 'Save this post',
                   tooltip: 'Save this post',
                   onClick: () => console.log('Save'),
-                  hoverColor: '#ffa801'
+                  hoverColor: 'components.postEditor.save.hover.color'
                 },
                 {
                   icon: <TbBookUpload fontSize="xl" />,
                   ariaLabel: 'Publish this post',
                   tooltip: 'Publish this post',
                   onClick: handlePublish,
-                  hoverColor: 'flat.se.green.600'
+                  hoverColor: 'components.postEditor.publish.hover.color'
                 }
               ]}
             />
