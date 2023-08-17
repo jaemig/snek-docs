@@ -33,9 +33,15 @@ const PostEditorTopNav: FC<IPostEditorTopNavProps> = ({
   return (
     <TopNav
       drawerDisclosure={topNavDisclosure}
-      wrapperProps={{ h: 'max-content', spacing: 5, py: 3 }}
+      wrapperProps={{ h: 'max-content', py: 5 }}
     >
-      <HStack w="full" mt={3}>
+      <Box
+        w="full"
+        borderTop="1px solid"
+        borderTopColor="topNav.borderColor"
+        my={5}
+      />
+      <HStack w="full" maxW="7xl">
         <HStack>
           <Image
             src="https://picsum.photos/200"
