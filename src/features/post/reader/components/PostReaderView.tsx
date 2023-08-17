@@ -11,6 +11,7 @@ import Link from '../../../../shared/components/Link';
 import TbStar from '../../../../shared/components/icons/tabler/TbStar';
 import { posts } from '../../../../shared/utils/features/post';
 import { formatNumber } from '../../../../shared/utils/utils';
+import MainGrid from '../../../../shared/containers/components/MainGrid';
 
 //* This would be the data that comes from Jaen.
 const userData: TUser = {
@@ -68,7 +69,7 @@ const PostReaderView: FC = () => {
   ];
 
   return (
-    <>
+    <MainGrid>
       <LeftNavPostReader post={post as any} user={userData} />
       <Stack spacing={{ base: 0, xl: 12 }} direction="row" mb={10}>
         <Box maxW="900px" w="full">
@@ -165,7 +166,7 @@ const PostReaderView: FC = () => {
         </Box>
         <RightNavPostReader />
       </Stack>
-    </>
+    </MainGrid>
   );
 };
 

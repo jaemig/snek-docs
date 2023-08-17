@@ -23,19 +23,35 @@ import Filesystem from '../../features/main-content/filesystem/components/Filesy
 import IconCard from '../../features/main-content/icon-card/components/IconCard';
 import ImageCard from '../../features/main-content/image-card/components/ImageCard';
 
-const MdxEditor: FC = () => {
+interface IMdxEditorProps {
+  hideHeadingHash?: boolean;
+}
+
+const MdxEditor: FC<IMdxEditorProps> = ({ hideHeadingHash }) => {
   return (
     <Field.Mdx
       name="documentation"
       components={{
         // TEXT
         p: props => <Text {...props} />,
-        h1: props => <Heading variant="h1" {...props} />,
-        h2: props => <Heading variant="h2" {...props} />,
-        h3: props => <Heading variant="h3" {...props} />,
-        h4: props => <Heading variant="h4" {...props} />,
-        h5: props => <Heading variant="h5" {...props} />,
-        h6: props => <Heading variant="h6" {...props} />,
+        h1: props => (
+          <Heading variant="h1" {...props} noAnchor={hideHeadingHash} />
+        ),
+        h2: props => (
+          <Heading variant="h2" {...props} noAnchor={hideHeadingHash} />
+        ),
+        h3: props => (
+          <Heading variant="h3" {...props} noAnchor={hideHeadingHash} />
+        ),
+        h4: props => (
+          <Heading variant="h4" {...props} noAnchor={hideHeadingHash} />
+        ),
+        h5: props => (
+          <Heading variant="h5" {...props} noAnchor={hideHeadingHash} />
+        ),
+        h6: props => (
+          <Heading variant="h6" {...props} noAnchor={hideHeadingHash} />
+        ),
         // LIST
         ul: (props: any) => <List {...props}></List>,
         ol: (props: any) => <List variant="ordered" {...props}></List>,

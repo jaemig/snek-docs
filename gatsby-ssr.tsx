@@ -6,7 +6,7 @@ export const wrapPageElement: GatsbySSR['wrapPageElement'] = ({
   props
 }) => {
   const path = props.location.pathname;
-  const hiddenTopNavPaths = ['/profile'];
+  const hiddenTopNavPaths = ['/profile', '/blog-post'];
 
   if (path.startsWith('/admin') || path === '/photonq/') {
     return element;
