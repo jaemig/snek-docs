@@ -48,7 +48,7 @@ const PostEditorTopNav: FC<IPostEditorTopNavProps> = ({
           </Tag>
         </HStack>
         <Spacer />
-        <HStack>
+        <HStack spacing={5}>
           <Button size="sm" leftIcon={<TbStar />}>
             {post.likes || 0}
           </Button>
