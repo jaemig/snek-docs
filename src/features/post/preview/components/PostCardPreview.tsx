@@ -3,6 +3,7 @@ import {
   Card,
   HStack,
   Heading,
+  Image,
   LinkBox,
   LinkBoxProps,
   LinkOverlay,
@@ -21,6 +22,13 @@ const postCardPreviewStyling = {
     p: 5,
     borderRadius: 'xl'
   },
+  topHStack: {
+    w: 'full',
+    spacing: 3
+  },
+  previewImage: {
+    boxSize: '3rem'
+  },
   summary: {
     mt: 2
   },
@@ -35,6 +43,7 @@ const postCardPreviewStyling = {
  */
 const PostCardPreview: FC<IPostPreviewProps<LinkBoxProps>> = ({
   id,
+  previewImage,
   publicationDate,
   author,
   hideAuthor,
@@ -79,26 +88,35 @@ const PostCardPreview: FC<IPostPreviewProps<LinkBoxProps>> = ({
       transition="all 0.2s cubic-bezier(.17,.67,.83,.67)"
       {...wrapperProps}
     >
-      {!hideAuthor && (
-        <Link
-          variant="hover-theme"
-          fontSize="sm"
-          color="components.postPreview.author.color"
-          href={`/profile/${author}`}
-        >
-          @{author}
-        </Link>
-      )}
+      <HStack {...postCardPreviewStyling.topHStack}>
+        <Image
+          {...postCardPreviewStyling.previewImage}
+          src={previewImage ?? 'https://picsum.photos/200'}
+          borderRadius="md"
+        />
+        <Box>
+          {!hideAuthor && (
+            <Link
+              variant="hover-theme"
+              fontSize="sm"
+              color="components.postPreview.author.color"
+              href={`/profile/${author}`}
+            >
+              @{author}
+            </Link>
+          )}
+          <Heading
+            as="h5"
+            size="sm"
+            transition="color 0.2s ease-in-out"
+            flex={1}
+            w={{ base: 'full', md: 'auto' }}
+          >
+            <LinkOverlay href={url}>{title}</LinkOverlay>
+          </Heading>
+        </Box>
+      </HStack>
 
-      <Heading
-        as="h5"
-        size="sm"
-        transition="color 0.2s ease-in-out"
-        flex={1}
-        w={{ base: 'full', md: 'auto' }}
-      >
-        <LinkOverlay href={url}>{title}</LinkOverlay>
-      </Heading>
       <Text
         {...postCardPreviewStyling.summary}
         flexGrow={1}

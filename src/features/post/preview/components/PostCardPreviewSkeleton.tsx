@@ -1,4 +1,12 @@
-import { Card, CardProps, HStack, Skeleton, Spacer } from '@chakra-ui/react';
+import {
+  Box,
+  Card,
+  CardProps,
+  HStack,
+  Skeleton,
+  Spacer,
+  VStack
+} from '@chakra-ui/react';
 import { FC } from 'react';
 import { postCardPreviewStyling } from './PostCardPreview';
 
@@ -15,8 +23,13 @@ const PostCardPreviewSkeleton: FC<IPostCardPreviewSkeletonProps> = ({
 }) => {
   return (
     <Card {...postCardPreviewStyling.wrapper} {...props}>
-      {!hideAuthor && <Skeleton w="25%" h="0.875rem" />}
-      <Skeleton w="80%" h="1rem" mt={2} />
+      <HStack {...postCardPreviewStyling.topHStack}>
+        <Skeleton {...postCardPreviewStyling.previewImage} />
+        <VStack flex={1} alignItems="flex-start">
+          {!hideAuthor && <Skeleton w="25%" h="0.875rem" />}
+          <Skeleton w="80%" h="1rem" mt={2} />
+        </VStack>
+      </HStack>
       <Skeleton w="100%" h="5rem" {...postCardPreviewStyling.summary} />
       <HStack {...postCardPreviewStyling.bottomHStack}>
         <Skeleton w="20%" h="0.875rem" />

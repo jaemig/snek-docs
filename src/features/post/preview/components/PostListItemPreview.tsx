@@ -52,7 +52,7 @@ const PostListItemPreview: FC<IPostPreviewProps<StackProps>> = ({
   author,
   hideAuthor,
   title,
-  previewImage,
+  previewImage = 'https://picsum.photos/200',
   summary,
   hasLiked,
   toggleLike,
