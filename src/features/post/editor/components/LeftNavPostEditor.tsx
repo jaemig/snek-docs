@@ -2,88 +2,104 @@ import { FC } from 'react';
 import LeftNav from '../../../../shared/containers/navigation/LeftNav';
 import {
   VStack,
-  Button,
-  HStack,
-  IconButton,
-  Divider,
-  Tooltip,
   Heading,
-  Textarea
+  Textarea,
+  Box,
+  Tag,
+  Input,
+  InputGroup,
+  InputRightAddon,
+  Divider
 } from '@chakra-ui/react';
-import TbBookUpload from '../../../../shared/components/icons/tabler/TbBookUpload';
-import TbDeviceFloppy from '../../../../shared/components/icons/tabler/TbDeviceFloppy';
+import { TPost } from '../../types/post';
+import TbEdit from '../../../../shared/components/icons/tabler/TbEdit';
+import Image from '../../../../shared/components/image/Image';
 
 interface ILeftNavPostEditorProps {
-  handlePublish: () => void;
+  post: Partial<TPost>;
 }
 
 /**
  * Left navigation for editing a post.
  */
-const LeftNavPostEditor: FC<ILeftNavPostEditorProps> = ({ handlePublish }) => {
+const LeftNavPostEditor: FC<ILeftNavPostEditorProps> = ({ post }) => {
+  const hasPublished = post.publicationDate !== undefined;
+
   return (
     <LeftNav w="full" isExpanded={true}>
-      <VStack w="full" minW="100px" alignSelf="center">
-        <HStack>
-          <Button
-            size="sm"
-            variant="outline-hover-filled"
-            colorScheme="flat.se.green"
-            rightIcon={<TbDeviceFloppy />}
-          >
-            Save
-          </Button>
-          {/* <Button
-            size="sm"
-            variant="outline-hover-filled"
-            rightIcon={<TbBookUpload />}
-          >
-            Publish
-          </Button> */}
-          {/* <Button
-            size="sm"
-            variant="outline-hover-filled"
-            w="full"
-            rightIcon={<TbBookUpload />}
-            px={4}
-          >
-            Publish
-          </Button> */}
-          <Tooltip
-            label="Publish this post"
-            bgColor="shared.body.bgColor"
-            color="flat.se.green.600"
-          >
-            <IconButton
-              icon={<TbBookUpload />}
-              size="sm"
-              aria-label="Publish this post"
-              variant="outline-hover-filled"
-              color="flat.se.green.700"
-              borderColor="flat.se.green.700"
-              _hover={{
-                bgColor: 'flat.se.green.600',
-                borderColor: 'flat.se.green.600',
-                color: 'gray.200'
-              }}
-              onClick={handlePublish}
-            />
-          </Tooltip>
-        </HStack>
+      <VStack
+        spacing={2}
+        __css={{
+          '& img': {
+            // We need this to force the image to be a square
+            h: 'auto',
+            aspectRatio: '1 / 1',
+            objectPosition: 'top'
+          }
+        }}
+      >
+        <Box overflow="hidden" borderRadius="full">
+          <Image
+            src="https://picsum.photos/200"
+            w={{ base: '50%', md: 'full' }}
+            maxW="120px"
+            h="max-content"
+            _hover={{
+              transform: 'scale(1.05)'
+            }}
+            transition="transform 0.2s cubic-bezier(.17,.67,.83,.67)"
+            editable
+          />
+        </Box>
+        <Box
+          position="relative"
+          __css={{
+            '&:hover': {
+              '& #editor-left-nav-edit-title-icon': {
+                opacity: 1
+              }
+            }
+          }}
+        >
+          <Input
+            placeholder="My Post"
+            defaultValue={post.title ?? 'My Post'}
+            textAlign="center"
+            variant="ghost"
+            px={8}
+            fontWeight="semibold"
+          />
+          <TbEdit
+            id="editor-left-nav-edit-title-icon"
+            position="absolute"
+            top={0}
+            right={2}
+            bottom={0}
+            margin="auto 0"
+            opacity={0}
+            transition="opacity 0.2s ease-in-out"
+          />
+        </Box>
+        <Tag size="sm" colorScheme={hasPublished ? 'green' : 'yellow'}>
+          {hasPublished ? 'public' : 'private'}
+        </Tag>
+        <Divider mt={8} mb={3} />
         <Heading
           as="h6"
           fontSize="sm"
           color="gray.500"
-          mt={10}
           mb={1}
           fontWeight="medium"
         >
           Post Summary
         </Heading>
         <Textarea
-          placeholder="Short summary about this post"
+          defaultValue={post.summary ?? 'Short summary of your post'}
+          placeholder="Short summary of your post"
           size="sm"
           borderRadius="lg"
+          textAlign="center"
+          variant="ghost"
         />
       </VStack>
     </LeftNav>

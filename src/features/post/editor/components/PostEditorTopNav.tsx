@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Center,
   HStack,
   Image,
   Spacer,
@@ -41,8 +42,8 @@ const PostEditorTopNav: FC<IPostEditorTopNavProps> = ({
         borderTopColor="topNav.borderColor"
         my={5}
       />
-      <HStack w="full" maxW="7xl">
-        <HStack>
+      <Center w="full" maxW="7xl">
+        {/* <HStack>
           <Image
             src="https://picsum.photos/200"
             boxSize="30px"
@@ -52,8 +53,8 @@ const PostEditorTopNav: FC<IPostEditorTopNavProps> = ({
           <Tag size="sm" colorScheme={hasPublished ? 'green' : 'yellow'}>
             {hasPublished ? 'public' : 'private'}
           </Tag>
-        </HStack>
-        <Spacer />
+        </HStack> */}
+        {/* <Spacer /> */}
         <HStack spacing={5}>
           <Button size="sm" leftIcon={<TbStar />}>
             {post.likes || 0}
@@ -79,7 +80,7 @@ const PostEditorTopNav: FC<IPostEditorTopNavProps> = ({
             </Button>
           )}
         </HStack>
-      </HStack>
+      </Center>
     </TopNav>
   );
 };

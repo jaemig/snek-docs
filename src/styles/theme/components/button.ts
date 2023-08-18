@@ -1,4 +1,6 @@
-const themeButtonComponent = {
+import { ComponentStyleConfig } from "@chakra-ui/react";
+
+const themeButtonComponent: ComponentStyleConfig = {
   variants: {
     'ghost-hover': {
       bgColor: 'transparent',

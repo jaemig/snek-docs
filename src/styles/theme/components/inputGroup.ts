@@ -1,12 +1,6 @@
 import { ComponentStyleConfig } from "@chakra-ui/react";
 
-//TODO: Get this to work
-const themeInputComponent: ComponentStyleConfig = {
-    baseStyle: {
-        field: {
-            // borderColor: 'gray.500',
-        }
-    },
+const themeInputGroupComponent: ComponentStyleConfig = {
     variants: {
         ghost: {
             field: {
@@ -17,8 +11,15 @@ const themeInputComponent: ComponentStyleConfig = {
                     borderColor: 'components.input.variants.ghost._focus.field.borderColor',
                 }
             },
+            addon: {
+                border: 'none',
+                bgColor: 'transparent',
+                _hover: {
+                    bgColor: 'gray.100',
+                },
+            },
         },
     },
 };
 
-export default themeInputComponent;
+export default themeInputGroupComponent;

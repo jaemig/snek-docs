@@ -6,7 +6,7 @@ import { TLinkData } from '../../../../shared/types/navigation';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { TImageData } from '../types/imageCard';
 // import themeCardComponent from '../../../theme/components/card';
-import Image from '../../../../shared/components/Image';
+import JaenImage from '../../../../shared/components/JaenImage';
 import { mainComponentBaseStyle } from '../../../../shared/containers/main/mainContent.vars';
 
 interface IImageCardProps extends IMainContentComponentBaseProps {
@@ -46,7 +46,7 @@ const ImageCard: FC<IImageCardProps> = ({
       transition="border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out"
     >
       <Link href={link.href}>
-        <Image
+        <JaenImage
           name={id + '-image'}
           defaultValue={image.src}
           alt={image.alt}

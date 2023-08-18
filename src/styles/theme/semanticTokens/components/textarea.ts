@@ -1,4 +1,4 @@
-const smtInputComponent = {
+const smtTextareaComponent = {
   a: 'b', // Remove after adding another property (otherwise _focus won't work)
   _focus: {
     borderColor: {
@@ -10,15 +10,13 @@ const smtInputComponent = {
     ghost: {
       a: 'b',
       _focus: {
-        field: {
-          borderColor: {
-            default: 'gray.300',
-            _dark: 'gray.600'
-          },
+        borderColor: {
+          default: 'gray.300',
+          _dark: 'gray.600'
         },
       },
     },
   },
 };
 
-export default smtInputComponent;
+export default smtTextareaComponent;

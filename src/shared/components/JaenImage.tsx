@@ -13,7 +13,7 @@ interface IImageProps {
 /**
  * Component for displaying an jaen image
  */
-export const Image: FC<IImageProps & JaenFieldProps & ImageFieldProps> = ({
+export const JaenImage: FC<IImageProps & JaenFieldProps & ImageFieldProps> = ({
   name,
   defaultValue,
   alt,
@@ -30,10 +30,10 @@ export const Image: FC<IImageProps & JaenFieldProps & ImageFieldProps> = ({
   );
 };
 
-Image.defaultProps = {
+JaenImage.defaultProps = {
   //@ts-expect-error
   name: () => `image-${(Math.random() + 1).toString(36).substring(7)}`,
   defaultValue: 'https://via.placeholder.com/150'
 };
 
-export default Image;
+export default JaenImage;

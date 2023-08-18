@@ -8,6 +8,8 @@ import themeInputComponent from './components/input';
 import themeLinkComponent from './components/link';
 import themeMenuComponent from './components/menu';
 import themeTooltipComponent from './components/tooltip';
+import themeInputGroupComponent from './components/inputGroup';
+import themeTextareaComponent from './components/textarea';
 
 const themeComponents: { [key: string]: ComponentStyleConfig } = {
   Accordion: themeAccordionComponent,
@@ -18,7 +20,9 @@ const themeComponents: { [key: string]: ComponentStyleConfig } = {
   Checkbox: themeCheckboxComponent,
   Avatar: themeAvatarComponent,
   Input: themeInputComponent,
+  InputGroup: themeInputGroupComponent,
   Tooltip: themeTooltipComponent,
+  Textarea: themeTextareaComponent,
 };
 
 export default themeComponents;

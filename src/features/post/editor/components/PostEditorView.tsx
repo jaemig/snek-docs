@@ -22,7 +22,6 @@ import MainGrid from '../../../../shared/containers/components/MainGrid';
 import PostEditorTopNav from './PostEditorTopNav';
 import { TPost } from '../../types/post';
 import { TActionToolbarItem } from '../../../../shared/components/action-toolbar/types/actionToolbar';
-import TbCloudUpload from '../../../../shared/components/icons/tabler/TbCloudUpload';
 import TbPhoto from '../../../../shared/components/icons/tabler/TbPhoto';
 
 const alertText = {
@@ -108,15 +107,14 @@ const PostEditorView: FC = () => {
           xl: 'minmax(auto, 250px) minmax(auto, 4fr) minmax(auto, 250px)'
         }}
       >
-        <Box />
-        {/* <LeftNavPostEditor handlePublish={publishAlertDisclosure.onOpen} /> */}
+        <LeftNavPostEditor post={post} />
         <Stack
           spacing={{ base: 0, xl: 12 }}
           direction="row"
           position="relative"
         >
           <Box maxW="900px" w="full">
-            <Box
+            {/* <Box
               position="relative"
               _after={{
                 content: '""',
@@ -178,7 +176,7 @@ const PostEditorView: FC = () => {
                 onBlur={() => setIsTextareaFocused(false)}
               />
             </Box>
-            <Divider my={5} />
+            <Divider my={5} /> */}
             <MdxEditor hideHeadingHash />
             <ActionToolbar
               actions={[

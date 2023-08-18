@@ -31,6 +31,8 @@ import smtToastComponent from '../../../shared/components/toast/styles/toast';
 import smtActionToolbarComponent from '../../../shared/components/action-toolbar/styles/actionToolbar';
 import smtTooltipComponent from './components/tooltip';
 import smtPostEditorComponent from '../../../features/post/editor/styles/postEditor';
+import smtTextareaComponent from './components/textarea';
+import smtImageComponent from './components/image';
 
 const themeSemanticTokens = {
   colors: {
@@ -51,9 +53,11 @@ const themeSemanticTokens = {
       userActivity: smtUserActivityComponent,
       stepper: smtStepperComponent,
       input: smtInputComponent,
+      textarea: smtTextareaComponent,
       toast: smtToastComponent,
       actionToolbar: smtActionToolbarComponent,
       tooltip: smtTooltipComponent,
+      image: smtImageComponent,
     },
     modals: {
       // Add styles for modals here

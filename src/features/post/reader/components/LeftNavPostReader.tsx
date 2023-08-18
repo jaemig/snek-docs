@@ -30,7 +30,6 @@ const LeftNavPostReader: FC<ILeftNavPostReaderProps> = ({ post, user }) => {
     <LeftNav w="full" isExpanded textAlign="center">
       <VStack
         spacing={2}
-        mb={8}
         __css={{
           '& img': {
             // We need this to force the image to be a square
