@@ -16,19 +16,20 @@ import TbCheckCircleFilled from '../icons/tabler/TbCheckCircleFilled';
 import TbXCircleFilled from '../icons/tabler/TbXCircleFilled';
 import TbInfoCircleFilled from '../icons/tabler/TbInfoCircleFilled';
 
-const statusIcons: { [key in ToastOptions['status']]: typeof Icon } = {
+const statusIcons: { [key in TToastStatus]: typeof Icon } = {
   success: TbCheckCircleFilled,
   error: TbXCircleFilled,
   warning: TbAlertCircleFilled,
-  info: TbInfoCircleFilled,
-  default: TbCheckCircleFilled,
-  loading: TbCheckCircleFilled
+  info: TbInfoCircleFilled
 };
 
-export interface IToastProps
-  extends ToastOptions,
-    Pick<ToastProviderProps, 'motionVariants' | 'toastSpacing'> {
+export interface IToastProps {
+  status?: TToastStatus;
   icon?: ReactNode;
+  duration?: number;
+  title?: string;
+  description?: string;
+  containerStyle?: StackProps;
 }
 
 /**
@@ -39,9 +40,8 @@ export interface IToastProps
 const Toast: FC<IToastProps> = ({
   icon,
   duration,
-  id,
-  message,
-  position,
+  title,
+  description,
   containerStyle,
   status = 'success',
   ...props
