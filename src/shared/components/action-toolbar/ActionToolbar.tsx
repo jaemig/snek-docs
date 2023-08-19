@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { TActionToolbarItem } from './types/actionToolbar';
-import { HStack, Tooltip, IconButton, StackProps } from '@chakra-ui/react';
+import { HStack, Tooltip, IconButton } from '@chakra-ui/react';
 
 interface IActionTOolbarProps {
   actions: TActionToolbarItem[];

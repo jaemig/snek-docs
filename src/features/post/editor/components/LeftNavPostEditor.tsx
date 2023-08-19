@@ -26,7 +26,7 @@ const LeftNavPostEditor: FC<ILeftNavPostEditorProps> = ({ post }) => {
   const hasPublished = post.publicationDate !== undefined;
 
   return (
-    <LeftNav w="full" isExpanded={true}>
+    <LeftNav w="full" isExpanded={true} display={{ base: 'none', md: 'block' }}>
       <VStack
         spacing={2}
         __css={{

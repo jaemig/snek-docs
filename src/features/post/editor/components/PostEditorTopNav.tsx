@@ -45,6 +45,7 @@ const PostEditorTopNav: FC<IPostEditorTopNavProps> = ({
         bgColor="shared.translucent.bgColor"
         py={3}
         mb={5}
+        display={{ base: 'none', md: 'block' }}
       >
         <Center>
           <HStack w="full" maxW="7xl">

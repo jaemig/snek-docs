@@ -4,6 +4,8 @@ import {
   Flex,
   HStack,
   Image,
+  LinkBox,
+  LinkOverlay,
   Spacer,
   Text,
   VStack,
@@ -28,8 +30,9 @@ const Footer: FC = () => {
         <VStack alignItems="start">
           <HStack>
             <Text>Powered by</Text>
-            <Link>
+            <LinkBox>
               <Image
+                display="inherit"
                 h="30px"
                 src={colorMode === 'light' ? JaenLogoLight : JaenLogoDark}
                 alt="Jaen Logo"
@@ -38,7 +41,8 @@ const Footer: FC = () => {
                 }}
                 transition="transform 0.2s ease-in-out"
               />
-            </Link>
+              <LinkOverlay href="/" />
+            </LinkBox>
           </HStack>
           <Spacer />
           <Text mt={1} fontSize="xs">

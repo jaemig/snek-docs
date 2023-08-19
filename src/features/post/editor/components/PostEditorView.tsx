@@ -1,11 +1,8 @@
 import {
   Stack,
-  Input,
   Box,
   useToast,
   useDisclosure,
-  Divider,
-  Textarea,
   useBreakpointValue
 } from '@chakra-ui/react';
 import { FC, useState } from 'react';
