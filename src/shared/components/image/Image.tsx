@@ -20,12 +20,14 @@ const Image: FC<ImageProps> = ({ editable, ...props }) => {
     return image;
   }
 
-  //TODO: Background color should be themeable (we probably need a separate color layer for this)
   return (
     <Box
       position="relative"
       __css={{
         '&:hover': {
+          '.image-edit-icon-color-layer': {
+            opacity: 0.3
+          },
           '.image-edit-icon-container': {
             opacity: 1
           },
@@ -34,15 +36,25 @@ const Image: FC<ImageProps> = ({ editable, ...props }) => {
           }
         }
       }}
+      cursor={editable ? 'pointer' : 'default'}
     >
       {image}
+      <Box
+        className="image-edit-icon-color-layer"
+        position="absolute"
+        top={0}
+        left={0}
+        boxSize="full"
+        bgColor="components.image.edit.container.bgColor"
+        opacity={0}
+        transition="opacity 0.2s ease-in-out"
+      ></Box>
       <Center
         className="image-edit-icon-container"
         position="absolute"
         top={0}
         left={0}
         boxSize="full"
-        bgColor="components.image.edit.container.bgColor"
         opacity={0}
         transition="opacity 0.2s ease-in-out"
       >

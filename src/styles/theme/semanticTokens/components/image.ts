@@ -1,7 +1,7 @@
 const smtImageComponent = {
     edit: {
         container: {
-            bgColor: 'rgb(52, 141, 215, 0.3)'
+            bgColor: 'theme.500'
         }
     }
 };

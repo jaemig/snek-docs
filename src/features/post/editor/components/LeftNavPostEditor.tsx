@@ -62,12 +62,14 @@ const LeftNavPostEditor: FC<ILeftNavPostEditorProps> = ({ post }) => {
           }}
         >
           <Input
+            variant="ghost"
+            size="sm"
             placeholder="My Post"
             defaultValue={post.title ?? 'My Post'}
             textAlign="center"
-            variant="ghost"
             px={8}
             fontWeight="semibold"
+            borderRadius="md"
           />
           <TbEdit
             id="editor-left-nav-edit-title-icon"
