@@ -25,6 +25,7 @@ import { TActionToolbarItem } from '../../../../shared/components/action-toolbar
 import TbPhoto from '../../../../shared/components/icons/tabler/TbPhoto';
 import { TUser } from '../../../user/types/user';
 import useScrollPosition from '../../../../shared/hooks/use-scroll-position';
+import TbBookDownload from '../../../../shared/components/icons/tabler/TbBookDownload';
 
 const alertText = {
   publish: {
@@ -82,8 +83,9 @@ const PostEditorView: FC = () => {
     onClose: () => console.log('closed')
   });
   const [post, setPost] = useState<Partial<TPost>>({ title: 'My Post' });
+  const isPublic = post.publicationDate !== undefined;
   const [alertContent, setAlertContent] = useState(
-    post.publicationDate === undefined ? alertText.publish : alertText.unpublish
+    isPublic ? alertText.unpublish : alertText.publish
   );
 
   const scrollPosition = useScrollPosition();
@@ -102,12 +104,13 @@ const PostEditorView: FC = () => {
       md: []
     }) ?? [];
 
-  const handlePublish = async () => {
+  const publishPost = async () => {
     //TODO: Connect to Jaen
     console.log('publishing...');
     await wait(1000); // Simulate publishing
     visibilityAlertDisclosure.onClose();
     setAlertContent(alertText.unpublish);
+    setPost({ ...post, publicationDate: '2023-09-11' }); // TODO: Remove after connecting to Jaen
     return;
     // displayToast({
     //   title: 'Post published.',
@@ -119,13 +122,19 @@ const PostEditorView: FC = () => {
     // });
   };
 
-  const handleUnpublish = async () => {
+  const unpublishPost = async () => {
     //TODO: Connect to Jaen
     console.log('unpublishing...');
     await wait(1000); // Simulate publishing
     visibilityAlertDisclosure.onClose();
     setAlertContent(alertText.publish);
+    setPost({ ...post, publicationDate: undefined }); //TODO: Remove after connecting to Jaen
     return;
+  };
+
+  const togglePostVisibility = () => {
+    if (isPublic) unpublishPost();
+    else publishPost();
   };
 
   return (
@@ -155,19 +164,27 @@ const PostEditorView: FC = () => {
               actions={[
                 ...actionToolbarItems,
                 {
-                  icon: <TbDeviceFloppy fontSize="xl" />,
+                  icon: <TbDeviceFloppy />,
                   ariaLabel: 'Save this post',
                   tooltip: 'Save this post',
                   onClick: () => console.log('Save'),
                   hoverColor: 'components.postEditor.save.hover.color'
                 },
-                {
-                  icon: <TbBookUpload fontSize="xl" />,
-                  ariaLabel: 'Publish this post',
-                  tooltip: 'Publish this post',
-                  onClick: handlePublish,
-                  hoverColor: 'components.postEditor.publish.hover.color'
-                }
+                isPublic
+                  ? {
+                      icon: <TbBookDownload />,
+                      ariaLabel: 'Unublish this post',
+                      tooltip: 'Unpublish this post',
+                      onClick: visibilityAlertDisclosure.onOpen,
+                      hoverColor: 'components.postEditor.publish.hover.color'
+                    }
+                  : {
+                      icon: <TbBookUpload />,
+                      ariaLabel: 'Publish this post',
+                      tooltip: 'Publish this post',
+                      onClick: visibilityAlertDisclosure.onOpen,
+                      hoverColor: 'components.postEditor.publish.hover.color'
+                    }
               ]}
             />
           </Box>
@@ -176,7 +193,7 @@ const PostEditorView: FC = () => {
       </MainGrid>
       <Alert
         disclosure={visibilityAlertDisclosure}
-        confirmationAction={handlePublish}
+        confirmationAction={togglePostVisibility}
         confirmationLabel={alertContent.confirmationLabel}
         body={alertContent.body}
         header={alertContent.header}

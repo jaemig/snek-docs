@@ -17,10 +17,12 @@ const ActionToolbar: FC<IActionTOolbarProps> = ({ actions, active = true }) => {
     >
       <IconButton
         icon={action.icon}
+        fontSize="xl"
         size="md"
         aria-label={action.ariaLabel}
         variant="ghost"
         borderRadius="full"
+        onClick={action.onClick}
         color="components.actionToolbar.button.color"
         {...action.buttonProps}
         _hover={{
@@ -37,7 +39,7 @@ const ActionToolbar: FC<IActionTOolbarProps> = ({ actions, active = true }) => {
   return (
     <HStack
       position="fixed"
-      zIndex={10}
+      zIndex={active ? 10 : -1} // Hide when inactive (visibility or display skips transitions - sort of an escape hatch)
       bottom={10}
       left="50%"
       bgColor="components.actionToolbar.container.bgColor"

@@ -34,7 +34,7 @@ const PostEditorTopNav: FC<IPostEditorTopNavProps> = ({
   user
 }) => {
   const topNavDisclosure = useDisclosure();
-  const hasPublished = post.publicationDate !== undefined;
+  const isPublic = post.publicationDate !== undefined;
   return (
     <>
       <TopNav drawerDisclosure={topNavDisclosure} />
@@ -63,21 +63,21 @@ const PostEditorTopNav: FC<IPostEditorTopNavProps> = ({
               <Button size="sm" leftIcon={<TbPhoto />}>
                 Image
               </Button>
-              {post.publicationDate === undefined ? (
-                <Button
-                  size="sm"
-                  leftIcon={<TbBookUpload />}
-                  onClick={handlePublish}
-                >
-                  Publish
-                </Button>
-              ) : (
+              {isPublic ? (
                 <Button
                   size="sm"
                   leftIcon={<TbBookDownload />}
                   onClick={handlePublish}
                 >
                   Unpublish
+                </Button>
+              ) : (
+                <Button
+                  size="sm"
+                  leftIcon={<TbBookUpload />}
+                  onClick={handlePublish}
+                >
+                  Publish
                 </Button>
               )}
             </HStack>
