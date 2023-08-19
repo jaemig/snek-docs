@@ -1,12 +1,13 @@
 import { FC } from 'react';
 import { TActionToolbarItem } from './types/actionToolbar';
-import { HStack, Tooltip, IconButton } from '@chakra-ui/react';
+import { HStack, Tooltip, IconButton, StackProps } from '@chakra-ui/react';
 
 interface IActionTOolbarProps {
   actions: TActionToolbarItem[];
+  active?: boolean;
 }
 
-const ActionToolbar: FC<IActionTOolbarProps> = ({ actions }) => {
+const ActionToolbar: FC<IActionTOolbarProps> = ({ actions, active = true }) => {
   const items = actions.map((action, index) => (
     <Tooltip
       key={index}
@@ -39,7 +40,6 @@ const ActionToolbar: FC<IActionTOolbarProps> = ({ actions }) => {
       zIndex={10}
       bottom={10}
       left="50%"
-      transform="translateX(-50%)"
       bgColor="components.actionToolbar.container.bgColor"
       border="1px solid"
       borderColor="components.actionToolbar.container.borderColor"
@@ -47,6 +47,9 @@ const ActionToolbar: FC<IActionTOolbarProps> = ({ actions }) => {
       py={2}
       borderRadius="full"
       spacing={3}
+      opacity={active ? 1 : 0}
+      transform={'translateX(-50%)' + (active ? '' : ' translateY(20px)')}
+      transition="opacity 0.2s cubic-bezier(0.000, 0.735, 0.580, 1.000), transform 0.2s cubic-bezier(0.000, 0.735, 0.580, 1.000)"
     >
       {items}
     </HStack>

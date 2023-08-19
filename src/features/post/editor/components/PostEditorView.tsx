@@ -23,6 +23,8 @@ import PostEditorTopNav from './PostEditorTopNav';
 import { TPost } from '../../types/post';
 import { TActionToolbarItem } from '../../../../shared/components/action-toolbar/types/actionToolbar';
 import TbPhoto from '../../../../shared/components/icons/tabler/TbPhoto';
+import { TUser } from '../../../user/types/user';
+import useScrollPosition from '../../../../shared/hooks/use-scroll-position';
 
 const alertText = {
   publish: {
@@ -39,6 +41,38 @@ const alertText = {
   }
 };
 
+//* This would be the data that comes from Jaen.
+const userData: TUser = {
+  displayName: 'Emily Brooks',
+  username: 'emilybrooks',
+  location: 'San Francisco, CA',
+  // company: 'Snek',
+  avatarUrl:
+    'https://onedrive.live.com/embed?resid=AE2DDC816CEF3E1E%21220972&authkey=%21AIUh8CadUcYw3cg&width=999999&height=1024',
+  bio: "Adventurous spirit with a knack for words and a passion for knowledge. Exploring the world of academia, one document at a time. Forever curious, forever learning. Let's dive into the realm of information together uncover the wonders of education.",
+  socials: [
+    {
+      type: 'company',
+      label: 'Snek',
+      url: 'https://snek.at'
+    },
+    {
+      type: 'email',
+      label: 'emily.brooks@snek.at',
+      url: 'mailto:emily.brooks@snek.at'
+    },
+    {
+      type: 'linkedin',
+      label: 'Emily-Brooks',
+      url: 'https://www.linkedin.com/in/emily-brooks-1a2b3c4d/'
+    },
+    {
+      type: 'location',
+      label: 'San Francisco, CA'
+    }
+  ]
+};
+
 /**
  * Component for editing a post.
  */
@@ -47,13 +81,13 @@ const PostEditorView: FC = () => {
   const visibilityAlertDisclosure = useDisclosure({
     onClose: () => console.log('closed')
   });
-  const [isInputFocused, setIsInputFocused] = useState(false);
-  const [isTextareaFocused, setIsTextareaFocused] = useState(false);
   const [post, setPost] = useState<Partial<TPost>>({ title: 'My Post' });
   const [alertContent, setAlertContent] = useState(
     post.publicationDate === undefined ? alertText.publish : alertText.unpublish
   );
 
+  const scrollPosition = useScrollPosition();
+  const isMobile = useBreakpointValue({ base: true, md: false });
   const toast = useToast();
   const actionToolbarItems =
     useBreakpointValue<TActionToolbarItem[]>({
@@ -99,6 +133,7 @@ const PostEditorView: FC = () => {
       <PostEditorTopNav
         post={post}
         handlePublish={visibilityAlertDisclosure.onOpen}
+        user={userData}
       />
       <MainGrid
         templateColumns={{
@@ -114,71 +149,9 @@ const PostEditorView: FC = () => {
           position="relative"
         >
           <Box maxW="900px" w="full">
-            {/* <Box
-              position="relative"
-              _after={{
-                content: '""',
-                position: 'absolute',
-                top: '50%',
-                left: 0,
-                width: '2px',
-                height: isInputFocused ? '60%' : 0,
-                background: 'theme.500',
-                transform: 'translateY(-50%)',
-                transition: 'height 0.2s ease-in-out'
-              }}
-              _hover={{
-                _after: {
-                  height: isInputFocused ? '60%' : '35%'
-                }
-              }}
-              pl={2}
-              mb={5}
-            >
-              <Input
-                position="relative"
-                variant="unstyled"
-                placeholder="Post Title"
-                fontSize={variantFontSizes.h1}
-                fontWeight="bold"
-                onFocus={() => setIsInputFocused(true)}
-                onBlur={() => setIsInputFocused(false)}
-              />
-            </Box>
-            <Box
-              position="relative"
-              _after={{
-                content: '""',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '2px',
-                height: isTextareaFocused ? '60%' : 0,
-                background: 'theme.500',
-                transition: 'height 0.2s ease-in-out'
-              }}
-              _hover={{
-                _after: {
-                  height: isTextareaFocused ? '90%' : '35%'
-                }
-              }}
-              mb={5}
-            >
-              <Textarea
-                variant="unstyled"
-                placeholder="Short summary of your post"
-                size="sm"
-                resize="vertical"
-                borderRadius="lg"
-                pt={0}
-                pl={2}
-                onFocus={() => setIsTextareaFocused(true)}
-                onBlur={() => setIsTextareaFocused(false)}
-              />
-            </Box>
-            <Divider my={5} /> */}
             <MdxEditor hideHeadingHash />
             <ActionToolbar
+              active={isMobile || scrollPosition > 90}
               actions={[
                 ...actionToolbarItems,
                 {
