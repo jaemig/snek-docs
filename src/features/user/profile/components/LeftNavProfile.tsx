@@ -1,7 +1,6 @@
 import {
   Avatar,
   Divider,
-  Flex,
   Grid,
   GridItem,
   HStack,
@@ -11,16 +10,14 @@ import {
   VStack,
   useBreakpointValue
 } from '@chakra-ui/react';
-import { FC, Fragment, ReactNode, useMemo } from 'react';
+import { FC, Fragment, useMemo } from 'react';
 import FeatherInbox from '../../../../shared/components/icons/feather/FeatherInbox';
 import TbBuilding from '../../../../shared/components/icons/tabler/TbBuilding';
 import TbLinkedIn from '../../../../shared/components/icons/tabler/TbLinkedIn';
 import TbMapPin from '../../../../shared/components/icons/tabler/TbMapPin';
 import Link from '../../../../shared/components/Link';
 import { useNavOffset } from '../../../../shared/hooks/use-nav-offset';
-import LeftNav, {
-  ILeftNavProps
-} from '../../../../shared/containers/navigation/LeftNav';
+import LeftNav from '../../../../shared/containers/navigation/LeftNav';
 import { TUser } from '../../types/user';
 
 export type TSocialLink = 'email' | 'linkedin' | 'location' | 'company';
