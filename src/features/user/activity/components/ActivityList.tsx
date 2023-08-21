@@ -20,6 +20,13 @@ import TbMessagesCircle2 from '../../../../shared/components/icons/tabler/TbMess
 import TbStar from '../../../../shared/components/icons/tabler/TbStar';
 import Link from '../../../../shared/components/Link';
 import usePagination from '../../../../shared/hooks/use-pagination';
+import ActivityListSkeleton from './ActivityListSkeleton';
+
+export const activityListStyling = {
+  title: {
+    mb: 5
+  }
+};
 
 const activityIcons: Record<TActivityType, ReactNode> = {
   commented: <TbMessagesCircle2 />,
@@ -259,7 +266,7 @@ const ActivityList: FC<IActivityListProps> = ({ ...props }) => {
 
   return (
     <Box textAlign="left" w="full" {...props}>
-      <Heading size="md" mb={5}>
+      <Heading size="md" {...activityListStyling.title}>
         Activity
       </Heading>
       <Stepper
@@ -281,6 +288,7 @@ const ActivityList: FC<IActivityListProps> = ({ ...props }) => {
           Show more
         </Button>
       </Center>
+      {/* <ActivityListSkeleton /> */}
     </Box>
   );
 };

@@ -3,6 +3,25 @@ import { FC } from 'react';
 import { TStepperSection } from './types/stepper';
 import StepperItem from './StepperItem';
 
+export const stepperStyling = {
+  wrapper: {
+    spacing: 0
+  },
+  title: {
+    vstack: {
+      spacing: 0,
+      w: 'full'
+    },
+    hstack: {
+      w: 'full',
+      mb: 3
+    },
+    divider: {
+      flex: 1
+    }
+  }
+};
+
 interface IStepperProps extends StackProps {
   sections: TStepperSection[];
 }
@@ -12,7 +31,7 @@ interface IStepperProps extends StackProps {
  */
 const Stepper: FC<IStepperProps> = ({ sections, ...props }) => {
   return (
-    <VStack w="full" spacing={0} {...props}>
+    <VStack w="full" {...stepperStyling.wrapper} {...props}>
       {sections.map((section, i) => {
         return (
           <VStack key={i} spacing={0} w="full" h="max-content">
