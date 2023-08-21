@@ -48,7 +48,6 @@ const userData: TUser = {
 const UserProfileContent: FC = () => {
   const { hash } = useLocation();
   const topNavDisclosure = useDisclosure();
-  const [isExpanded, setIsExpanded] = useState(true);
   const [posts, setPosts] = useState<TPostListData>({
     state: 'inactive',
     posts: []
