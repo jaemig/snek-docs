@@ -3,7 +3,6 @@ import {
   BoxProps,
   Button,
   Center,
-  Flex,
   HStack,
   Heading,
   LinkBox,
@@ -11,7 +10,7 @@ import {
   Spacer,
   Text
 } from '@chakra-ui/react';
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 import { TActivitySection, TActivityType } from '../types/activity';
 import { TStepperSection } from '../../../../shared/components/stepper/types/stepper';
 import Stepper from '../../../../shared/components/stepper/Stepper';
@@ -28,6 +27,165 @@ export const activityListStyling = {
   }
 };
 
+//TODO: This would be fetched from the API
+const activities: TActivitySection[] = [
+  {
+    timestamp: '2023-07-15',
+    activities: [
+      {
+        id: '1',
+        title: {
+          name: 'Unlocking the Power of Quantum Computing',
+          href: '#'
+        },
+        timestamp: '2023-07-15',
+        type: 'published'
+      },
+      {
+        id: '2',
+        title: {
+          name: 'Unlocking the Power of Quantum Computing',
+          href: '#'
+        },
+        timestamp: '2023-07-15',
+        type: 'commented'
+      },
+      {
+        id: '4',
+        title: {
+          name: 'Learn Quantum Computing with Python and Qiskit',
+          href: '#'
+        },
+        timestamp: '2023-07-10',
+        type: 'published'
+      }
+    ]
+  },
+  {
+    timestamp: '2023-06-22',
+    activities: [
+      {
+        id: '3',
+        title: {
+          name: 'How to PhotonQ',
+          href: '/docs'
+        },
+        timestamp: '2023-06-01',
+        type: 'rated'
+      },
+      {
+        id: '5',
+        title: {
+          name: 'Exploring Quantum Algorithms',
+          href: '#'
+        },
+        timestamp: '2023-07-12',
+        type: 'published'
+      },
+      {
+        id: '6',
+        title: {
+          name: 'Introduction to Quantum Mechanics',
+          href: '#'
+        },
+        timestamp: '2023-07-17',
+        type: 'published'
+      },
+      {
+        id: '7',
+        title: {
+          name: 'Introduction to Quantum Mechanics',
+          href: '#'
+        },
+        timestamp: '2023-07-17',
+        type: 'commented'
+      }
+    ]
+  },
+  {
+    timestamp: '2023-05-30',
+    activities: [
+      {
+        id: '8',
+        title: {
+          name: "Quantum Computing: A Beginner's Guide",
+          href: '#'
+        },
+        timestamp: '2023-07-09',
+        type: 'published'
+      },
+      {
+        id: '9',
+        title: {
+          name: 'Quantum Computing Hardware Overview',
+          href: '#'
+        },
+        timestamp: '2023-07-16',
+        type: 'published'
+      },
+      {
+        id: '10',
+        title: {
+          name: 'Quantum Cryptography: Ensuring Secure Communication',
+          href: '#'
+        },
+        timestamp: '2023-07-15',
+        type: 'published'
+      }
+    ]
+  },
+  {
+    timestamp: '2023-04-20',
+    activities: [
+      {
+        id: '11',
+        title: {
+          name: 'Quantum Machine Learning: Enhancing AI with Qubits',
+          href: '#'
+        },
+        timestamp: '2023-07-14',
+        type: 'published'
+      },
+      {
+        id: '12',
+        title: {
+          name: 'Quantum Error Correction: Protecting Qubits',
+          href: '#'
+        },
+        timestamp: '2023-07-13',
+        type: 'published'
+      },
+      {
+        id: '13',
+        title: {
+          name: 'Quantum Supremacy: Breaking Computational Barriers',
+          href: '#'
+        },
+        timestamp: '2023-07-12',
+        type: 'published'
+      },
+      {
+        id: '14',
+        title: {
+          name: 'Quantum Entanglement: Spooky Action at a Distance',
+          href: '#'
+        },
+        timestamp: '2023-07-11',
+        type: 'published'
+      },
+      {
+        id: '15',
+        title: {
+          name: 'Quantum Algorithms for Optimization Problems',
+          href: '#'
+        },
+        timestamp: '2023-07-10',
+        type: 'published'
+      }
+    ]
+  }
+];
+
 const activityIcons: Record<TActivityType, ReactNode> = {
   commented: <TbMessagesCircle2 />,
   published: <TbPencil />,
@@ -40,172 +198,13 @@ interface IActivityListProps extends BoxProps {}
  * Component for displaying a list of activities.
  */
 const ActivityList: FC<IActivityListProps> = ({ ...props }) => {
-  //TODO: This would be fetched from the API
-  const activities: TActivitySection[] = [
-    {
-      timestamp: '2023-07-15',
-      activities: [
-        {
-          id: '1',
-          title: {
-            name: 'Unlocking the Power of Quantum Computing',
-            href: '#'
-          },
-          timestamp: '2023-07-15',
-          type: 'published'
-        },
-        {
-          id: '2',
-          title: {
-            name: 'Unlocking the Power of Quantum Computing',
-            href: '#'
-          },
-          timestamp: '2023-07-15',
-          type: 'commented'
-        },
-        {
-          id: '4',
-          title: {
-            name: 'Learn Quantum Computing with Python and Qiskit',
-            href: '#'
-          },
-          timestamp: '2023-07-10',
-          type: 'published'
-        }
-      ]
-    },
-    {
-      timestamp: '2023-06-22',
-      activities: [
-        {
-          id: '3',
-          title: {
-            name: 'How to PhotonQ',
-            href: '/docs'
-          },
-          timestamp: '2023-06-01',
-          type: 'rated'
-        },
-        {
-          id: '5',
-          title: {
-            name: 'Exploring Quantum Algorithms',
-            href: '#'
-          },
-          timestamp: '2023-07-12',
-          type: 'published'
-        },
-        {
-          id: '6',
-          title: {
-            name: 'Introduction to Quantum Mechanics',
-            href: '#'
-          },
-          timestamp: '2023-07-17',
-          type: 'published'
-        },
-        {
-          id: '7',
-          title: {
-            name: 'Introduction to Quantum Mechanics',
-            href: '#'
-          },
-          timestamp: '2023-07-17',
-          type: 'commented'
-        }
-      ]
-    },
-    {
-      timestamp: '2023-05-30',
-      activities: [
-        {
-          id: '8',
-          title: {
-            name: "Quantum Computing: A Beginner's Guide",
-            href: '#'
-          },
-          timestamp: '2023-07-09',
-          type: 'published'
-        },
-        {
-          id: '9',
-          title: {
-            name: 'Quantum Computing Hardware Overview',
-            href: '#'
-          },
-          timestamp: '2023-07-16',
-          type: 'published'
-        },
-        {
-          id: '10',
-          title: {
-            name: 'Quantum Cryptography: Ensuring Secure Communication',
-            href: '#'
-          },
-          timestamp: '2023-07-15',
-          type: 'published'
-        }
-      ]
-    },
-    {
-      timestamp: '2023-04-20',
-      activities: [
-        {
-          id: '11',
-          title: {
-            name: 'Quantum Machine Learning: Enhancing AI with Qubits',
-            href: '#'
-          },
-          timestamp: '2023-07-14',
-          type: 'published'
-        },
-        {
-          id: '12',
-          title: {
-            name: 'Quantum Error Correction: Protecting Qubits',
-            href: '#'
-          },
-          timestamp: '2023-07-13',
-          type: 'published'
-        },
-        {
-          id: '13',
-          title: {
-            name: 'Quantum Supremacy: Breaking Computational Barriers',
-            href: '#'
-          },
-          timestamp: '2023-07-12',
-          type: 'published'
-        },
-        {
-          id: '14',
-          title: {
-            name: 'Quantum Entanglement: Spooky Action at a Distance',
-            href: '#'
-          },
-          timestamp: '2023-07-11',
-          type: 'published'
-        },
-        {
-          id: '15',
-          title: {
-            name: 'Quantum Algorithms for Optimization Problems',
-            href: '#'
-          },
-          timestamp: '2023-07-10',
-          type: 'published'
-        }
-      ]
-    }
-  ];
-
+  const [activity, setActivity] = useState<TActivitySection[]>();
   const pagination = usePagination({
     itemsPerPage: 3,
-    totalItems: activities.length
+    totalItems: activity?.length ?? 0
   });
-  // const sectionOffset = 0;
 
-  const stepperData: TStepperSection[] = activities.map(section => {
+  const stepperData: TStepperSection[] | undefined = activity?.map(section => {
     const sectionDate = new Date(section.timestamp);
     const sectionTitle = (
       <HStack spacing={1}>
@@ -264,6 +263,21 @@ const ActivityList: FC<IActivityListProps> = ({ ...props }) => {
     };
   });
 
+  useEffect(() => {
+    // Simulate API call
+    setTimeout(() => {
+      setActivity(activities);
+    }, 2500);
+  }, []);
+
+  if (!activity || !stepperData) {
+    return (
+      <Box w="full" {...props}>
+        <ActivityListSkeleton />
+      </Box>
+    );
+  }
+
   return (
     <Box textAlign="left" w="full" {...props}>
       <Heading size="md" {...activityListStyling.title}>
@@ -288,7 +302,6 @@ const ActivityList: FC<IActivityListProps> = ({ ...props }) => {
           Show more
         </Button>
       </Center>
-      {/* <ActivityListSkeleton /> */}
     </Box>
   );
 };

@@ -23,8 +23,6 @@ const ActivityListSkeleton: FC = () => {
     })
   });
 
-  console.log('sections: ', sections);
-
   return (
     <Box>
       <Skeleton {...activityListStyling.title} h="20px" w="min(10%, 200px)" />
@@ -32,5 +30,4 @@ const ActivityListSkeleton: FC = () => {
     </Box>
   );
 };
-
 export default memo(ActivityListSkeleton);
