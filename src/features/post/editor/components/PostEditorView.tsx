@@ -1,7 +1,6 @@
 import {
   Stack,
   Box,
-  useToast,
   useDisclosure,
   useBreakpointValue
 } from '@chakra-ui/react';
@@ -23,6 +22,7 @@ import TbPhoto from '../../../../shared/components/icons/tabler/TbPhoto';
 import { TUser } from '../../../user/types/user';
 import useScrollPosition from '../../../../shared/hooks/use-scroll-position';
 import TbBookDownload from '../../../../shared/components/icons/tabler/TbBookDownload';
+import useToast from '../../../../shared/hooks/use-toast';
 
 const alertText = {
   publish: {
@@ -84,10 +84,11 @@ const PostEditorView: FC = () => {
   const [alertContent, setAlertContent] = useState(
     isPublic ? alertText.unpublish : alertText.publish
   );
+  const customToast = useToast();
 
   const scrollPosition = useScrollPosition();
   const isMobile = useBreakpointValue({ base: true, md: false });
-  const toast = useToast();
+  // const toast = useToast();
   const actionToolbarItems =
     useBreakpointValue<TActionToolbarItem[]>({
       base: [
@@ -107,7 +108,12 @@ const PostEditorView: FC = () => {
     await wait(1000); // Simulate publishing
     visibilityAlertDisclosure.onClose();
     setAlertContent(alertText.unpublish);
-    setPost({ ...post, publicationDate: '2023-09-11' }); // TODO: Remove after connecting to Jaen
+    // setPost({ ...post, publicationDate: '2023-09-11' }); // TODO: Remove after connecting to Jaen
+    customToast({
+      title: 'Post published.',
+      description: 'Your post has been published.',
+      status: 'info'
+    });
     return;
     // displayToast({
     //   title: 'Post published.',
